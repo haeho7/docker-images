@@ -6,7 +6,7 @@ on:
       - master
     paths-ignore:
       - '**.md'
-      - '**.yml'
+      - 'docker-compose.yml'
   workflow_dispatch:
     inputs:
       deploy:
@@ -53,12 +53,12 @@ jobs:
          password: ${{ secrets.GHCR_PAT }}
 
       # cache
-#      - name: Cache Docker layers
-#        uses: actions/cache@v2
-#        with:
-#          path: /tmp/.buildx-cache
-#          key: ${{ runner.os }}-${{ env.BUILD_TAG }}-buildx-${{ github.sha }}
-#          restore-keys: ${{ runner.os }}-${{ env.BUILD_TAG }}-buildx-
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-${{ env.BUILD_TAG }}-buildx-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-${{ env.BUILD_TAG }}-buildx-
 
       # build & push
       - name: Build image and Push to Container Registries
@@ -71,5 +71,5 @@ jobs:
             ghcr.io/${{ github.repository }}:${{ env.BUILD_TAG }}
           platforms: ${{ matrix.TARGET_PLATFORMS }}
           push: true
-#          cache-from: type=local,src=/tmp/.buildx-cache
-#          cache-to: type=local,dest=/tmp/.buildx-cache
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
