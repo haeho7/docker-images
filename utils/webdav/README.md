@@ -10,5 +10,5 @@ docker run -d \
   -v $(pwd)/webdav-data/config.yml:/etc/webdav/config.yml \
   -v /mnt/data:/data \
   -v /etc/localtime:/etc/localtime:ro \
-  pexcn/docker-images:webdav
+  haeho7/docker-images:webdav
 ```
