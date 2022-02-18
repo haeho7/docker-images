@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
     inputs:
       deploy:
-        description: 'Whether to deploy DockerHub and GHCR'
+        description: 'Whether to deploy DockerHub'
         required: true
         default: '0'
 
