@@ -15,3 +15,5 @@ chown $PUID:$PGID "/data"
 if [ "x$PUMASK" != "x" ]; then
     umask $PUMASK
 fi
+
+exec "$@"
