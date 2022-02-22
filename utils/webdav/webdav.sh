@@ -8,8 +8,8 @@ set -e
 #addgroup -g $PGID -S user-group 1>/dev/null || true
 #adduser -u $PUID -S user 1>/dev/null || true
 
-chown $PUID:$PGID "/etc/webdav/"
-chown $PUID:$PGID "/data"
+#chown $PUID:$PGID "/etc/webdav"
+#chown $PUID:$PGID "/data"
 
 # Set umask
 #if [ "x$PUMASK" != "x" ]; then
