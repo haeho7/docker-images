@@ -16,4 +16,4 @@ if [ "x$PUMASK" != "x" ]; then
     umask $PUMASK
 fi
 
-exec "$@"
+exec webdav "$@"
