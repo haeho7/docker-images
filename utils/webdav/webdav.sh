@@ -1,14 +1,24 @@
 #!/bin/sh
 set -e
 
-_is_exist_group() {
-  getent group $1 &>/dev/null
-}
+# set env
+PUID=${PUID:-1000}
+PGID=${PGID:-1000}
+UMASK=${UMASK:-022}
 
-_is_exist_user() {
-  id -u $1 &>/dev/null
-}
+# set user nobody to specified user id (non unique)
+usermod -o -u "${PUID}" nobody &>/dev/null
 
-_is_exist_group webdav || addgroup -S -g $PGID webdav || true
-_is_exist_user webdav || adduser -S -G webdav -s /bin/ash -u $PUID webdav || true
-exec su webdav -c webdav "$@"
+# set group users to specified group id (non unique)
+groupmod -o -g "${PGID}" users &>/dev/null
+
+#set folder's owne
+chown $PUID:$PGID "/etc/webdav"
+chown $PUID:$PGID "/data"
+
+# set umask
+if [ "x$PUMASK" != "x" ]; then
+    umask $PUMASK
+fi
+
+exec su -s /bin/ash nobody -c webdav "$@"
