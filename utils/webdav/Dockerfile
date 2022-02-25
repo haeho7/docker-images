@@ -30,10 +30,10 @@ RUN apk update \
   && rm -rf /var/cache/apk/*
 
 COPY --from=builder /usr/local/bin/webdav /usr/local/bin/
-COPY --chmod=777 webdav.sh /usr/local/bin/
+COPY webdav.sh /usr/local/bin/
 
-# ENV PUID=1000
-# ENV PGID=1000
+ENV UID=1000
+ENV GID=1000
 
 VOLUME /data
 
