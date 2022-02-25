@@ -1,19 +1,14 @@
 #!/bin/sh
 set -e
 
-#PUID=${PUID:-1000}
-#PGID=${PGID:-1000}
+_is_exist_group() {
+  getent group $1 &>/dev/null
+}
 
-# add PUID:PGID, ignore error
-#addgroup -g $PGID -S user-group 1>/dev/null || true
-#adduser -u $PUID -S user 1>/dev/null || true
+_is_exist_user() {
+  id -u $1 &>/dev/null
+}
 
-#chown $PUID:$PGID "/etc/webdav"
-#chown $PUID:$PGID "/data"
-
-# Set umask
-#if [ "x$PUMASK" != "x" ]; then
-#    umask $PUMASK
-#fi
-
-exec webdav "$@"
+_is_exist_group webdav || addgroup -S -g $GID webdav || true
+_is_exist_user webdav || adduser -S -G webdav -s /bin/ash -u $UID webdav || true
+exec su webdav -c webdav "$@"
