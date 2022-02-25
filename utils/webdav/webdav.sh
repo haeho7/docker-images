@@ -7,7 +7,7 @@ PGID=${PGID:-1000}
 UMASK=${UMASK:-022}
 
 # set user nobody to specified user id (non unique)
-usermod -o -u "${PUID}" nobody &>/dev/null
+usermod -o -u "${PUID}" -g users -s /bin/ash nobody
 
 # set group users to specified group id (non unique)
 groupmod -o -g "${PGID}" users &>/dev/null
