@@ -1,9 +1,6 @@
 #!/bin/bash
 set -e
 
-#export path
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-
 # set env
 PUID=${PUID:-1000}
 PGID=${PGID:-1000}
