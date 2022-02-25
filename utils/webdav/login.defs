@@ -89,7 +89,7 @@ CONSOLE		/etc/securetty
 # If defined, ":" delimited list of "message of the day" files to
 # be displayed upon login.
 #
-MOTD_FILE	/etc/motd
+#MOTD_FILE	/etc/motd
 #MOTD_FILE	/etc/motd:/usr/lib/news/news-motd
 
 #
@@ -237,28 +237,28 @@ CRACKLIB_DICTPATH	/var/cache/cracklib/cracklib_dict
 #
 # Min/max values for automatic uid selection in useradd(8)
 #
-UID_MIN			 1000
-UID_MAX			60000
+UID_MIN			        1000
+UID_MAX			        60000
 # System accounts
-SYS_UID_MIN		  101
-SYS_UID_MAX		  999
+SYS_UID_MIN		      500
+SYS_UID_MAX		      999
 # Extra per user uids
-SUB_UID_MIN		   100000
-SUB_UID_MAX		600100000
-SUB_UID_COUNT		    65536
+SUB_UID_MIN		     100000
+SUB_UID_MAX		     600100000
+SUB_UID_COUNT		   65536
 
 #
 # Min/max values for automatic gid selection in groupadd(8)
 #
-GID_MIN			 1000
-GID_MAX			60000
+GID_MIN			      1000
+GID_MAX			      60000
 # System accounts
-SYS_GID_MIN		  101
-SYS_GID_MAX		  999
+SYS_GID_MIN		    500
+SYS_GID_MAX		    999
 # Extra per user group ids
-SUB_GID_MIN		   100000
-SUB_GID_MAX		600100000
-SUB_GID_COUNT		    65536
+SUB_GID_MIN		    100000
+SUB_GID_MAX		    600100000
+SUB_GID_COUNT		  65536
 
 #
 # Max number of login(1) retries if password is bad
@@ -336,7 +336,7 @@ CHFN_RESTRICT		rwh
 # Note: If you use PAM, it is recommended to use a value consistent with
 # the PAM modules configuration.
 #
-#ENCRYPT_METHOD DES
+ENCRYPT_METHOD SHA512
 
 #
 # Only works if ENCRYPT_METHOD is set to SHA256 or SHA512.
@@ -406,7 +406,7 @@ DEFAULT_HOME	yes
 # not have a home directory.  Such accounts may have this string as
 # their home directory in /etc/passwd to avoid a spurious warning.
 #
-NONEXISTENT	/nonexistent
+# NONEXISTENT	/nonexistent
 
 #
 # If this file exists and is readable, login environment will be
@@ -467,7 +467,7 @@ USERGROUPS_ENAB yes
 # Set to "yes" to prevent for all accounts
 # Set to "superuser" to prevent for UID 0 / root (default)
 # Set to "no" to not prevent for any account (dangerous, historical default)
-PREVENT_NO_AUTH superuser
+# PREVENT_NO_AUTH superuser
 
 #
 # Select the HMAC cryptography algorithm.
