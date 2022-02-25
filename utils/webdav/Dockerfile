@@ -26,7 +26,7 @@ FROM alpine
 LABEL maintainer="pexcn <i@pexcn.me>"
 
 RUN apk update \
-  && apk add tzdata shadow \
+  && apk add tzdata shadow bash bash-completion \
   && rm -rf /var/cache/apk/*
 
 COPY --from=builder /usr/local/bin/webdav /usr/local/bin/
