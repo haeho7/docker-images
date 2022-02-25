@@ -31,7 +31,7 @@ RUN apk update \
 
 COPY --from=builder /usr/local/bin/webdav /usr/local/bin/
 COPY --chmod=777 webdav.sh /usr/local/bin/
-COPY --chmod=0644 login.defs /etc/login.defs
+COPY --chmod=644 login.defs /etc/login.defs
 
 # ENV PUID=1000
 # ENV PGID=1000
