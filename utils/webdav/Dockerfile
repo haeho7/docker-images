@@ -38,4 +38,4 @@ COPY --chmod=0644 login.defs /etc/login.defs
 
 VOLUME /data
 
-# ENTRYPOINT ["webdav.sh"]
+ENTRYPOINT ["webdav.sh"]
