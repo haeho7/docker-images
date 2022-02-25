@@ -37,4 +37,4 @@ COPY --chmod=777 webdav.sh /usr/local/bin/
 
 VOLUME /data
 
-ENTRYPOINT ["webdav.sh"]
+# ENTRYPOINT ["webdav.sh"]
