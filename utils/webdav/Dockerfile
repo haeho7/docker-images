@@ -26,14 +26,14 @@ FROM alpine
 LABEL maintainer="pexcn <i@pexcn.me>"
 
 RUN apk update \
-  && apk add tzdata \
+  && apk add tzdata shadow \
   && rm -rf /var/cache/apk/*
 
 COPY --from=builder /usr/local/bin/webdav /usr/local/bin/
 COPY --chmod=777 webdav.sh /usr/local/bin/
 
-ENV PUID=1000
-ENV PGID=1000
+# ENV PUID=1000
+# ENV PGID=1000
 
 VOLUME /data
 
