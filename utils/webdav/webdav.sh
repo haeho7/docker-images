@@ -17,8 +17,8 @@ chown $PUID:$PGID "/etc/webdav"
 chown $PUID:$PGID "/data"
 
 # set umask
-if [ "x$PUMASK" != "x" ]; then
-    umask $PUMASK
+if [ "x$UMASK" != "x" ]; then
+    umask $UMASK
 fi
 
 exec su -s /bin/ash nobody -c webdav "$@"
