@@ -32,8 +32,8 @@ RUN apk update \
 COPY --from=builder /usr/local/bin/webdav /usr/local/bin/
 COPY webdav.sh /usr/local/bin/
 
-ENV UID=1000
-ENV GID=1000
+ENV PUID=1000
+ENV PGID=1000
 
 VOLUME /data
 
