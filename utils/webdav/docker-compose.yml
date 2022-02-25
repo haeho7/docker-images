@@ -7,8 +7,8 @@ services:
     restart: unless-stopped
     network_mode: host
     environment:
-      UID: $PUID
-      GID: $PGID
+      PUID: 99
+      PGID: 100
     volumes:
       - ./webdav-data/config.yml:/etc/webdav/config.yml
       - /mnt/data:/data
