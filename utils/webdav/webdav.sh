@@ -4,7 +4,7 @@ set -e
 # set env
 PUID=${PUID:-1000}
 PGID=${PGID:-1000}
-UMASK=${UMASK:-022}
+UMASK=${UMASK:-000}
 
 # set user nobody to specified user id (non unique)
 usermod -o -u "${PUID}" -g users -G nobody -s /bin/ash nobody
