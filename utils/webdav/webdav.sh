@@ -16,9 +16,10 @@ groupmod -o -g "${PGID}" users &>/dev/null
 chown $PUID:$PGID "/etc/webdav"
 chown $PUID:$PGID "/data"
 
-# set umask
+# if UMASK is not null set umask
 if [ "x$UMASK" != "x" ]; then
     umask $UMASK
 fi
 
 exec su -s /bin/ash nobody -c webdav "$@"
+# exec su -s /bin/ash nobody -c umask $UMASK && webdav "$@"
