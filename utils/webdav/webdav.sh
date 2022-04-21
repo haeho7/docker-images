@@ -22,4 +22,4 @@ if [ "x$UMASK" != "x" ]; then
 fi
 
 # exec su -s /bin/ash nobody -c webdav "$@"
-# exec su -s /bin/ash nobody -c umask $UMASK -c webdav "$@"
+exec su -s /bin/ash nobody -c umask $UMASK -c webdav "$@"
