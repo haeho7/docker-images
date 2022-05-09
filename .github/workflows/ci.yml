@@ -28,6 +28,9 @@ jobs:
           # webdav
           - BUILD_CONTEXT: utils/webdav
             TARGET_PLATFORMS: linux/amd64,linux/arm64
+          # wireguard
+          - BUILD_CONTEXT: net/wireguard
+            TARGET_PLATFORMS: linux/amd64,linux/arm64
     steps:
       # prepare
       - name: Checkout
