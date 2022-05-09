@@ -16,4 +16,4 @@ services:
     volumes:
       - /mnt/user/appdata/webdav/config.yml:/etc/webdav/config.yml
       - /mnt/user/datas/webdav:/data
-      #- /etc/localtime:/etc/localtime:ro
+      # - /etc/localtime:/etc/localtime:ro
