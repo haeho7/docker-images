@@ -18,6 +18,14 @@ docker run -d \
 ```
 
 
+## DDNS Resolve
+
+If the peer Endpoint is DDNS,you can use `PEER_RESOLVE_INTERVAL` to resolve periodically (in seconds). 
+
+Script source: https://github.com/WireGuard/wireguard-tools/blob/master/contrib/reresolve-dns/reresolve-dns.sh
+
+
+
 ## Generate Privatekey and Publickey
 
 ```conf
@@ -96,7 +104,7 @@ DNS = 192.168.1.254
 
 As a gateway, there may be MTU related issues, you can try appending the following iptables rules to `PostUp` and `PostDown`:
 
-PC & Other Clinet -> Router Device -> NodeA WireGuard（Gateway） -> NodeB WireGuard
+PC & other Clinet -> Router Device -> NodeA WireGuard tunnel（Gateway） -> NodeB WireGuard tunnel
 
 ```sh
 PostUp = iptables -t mangle -A POSTROUTING -o %i -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
@@ -118,7 +126,7 @@ PostDown = iptables -t nat -D POSTROUTING -o <INTERNAL INTERFACE NAME> -j SNAT -
 
 如果WireGuard作为网关，NodeA的内部客户端通过WireGuard隧道访问NodeB的内部网络，但是NodeB的 `AllowedIP` 中没有添加NodeA的内部路由，需要在NodeA上将内部源地址转换为WireGuard隧道地址。
 
-PC & Other Clinet -> Router Device -> NodeA WireGuard (Gateway) -> NodeB WireGuard -> NodeB Internal Network (192.168.2.0/24)
+PC & Other Clinet -> Router Device -> NodeA WireGuard tunnel (Gateway) -> NodeB WireGuard tunnel -> NodeB Internal Network (192.168.2.0/24)
 
 ```sh
 # NodeA Add
