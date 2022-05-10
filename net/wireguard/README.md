@@ -8,9 +8,10 @@
 docker run -d \
   --name=wireguard \
   --network=host \
-  --restart unless-stopped \
+  --restart=unless-stopped \
   --privileged=true \
-  --memory=512M --memory-swap=1G \
+  --memory=512M \
+  --memory-swap=1G \
   -e USE_USERSPACE_MODE=0 \
   -e PEER_RESOLVE_INTERVAL=0 \
   -v /mnt/user/appdata/wireguard:/etc/wireguard \
