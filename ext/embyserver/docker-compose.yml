@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  embyserver:
+    image: haeho7/docker-images:embyserver-4.6.7.0
+    container_name: embyserver
+    restart: unless-stopped
+    networks:
+      br0:
+        ipv4_address: 192.168.1.247
+    limits:
+      memory: 2G            
+    environment:
+      TZ: Asia/Shanghai
+      UID: 99
+      GID: 100
+      GIDLIST: 100
+      UMASK: 022
+    # ports:
+    #  - 8096:8096
+    #  - 8920:8920
+    volumes:
+      - /mnt/user/medias/moive/:/data/movies
+      - /mnt/user/medias/series/:/data/tvshows

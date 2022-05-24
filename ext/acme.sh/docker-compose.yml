@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  acme.sh:
+    image: neilpang/acme.sh:3.0.2
+    container_name: acme.sh
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      TZ: Asia/Shanghai
+      DPI_ID: DNSPod ID
+      DPI_Key: DNSPod Key
+    volumes:
+      - /mnt/user/appdata/acme.sh:/acme.sh
+      - /etc/localtime:/etc/localtime:ro
+    command: daemon
