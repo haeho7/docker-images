@@ -36,7 +36,6 @@
 /mnt/user/appdata/transmission/settings.json
 
 ```json
-"cat /mnt/user/appdata/transmission/settings.json"
 
 {
     "alt-speed-down": 50,
