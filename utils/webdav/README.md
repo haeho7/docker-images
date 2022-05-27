@@ -15,7 +15,9 @@ docker run -d \
   -e PGID=100 \
   -e UMASK=000 \
   -e TZ=Asia/Shanghai \
-  -p 8080:8080/tcp \
+  -e USERNAME=example \
+  -e PASSWORD='example' \
+  -p 8080:8080 \
   -v /mnt/user/appdata/webdav/config.yml:/etc/webdav/config.yml \
   -v /mnt/user/datas/webdav:/data \
   # -v /etc/localtime:/etc/localtime:ro \

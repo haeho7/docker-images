@@ -13,6 +13,8 @@ services:
       PGID: 100
       UMASK: 000
       TZ: Asia/Shanghai
+      USERNAME: example
+      PASSWORD: 'example'
     ports:
       - 8080:8080
     volumes:
