@@ -171,7 +171,7 @@ docker exec --user=99:100 nextcloud php /var/www/html/occ files:cleanup
 See more: https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html
 
 ```php 
-  // enable ext previe
+  // enable extra preview
   // preview video need install ffmpeg
   'enable_previews' => true,
   'enabledPreviewProviders' => [
