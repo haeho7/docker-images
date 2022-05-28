@@ -108,10 +108,10 @@ See more: https://docs.nextcloud.com/server/stable/admin_manual/configuration_se
 Find the path where occ is located in the container.
 
 ```sh
-find /var/www/html/occ -iname *occ*
+find / -iname *occ*
 
-cd var/www/html/occ
- ./occ --version
+cd /var/www/html
+./occ --version
 ```
 
 ``` sh
