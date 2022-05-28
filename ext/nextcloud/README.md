@@ -212,8 +212,11 @@ See more: https://docs.nextcloud.com/server/latest/admin_manual/configuration_se
   // force logout default false
   'auto_logout' => true,
 
-  // auto scan files changes
+  // auto scan files changes default 0
   'filesystem_check_changes' => 1,
+
+  // file versions control default auto
+  'versions_retention_obligation' => 'auto',
 
   // clear trashbin default auto(30 day)
   'trashbin_retention_obligation' => 'auto',
