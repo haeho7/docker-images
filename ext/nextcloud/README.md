@@ -55,11 +55,19 @@ GRANT Alter, Alter Routine, Create, Create Routine, Create Temporary Tables, Cre
 variables in `nextcloud.ini` configuration files.
 
 ```ini
-#cat /usr/local/etc/php/conf.d/nextcloud.ini
+# cat /usr/local/etc/php/conf.d/nextcloud.ini
 
 memory_limit=${PHP_MEMORY_LIMIT}
 upload_max_filesize=${PHP_UPLOAD_LIMIT}
 post_max_size=${PHP_UPLOAD_LIMIT}
+```
+
+
+###  Database and Trusted Domains List
+variables in `config.php` configuration files
+
+```sh
+cat /var/www/html/config/config.php
 ```
 
 
@@ -74,14 +82,6 @@ opcache.max_accelerated_files=10000
 opcache.memory_consumption=128
 opcache.save_comments=1
 opcache.revalidate_freq=60
-```
-
-
-###  Database and Trusted Domains List
-variables in `config.php` configuration files
-
-```sh
-cat /var/www/html/config/config.php
 ```
 
 
