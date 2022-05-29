@@ -84,6 +84,7 @@ back_log = 256
 query_cache_type = 1
 query_cache_size = 8M
 query_cache_limit = 2M
+query_cache_min_res_unit = 2K
 
 # timestamp default
 explicit_defaults_for_timestamp = 0
