@@ -242,12 +242,12 @@ Please refer to the following parameters: [www.conf](./nextcloud-data/php-fpm.d/
 ### PHP-FPM Tuning
 If you need high performance, you can optimize the default PHP-FPM parameters.
 
+Please refer to the following parameters: [www.conf](./nextcloud-data/php-fpm.d/www.conf)
+
 ```sh
 # nextcloud container add volumes
 -v /mnt/user/appdata/nextcloud/config/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf \
 ```
-
-Please refer to the following parameters: [www.conf](./nextcloud-data/php-fpm.d/www.conf)
 
 Tips: It is recommended to do it after the nextcloud container is initialized, otherwise it may cause initialization errors or other problems.
 
