@@ -262,7 +262,7 @@ If you need to monitor the running status of php-fpm:
 pm.status_path = /status
 ```
 
-- nginx configuration add `location`
+- nginx configuration add `location` ,it is recommended to enable it only on internal networks.
 
 ```conf
     # php-fpm running status monitoring
