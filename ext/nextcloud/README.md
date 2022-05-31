@@ -24,7 +24,6 @@ docker run -d \
   -e PHP_UPLOAD_LIMIT=0 \
   -v /mnt/user/appdata/nextcloud:/var/www/html \
   -v /mnt/user/datas/nextcloud:/var/www/html/data \
-  # -v /mnt/user/appdata/nextcloud/config/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf \
   -v /etc/localtime:/etc/localtime:ro
   nextcloud:24.0.0-fpm-alpine
 ```
@@ -34,7 +33,7 @@ docker run -d \
 If you use nginx to proxy nextcloud, you need to mount the nextcloud working directory to the nginx container.
 
 ```sh
-# nginx container
+# nginx container add volumes
 -v /mnt/user/appdata/nextcloud:/var/www/html \
 ```
 
@@ -50,11 +49,6 @@ CREATE USER `nextcloud`@`` IDENTIFIED BY 'example';
 
 GRANT Alter, Alter Routine, Create, Create Routine, Create Temporary Tables, Create View, Delete, Drop, Event, Execute, Grant Option, Index, Insert, Lock Tables, References, Select, Show View, Trigger, Update ON `nextcloud`.* TO `nextcloud`@`%`;
 ```
-
-### PHP-FPM Tuning
-If you need high performance, you can optimize the default PHP-FPM parameters.
-
-Please refer to the following parameters: [www.conf](./nextcloud-data/php-fpm.d/www.conf)
 
 
 ### PHP Memory and Upload Limit
@@ -236,7 +230,7 @@ See more: https://docs.nextcloud.com/server/latest/admin_manual/configuration_se
 ```
 
 
-### Fix Error
+### Error Fix
 If the nextcloud container log reports an error:
 
 ```sh
@@ -245,10 +239,24 @@ WARNING: [pool www] server reached pm.max_children setting (5), consider raising
 Please refer to the following parameters: [www.conf](./nextcloud-data/php-fpm.d/www.conf)
 
 
+### PHP-FPM Tuning
+If you need high performance, you can optimize the default PHP-FPM parameters.
+
+```sh
+# nextcloud container add volumes
+-v /mnt/user/appdata/nextcloud/config/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf \
+```
+
+Please refer to the following parameters: [www.conf](./nextcloud-data/php-fpm.d/www.conf)
+
+Tips: It is recommended to do it after the nextcloud container is initialized, otherwise it may cause initialization errors or other problems.
+
+
+
 ### PHP-FPM STATUS Monitoring
 If you need to monitor the running status of php-fpm: 
 
-- Uncomment the `pm.status_path` in the `www.conf` configuration file
+- Uncomment in the `www.conf` configuration file the `pm.status_path` 
 
 ```conf
 pm.status_path = /status
