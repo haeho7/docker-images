@@ -24,6 +24,7 @@ docker run -d \
   -e PHP_UPLOAD_LIMIT=0 \
   -v /mnt/user/appdata/nextcloud:/var/www/html \
   -v /mnt/user/datas/nextcloud:/var/www/html/data \
+  # -v /mnt/user/appdata/nextcloud/config/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf \
   -v /etc/localtime:/etc/localtime:ro
   nextcloud:24.0.0-fpm-alpine
 ```
@@ -49,6 +50,11 @@ CREATE USER `nextcloud`@`` IDENTIFIED BY 'example';
 
 GRANT Alter, Alter Routine, Create, Create Routine, Create Temporary Tables, Create View, Delete, Drop, Event, Execute, Grant Option, Index, Insert, Lock Tables, References, Select, Show View, Trigger, Update ON `nextcloud`.* TO `nextcloud`@`%`;
 ```
+
+### PHP-FPM Tuning
+If you need high performance, you can optimize the default PHP-FPM parameters.
+
+Please refer to the following parameters: [www.conf](./nextcloud-data/php-fpm.d/www.conf)
 
 
 ### PHP Memory and Upload Limit
@@ -151,7 +157,7 @@ docker exec --user=99:100 nextcloud php /var/www/html/occ files:scan --path="/<u
 
 ```sh
 # scan all user file,show directories and files verbose 
-docker exec --user=99:100 nextcloud php /var/www/html/occ files:scan --all --verbose 
+docker exec --user=99:100 nextcloud php /var/www/html/occ files:scan --all --verbose
 ``` 
 
 ```sh
@@ -227,4 +233,36 @@ See more: https://docs.nextcloud.com/server/latest/admin_manual/configuration_se
   'loglevel' => 2,
   'logdateformat' => 'Y-m-d H:i:s',
   'logtimezone' => 'Asia/Shanghai',
+```
+
+
+### Fix Error
+If the nextcloud container log reports an error:
+
+```sh
+WARNING: [pool www] server reached pm.max_children setting (5), consider raising it
+```
+Please refer to the following parameters: [www.conf](./nextcloud-data/php-fpm.d/www.conf)
+
+
+### PHP-FPM STATUS Monitoring
+If you need to monitor the running status of php-fpm: 
+
+- Uncomment the `pm.status_path` in the `www.conf` configuration file
+
+```conf
+pm.status_path = /status
+```
+
+- nginx configuration add `location`
+
+```conf
+    # php-fpm running status monitoring
+    location /status {
+        fastcgi_index   index.php;
+        fastcgi_pass    192.168.246.248:9000;
+        include         fastcgi_params;
+        fastcgi_param   SCRIPT_FILENAME    $document_root$fastcgi_script_name;
+        fastcgi_param   SCRIPT_NAME        $fastcgi_script_name;
+    }    
 ```
