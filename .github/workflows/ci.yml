@@ -31,6 +31,9 @@ jobs:
           # wireguard
           - BUILD_CONTEXT: net/wireguard
             TARGET_PLATFORMS: linux/amd64,linux/arm64
+          # nextcloud
+          - BUILD_CONTEXT: utils/nextcloud
+            TARGET_PLATFORMS: linux/amd64,linux/arm64
     steps:
       # prepare
       - name: Checkout

@@ -231,12 +231,17 @@ See more: https://docs.nextcloud.com/server/latest/admin_manual/configuration_se
 
 
 ### Error Fix
-If the nextcloud container log reports an error:
+- WARNING: [pool www] server reached pm.max_children setting (5), consider raising it.
+
+Please refer to the following parameters: [www.conf](./nextcloud-data/php-fpm.d/www.conf)
+
+- Module php-imagick in this instance has no SVG support. For better compatibility it is recommended to install it.
 
 ```sh
-WARNING: [pool www] server reached pm.max_children setting (5), consider raising it
+docker exec -it -u root:root nextcloud sh
+apk add --no-cache imagemagick
 ```
-Please refer to the following parameters: [www.conf](./nextcloud-data/php-fpm.d/www.conf)
+
 
 
 ### PHP-FPM Tuning
