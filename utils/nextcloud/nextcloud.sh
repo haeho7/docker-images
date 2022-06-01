@@ -27,3 +27,4 @@ fi
 
 # exec gosu ${PUID}:${PGID} bash -c 'umask $UMASK' bash-c /entrypoint.sh "$@"
 # exec gosu ${PUID}:${PGID} /entrypoint.sh php-fpm "$@"
+exec /entrypoint.sh "$@"
