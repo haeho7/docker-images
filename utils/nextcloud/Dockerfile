@@ -30,6 +30,7 @@ RUN apk update \
   && rm -rf /var/cache/apk/*
 
 COPY --from=builder /usr/local/bin/gosu /usr/local/bin/
+COPY --chmod=777 nextcloud.sh /usr/local/bin/
 
 # ENV PUID=1000
 # ENV PGID=1000
