@@ -1,51 +1,28 @@
 FROM nextcloud:24.0.0-fpm-alpine
 
-RUN set -ex; \
-    \
-    apk add --no-cache \
-        ffmpeg \
-        imagemagick \
-        procps \
-        samba-client \
-        supervisor \
-#       libreoffice \
-    ;
-
-RUN set -ex; \
-    \
-    apk add --no-cache --virtual .build-deps \
-        $PHPIZE_DEPS \
-        imap-dev \
-        krb5-dev \
-        openssl-dev \
-        samba-dev \
-        bzip2-dev \
-    ; \
-    \
-    docker-php-ext-configure imap --with-kerberos --with-imap-ssl; \
-    docker-php-ext-install \
-        bz2 \
-        imap \
-    ; \
-    pecl install smbclient; \
-    docker-php-ext-enable smbclient; \
-    \
-    runDeps="$( \
-        scanelf --needed --nobanner --format '%n#p' --recursive /usr/local/lib/php/extensions \
-            | tr ',' '\n' \
-            | sort -u \
-            | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
-    )"; \
-    apk add --virtual .nextcloud-phpext-rundeps $runDeps; \
-    apk del .build-deps
-
-RUN mkdir -p \
-    /var/log/supervisord \
-    /var/run/supervisord \
-;
-
-COPY ./supervis/supervisord.conf /
-
 ENV NEXTCLOUD_UPDATE=1
 
-CMD ["/usr/bin/supervisord", "-c", "/supervisord.conf"]
+RUN mkdir -p /usr/share/man/man1 \
+    && apt-get update && apt-get install -y \
+        supervisor \
+        ffmpeg \
+        libmagickwand-dev \
+        libgmp3-dev \
+        libc-client-dev \
+        libkrb5-dev \
+        smbclient \
+        libsmbclient-dev \
+        inotify-tools \
+    && rm -rf /var/lib/apt/lists/* \
+    && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
+    && docker-php-ext-install bz2 gmp imap \
+    && pecl install imagick smbclient \
+    && docker-php-ext-enable imagick smbclient \
+    && mkdir -p /var/log/supervisord \
+    && mkdir -p /var/run/supervisord
+
+COPY nextcloud-entrypoint.sh /
+COPY ./supervisord.conf /
+
+ENTRYPOINT ["/nextcloud-entrypoint.sh"]
+CMD ["/usr/bin/supervisord","-c","/supervisord.conf"]
