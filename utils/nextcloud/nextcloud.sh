@@ -23,7 +23,7 @@ if [ "x$UMASK" != "x" ]; then
 fi
 
 # exec su -s /bin/ash www-data -c webdav "$@"
-exec su -s /bin/ash ${USER} -c umask $UMASK -c /entrypoint.sh php-fpm "$@"
+exec su -s /bin/ash ${USER} -c umask $UMASK -c /entrypoint.sh -c php-fpm "$@"
 
 # exec gosu ${PUID}:${PGID} bash -c 'umask $UMASK' bash-c /entrypoint.sh "$@"
 # exec gosu ${USER} /entrypoint.sh php-fpm "$@"
