@@ -32,7 +32,7 @@ jobs:
           - BUILD_CONTEXT: net/wireguard
             TARGET_PLATFORMS: linux/amd64,linux/arm64
           # nextcloud
-          - BUILD_CONTEXT: utils/nextcloud
+          - BUILD_CONTEXT: ext/nextcloud
             TARGET_PLATFORMS: linux/amd64,linux/arm64
     steps:
       # prepare

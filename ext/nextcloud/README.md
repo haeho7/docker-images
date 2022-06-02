@@ -13,6 +13,7 @@ docker run -d \
   --memory=2G \
   --memory-swap=4G \
   --user=99:100 \
+  -e TZ=Asia/Shanghai \
   -e MYSQL_HOST='192.168.1.250:3306' \
   -e MYSQL_DATABASE=nextcloud \
   -e MYSQL_USER=nextcloud \
@@ -24,8 +25,7 @@ docker run -d \
   -e PHP_UPLOAD_LIMIT=0 \
   -v /mnt/user/appdata/nextcloud:/var/www/html \
   -v /mnt/user/datas/nextcloud:/var/www/html/data \
-  -v /etc/localtime:/etc/localtime:ro
-  nextcloud:24.0.0-fpm-alpine
+  haeho7/docker-images:nextcloud
 ```
 
 
