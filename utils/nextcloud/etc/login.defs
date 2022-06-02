@@ -1,5 +1,5 @@
 #
-# default config:https://github.com/shadow-maint/shadow/blob/master/etc/login.defs
+# default config: https://github.com/shadow-maint/shadow/blob/master/etc/login.defs
 #
 # /etc/login.defs - Configuration control definitions for the shadow package.
 #

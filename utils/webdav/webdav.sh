@@ -2,12 +2,13 @@
 set -e
 
 # set env
+USER=nobody
 PUID=${PUID:-1000}
 PGID=${PGID:-1000}
 UMASK=${UMASK:-000}
 
-# set user nobody to specified user id (non unique)
-usermod -o -u "${PUID}" -g users -G nobody -s /bin/ash nobody
+# set user to specified user id (non unique)
+usermod -o -u "${PUID}" -g users -G ${USER} -s /bin/ash ${USER}
 
 # set group users to specified group id (non unique)
 groupmod -o -g "${PGID}" users &>/dev/null
@@ -21,5 +22,4 @@ if [ "x$UMASK" != "x" ]; then
     umask $UMASK
 fi
 
-# exec su -s /bin/ash nobody -c webdav "$@"
-exec su -s /bin/ash nobody -c umask $UMASK -c webdav "$@"
+exec su -s /bin/ash ${PUID} -c umask $UMASK -c webdav "$@"
