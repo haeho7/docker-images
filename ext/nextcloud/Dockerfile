@@ -31,4 +31,4 @@ RUN apk update \
 #
 RUN apk update \
   && apk add --no-cache tzdata ffmpeg imagemagick samba-client \
-  && rm -rf /var/cache/apk/* \
+  && rm -rf /var/cache/apk/*
