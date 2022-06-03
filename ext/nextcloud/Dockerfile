@@ -30,5 +30,5 @@ RUN apk update \
 # install nextcloud ext packages
 #
 RUN apk update \
-  && apk add --no-cache tzdata ffmpeg samba-client \
+  && apk add --no-cache tzdata ffmpeg imagemagick samba-client \
   && rm -rf /var/cache/apk/* \
