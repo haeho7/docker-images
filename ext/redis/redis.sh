@@ -12,7 +12,9 @@ usermod -o -u "${PUID}" -g users -G ${USER} -s /bin/ash ${USER}
 # set group users to specified group id (non unique)
 groupmod -o -g "${PGID}" users &>/dev/null
 
-# copy redis.conf
+# copy and chown redis.conf
 cp -a /tmp/redis.conf /data
+chown ${PUID}:${PGID} /data/redis.conf
 
-exec /docker-entrypoint.sh "$@" 
+# call redis official startup script
+exec /usr/local/bin/docker-entrypoint.sh "$@" 
