@@ -14,5 +14,5 @@ RUN apk update \
   && rm -rf /var/cache/apk/*
 
 COPY redis-data/redis.conf /tmp
-CMD [ "cp -a /tmp/redis.conf /data","redis-server", "/data/redis.conf" ]
+CMD [ "cp -a /tmp/redis.conf /data && redis-server", "/data/redis.conf" ]
 # CMD [ "redis-server", "/data/redis.conf" ]
