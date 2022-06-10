@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     network_mode: host
     limits:
-      memory: 512M    
+      memory: 512M
     environment:
       TZ: Asia/Shanghai
       PUID: 99
