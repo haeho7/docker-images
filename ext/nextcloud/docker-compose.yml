@@ -10,7 +10,7 @@ services:
       br0:
         ipv4_address: 192.168.1.248
     limits:
-      memory: 2G            
+      memory: 2G
     environment:
       TZ: Asia/Shanghai
       MYSQL_HOST: '192.168.1.250:3306'

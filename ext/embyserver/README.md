@@ -12,11 +12,11 @@
   --restart=unless-stopped \
   --memory=2G \
   --memory-swap=4G \
-  -e TZ=Asia/Shanghai \
   -e UID=99 \
   -e GID=100 \
   -e GIDLIST=100 \
   -e UMASK=022 \
+  -e TZ=Asia/Shanghai \
   # -p 8096:8096 \
   # -p 8920:8920 \
   -v /mnt/user/medias/moive/:/data/movies \

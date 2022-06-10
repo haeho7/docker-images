@@ -9,7 +9,7 @@ services:
       br0:
         ipv4_address: 192.168.1.240
     limits:
-      memory: 2G            
+      memory: 2G
     environment:
       TZ: Asia/Shanghai
       PUID: 99
