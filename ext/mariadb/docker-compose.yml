@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   mariadb:
-    image: mariadb:10.6.7
+    image: mariadb:10.6.8
     container_name: mariadb
     restart: unless-stopped
     network_mode: host

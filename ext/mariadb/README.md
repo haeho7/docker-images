@@ -21,7 +21,7 @@ docker run -d \
   -v /mnt/user/appdata/mariadb/conf.d/:/etc/mysql/conf.d \
   -v /mnt/user/appdata/mariadb/data:/var/lib/mysql \
   # -v /etc/localtime:/etc/localtime:ro \
-  mariadb:10.6.7
+  mariadb:10.6.8
 ```
 
 
