@@ -14,7 +14,7 @@
   -e TZ=Asia/Shanghai \
   # -p 9876:9876 \
   -v /mnt/user/appdata/ddns-go:/root \
-  jeessy/ddns-go:v3.6.2
+  jeessy/ddns-go:v3.7.1
 ```
 
 
