@@ -11,7 +11,8 @@ docker run -d \
   --restart=unless-stopped \
   --memory=2G \
   --memory-swap=4G \
-  --user=99:100 \
+  -e PUID=99 \
+  -e PGID=100 \
   -e TZ=Asia/Shanghai \
   -e MARIADB_ROOT_PASSWORD='example' \
   # -e MARIADB_DATABASE=example \
@@ -21,7 +22,7 @@ docker run -d \
   -v /mnt/user/appdata/mariadb/conf.d/:/etc/mysql/conf.d \
   -v /mnt/user/appdata/mariadb/data:/var/lib/mysql \
   # -v /etc/localtime:/etc/localtime:ro \
-  mariadb:10.6.8
+  haeho7/docker-images:mariadb
 ```
 
 
