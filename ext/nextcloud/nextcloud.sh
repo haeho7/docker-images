@@ -19,4 +19,4 @@ groupmod -o -g ${PGID} ${GROUP} &>/dev/null
 chown -R ${PUID}:${PGID} /var/www
 
 # call nextcloud official startup script
-exec /entrypoint.sh php-fpm "$@"
+exec /entrypoint.sh "$@"
