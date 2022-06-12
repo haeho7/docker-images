@@ -22,10 +22,24 @@ docker run -d \
 ### Redis Auth
 Authentication is required to connect to redis. For the default password, refer to the configuration file: [redis.conf](./redis-data/redis.conf)
 
-Modify the `requirepass` parameter in the configuration file, or add the `--requirepass password` extra parameter to override when creating the container.
+Modify the `requirepass` parameter in the configuration file, or creating the container add the `--requirepass password` extra parameter.
 
 
 ### Redis Tuning
 If you need high performance, you can optimize the default redis parameters.
 
 Please refer to the following parameters: [redis.conf](./redis-data/redis.conf)
+
+
+### Redis Command
+``` sh
+# show all cinfig
+CONFIG GET *
+CONFIG GET requirepass
+```
+
+``` sh
+# show all key
+SELECT 0
+KEYS *
+```

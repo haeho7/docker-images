@@ -18,6 +18,9 @@ docker run -d \
   -e MYSQL_DATABASE=nextcloud \
   -e MYSQL_USER=nextcloud \
   -e MYSQL_PASSWORD='example' \
+  -e REDIS_HOST='192.168.1.250' \
+  -e REDIS_HOST_PORT=6379 \
+  -e REDIS_HOST_PASSWORD='example' \
   -e NEXTCLOUD_ADMIN_USER=example \
   -e NEXTCLOUD_ADMIN_PASSWORD='example' \
   -e NEXTCLOUD_TRUSTED_DOMAINS='192.168.1.248 nextcloud.aimoyu.cc nextcloud.local.aimoyu.cc' \
@@ -29,7 +32,7 @@ docker run -d \
 ```
 
 
-### NGINX Webroot
+### Ngnix Webroot
 If you use nginx to proxy nextcloud, you need to mount the nextcloud working directory to the nginx container.
 
 ```sh
@@ -38,7 +41,14 @@ If you use nginx to proxy nextcloud, you need to mount the nextcloud working dir
 ```
 
 
+### Redis
+
+If you need to use a redis database, please create a [redis container](./redis/README.md) first. For redis parameters, please refer to [redis.conf](./redis/redis-data/redis.conf)
+
+
 ### Mariadb Database
+If you need to use a mariadb database, please create a [mariadb container](./mariadb/README.md) first. For redis parameters, please refer to [mariadb.conf](./mariadb/mariadb-data/conf.d/mariadb.cnf)
+
 Initialize the database used by the nextcloud container in mariadb.
 
 ```sql

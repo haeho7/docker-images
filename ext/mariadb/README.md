@@ -39,7 +39,7 @@ chmod 0644 /mnt/user/appdata/mariadb/conf.d/mariadb.cnf
 show variables;
 show global variables;
 ```
-See more: [default-variables](./variables/default-variables.html)
+See more: [default-variables](./variables)
 
 
 ## Variables Tuning
