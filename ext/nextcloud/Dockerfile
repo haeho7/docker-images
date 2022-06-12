@@ -35,4 +35,3 @@ RUN apk update \
 
 COPY --chmod=777 nextcloud.sh /usr/local/bin/
 ENTRYPOINT ["nextcloud.sh"]
-CMD ["php-fpm"]
