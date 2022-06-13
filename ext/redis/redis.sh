@@ -16,6 +16,7 @@ groupmod -o -g ${PGID} ${GROUP} &>/dev/null
 
 # copy and chown redis.conf
 cp -a /tmp/redis.conf /data
+chmod 644 /data/redis.conf
 chown ${PUID}:${PGID} /data/redis.conf
 
 # call redis official startup script

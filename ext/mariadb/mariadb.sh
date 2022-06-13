@@ -15,9 +15,9 @@ usermod -o -u ${PUID} -g ${GROUP} -G ${GROUPS} -s /bin/bash ${USER} &>/dev/null
 groupmod -o -g ${PGID} ${GROUP} &>/dev/null
 
 # copy and chown mariadb.cnf
-cp -a /tmp/mariadb.cnf /etc/mysql/conf.d
+cp -a /tmp/mariadb.cnf /etc/mysql/conf.d/
+chmod 644 /etc/mysql/conf.d/mariadb.cnf
 chown ${PUID}:${PGID} /etc/mysql/conf.d/mariadb.cnf
-chmod 0644 /etc/mysql/conf.d/mariadb.cnf
 
 # call mariadb official startup script
 exec /usr/local/bin/docker-entrypoint.sh "$@"

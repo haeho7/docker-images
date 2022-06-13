@@ -16,8 +16,8 @@ usermod -o -u ${PUID} -g ${GROUP} -G ${GROUPS} -s /bin/ash ${USER} &>/dev/null
 groupmod -o -g ${PGID} ${GROUP} &>/dev/null
 
 #set folder's owne
-chown $PUID:$PGID /etc/webdav
 chown $PUID:$PGID /data
+chown $PUID:$PGID /etc/webdav
 
 # if UMASK is not null set umask
 if [ "x$UMASK" != "x" ]; then

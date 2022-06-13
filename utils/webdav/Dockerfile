@@ -31,7 +31,7 @@ RUN apk update \
 
 COPY --from=builder /usr/local/bin/webdav /usr/local/bin/
 COPY --chmod=644 etc/login.defs /etc/login.defs
-COPY --chmod=777 webdav.sh /usr/local/bin/
+COPY --chmod=755 webdav.sh /usr/local/bin/
 
 VOLUME /data
 
