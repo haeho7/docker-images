@@ -13,7 +13,7 @@ UMASK=${UMASK:-000}
 usermod -o -u ${PUID} -g ${GROUP} -G ${GROUPS} -s /bin/ash ${USER} &>/dev/null
 
 # set group users to specified group id (non unique)
-groupmod -o -g ${PGID} ${GROUP} &>
+groupmod -o -g ${PGID} ${GROUP} &>/dev/null
 
 #set folder's owne
 chown $PUID:$PGID /etc/webdav
