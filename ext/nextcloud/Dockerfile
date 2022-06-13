@@ -33,8 +33,8 @@ RUN apk update \
   && apk add --no-cache tzdata shadow ffmpeg imagemagick samba-client \
   && rm -rf /var/cache/apk/*
 
-COPY --chmod=644 etc/login.defs /etc/login.defs
-COPY --chmod=755 gosu /usr/local/bin/
+# COPY --chmod=644 etc/login.defs /etc/login.defs
+# COPY --chmod=755 gosu /usr/local/bin/
 COPY --chmod=755 nextcloud.sh /usr/local/bin/
 
 ENTRYPOINT ["nextcloud.sh"]
