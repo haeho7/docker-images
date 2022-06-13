@@ -17,4 +17,4 @@ COPY --chmod=777 redis.sh /usr/local/bin/
 COPY redis-data/redis.conf /tmp
 
 ENTRYPOINT ["redis.sh"] 
-CMD [ "redis-server", "/data/redis.conf" ]
+CMD ["redis-server", "/data/redis.conf"]

@@ -7,7 +7,7 @@
 #
 FROM golang:alpine AS builder
 
-ARG VERSION=v4.1.1
+ARG VERSION=v4.2.0
 RUN apk update \
   && apk add --no-cache --virtual .build-deps git gcc musl-dev \
   && git clone https://github.com/hacdias/webdav.git --branch $VERSION \
@@ -32,9 +32,6 @@ RUN apk update \
 COPY --from=builder /usr/local/bin/webdav /usr/local/bin/
 COPY --chmod=644 etc/login.defs /etc/login.defs
 COPY --chmod=777 webdav.sh /usr/local/bin/
-
-# ENV PUID=1000
-# ENV PGID=1000
 
 VOLUME /data
 

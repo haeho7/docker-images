@@ -3,15 +3,17 @@ set -e
 
 # set env
 USER=nobody
+GROUP=users
+GROUPS=nobody
 PUID=${PUID:-1000}
 PGID=${PGID:-1000}
 UMASK=${UMASK:-000}
 
 # set user to specified user id (non unique)
-usermod -o -u "${PUID}" -g users -G ${USER} -s /bin/ash ${USER}
+usermod -o -u ${PUID} -g ${GROUP} -G ${GROUPS} -s /bin/bash ${USER} &>/dev/null
 
 # set group users to specified group id (non unique)
-groupmod -o -g "${PGID}" users &>/dev/null
+groupmod -o -g ${PGID} ${GROUP} &>
 
 #set folder's owne
 chown $PUID:$PGID "/etc/webdav"
