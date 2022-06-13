@@ -36,5 +36,6 @@ RUN apk update \
 COPY --chmod=644 etc/login.defs /etc/login.defs
 COPY --chmod=755 gosu /usr/local/bin/
 COPY --chmod=777 nextcloud.sh /usr/local/bin/
+
 ENTRYPOINT ["nextcloud.sh"]
 CMD ["php-fpm"]
