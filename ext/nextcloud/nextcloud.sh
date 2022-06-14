@@ -18,10 +18,11 @@ groupmod -o -g ${PGID} ${GROUP} &>/dev/null
 # See more: https://github.com/nextcloud/docker/blob/00d88733d0d93d0abc628c7b18bc589181c34cbb/24/fpm-alpine/Dockerfile#L100
 chown -R ${PUID}:${PGID} /var/www
 
-# replace rsync_options
+# add env and replace rsync_options
 # See more: https://github.com/nextcloud/docker/blob/00d88733d0d93d0abc628c7b18bc589181c34cbb/24/fpm-alpine/entrypoint.sh#L100
+sed -i '/set -eu/a USER=www-data\nGROUP=users' /entrypoint.sh
 sed -i 's/-rlDog --chown www-data:root/-rlDog --chown \${USER}:\${GROUP}/g' /entrypoint.sh
- 
+
 # call nextcloud official startup script
 # exec gosu ${USER} /entrypoint.sh "$@"
 exec /entrypoint.sh "$@"
