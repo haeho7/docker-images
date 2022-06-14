@@ -12,8 +12,7 @@ docker run -d \
   --restart=unless-stopped \
   --memory=2G \
   --memory-swap=4G \
-  -e PUID=99 \
-  -e PGID=100 \
+  --user=99:100 \
   -e TZ=Asia/Shanghai \
   -e MYSQL_HOST='192.168.1.250:3306' \
   -e MYSQL_DATABASE=nextcloud \
