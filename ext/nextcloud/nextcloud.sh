@@ -16,7 +16,7 @@ groupmod -o -g ${PGID} ${GROUP} &>/dev/null
 
 # chown nextcloud folder
 # See more: https://github.com/nextcloud/docker/blob/00d88733d0d93d0abc628c7b18bc589181c34cbb/24/fpm-alpine/Dockerfile#L100
-# ls -1 /var/www/html |grep -v data |xargs chown -R ${PUID}:${PGID}
+# cd /var/www/html && ls -1 /var/www/html | grep -v data | xargs chown -R ${PUID}:${PGID}
 
 # add env and replace rsync_options
 # See more: https://github.com/nextcloud/docker/blob/00d88733d0d93d0abc628c7b18bc589181c34cbb/24/fpm-alpine/entrypoint.sh#L100

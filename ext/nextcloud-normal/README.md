@@ -28,7 +28,7 @@ docker run -d \
   -e PHP_UPLOAD_LIMIT=0 \
   -v /mnt/user/appdata/nextcloud:/var/www/html \
   -v /mnt/user/datas/nextcloud:/var/www/html/data \
-  haeho7/docker-images:nextcloud
+  haeho7/docker-images:nextcloud-normal
 ```
 
 
