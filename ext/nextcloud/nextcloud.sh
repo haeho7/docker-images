@@ -3,8 +3,8 @@ set -e
 
 # set env
 USER=www-data
-GROUP=users
-GROUPS=www-data
+GROUP=www-data
+GROUPS=www-data,users
 PUID=${PUID:-1000}
 PGID=${PGID:-1000}
 
@@ -25,5 +25,4 @@ sed -i '/set -eu/a USER=www-data\nGROUP=users' /entrypoint.sh
 sed -i 's/-rlDog --chown www-data:root/-rlDog --chown \${USER}:\${GROUP}/g' /entrypoint.sh
 
 # call nextcloud official startup script
-# exec gosu ${USER} /entrypoint.sh "$@"
 exec /entrypoint.sh "$@"
