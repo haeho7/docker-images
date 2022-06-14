@@ -33,9 +33,8 @@ RUN apk update \
   && apk add --no-cache tzdata shadow ffmpeg imagemagick samba-client \
   && rm -rf /var/cache/apk/*
 
-# If the startup error php: not found, you need copy the login.defs file to etc.
+# If the startup error php: not found, you need copy the login.defs file to /etc.
 # See more: https://github.com/haeho7/docker-images/blob/475d15c4564987c9a0150b39180df58dab96223f/ext/nextcloud/etc/login.defs#L163-L164
-
 COPY --chmod=644 etc/login.defs /etc/login.defs
 COPY --chmod=755 nextcloud.sh /usr/local/bin/
 # COPY --chmod=755 gosu /usr/local/bin/
