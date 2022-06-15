@@ -18,8 +18,8 @@ groupmod -o -g ${PGID} ${GROUP} &>/dev/null
 if [ ! -f "/etc/mysql/conf.d/mariadb.cnf" ]; then
   cp -a /opt/mariadb.cnf /etc/mysql/conf.d/
 fi
-chown -R ${PUID}:${PGID} /etc/mysql/conf.d/
-chmod -R 644 /etc/mysql/conf.d/
+chmod 644 /etc/mysql/conf.d/mariadb.cnf
+chown ${PUID}:${PGID} /etc/mysql/conf.d/mariadb.cnf
 
 # call mariadb official startup script
 exec /usr/local/bin/docker-entrypoint.sh "$@"
