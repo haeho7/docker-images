@@ -13,8 +13,8 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends tzdata \
   && rm -rf /var/lib/apt/lists/*
 
-COPY mariadb-data/conf.d/mariadb.cnf /tmp/
+COPY mariadb-data/conf.d/mariadb.cnf /etc/mysql/conf.d/
 COPY --chmod=755 mariadb.sh /usr/local/bin/
 
-ENTRYPOINT ["mariadb.sh"] 
+ENTRYPOINT ["mariadb.sh"]
 CMD ["mariadbd"]
