@@ -19,7 +19,7 @@ if [ ! -f "/etc/mysql/conf.d/mariadb.cnf" ]; then
   cp -a /opt/mariadb.cnf /etc/mysql/conf.d/
 fi
 chmod 644 /etc/mysql/conf.d/mariadb.cnf
-chown ${PUID}:${PGID} /etc/mysql/conf.d/mariadb.cnf
+chown -R ${PUID}:${PGID} /etc/mysql/conf.d/
 
 # call mariadb official startup script
 exec /usr/local/bin/docker-entrypoint.sh "$@"
