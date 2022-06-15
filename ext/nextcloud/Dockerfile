@@ -33,6 +33,11 @@ RUN apk update \
   && apk add --no-cache tzdata shadow ffmpeg imagemagick samba-client \
   && rm -rf /var/cache/apk/*
 
+# add env and replace rsync_options
+# See more: https://github.com/nextcloud/docker/blob/00d88733d0d93d0abc628c7b18bc589181c34cbb/24/fpm-alpine/entrypoint.sh#L100
+RUN sed -i '/set -eu/a USER=www-data\nGROUP=users' /entrypoint.sh \
+  && sed -i 's/-rlDog --chown www-data:root/-rlDog --chown \${USER}:\${GROUP}/g' /entrypoint.sh
+
 # If the startup error php: not found, you need copy the login.defs file to /etc.
 # See more: https://github.com/haeho7/docker-images/blob/475d15c4564987c9a0150b39180df58dab96223f/ext/nextcloud/etc/login.defs#L163-L164
 COPY --chmod=644 etc/login.defs /etc/login.defs
