@@ -13,7 +13,7 @@ RUN apk update \
   && apk add --no-cache tzdata shadow \
   && rm -rf /var/cache/apk/*
 
-COPY redis-data/redis.conf /tmp/
+COPY redis-data/redis.conf /opt/
 COPY --chmod=755 redis.sh /usr/local/bin/
 
 ENTRYPOINT ["redis.sh"] 

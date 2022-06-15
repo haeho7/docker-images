@@ -16,7 +16,7 @@ groupmod -o -g ${PGID} ${GROUP} &>/dev/null
 
 # copy and chown mariadb.cnf
 if [ ! -f "/etc/mysql/conf.d/mariadb.cnf" ]; then
-  cp -a /tmp/mariadb.cnf /etc/mysql/conf.d/
+  cp -a /opt/mariadb.cnf /etc/mysql/conf.d/
 fi
 chown -R ${PUID}:${PGID} /etc/mysql/conf.d/
 chmod -R 644 /etc/mysql/conf.d/
