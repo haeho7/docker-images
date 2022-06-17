@@ -17,7 +17,7 @@ groupmod -o -g ${PGID} ${GROUP} &>/dev/null
 # call nextcloud official crontab script
 if [ ! `pgrep -f "crond"` >/dev/null ]; then
   echo "crond process not runing, starting crond..."
-  nohup /cron.sh >/var/www/html/data/cron.log &
+  nohup /cron.sh >/var/www/html/data/crond.log &
 else
   echo "crond process still running"
 fi
