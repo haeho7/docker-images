@@ -14,16 +14,6 @@ usermod -o -u ${PUID} -g ${GROUP} -aG ${GROUPS} -s /bin/ash ${USER} &>/dev/null
 # set group users to specified group id (non unique)
 groupmod -o -g ${PGID} ${GROUP} &>/dev/null
 
-# # copy and chown php-fpm www.conf
-# if [ ! -f "/var/www/html/config/php-fpm.d/www.conf" ]; then
-#   echo "php-fpm.d/www.conf file does not exist, copy www.conf"
-#   mkdir var/www/html/config/php-fpm.d/
-#   cp -a /usr/src/nextcloud/config/php-fpm.d/www.conf /var/www/html/config/php-fpm.d/
-#   chown ${PUID}:${PGID} /var/www/html/config/php-fpm.d/www.conf
-# else
-#   echo "php-fpm.d/www.conf file already exists, skip copy"
-# fi
-
 # chown nextcloud folder
 # See more: https://github.com/nextcloud/docker/blob/00d88733d0d93d0abc628c7b18bc589181c34cbb/24/fpm-alpine/Dockerfile#L100
 # cd /var/www/html && ls -1 /var/www/html | grep -v data | xargs chown -R ${PUID}:${PGID}
