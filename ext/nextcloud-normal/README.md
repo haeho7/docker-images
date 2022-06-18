@@ -118,7 +118,7 @@ See more: https://docs.nextcloud.com/server/stable/admin_manual/configuration_se
 Find the path where occ is located in the container.
 
 ```sh
-find / -iname *occ*
+find / -iname "*occ*"
 
 cd /var/www/html
 ./occ --version

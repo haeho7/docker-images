@@ -16,7 +16,10 @@ groupmod -o -g ${PGID} ${GROUP} &>/dev/null
 
 # copy and chown mariadb.cnf
 if [ ! -f "/etc/mysql/conf.d/mariadb.cnf" ]; then
+  echo "mariadb.cnf does not exist, copy mariadb.cnf"
   cp -a /opt/mariadb.cnf /etc/mysql/conf.d/
+else
+  echo "mariadb.cnf file already exists, skip copy"
 fi
 chmod 644 /etc/mysql/conf.d/mariadb.cnf
 chown -R ${PUID}:${PGID} /etc/mysql/conf.d/

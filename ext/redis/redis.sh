@@ -16,7 +16,10 @@ groupmod -o -g ${PGID} ${GROUP} &>/dev/null
 
 # copy and chown redis.conf
 if [ ! -f "/data/redis.conf" ]; then
+  echo "redis.conf does not exist, copy redis.conf"
   cp -a /opt/redis.conf /data/
+else
+  echo "redis.conf file already exists, skip copy"
 fi
 chmod 644 /data/redis.conf
 chown ${PUID}:${PGID} /data/redis.conf
