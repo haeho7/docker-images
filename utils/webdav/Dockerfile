@@ -25,7 +25,6 @@ RUN apk update \
 FROM alpine
 LABEL maintainer="haeho7 <i@aimoyu.cc>"
 
-RUN 
 RUN apk update \
   && apk add tzdata shadow \
   && apk add gosu --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing \
