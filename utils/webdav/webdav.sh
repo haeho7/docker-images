@@ -24,4 +24,6 @@ if [ "x$UMASK" != "x" ]; then
     umask $UMASK
 fi
 
-exec su -s /bin/ash ${USER} -c umask $UMASK -c webdav "$@"
+# exec su -s /bin/ash ${USER} -c umask $UMASK -c webdav "$@"
+gosu ${USER} sh -c "umask ${UMASK} && webdav -c $0" "$@"
+# gosu ${USER} sh -c "umask ${UMASK} && webdav -c $0" "$@"

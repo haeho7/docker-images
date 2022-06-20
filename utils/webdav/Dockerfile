@@ -27,12 +27,15 @@ LABEL maintainer="haeho7 <i@aimoyu.cc>"
 
 RUN apk update \
   && apk add tzdata shadow \
+  && apk add gosu --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing \
   && rm -rf /var/cache/apk/*
 
 COPY --from=builder /usr/local/bin/webdav /usr/local/bin/
 COPY --chmod=644 etc/login.defs /etc/login.defs
+COPY --chmod=644 webdav-data/config.yml /data/
 COPY --chmod=755 webdav.sh /usr/local/bin/
 
 VOLUME /data
 
 ENTRYPOINT ["webdav.sh"]
+CMD ["/data/config.yml"]
