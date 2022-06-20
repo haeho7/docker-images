@@ -25,9 +25,8 @@ else
 fi
 
 #set folder's owne
-chown $PUID:$PGID /data
-chown $PUID:$PGID /etc/webdav
 chown $PUID:$PGID ${CONFIG_FILE}
+chown $PUID:$PGID /data
 
 # if UMASK is not null set umask
 if [ "x$UMASK" != "x" ]; then
