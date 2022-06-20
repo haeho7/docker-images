@@ -284,7 +284,7 @@ pm.status_path = /status
     # php-fpm running status monitoring
     location /status {
         fastcgi_index   index.php;
-        fastcgi_pass    192.168.246.248:9000;
+        fastcgi_pass    php-handler;
         include         fastcgi_params;
         fastcgi_param   SCRIPT_FILENAME    $document_root$fastcgi_script_name;
         fastcgi_param   SCRIPT_NAME        $fastcgi_script_name;
