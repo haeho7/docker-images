@@ -70,6 +70,9 @@ variables in `nextcloud.ini` configuration files.
 memory_limit=${PHP_MEMORY_LIMIT}
 upload_max_filesize=${PHP_UPLOAD_LIMIT}
 post_max_size=${PHP_UPLOAD_LIMIT}
+
+# php temp directory (custom variables)
+upload_tmp_dir=/var/www/html/temp
 ```
 
 
@@ -230,6 +233,9 @@ See more: https://docs.nextcloud.com/server/latest/admin_manual/configuration_se
 
   // clear trashbin default auto(30 day)
   'trashbin_retention_obligation' => 'auto',
+
+  // temp directory you need create and chown
+  //'tempdirectory' => '/var/www/html/temp',
 
   // logfile
   'log_type' => 'file',

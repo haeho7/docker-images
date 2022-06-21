@@ -33,6 +33,14 @@ RUN apk update \
   && apk add --no-cache tzdata shadow ffmpeg imagemagick samba-client \
   && rm -rf /var/cache/apk/*
 
+ENV TEMP_FILE_DIR="/var/www/html/temp"
+
+# add php temp directory
+# See more: https://docs.nextcloud.com/server/latest/admin_manual/configuration_files/big_file_upload_configuration.html?highlight=webdav#configuring-php
+# https://github.com/nextcloud/docker/blob/c416385b7c97f7d5a385f0133fd4fb6cb31690db/24/fpm-alpine/Dockerfile#L95
+RUN mkdir /usr/src/nextcloud/temp \
+  && sed -i '/post_max_size/a upload_tmp_dir=${TEMP_FILE_DIR}' /usr/local/etc/php/conf.d/nextcloud.ini
+
 # add env and replace rsync_options
 # See more: https://github.com/nextcloud/docker/blob/00d88733d0d93d0abc628c7b18bc589181c34cbb/24/fpm-alpine/entrypoint.sh#L100
 RUN sed -i '/set -eu/a USER=www-data\nGROUP=users' /entrypoint.sh \
