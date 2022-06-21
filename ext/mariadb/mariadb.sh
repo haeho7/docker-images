@@ -7,7 +7,6 @@ GROUP=mysql
 GROUPS=mysql,users
 PUID=${PUID:-1000}
 PGID=${PGID:-1000}
-CONFIG_FILE="/etc/mysql/conf.d/mariadb.cnf"
 
 # set user to specified user id (non unique)
 usermod -o -u ${PUID} -g ${GROUP} -aG ${GROUPS} -s /bin/bash ${USER} &>/dev/null
@@ -16,7 +15,7 @@ usermod -o -u ${PUID} -g ${GROUP} -aG ${GROUPS} -s /bin/bash ${USER} &>/dev/null
 groupmod -o -g ${PGID} ${GROUP} &>/dev/null
 
 # copy and chown mariadb.cnf
-if [ ! -f "${CONFIG_FILE}" ]; then
+if [ ! -f "/etc/mysql/conf.d/mariadb.cnf" ]; then
   echo "mariadb.cnf does not exist, copy mariadb.cnf"
   cp -a /opt/mariadb.cnf /etc/mysql/conf.d/
 else
