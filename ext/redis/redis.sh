@@ -21,8 +21,8 @@ if [ ! -f "/data/redis.conf" ]; then
 else
   echo "redis.conf file already exists, skip copy"
 fi
-chmod 644 /data/redis.conf
-chown ${PUID}:${PGID} /data/redis.conf
+chmod 644 /data/*.conf
+chown ${PUID}:${PGID} /data/*.conf
 
 # call redis official startup script
 exec /usr/local/bin/docker-entrypoint.sh "$@"

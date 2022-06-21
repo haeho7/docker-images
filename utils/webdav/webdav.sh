@@ -8,7 +8,7 @@ GROUPS=webdav,users
 PUID=${PUID:-1000}
 PGID=${PGID:-1000}
 UMASK=${UMASK:-000}
-CONFIG_FILE="/data/config.yml"
+CONFIG_FILE="/config/config.yml"
 
 # set user to specified user id (non unique)
 usermod -o -u ${PUID} -g ${GROUP} -aG ${GROUPS} -s /bin/ash ${USER} &>/dev/null
@@ -19,13 +19,14 @@ groupmod -o -g ${PGID} ${GROUP} &>/dev/null
 # copy and chown config.yml
 if [ ! -f "${CONFIG_FILE}" ]; then
   echo "config.yml does not exist, copy config.yml"
-  cp -a /opt/config.yml /data/
+  cp -a /opt/config.yml /config/
 else
   echo "config.yml file already exists, skip copy"
 fi
 
 #set folder's owne
-chown $PUID:$PGID ${CONFIG_FILE}
+chmod 644 /config/*.yml
+chown $PUID:$PGID /config/*.yml
 chown $PUID:$PGID /data
 
 # if UMASK is not null set umask

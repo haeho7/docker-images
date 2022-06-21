@@ -36,6 +36,6 @@ COPY --chmod=644 etc/login.defs /etc/login.defs
 COPY --chmod=644 webdav-data/config.yml /opt/
 COPY --chmod=755 webdav.sh /usr/local/bin/
 
-VOLUME /data
+VOLUME ["/config", "/data"]
 
 ENTRYPOINT ["webdav.sh"]
