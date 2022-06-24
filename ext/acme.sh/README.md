@@ -15,7 +15,6 @@
   -e DP_Id=example \   #is DNSPod.cn api ID
   -e DP_Key=example \  #is DNSPod.cn api Key
   -v /mnt/user/appdata/acme.sh:/acme.sh \
-  # -v /etc/localtime:/etc/localtime:ro \
   neilpang/acme.sh:3.0.2 daemon
 ```
 
@@ -41,7 +40,3 @@ docker exec -it acme.sh --remove -d aimoyu.cc --ecc
 # 切换默认提供商
 docker exec -it acme.sh --set-default-ca --server letsencrypt / zerossl
 ```
-
-
-
-

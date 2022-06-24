@@ -21,7 +21,6 @@ docker run -d \
   # -e MARIADB_ROOT_HOST='% localhost' \
   -v /mnt/user/appdata/mariadb/conf.d/:/etc/mysql/conf.d \
   -v /mnt/user/appdata/mariadb/data:/var/lib/mysql \
-  # -v /etc/localtime:/etc/localtime:ro \
   haeho7/docker-images:mariadb
 ```
 
@@ -49,4 +48,3 @@ See more: [default-variables](./variables)
 https://blog.csdn.net/u014044812/article/details/78929579
 https://segmentfault.com/a/1190000021408999
 ```
-

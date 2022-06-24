@@ -15,4 +15,3 @@ services:
     command: daemon
     volumes:
       - /mnt/user/appdata/acme.sh:/acme.sh
-      # - /etc/localtime:/etc/localtime:ro

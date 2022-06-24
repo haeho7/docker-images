@@ -20,4 +20,3 @@ services:
     volumes:
       - /mnt/user/appdata/mariadb/conf.d/:/etc/mysql/conf.d
       - /mnt/user/appdata/mariadb/data:/var/lib/mysql
-      # - /etc/localtime:/etc/localtime:ro

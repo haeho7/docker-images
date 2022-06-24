@@ -16,6 +16,3 @@
   -v /mnt/user/appdata/ddns-go:/root \
   jeessy/ddns-go:v3.7.1
 ```
-
-
-

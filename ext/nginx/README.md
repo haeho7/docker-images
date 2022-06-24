@@ -16,7 +16,6 @@
   -v /mnt/user/appdata/nginx/nginx.conf:/etc/nginx/nginx.conf \
   -v /mnt/user/appdata/nginx/conf.d:/etc/nginx/conf.d \
   -v /mnt/user/appdata/acme.sh:/cert \
-  # -v /etc/localtime:/etc/localtime:ro \
   nginx:1.21.6-alpine
 ```
 
@@ -38,11 +37,5 @@
   -v /mnt/user/appdata/nginx/nginx.conf:/etc/nginx/nginx.conf \
   -v /mnt/user/appdata/nginx/conf.d:/etc/nginx/conf.d \
   -v /mnt/user/appdata/acme.sh:/cert \
-  # -v /etc/localtime:/etc/localtime:ro \
   lscr.io/linuxserver/nginx
 ```
-
-
-
-
-
