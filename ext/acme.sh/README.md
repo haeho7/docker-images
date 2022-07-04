@@ -32,16 +32,13 @@
 docker exec -it acme.sh --issue --dns dns_dp --dnssleep 30 -d demo.com -d *.demo.com -k ec-256 -m example@gmail.com
 docker exec -it acme.sh --issue --dns dns_he --dnssleep 30 -d local.demo.com -d *.local.demo.com -k ec-256 -m example@gmail.com
 
-
 # 续期
 docker exec -it acme.sh --renew -d demo.com -d *.demo.com --ecc --force
 docker exec -it acme.sh --renew -d local.demo.com -d *.local.demo.com --ecc --force
 
-
 # 吊销
 docker exec -it acme.sh --remove -d demo.com --ecc
 docker exec -it acme.sh --remove -d local.demo.com --ecc
-
 
 # 切换默认提供商
 docker exec -it acme.sh --set-default-ca --server letsencrypt / zerossl
