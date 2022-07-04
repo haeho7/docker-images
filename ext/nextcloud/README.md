@@ -24,7 +24,7 @@ docker run -d \
   -e REDIS_HOST_PASSWORD='example' \
   -e NEXTCLOUD_ADMIN_USER=example \
   -e NEXTCLOUD_ADMIN_PASSWORD='example' \
-  -e NEXTCLOUD_TRUSTED_DOMAINS='192.168.1.248 example.demo.com example.local.demo.com' \
+  -e NEXTCLOUD_TRUSTED_DOMAINS='192.168.1.248 nextcloud.demo.com nextcloud.local.demo.com' \
   -e PHP_MEMORY_LIMIT=1024M \
   -e PHP_UPLOAD_LIMIT=0 \
   -v /mnt/user/appdata/nextcloud:/var/www/html \
