@@ -6,7 +6,7 @@
 # Runtime stage
 #
 FROM redis:6.2.7-alpine
-LABEL maintainer="haeho7 <i@aimoyu.cc>"
+LABEL maintainer="haeho7 <i@demo.com>"
 # See more: https://github.com/docker-library/redis/tree/master/6.2/alpine
 
 RUN apk update \

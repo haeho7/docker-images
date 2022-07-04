@@ -23,7 +23,7 @@ RUN apk update \
 # Runtime stage
 #
 FROM alpine
-LABEL maintainer="haeho7 <i@aimoyu.cc>"
+LABEL maintainer="haeho7 <i@demo.com>"
 
 RUN apk update \
   && apk add tzdata shadow \

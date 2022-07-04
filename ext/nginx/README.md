@@ -39,3 +39,11 @@
   -v /mnt/user/appdata/acme.sh:/cert \
   lscr.io/linuxserver/nginx
 ```
+
+
+## repair file permissions
+
+```sh
+cd /mnt/user/appdata/nginx
+chmod -R 644 *.conf
+```

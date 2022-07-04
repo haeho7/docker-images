@@ -19,13 +19,13 @@ docker run -d \
 ```
 
 
-##WireGuard-go
-If your linux kernel is lower than 5.6, you can use `USE_USERSPACE_MODE`  switch to wireguard-go.
+## WireGuard-go
+If your linux kernel is lower than 5.6, you can use `USE_USERSPACE_MODE`  switch to wireguard-go.  
 See more: https://github.com/WireGuard/wireguard-go
 
 
 ## DDNS Resolve
-If the peer Endpoint is DDNS,you can use `PEER_RESOLVE_INTERVAL` to resolve periodically (in seconds).
+If the peer Endpoint is DDNS,you can use `PEER_RESOLVE_INTERVAL` to resolve periodically (in seconds).  
 Script source: https://github.com/WireGuard/wireguard-tools/blob/master/contrib/reresolve-dns/reresolve-dns.sh
 
 
@@ -74,6 +74,14 @@ PublicKey = <SERVER_PUBLIC_KEY>
 AllowedIPs = 10.10.10.1/32, 192.168.1.0/24
 Endpoint = <SERVER_ADDR:SERVER_PORT or SERVER_DOMAIN NAME:SERVER_PORT>
 PersistentKeepalive = 30
+```
+
+
+## Quick Modify Peer
+Modify peer configuration online without restarting the container.
+
+```conf
+wg set <WIREGUARD INTERFACE NAME> peer <PublicKey> allowed-ips '<AllowedIPs>'
 ```
 
 

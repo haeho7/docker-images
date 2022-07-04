@@ -14,11 +14,11 @@ services:
       TZ: Asia/Shanghai
       UID: 99
       GID: 100
-      GIDLIST: 100
-      UMASK: 022
+      GIDLIST: "100,18"
     # ports:
     #  - 8096:8096
     #  - 8920:8920
     volumes:
       - /mnt/user/medias/moive/:/data/movies
-      - /mnt/user/medias/series/:/data/tvshows
+      - /mnt/user/medias/series/:/data/series
+      - /etc/localtime:/etc/localtime:ro

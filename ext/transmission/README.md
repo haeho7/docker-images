@@ -20,7 +20,7 @@
   -e USER=example \
   -e PASS='example' \
   -e WHITELIST='127.0.0.1,192.168.*.*' \
-  -e HOST_WHITELIST='*.aimoyu.cc' \
+  -e HOST_WHITELIST='*.demo.com' \
   -e PEERPORT=51413 \
   # -p 9091:9091 \
   # -p 51413:51413 \
@@ -36,7 +36,6 @@
 /mnt/user/appdata/transmission/settings.json
 
 ```json
-
 {
     "alt-speed-down": 50,
     "alt-speed-enabled": false,
@@ -70,7 +69,7 @@
     "peer-port-random-low": 49152,
     "peer-port-random-on-start": false,
     "peer-socket-tos": "default",
-    "pex-enabled": true,
+    "pex-enabled": false,
     "port-forwarding-enabled": true,
     "preallocation": 1,
     "prefetch-enabled": true,
@@ -82,12 +81,12 @@
     "rpc-authentication-required": true,
     "rpc-bind-address": "0.0.0.0",
     "rpc-enabled": true,
-    "rpc-host-whitelist": "*.aimoyu.cc",
+    "rpc-host-whitelist": "*.demo.com",
     "rpc-host-whitelist-enabled": true,
     "rpc-password": "is encryption password",
     "rpc-port": 9091,
     "rpc-url": "/transmission/",
-    "rpc-username": "haeho",
+    "rpc-username": "example",
     "rpc-whitelist": "127.0.0.1,192.168.*.*,*",
     "rpc-whitelist-enabled": true,
     "scrape-paused-torrents-enabled": true,
@@ -110,4 +109,12 @@
 ```
 
 
+## BT or PT
 
+```sh
+# BT download enabled options, PT download needs to be off.
+# Many PT stations default automatically mask dht and pex options.
+dht-enabled
+pex-enabled
+lpd-enabled
+```

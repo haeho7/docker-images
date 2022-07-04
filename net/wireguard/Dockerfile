@@ -25,7 +25,7 @@ RUN apk update \
 # Runtime stage
 #
 FROM alpine:3.15
-LABEL maintainer="haeho7 <i@aimoyu.cc>"
+LABEL maintainer="haeho7 <i@demo.com>"
 
 ARG WIREGUARD_VER=1.0.20210914-r0
 RUN apk update \

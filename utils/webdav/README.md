@@ -2,7 +2,7 @@
 
 - [x] Unraid & Normal
 
-## docker
+## Usage
 
 ```sh
 docker run -d \

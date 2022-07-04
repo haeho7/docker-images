@@ -6,7 +6,7 @@
 # Runtime stage
 #
 FROM mariadb:10.6.8
-LABEL maintainer="haeho7 <i@aimoyu.cc>"
+LABEL maintainer="haeho7 <i@demo.com>"
 # See more: https://github.com/MariaDB/mariadb-docker/tree/master/10.6
 
 RUN apt-get update \
