@@ -117,6 +117,17 @@ docker exec -i --user=99:100 nextcloud php -f /var/www/html/cron.php
 ```
 
 
+### APCu and Crontab
+APCu is disabled by default on CLI which could cause issues with nextcloud’s cron jobs.  
+See more: https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/caching_configuration.html#id1
+
+```ini
+# cat /usr/local/etc/php/conf.d # cat docker-php-ext-apcu.ini
+extension=apcu
+apc.enable_cli=1
+```
+
+
 ### PHP OCC Command
 See more: https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/occ_command.html
 
@@ -179,6 +190,15 @@ docker exec --user=99:100 php /var/www/html/occ trashbin:cleanup --all-users
 # Not tested
 # clean database tables not match files
 docker exec --user=99:100 nextcloud php /var/www/html/occ files:cleanup
+```
+
+### Upload Chunk Size
+
+For upload performance improvements in environments with high upload bandwidth, the server’s upload chunk size may be adjusted.Default is 10485760 (10 MiB).
+
+```sh
+# disable upload chunk size
+docker exec --user=99:100 nextcloud php /var/www/html/occ config:app:set files max_chunk_size --value 0
 ```
 
 
