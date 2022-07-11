@@ -18,6 +18,7 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - /mnt/user/appdata/webdav/config.yml:/etc/webdav/config.yml
+      - /mnt/user/appdata/webdav:/config
       - /mnt/user/datas/webdav:/data
+      # - /mnt/user/appdata/webdav/config.yml:/etc/webdav/config.yml
       # - /etc/localtime:/etc/localtime:ro
