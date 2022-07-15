@@ -24,14 +24,13 @@ docker run -d \
   haeho7/docker-images:mariadb
 ```
 
-
 ## Fix Permission
+
 If the configuration file does not take effect, the configuration file repair permission is required
 
 ```sh
 chmod 0644 /mnt/user/appdata/mariadb/conf.d/mariadb.cnf
 ```
-
 
 ## Variables
 
@@ -39,12 +38,12 @@ chmod 0644 /mnt/user/appdata/mariadb/conf.d/mariadb.cnf
 show variables;
 show global variables;
 ```
-See more: [default-variables](./variables)
 
+See more: [default-variables](./variables)
 
 ## Variables Tuning
 
-```
+```txt
 https://blog.csdn.net/u014044812/article/details/78929579
 https://segmentfault.com/a/1190000021408999
 ```

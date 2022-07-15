@@ -31,8 +31,8 @@
   linuxserver/transmission
 ```
 
-
 ## Settings Config
+
 /mnt/user/appdata/transmission/settings.json
 
 ```json
@@ -107,7 +107,6 @@
     "watch-dir-enabled": true
 }
 ```
-
 
 ## BT or PT
 

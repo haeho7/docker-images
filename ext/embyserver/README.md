@@ -31,7 +31,7 @@ haeho7/docker-images:embyserver-4.6.7.0
 
 ## FAQs
 
-### Browser play video error: No compatible streams are currently available. Please try again later or contact your system administrator for more information.
+### Browser play video error: No compatible streams are currently available. Please try again later or contact your system administrator for more information
 
 Most browsers do not support decoding of HEVC videos, so you need enable transcoding on emby.Select Advanced for transcoding type, and it is recommended to use only the Intel QuickSync decoder.
 
@@ -39,4 +39,4 @@ Most browsers do not support decoding of HEVC videos, so you need enable transco
 
 Modify the Media Library Movie Metadata Downloader to TheMovieDb, Movie Image Fetchers to TheMovieDb and FanArt.
 
-See more: https://emby.media/community/
+See more: <https://emby.media/community/>

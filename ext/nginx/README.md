@@ -19,7 +19,6 @@
   nginx:1.21.6-alpine
 ```
 
-
 ## docker for linuxserver
 
 ```sh
@@ -39,7 +38,6 @@
   -v /mnt/user/appdata/acme.sh:/cert \
   lscr.io/linuxserver/nginx
 ```
-
 
 ## repair file permissions
 

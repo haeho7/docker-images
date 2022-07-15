@@ -32,8 +32,8 @@ docker run -d \
   haeho7/docker-images:nextcloud
 ```
 
-
 ### Ngnix Webroot
+
 If you use nginx to proxy nextcloud, you need to mount the nextcloud working directory to the nginx container.
 
 ```sh
@@ -41,13 +41,12 @@ If you use nginx to proxy nextcloud, you need to mount the nextcloud working dir
 -v /mnt/user/appdata/nextcloud:/var/www/html \
 ```
 
-
 ### Redis
 
 If you need to use a redis database, please create a [redis container](../redis/README.md) first. For redis parameters, please refer to [redis.conf](../redis/redis-data/redis.conf)
 
-
 ### Mariadb
+
 If you need to use a mariadb database, please create a [mariadb container](../mariadb/README.md) first. For mariadb parameters, please refer to [mariadb.conf](../mariadb/mariadb-data/conf.d/mariadb.cnf)
 
 Initialize the database used by the nextcloud container in mariadb.
@@ -56,15 +55,15 @@ Initialize the database used by the nextcloud container in mariadb.
 
 CREATE DATABASE `nextcloud` CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_general_ci';
 
-CREATE USER `nextcloud`@`` IDENTIFIED BY 'example';
+CREATE USER `nextcloud`@`%` IDENTIFIED BY 'example';
 
 GRANT Alter, Alter Routine, Create, Create Routine, Create Temporary Tables, Create View, Delete, Drop, Event, Execute, Grant Option, Index, Insert, Lock Tables, References, Select, Show View, Trigger, Update ON `nextcloud`.* TO `nextcloud`@`%`;
 
 FLUSH PRIVILEGES;
 ```
 
-
 ### PHP Memory and Upload Limit
+
 variables in `nextcloud.ini` configuration files.
 
 ```ini
@@ -78,16 +77,15 @@ post_max_size=${PHP_UPLOAD_LIMIT}
 upload_tmp_dir=${TEMP_FILE_DIR}
 ```
 
+### Database and Trusted Domains List
 
-###  Database and Trusted Domains List
 variables in `config.php` configuration files
 
 ```sh
 cat /var/www/html/config/config.php
 ```
 
-
-### OPcache Default 
+### OPcache Default
 
 ```ini
 # cat /usr/local/etc/php/conf.d/opcache-recommended.ini
@@ -100,8 +98,8 @@ opcache.save_comments=1
 opcache.revalidate_freq=60
 ```
 
-
 ### Crontab
+
 if nextcloud container is run with `--user` parameter,cron tasks may fail to execute.need custom scheduled tasks.
 
 ```sh
@@ -110,17 +108,17 @@ cat /etc/crontabs/www-data
 */5 * * * * php -f /var/www/html/cron.php
 ```
 
-custom scheduled tasks: 
+custom scheduled tasks:
 
 ```sh
 # Unraid use User Scripts plugin
 docker exec -i --user=99:100 nextcloud php -f /var/www/html/cron.php
 ```
 
-
 ### APCu and Crontab
+
 APCu is disabled by default on CLI which could cause issues with nextcloud’s cron jobs.  
-See more: https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/caching_configuration.html#id1
+See more: <https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/caching_configuration.html#id1>
 
 ```ini
 # cat /usr/local/etc/php/conf.d # cat docker-php-ext-apcu.ini
@@ -128,9 +126,9 @@ extension=apcu
 apc.enable_cli=1
 ```
 
-
 ### PHP OCC Command
-See more: https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/occ_command.html
+
+See more: <https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/occ_command.html>
 
 Find the path where occ is located in the container.
 
@@ -179,7 +177,7 @@ docker exec --user=99:100 nextcloud php /var/www/html/occ files:scan --path="/<u
 ```sh
 # scan all user file,show directories and files verbose 
 docker exec --user=99:100 nextcloud php /var/www/html/occ files:scan --all --verbose
-``` 
+```
 
 ```sh
 # clear users trashbin
@@ -193,7 +191,6 @@ docker exec --user=99:100 php /var/www/html/occ trashbin:cleanup --all-users
 docker exec --user=99:100 nextcloud php /var/www/html/occ files:cleanup
 ```
 
-
 ### Upload Chunk Size
 
 For upload performance improvements in environments with high upload bandwidth, the server’s upload chunk size may be adjusted.Default is 10485760 (10 MiB).
@@ -203,11 +200,11 @@ For upload performance improvements in environments with high upload bandwidth, 
 docker exec --user=99:100 nextcloud php /var/www/html/occ config:app:set files max_chunk_size --value 0
 ```
 
-
 ### Extend Config
-See more: https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html
 
-```php 
+See more: <https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html>
+
+```php
   // enable extra preview
   // preview video need install ffmpeg
   'enable_previews' => true,
@@ -269,8 +266,8 @@ See more: https://docs.nextcloud.com/server/latest/admin_manual/configuration_se
   'logtimezone' => 'Asia/Shanghai',
 ```
 
-
 ### Error Fix
+
 - WARNING: [pool www] server reached pm.max_children setting (5), consider raising it.
 
 Please refer to the following parameters: [www.conf](./nextcloud-data/php-fpm.d/www.conf)
@@ -282,9 +279,8 @@ docker exec -it -u root:root nextcloud sh
 apk add --no-cache imagemagick
 ```
 
-
-
 ### PHP-FPM Tuning
+
 If you need high performance, you can optimize the default PHP-FPM parameters.
 
 Please refer to the following parameters: [www.conf](./nextcloud-data/php-fpm.d/www.conf)
@@ -296,12 +292,11 @@ Please refer to the following parameters: [www.conf](./nextcloud-data/php-fpm.d/
 
 Tips: It is recommended to do it after the nextcloud container is initialized, otherwise it may cause initialization errors or other problems.
 
-
-
 ### PHP-FPM STATUS Monitoring
-If you need to monitor the running status of php-fpm: 
 
-- Uncomment in the `www.conf` configuration file the `pm.status_path` 
+If you need to monitor the running status of php-fpm:
+
+- Uncomment in the `www.conf` configuration file the `pm.status_path`
 
 ```conf
 pm.status_path = /status
