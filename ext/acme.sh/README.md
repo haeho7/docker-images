@@ -25,7 +25,7 @@
   # DNSPod.cn 域变量为 DP_Id DP_Key
   # DNSPod.com 域变量为 DPI_Id DPI_Key
   # 容器外运行可能需要export 变量
-  # 通过ACME申请的证书无法在zerossl控制面板吊销，可直接注销zerossl账号再注册
+  # 通过ACME申请的证书无法在zerossl控制面板吊销，可直接注销zerossl账号再注册。
 
 # 申请
 docker exec -it acme.sh --issue --dns dns_dp --dnssleep 30 -d demo.com -d *.demo.com -k ec-256 -m example@gmail.com

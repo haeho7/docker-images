@@ -26,7 +26,7 @@ docker run -d \
 
 ## Fix Permission
 
-If the configuration file does not take effect, the configuration file repair permission is required
+If the configuration file does not take effect, the configuration file repair permission is required.
 
 ```sh
 chmod 0644 /mnt/user/appdata/mariadb/conf.d/mariadb.cnf
