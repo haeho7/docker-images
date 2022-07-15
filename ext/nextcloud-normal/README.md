@@ -73,7 +73,7 @@ upload_max_filesize=${PHP_UPLOAD_LIMIT}
 post_max_size=${PHP_UPLOAD_LIMIT}
 
 # php temp directory (custom variables)
-upload_tmp_dir=${TEMP_FILE_DIR}
+upload_tmp_dir=/var/www/html/temp
 ```
 
 ### Database and Trusted Domains List
