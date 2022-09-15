@@ -1,0 +1,92 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - 'LICENSE'
+      - '**.md'
+      - '**/docker-compose.yml'
+      - 'ext/nginx/nginx-data/**'
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: 'Whether to deploy DockerHub'
+        required: true
+        default: '0'
+
+jobs:
+  build-and-push:
+    #if: "!startsWith(github.event.head_commit.message, 'ext:')"
+    runs-on: ubuntu-20.04
+    env:
+      TZ: Asia/Shanghai
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # wireguard
+          - BUILD_CONTEXT: net/wireguard
+            TARGET_PLATFORMS: linux/amd64,linux/arm64
+          # webdav
+          - BUILD_CONTEXT: utils/webdav
+            TARGET_PLATFORMS: linux/amd64,linux/arm64
+          # nextcloud-normal
+          - BUILD_CONTEXT: utils/nextcloud-normal
+            TARGET_PLATFORMS: linux/amd64,linux/arm64
+          # nextcloud
+          - BUILD_CONTEXT: utils/nextcloud
+            TARGET_PLATFORMS: linux/amd64,linux/arm64
+          # redis
+          - BUILD_CONTEXT: utils/redis
+            TARGET_PLATFORMS: linux/amd64,linux/arm64
+          # mariadb
+          - BUILD_CONTEXT: utils/mariadb
+            TARGET_PLATFORMS: linux/amd64,linux/arm64
+    steps:
+      # prepare
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Set environment variables
+        run: |
+          echo "BUILD_TAG=$(basename ${{ matrix.BUILD_CONTEXT }})" >> $GITHUB_ENV
+
+      # login
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+         registry: ghcr.io
+         username: ${{ github.repository_owner }}
+         password: ${{ secrets.GHCR_TOKEN }}
+
+      # cache
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-${{ env.BUILD_TAG }}-buildx-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-${{ env.BUILD_TAG }}-buildx-
+
+      # build & push
+      - name: Build image and Push to Container Registries
+        uses: docker/build-push-action@v2
+        if: ${{ github.event_name == 'push' || github.event.inputs.deploy == '1' }}
+        with:
+          context: ${{ matrix.BUILD_CONTEXT }}
+          tags: |
+            ${{ github.repository }}:${{ env.BUILD_TAG }}
+            ghcr.io/${{ github.repository }}:${{ env.BUILD_TAG }}
+          platforms: ${{ matrix.TARGET_PLATFORMS }}
+          push: true
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache

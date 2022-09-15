@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  ddns-go:
+    image: jeessy/ddns-go:v4.0.4
+    container_name: ddns-go
+    restart: unless-stopped
+    network_mode: host
+    limits:
+      memory: 256M
+    environment:
+      TZ: Asia/Shanghai
+    # ports:
+    #  - 9876:9876
+    volumes:
+      - /mnt/user/appdata/ddns-go:/root

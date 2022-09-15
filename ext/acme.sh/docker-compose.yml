@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  acme.sh:
+    image: neilpang/acme.sh:3.0.4
+    container_name: acme.sh
+    restart: unless-stopped
+    network_mode: host
+    limits:
+      memory: 256M
+    environment:
+      TZ: Asia/Shanghai
+      DPI_ID: DNSPod ID
+      DPI_Key: DNSPod Key
+    command: daemon
+    volumes:
+      - /mnt/user/appdata/acme.sh:/acme.sh

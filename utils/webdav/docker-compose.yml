@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  webdav:
+    image: haeho7/docker-images:webdav
+    container_name: webdav
+    restart: unless-stopped
+    network_mode: bridge
+    limits:
+      memory: 512M
+    environment:
+      PUID: 99
+      PGID: 100
+      UMASK: 000
+      TZ: Asia/Shanghai
+      USERNAME: example
+      PASSWORD: 'example'
+    ports:
+      - 8080:8080
+    volumes:
+      - /mnt/user/appdata/webdav:/config
+      - /mnt/user/datas/webdav:/data
+      # - /mnt/user/appdata/webdav/config.yml:/etc/webdav/config.yml
+      # - /etc/localtime:/etc/localtime:ro

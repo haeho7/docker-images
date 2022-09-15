@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  nextcloud:
+    image: haeho7/docker-images:nextcloud-normal
+    container_name: nextcloud
+    restart: unless-stopped
+    user: 99:100
+    networks:
+      br0:
+        ipv4_address: 192.168.1.248
+    limits:
+      memory: 2G
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_HOST: '192.168.1.250:3306'
+      MYSQL_DATABASE: nextcloud
+      MYSQL_USER: nextcloud
+      MYSQL_PASSWORD: 'example'
+      REDIS_HOST: '192.168.1.250'
+      REDIS_HOST_PORT: 6379
+      REDIS_HOST_PASSWORD: 'example' 
+      NEXTCLOUD_ADMIN_USER: example
+      NEXTCLOUD_ADMIN_PASSWORD: 'example'
+      NEXTCLOUD_TRUSTED_DOMAINS: '192.168.1.248 nextcloud.demo.com nextcloud.local.demo.com'
+      PHP_MEMORY_LIMIT: 1024M
+      PHP_UPLOAD_LIMIT: 0
+    volumes:
+      - /mnt/user/appdata/nextcloud:/var/www/html
+      - /mnt/user/datas/nextcloud:/var/www/html/data
