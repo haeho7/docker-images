@@ -1,5 +1,5 @@
 bind_host: 0.0.0.0
-bind_port: 80
+bind_port: 3001
 beta_bind_port: 0
 users:
 - name: example
@@ -9,11 +9,12 @@ block_auth_min: 15
 http_proxy: ""
 language: zh-cn
 debug_pprof: false
-web_session_ttl: 720
+web_session_ttl: 1
 dns:
   bind_hosts:
-  - 192.168.1.246
-  port: 53
+    - 192.168.1.1
+    - 127.0.0.1
+  port: 5354
   statistics_interval: 1
   querylog_enabled: true
   querylog_file_enabled: true
@@ -31,25 +32,25 @@ dns:
   ratelimit_whitelist: []
   refuse_any: false
   upstream_dns:
-  - https://doh.pub/dns-query
-  - tls://dot.pub
-  - https://dns.alidns.com/dns-query
-  - tls://dns.alidns.com
+    - 127.0.0.1:5353
+    - '# https://doh.pub/dns-query'
+    - '# tls://dot.pub'
+    - '# https://dns.alidns.com/dns-query'
+    - '# tls://dns.alidns.com'
   upstream_dns_file: ""
   bootstrap_dns:
-  - 119.29.29.29
-  - 223.5.5.5
-  all_servers: true
+    - 127.0.0.1:5353
+  all_servers: false
   fastest_addr: false
   fastest_timeout: 1s
   allowed_clients:
-  - 192.168.1.0/24
-  - 127.0.0.1/32
+    - 192.168.1.0/24
+    - 127.0.0.1/32
   disallowed_clients: []
   blocked_hosts:
-  - hostname.bind
+    - hostname.bind
   trusted_proxies:
-  - 192.168.1.249/32
+    - 192.168.1.249/32
   cache_size: 16777216
   cache_ttl_min: 600
   cache_ttl_max: 86400
@@ -69,7 +70,13 @@ dns:
   safesearch_cache_size: 1048576
   parental_cache_size: 1048576
   cache_time: 30
-  rewrites: []
+  rewrites:
+    - domain: xtbg.gdzwfw.gov.cn
+      answer: 19.15.0.77
+    - domain: xtbgsafe.gdzwfw.gov.cn
+      answer: 19.15.0.77
+    - domain: mail.huadu.gov.cn
+      answer: 192.168.102.17
   blocked_services: []
   upstream_timeout: 10s
   private_networks: []
@@ -91,26 +98,26 @@ tls:
   certificate_path: ""
   private_key_path: ""
 filters:
-- enabled: true
-  url: https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
-  name: AdGuard DNS filter
-  id: 1
-- enabled: true
-  url: https://adaway.org/hosts.txt
-  name: AdAway Default Blocklist
-  id: 1636824661
-- enabled: true
-  url: https://easylist-downloads.adblockplus.org/easylistchina+easylist.txt
-  name: EasyList+EasyListChina
-  id: 1636824663
-- enabled: true
-  url: https://pgl.yoyo.org/adservers/serverlist.php?hostformat=adblockplus&showintro=0&mimetype=plaintext
-  name: Yoyo Ad Servers
-  id: 1636824666
-- enabled: false
-  url: https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-adguard.txt
-  name: Anti-AD
-  id: 1642839328
+  - enabled: true
+    url: https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
+    name: AdGuard DNS filter
+    id: 1
+  - enabled: true
+    url: https://adaway.org/hosts.txt
+    name: AdAway Default Blocklist
+    id: 2
+  - enabled: true
+    url: https://easylist-downloads.adblockplus.org/easylistchina+easylist.txt
+    name: EasyList+EasyListChina
+    id: 3
+  - enabled: true
+    url: https://pgl.yoyo.org/adservers/serverlist.php?hostformat=adblockplus&showintro=0&mimetype=plaintext
+    name: Yoyo Ad Servers
+    id: 4
+  - enabled: false
+    url: https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-adguard.txt
+    name: Anti-AD
+    id: 5
 whitelist_filters: []
 user_rules: []
 dhcp:
@@ -138,12 +145,12 @@ clients:
     dhcp: true
     hosts: true
   persistent: []
+log_file: "" 
+log_max_backups: 1 
 log_compress: true
 log_localtime: true
-log_max_backups: 2
 log_max_size: 100
 log_max_age: 3
-log_file: ""
 verbose: false
 os:
   group: ""
