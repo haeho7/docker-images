@@ -32,6 +32,18 @@ If the configuration file does not take effect, the configuration file repair pe
 chmod 0644 /mnt/user/appdata/mariadb/conf.d/mariadb.cnf
 ```
 
+## Lower Case
+
+Determines whether table names, table aliases, and database names are compared in a case-sensitive manner, and whether tablespace files are stored on disk in a case-sensitive manner.
+
+```cnf
+# linux default
+lower_case_table_names = 0
+
+# windows default
+lower_case_table_names = 1
+```
+
 ## Variables
 
 ```sql
