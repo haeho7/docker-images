@@ -140,3 +140,7 @@ PC & Other Clinet -> Router Device -> NodeA WireGuard tunnel (Gateway) -> NodeB 
 PostUp = iptables -t nat -A POSTROUTING -o <WIREGUARD INTERFACE NAME> -j SNAT --to-source 10.10.10.2
 PostDown = iptables -t nat -D POSTROUTING -o <WIREGUARD INTERFACE NAME> -j SNAT --to-source 10.10.10.2
 ```
+
+## Acknowledgments
+
+* [@pexcn/docker-images](https://github.com/pexcn/docker-images/tree/master/net/wireguard)
