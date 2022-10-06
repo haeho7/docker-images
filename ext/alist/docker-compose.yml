@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   alist:
-    image: xhofe/alist:v2.6.4
+    image: xhofe/alist:v3.0.3
     container_name: alist
     restart: unless-stopped
     network_mode: host

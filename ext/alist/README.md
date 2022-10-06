@@ -15,5 +15,5 @@
   -e TZ=Asia/Shanghai \
   -v /mnt/user/appdata/alist:/opt/alist/data \
   -v /mnt/user/datas/alist:/mnt/data \
-  xhofe/alist:v2.6.4
+  xhofe/alist:v3.0.3
 ```

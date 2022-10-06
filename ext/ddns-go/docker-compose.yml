@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   ddns-go:
-    image: jeessy/ddns-go:v4.0.4
+    image: jeessy/ddns-go:v4.1.1
     container_name: ddns-go
     restart: unless-stopped
     network_mode: host

@@ -15,5 +15,5 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -v /mnt/user/appdata/adguardhome/conf:/opt/adguardhome/conf \
   -v /mnt/user/appdata/adguardhome/work:/opt/adguardhome/work \
-  adguard/adguardhome:v0.107.13
+  adguard/adguardhome:v0.107.15
 ```
