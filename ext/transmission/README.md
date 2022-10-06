@@ -34,11 +34,11 @@ docker run -d \
 
 ## Use macvlan network
 
-When creating a macvlan, if the device has a bridge device, `parent` needs to specify a bridge device instead of a physical interface, such as: `parent=br-lan` .
-
 OpenWrt need install `kmod-macvlan` package.
 
 See more: <https://forum.openwrt.org/t/solved-docker-macvlan-network/106478>
+
+When creating a macvlan, if the bridge device, `parent` needs to specify a bridge device instead of a physical interface, such as: `parent=br-lan` .
 
 ```sh
 # create network
@@ -50,6 +50,7 @@ docker network create -d macvlan \
   br0
 
 # show network
+docker network ls
 docker network inspect br0
 ```
 
