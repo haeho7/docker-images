@@ -14,7 +14,7 @@ docker run -d \
   --memory-swap=512M \
   -e TZ=Asia/Shanghai \
   -e DP_Id=example \
-  -e DP_Key=example \
+  -e DP_Key='example' \
   -v /mnt/user/appdata/acme.sh:/acme.sh \
   neilpang/acme.sh:3.0.4 daemon
 ```

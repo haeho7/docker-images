@@ -9,7 +9,7 @@ services:
     environment:
       UID: 99
       GID: 100
-      GIDLIST: "100,18"
+      GIDLIST: '100,18'
     #ports:
       #- 8096:8096
       #- 8920:8920

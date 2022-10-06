@@ -14,7 +14,7 @@ docker run -d \
   --memory-swap=4G \
   -e UID=99 \
   -e GID=100 \
-  -e GIDLIST="100,18" \
+  -e GIDLIST='100,18' \
   #-p 8096:8096 \
   #-p 8920:8920 \
   #-p 1900:1900/udp \
