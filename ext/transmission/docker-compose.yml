@@ -6,10 +6,8 @@ services:
     container_name: transmission
     restart: unless-stopped
     networks:
-      br0:
-        ipv4_address: 192.168.1.240
-    limits:
-      memory: 2G
+      default:
+        ipv4_address: 192.168.1.29
     environment:
       TZ: Asia/Shanghai
       PUID: 99
@@ -18,7 +16,7 @@ services:
       USER: example
       PASS: 'example'
       TRANSMISSION_WEB_HOME: /transmission-web-control/
-      WHITELIST: '127.0.0.1,192.168.*.*'
+      WHITELIST: '127.0.0.1,192.168.1.*'
       HOST_WHITELIST: '*.demo.com'
       PEERPORT: 51413
     # ports:
@@ -26,6 +24,11 @@ services:
     #  - 51413:51413
     #  - 51413:51413/udp
     volumes:
-      - /mnt/user/appdata/transmission:/config
+      - ./transmission-data:/config
       - /mnt/user/torrent/:/downloads
-      - /mnt/user/torrent/torrents_watch:/watch
+      - /mnt/user/torrent/watch:/watch
+
+networks:
+  default:
+    name: br0
+    external: true

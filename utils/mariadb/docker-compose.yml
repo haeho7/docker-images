@@ -6,17 +6,15 @@ services:
     container_name: mariadb
     restart: unless-stopped
     network_mode: host
-    limits:
-      memory: 2G
     environment:
       PUID: 99
       PGID: 100
       TZ: Asia/Shanghai
       MARIADB_ROOT_PASSWORD: 'example'
-      # MARIADB_DATABASE: example
-      # MARIADB_USER: example
-      # MARIADB_PASSWORD: 'example'
-      # MARIADB_ROOT_HOST: '% localhost'
+      #MARIADB_DATABASE: example
+      #MARIADB_USER: example
+      #MARIADB_PASSWORD: 'example'
+      #MARIADB_ROOT_HOST: '% localhost'
     volumes:
-      - /mnt/user/appdata/mariadb/conf.d/:/etc/mysql/conf.d
-      - /mnt/user/appdata/mariadb/data:/var/lib/mysql
+      - ./mariadb-data/conf.d/:/etc/mysql/conf.d
+      - ./mariadb-data/data:/var/lib/mysql

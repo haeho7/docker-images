@@ -5,11 +5,9 @@ services:
     image: adguard/adguardhome:v0.107.13
     container_name: adguardhome
     restart: unless-stopped
-    networks: host
-    limits:
-      memory: 512M
+    network_mode: host
     environment:
       TZ: Asia/Shanghai
     volumes:
-      - /mnt/user/appdata/adguardhome/conf:/opt/adguardhome/conf
-      - /mnt/user/appdata/adguardhome/work:/opt/adguardhome/work
+      - ./adguardhome-data/conf:/opt/adguardhome/conf
+      - ./adguardhome-data/work:/opt/adguardhome/work

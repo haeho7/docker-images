@@ -6,11 +6,7 @@ services:
     container_name: ddns-go
     restart: unless-stopped
     network_mode: host
-    limits:
-      memory: 256M
     environment:
       TZ: Asia/Shanghai
-    # ports:
-    #  - 9876:9876
     volumes:
-      - /mnt/user/appdata/ddns-go:/root
+      - ./ddns-go-data:/root

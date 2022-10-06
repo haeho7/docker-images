@@ -1,6 +1,7 @@
 # Webdav
 
-- [x] Unraid & Normal
+- [x] unRAID
+- [x] Normal
 
 ## Usage
 
@@ -17,10 +18,7 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -e USERNAME=example \
   -e PASSWORD='example' \
-  -p 8080:8080 \
   -v /mnt/user/appdata/webdav:/config \
   -v /mnt/user/datas/webdav:/data \
-  # -v /mnt/user/appdata/webdav/config.yml:/etc/webdav/config.yml \
-  # -v /etc/localtime:/etc/localtime:ro \
   haeho7/docker-images:webdav
 ```

@@ -6,11 +6,9 @@ services:
     container_name: redis
     restart: unless-stopped
     network_mode: host
-    limits:
-      memory: 512M
     environment:
       TZ: Asia/Shanghai
       PUID: 99
       PGID: 100
     volumes:
-      - /mnt/user/appdata/redis:/data
+      - ./redis-data:/data

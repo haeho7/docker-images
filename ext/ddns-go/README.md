@@ -1,18 +1,18 @@
 # ddns-go
 
-- [x] Unraid & Normal
+- [x] unRAID
+- [x] Normal
 
 ## Usage
 
 ```sh
-  docker run -d \
+docker run -d \
   --name=ddns-go \
   --restart=unless-stopped \
   --network=host \
   --memory=256M \
   --memory-swap=512M \
   -e TZ=Asia/Shanghai \
-  # -p 9876:9876 \
   -v /mnt/user/appdata/ddns-go:/root \
   jeessy/ddns-go:v4.0.4
 ```

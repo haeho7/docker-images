@@ -5,9 +5,7 @@ services:
     image: haeho7/docker-images:webdav
     container_name: webdav
     restart: unless-stopped
-    network_mode: bridge
-    limits:
-      memory: 512M
+    network_mode: host
     environment:
       PUID: 99
       PGID: 100
@@ -15,10 +13,6 @@ services:
       TZ: Asia/Shanghai
       USERNAME: example
       PASSWORD: 'example'
-    ports:
-      - 8080:8080
     volumes:
-      - /mnt/user/appdata/webdav:/config
+      - ./webdav-data:/config
       - /mnt/user/datas/webdav:/data
-      # - /mnt/user/appdata/webdav/config.yml:/etc/webdav/config.yml
-      # - /etc/localtime:/etc/localtime:ro

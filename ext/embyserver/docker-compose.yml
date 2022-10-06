@@ -5,20 +5,18 @@ services:
     image: haeho7/docker-images:embyserver-4.6.7.0
     container_name: embyserver
     restart: unless-stopped
-    networks: host
-    limits:
-      memory: 2G
+    network_mode: host
     environment:
-      TZ: Asia/Shanghai
       UID: 99
       GID: 100
       GIDLIST: "100,18"
-    # ports:
-    #  - 8096:8096
-    #  - 8920:8920
-    #  - 1900:1900/udp
-    #  - 7359:7359/udp
+    #ports:
+      #- 8096:8096
+      #- 8920:8920
+      #- 1900:1900/udp
+      #- 7359:7359/udp
     volumes:
+      - ./embyserver-data:/config
+      - /etc/localtime:/etc/localtime:ro
       - /mnt/user/medias/moive/:/data/movies
       - /mnt/user/medias/series/:/data/series
-      - /etc/localtime:/etc/localtime:ro

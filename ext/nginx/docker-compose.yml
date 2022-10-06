@@ -2,22 +2,18 @@ version: '3.9'
 
 services:
   nginx:
-    # image: lscr.io/linuxserver/nginx
+    #image: linuxserver/nginx
     image: nginx:1.23.1-alpine
     container_name: nginx
     restart: unless-stopped
-    networks:
-      br0:
-        ipv4_address: 192.168.1.249
-    limits:
-      memory: 512M
+    network_mode: host
     environment:
       TZ: Asia/Shanghai
-      # use linuxserver images
-      # PUID: 99
-      # PGID: 100
-      # UMASK: 022
+      #use linuxserver images
+      #PUID: 99
+      #PGID: 100
+      #UMASK: 022
     volumes:
-      - /mnt/user/appdata/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - /mnt/user/appdata/nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx-data/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx-data/conf.d:/etc/nginx/conf.d
       - /mnt/user/appdata/acme.sh:/cert

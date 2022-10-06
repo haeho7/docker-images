@@ -7,10 +7,8 @@ services:
     restart: unless-stopped
     network_mode: host
     privileged: true
-    limits:
-      memory: 512M
     environment:
       USE_USERSPACE_MODE: 0
-      PEER_RESOLVE_INTERVAL: 0
+      PEER_RESOLVE_INTERVAL: 300
     volumes:
-      - /mnt/user/appdata/wireguard:/etc/wireguard
+      - ./wireguard-data:/etc/wireguard

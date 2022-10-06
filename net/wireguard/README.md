@@ -8,8 +8,8 @@
 docker run -d \
   --name=wireguard \
   --network=host \
-  --restart=unless-stopped \
   --privileged=true \
+  --restart=unless-stopped \
   --memory=512M \
   --memory-swap=1G \
   -e USE_USERSPACE_MODE=0 \
@@ -108,7 +108,7 @@ See more: <https://lists.zx2c4.com/pipermail/wireguard/2017-December/002201.html
 DNS setting be only when as a client, and should be set to the DNS of remote peer, e.g.:
 
 ```sh
-DNS = 192.168.1.254
+DNS = 192.168.1.1
 ```
 
 ### As Gateway
@@ -143,4 +143,4 @@ PostDown = iptables -t nat -D POSTROUTING -o <WIREGUARD INTERFACE NAME> -j SNAT 
 
 ## Acknowledgments
 
-* [@pexcn/docker-images](https://github.com/pexcn/docker-images/tree/master/net/wireguard)
+- [@pexcn/docker-images](https://github.com/pexcn/docker-images/tree/master/net/wireguard)

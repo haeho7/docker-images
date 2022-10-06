@@ -1,19 +1,20 @@
 # ACME.sh
 
-- [x] Unraid & Normal
+- [x] unRAID
+- [x] Normal
 
 ## Usage
 
 ```sh
-  docker run -d \
+docker run -d \
   --name=acme.sh \
   --restart unless-stopped \
   --network=host \
   --memory=256M \
   --memory-swap=512M \
   -e TZ=Asia/Shanghai \
-  -e DP_Id=example \   #is DNSPod.cn api ID
-  -e DP_Key=example \  #is DNSPod.cn api Key
+  -e DP_Id=example \
+  -e DP_Key=example \
   -v /mnt/user/appdata/acme.sh:/acme.sh \
   neilpang/acme.sh:3.0.4 daemon
 ```

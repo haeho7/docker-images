@@ -1,6 +1,7 @@
 # MariaDB
 
-- [x] Unraid & Normal
+- [x] unRAID
+- [x] Normal
 
 ## Usage
 
@@ -15,10 +16,10 @@ docker run -d \
   -e PGID=100 \
   -e TZ=Asia/Shanghai \
   -e MARIADB_ROOT_PASSWORD='example' \
-  # -e MARIADB_DATABASE=example \
-  # -e MARIADB_USER=example \
-  # -e MARIADB_PASSWORD='example' \
-  # -e MARIADB_ROOT_HOST='% localhost' \
+  #-e MARIADB_DATABASE=example \
+  #-e MARIADB_USER=example \
+  #-e MARIADB_PASSWORD='example' \
+  #-e MARIADB_ROOT_HOST='% localhost' \
   -v /mnt/user/appdata/mariadb/conf.d/:/etc/mysql/conf.d \
   -v /mnt/user/appdata/mariadb/data:/var/lib/mysql \
   haeho7/docker-images:mariadb

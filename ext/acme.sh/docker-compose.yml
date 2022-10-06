@@ -6,12 +6,10 @@ services:
     container_name: acme.sh
     restart: unless-stopped
     network_mode: host
-    limits:
-      memory: 256M
     environment:
       TZ: Asia/Shanghai
       DPI_ID: DNSPod ID
       DPI_Key: DNSPod Key
     command: daemon
     volumes:
-      - /mnt/user/appdata/acme.sh:/acme.sh
+      - ./acme.sh-data:/acme.sh

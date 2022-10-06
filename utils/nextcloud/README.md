@@ -1,6 +1,7 @@
 # NextCloud
 
-- [x] Unraid & Normal
+- [x] unRAID
+- [x] Normal
 
 ## Usage
 
@@ -14,16 +15,16 @@ docker run -d \
   -e PUID=99 \
   -e PGID=100 \
   -e TZ=Asia/Shanghai \
-  -e MYSQL_HOST='192.168.1.250:3306' \
+  -e MYSQL_HOST='192.168.1.20:3306' \
   -e MYSQL_DATABASE=nextcloud \
   -e MYSQL_USER=nextcloud \
   -e MYSQL_PASSWORD='example' \
-  -e REDIS_HOST='192.168.1.250' \
+  -e REDIS_HOST='192.168.1.20' \
   -e REDIS_HOST_PORT=6379 \
   -e REDIS_HOST_PASSWORD='example' \
   -e NEXTCLOUD_ADMIN_USER=example \
   -e NEXTCLOUD_ADMIN_PASSWORD='example' \
-  -e NEXTCLOUD_TRUSTED_DOMAINS='192.168.1.250 nextcloud.demo.com nextcloud.local.demo.com' \
+  -e NEXTCLOUD_TRUSTED_DOMAINS='192.168.1.20 nextcloud.demo.com nextcloud.local.demo.com' \
   -e PHP_MEMORY_LIMIT=1024M \
   -e PHP_UPLOAD_LIMIT=0 \
   -v /mnt/user/appdata/nextcloud:/var/www/html \

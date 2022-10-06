@@ -6,12 +6,8 @@ services:
     container_name: alist
     restart: unless-stopped
     network_mode: host
-    limits:
-      memory: 256M
     environment:
       TZ: Asia/Shanghai
-    # ports:
-    #  - 5244:5244
     volumes:
-      - /mnt/user/appdata/alist:/opt/alist/data
+      - ./alist-data:/opt/alist/data
       - /mnt/user/datas/alist:/mnt/data

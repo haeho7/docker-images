@@ -1,11 +1,12 @@
 # EmbyServer
 
-- [x] Unraid & Normal
+- [x] unRAID
+- [x] Normal
 
 ## Usage
 
 ```sh
-  docker run -d \
+docker run -d \
   --name=embyserver \
   --network=host \
   --restart=unless-stopped \
@@ -14,13 +15,14 @@
   -e UID=99 \
   -e GID=100 \
   -e GIDLIST="100,18" \
-  # -p 8096:8096 \
-  # -p 8920:8920 \
-  # -p 1900:1900/udp \
-  # -p 7359:7359/udp \
+  #-p 8096:8096 \
+  #-p 8920:8920 \
+  #-p 1900:1900/udp \
+  #-p 7359:7359/udp \
+  -v /mnt/user/appdata/embyserver:/config \
+  -v /etc/localtime:/etc/localtime:ro \
   -v /mnt/user/medias/moive/:/data/movies \
   -v /mnt/user/medias/series/:/data/series \
-  -v /etc/localtime:/etc/localtime:ro \
   haeho7/docker-images:embyserver-4.6.7.0
 ```
 
