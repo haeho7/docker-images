@@ -1,6 +1,7 @@
 # Transmission
 
-- [x] Unraid & Normal
+- [x] unRAID
+- [x] Normal
 
 ## docker for linuxserver
 
@@ -16,7 +17,7 @@ docker run -d \
   -e PGID=100 \
   -e UMASK=022 \
   -e TZ=Asia/Shanghai \
-  -e TRANSMISSION_WEB_HOME=/transmission-web-control/ \
+  -e TRANSMISSION_WEB_HOME='/transmission-web-control/' \
   -e USER=example \
   -e PASS='example' \
   -e WHITELIST='127.0.0.1,192.168.1.*' \
@@ -35,7 +36,7 @@ docker run -d \
 
 When creating a macvlan, if the device has a bridge device, `parent` needs to specify a bridge device instead of a physical interface, such as: `parent=br-lan` .
 
-OpenWrt need install `kmod-macvlan` package and reboot.
+OpenWrt need install `kmod-macvlan` package.
 
 See more: <https://forum.openwrt.org/t/solved-docker-macvlan-network/106478>
 
