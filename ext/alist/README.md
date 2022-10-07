@@ -6,7 +6,7 @@
 ## Usage
 
 ```sh
-  docker run -d \
+docker run -d \
   --name=alist \
   --restart=unless-stopped \
   --network=host \
