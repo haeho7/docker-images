@@ -1,6 +1,7 @@
 # WireGuard
 
-- [x] Unraid & Normal
+- [x] unRAID
+- [x] Normal
 
 ## Usage
 
