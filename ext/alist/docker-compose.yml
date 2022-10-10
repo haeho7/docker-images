@@ -4,8 +4,8 @@ services:
   alist:
     image: xhofe/alist:v3.0.3
     container_name: alist
-    restart: unless-stopped
     network_mode: host
+    restart: unless-stopped
     environment:
       TZ: Asia/Shanghai
     volumes:

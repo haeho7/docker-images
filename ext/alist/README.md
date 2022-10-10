@@ -8,8 +8,8 @@
 ```sh
 docker run -d \
   --name=alist \
-  --restart=unless-stopped \
   --network=host \
+  --restart=unless-stopped \
   --memory=256M \
   --memory-swap=512M \
   -e TZ=Asia/Shanghai \

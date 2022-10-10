@@ -10,7 +10,7 @@ docker run -d \
   --name strongswan \
   --restart unless-stopped \
   --network=host \
-  --privileged \
+  --privileged=true \
   #-p 500:500/udp \
   #-p 4500:4500/udp \
   -e PSK='PreSharedKey' \

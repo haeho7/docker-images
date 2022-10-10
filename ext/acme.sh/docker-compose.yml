@@ -4,8 +4,8 @@ services:
   acme.sh:
     image: neilpang/acme.sh:3.0.4
     container_name: acme.sh
-    restart: unless-stopped
     network_mode: host
+    restart: unless-stopped
     environment:
       TZ: Asia/Shanghai
       DPI_ID: example

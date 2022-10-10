@@ -8,7 +8,7 @@
 ```sh
 docker run -d \
   --name=webdav \
-  --network=bridge \
+  --network=host \
   --restart=unless-stopped \
   --memory=512M \
   --memory-swap=1G \

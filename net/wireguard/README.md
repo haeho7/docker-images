@@ -125,15 +125,28 @@ PostDown = iptables -t mangle -D POSTROUTING -o %i -p tcp -m tcp --tcp-flags SYN
 ### Address Translation
 
 如果NodeA通过WireGuard隧道访问NodeB的内部网络，但是NodeB的内部网络并没有NodeA隧道地址的路由，需要在NodeB上将NodeA的隧道源地址转为NodeB的内部接口地址。
+
 NodeA -> WireGuard tunnel -> NodeB -> NodeB internal network (192.168.1.0/24)
 
 ```sh
 # NodeB Add
-PostUp = iptables -t nat -A POSTROUTING -o <INTERNAL INTERFACE NAME> -j SNAT --to-source 192.168.1.250
-PostDown = iptables -t nat -D POSTROUTING -o <INTERNAL INTERFACE NAME> -j SNAT --to-source 192.168.1.250
+PostUp = iptables -t nat -A POSTROUTING -o <INTERNAL INTERFACE NAME> -j SNAT --to-source 192.168.1.10
+PostDown = iptables -t nat -D POSTROUTING -o <INTERNAL INTERFACE NAME> -j SNAT --to-source 192.168.1.10
+```
+
+如果unRAID网卡使用绑定模式，即系统中存在 `br0` `shim-br0`。在进行SNAT转换时需对两张网卡都进行操作。建议配合 `iptables -s` 参数仅匹配WireGuard隧道网段，防止其他从 `br0` `shim-br0` 出去的流量被转换。
+
+```sh
+# NodeB Add
+PostUp = iptables -t nat -A POSTROUTING -s 10.10.10.0/24 -o br0 -j SNAT --to-source 192.168.1.10
+PostUp = iptables -t nat -A POSTROUTING -s 10.10.10.0/24 -o shim-br0 -j SNAT --to-source 192.168.1.10
+
+PostDown = iptables -t nat -D POSTROUTING -s 10.10.10.0/24 -o br0 -j SNAT --to-source 192.168.1.10
+PostDown = iptables -t nat -D POSTROUTING -s 10.10.10.0/24 -o shim-br0 -j SNAT --to-source 192.168.1.10
 ```
 
 如果WireGuard作为网关，NodeA的内部客户端通过WireGuard隧道访问NodeB的内部网络，但是NodeB的 `AllowedIP` 中没有添加NodeA的内部路由，需要在NodeA上将内部源地址转换为WireGuard隧道地址。
+
 PC & Other Clinet -> Router Device -> NodeA WireGuard tunnel (Gateway) -> NodeB WireGuard tunnel -> NodeB Internal Network (192.168.2.0/24)
 
 ```sh

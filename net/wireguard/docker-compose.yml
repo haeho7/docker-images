@@ -4,9 +4,9 @@ services:
   wireguard:
     image: haeho7/docker-images:wireguard
     container_name: wireguard
-    restart: unless-stopped
     network_mode: host
     privileged: true
+    restart: unless-stopped
     environment:
       USE_USERSPACE_MODE: 0
       PEER_RESOLVE_INTERVAL: 300

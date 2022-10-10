@@ -4,8 +4,8 @@ services:
   adguardhome:
     image: adguard/adguardhome:v0.107.15
     container_name: adguardhome
-    restart: unless-stopped
     network_mode: host
+    restart: unless-stopped
     environment:
       TZ: Asia/Shanghai
     volumes:

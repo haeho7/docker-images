@@ -4,8 +4,8 @@ services:
   embyserver:
     image: haeho7/docker-images:embyserver-4.6.7.0
     container_name: embyserver
-    restart: unless-stopped
     network_mode: host
+    restart: unless-stopped
     environment:
       UID: 99
       GID: 100

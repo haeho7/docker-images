@@ -5,8 +5,8 @@ services:
     #image: linuxserver/nginx
     image: nginx:1.23.1-alpine
     container_name: nginx
-    restart: unless-stopped
     network_mode: host
+    restart: unless-stopped
     environment:
       TZ: Asia/Shanghai
       #use linuxserver images

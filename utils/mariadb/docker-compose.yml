@@ -4,8 +4,8 @@ services:
   mariadb:
     image: haeho7/docker-images:mariadb
     container_name: mariadb
-    restart: unless-stopped
     network_mode: host
+    restart: unless-stopped
     environment:
       PUID: 99
       PGID: 100

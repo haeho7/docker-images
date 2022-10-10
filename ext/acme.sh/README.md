@@ -8,12 +8,12 @@
 ```sh
 docker run -d \
   --name=acme.sh \
-  --restart unless-stopped \
   --network=host \
+  --restart unless-stopped \
   --memory=256M \
   --memory-swap=512M \
   -e TZ=Asia/Shanghai \
-  -e DP_Id=example \
+  -e DP_Id='example' \
   -e DP_Key='example' \
   -v /mnt/user/appdata/acme.sh:/acme.sh \
   neilpang/acme.sh:3.0.4 daemon

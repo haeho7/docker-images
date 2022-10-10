@@ -4,8 +4,8 @@ services:
   redis:
     image: haeho7/docker-images:redis
     container_name: redis
-    restart: unless-stopped
     network_mode: host
+    restart: unless-stopped
     environment:
       TZ: Asia/Shanghai
       PUID: 99
