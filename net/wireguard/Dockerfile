@@ -16,7 +16,7 @@ RUN apk update \
   && sed -i 's/go build -v -o "$@"/CGO_ENABLED=0 go build -v -o "$@" -trimpath -ldflags "-s -w"/' Makefile \
   && make \
   && make install \
-  && cd .. \
+  && cd - \
   && rm -r wireguard-go \
   && apk del .build-deps \
   && rm -rf /var/cache/apk/*
@@ -24,7 +24,7 @@ RUN apk update \
 #
 # Runtime stage
 #
-FROM alpine:3.15
+FROM alpine:3.16
 LABEL maintainer="haeho7 <i@demo.com>"
 
 ARG WIREGUARD_VER=1.0.20210914-r0
@@ -34,7 +34,7 @@ RUN apk update \
       wireguard-tools-doc=$WIREGUARD_VER \
   && rm -rf /var/cache/apk/*
 
-RUN cp /usr/share/doc/wireguard-tools/contrib/reresolve-dns/reresolve-dns.sh /usr/local/bin/
+RUN install /usr/share/doc/wireguard-tools/contrib/reresolve-dns/reresolve-dns.sh /usr/local/bin/
 
 COPY --from=builder /usr/bin/wireguard-go /srv/wireguard-go/
 COPY --chmod=755 wireguard.sh /usr/local/bin/
