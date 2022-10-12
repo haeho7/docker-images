@@ -32,9 +32,6 @@ jobs:
           # webdav
           - BUILD_CONTEXT: utils/webdav
             TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # nextcloud-normal
-          - BUILD_CONTEXT: utils/nextcloud-normal
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
           # nextcloud
           - BUILD_CONTEXT: utils/nextcloud
             TARGET_PLATFORMS: linux/amd64,linux/arm64
