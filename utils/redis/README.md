@@ -34,12 +34,13 @@ Please refer to the following parameters: [redis.conf](./redis-data/redis.conf)
 ### Redis Command
 
 ``` sh
+# login
+redis-cli -h 127.0.0.1 -p 6379 -a password
+
 # show all cinfig
 CONFIG GET *
 CONFIG GET requirepass
-```
 
-``` sh
 # show all key
 SELECT 0
 KEYS *

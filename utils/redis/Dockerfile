@@ -2,12 +2,9 @@
 # Dockerfile for redis
 #
 
-#
-# Runtime stage
-#
-FROM redis:6.2.7-alpine
+FROM redis:7.0.5-alpine
 LABEL maintainer="haeho7 <i@demo.com>"
-# See more: https://github.com/docker-library/redis/tree/master/6.2/alpine
+# See more: https://github.com/docker-library/redis/tree/master/7.0/alpine
 
 RUN apk update \
   && apk add --no-cache tzdata shadow \
