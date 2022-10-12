@@ -2,10 +2,7 @@
 # Dockerfile for mariadb
 #
 
-#
-# Runtime stage
-#
-FROM mariadb:10.6.8
+FROM mariadb:10.6.10
 LABEL maintainer="haeho7 <i@demo.com>"
 # See more: https://github.com/MariaDB/mariadb-docker/tree/master/10.6
 

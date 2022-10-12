@@ -19,7 +19,7 @@ docker run -d \
   #-e MARIADB_DATABASE=example \
   #-e MARIADB_USER=example \
   #-e MARIADB_PASSWORD='example' \
-  #-e MARIADB_ROOT_HOST='% localhost' \
+  #-e MARIADB_ROOT_HOST='%' \
   -v /mnt/user/appdata/mariadb/conf.d/:/etc/mysql/conf.d \
   -v /mnt/user/appdata/mariadb/data:/var/lib/mysql \
   haeho7/docker-images:mariadb

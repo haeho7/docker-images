@@ -14,7 +14,7 @@ services:
       #MARIADB_DATABASE: example
       #MARIADB_USER: example
       #MARIADB_PASSWORD: 'example'
-      #MARIADB_ROOT_HOST: '% localhost'
+      #MARIADB_ROOT_HOST: '%'
     volumes:
       - ./mariadb-data/conf.d/:/etc/mysql/conf.d
       - ./mariadb-data/data:/var/lib/mysql
