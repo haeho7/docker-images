@@ -265,6 +265,12 @@ See more: <https://docs.nextcloud.com/server/latest/admin_manual/configuration_s
   // temp directory
   'tempdirectory' => '/var/www/html/temp',
 
+  // user setting
+  'skeletondirectory'  => '',
+  'templatedirectory'  => '',
+  'default_language' => 'zh_CN',
+  'default_locale' => 'zh_Hans_CN',
+
   // logfile
   'log_type' => 'file',
   'logfile' => '[datadirectory]/nextcloud.log',
