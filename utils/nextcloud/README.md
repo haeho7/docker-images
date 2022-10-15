@@ -68,7 +68,6 @@ variables in `nextcloud.ini` configuration files.
 
 ```ini
 # cat /usr/local/etc/php/conf.d/nextcloud.ini
-
 memory_limit=${PHP_MEMORY_LIMIT}
 upload_max_filesize=${PHP_UPLOAD_LIMIT}
 post_max_size=${PHP_UPLOAD_LIMIT}
@@ -89,7 +88,6 @@ cat /var/www/html/config/config.php
 
 ```ini
 # cat /usr/local/etc/php/conf.d/opcache-recommended.ini
-
 opcache.enable=1
 opcache.interned_strings_buffer=16
 opcache.max_accelerated_files=10000
@@ -121,7 +119,7 @@ APCu is disabled by default on CLI which could cause issues with nextcloud’s c
 See more: <https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/caching_configuration.html#id1>
 
 ```ini
-# cat /usr/local/etc/php/conf.d # cat docker-php-ext-apcu.ini
+# cat /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini
 extension=apcu
 apc.enable_cli=1
 ```
@@ -134,60 +132,38 @@ Find the path where occ is located in the container.
 
 ```sh
 find / -iname "*occ*"
-
 cd /var/www/html
 ./occ --version
-```
 
-``` sh
 # display config
 docker exec --user=99:100 nextcloud php /var/www/html/occ config:list
-```
 
-```sh
 # display get single value 
 docker exec --user=99:100 nextcloud php /var/www/html/occ config:system:get trusted_domains
-```
 
-``` sh
 # display user list
 docker exec --user=99:100 nextcloud php /var/www/html/occ user:list
-```
 
-```sh
 # display user setting
 docker exec --user=99:100 nextcloud php /var/www/html/occ user:setting <usernmae>
-```
 
-```sh
 # display config and private
 docker exec --user=99:100 nextcloud php /var/www/html/occ config:list --private
-```
 
-```sh
 # scan user file
 docker exec --user=99:100 nextcloud php /var/www/html/occ files:scan <usernmae1> <usernmae2>
-```
 
-```sh
 # scan user file and limit the search path
 docker exec --user=99:100 nextcloud php /var/www/html/occ files:scan --path="/<username>/files/Photos"
-```
 
-```sh
 # scan all user file,show directories and files verbose 
 docker exec --user=99:100 nextcloud php /var/www/html/occ files:scan --all --verbose
-```
 
-```sh
 # clear users trashbin
 docker exec --user=99:100 php /var/www/html/occ trashbin:cleanup <usernmae1> <usernmae2>
 docker exec --user=99:100 php /var/www/html/occ trashbin:cleanup --all-users
-```
 
-```sh
-# Not tested
-# clean database tables not match files
+# clean database tables not match files (Not tested)
 docker exec --user=99:100 nextcloud php /var/www/html/occ files:cleanup
 ```
 
