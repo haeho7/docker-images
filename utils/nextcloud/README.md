@@ -275,13 +275,17 @@ Reference:
 docker exec --user=99:100 nextcloud php /var/www/html/occ config:system:set preview_max_x --value 1080
 docker exec --user=99:100 nextcloud php /var/www/html/occ config:system:set preview_max_y --value 1920
 
+# change nextcloud preview images quality
+docker exec --user=99:100 nextcloud php /var/www/html/occ config:system:set jpeg_quality --value 50
+
 # change preview generator sizes
-docker exec --user=99:100 nextcloud php /var/www/html/occ config:app:set --value="32 64 256 1024 1920"  previewgenerator squareSizes
-docker exec --user=99:100 nextcloud php /var/www/html/occ config:app:set --value="64 128 1024 1080 1920" previewgenerator widthSizes
-docker exec --user=99:100 nextcloud php /var/www/html/occ config:app:set --value="64 256 1024 1080 1920" previewgenerator heightSizes
+docker exec --user=99:100 nextcloud php /var/www/html/occ config:app:set --value="32 64 1024"  previewgenerator squareSizes
+docker exec --user=99:100 nextcloud php /var/www/html/occ config:app:set --value="64 128 1024" previewgenerator widthSizes
+docker exec --user=99:100 nextcloud php /var/www/html/occ config:app:set --value="64 256 1024" previewgenerator heightSizes
 
 # show config
 docker exec --user=99:100 nextcloud php /var/www/html/occ config:list --private | grep preview
+docker exec --user=99:100 nextcloud php /var/www/html/occ config:list --private | grep jpeg_quality
 docker exec --user=99:100 nextcloud php /var/www/html/occ config:list --private | grep Sizes
 
 # reset previews database
