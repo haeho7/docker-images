@@ -124,65 +124,6 @@ extension=apcu
 apc.enable_cli=1
 ```
 
-### PHP OCC Command
-
-See more: <https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/occ_command.html>
-
-Find the path where occ is located in the container.
-
-```sh
-find / -iname "*occ*"
-cd /var/www/html
-./occ --version
-
-# display config
-docker exec --user=99:100 nextcloud php /var/www/html/occ config:list
-
-# display get single value 
-docker exec --user=99:100 nextcloud php /var/www/html/occ config:system:get trusted_domains
-
-# display user list
-docker exec --user=99:100 nextcloud php /var/www/html/occ user:list
-
-# display user setting
-docker exec --user=99:100 nextcloud php /var/www/html/occ user:setting <usernmae>
-
-# display config and private
-docker exec --user=99:100 nextcloud php /var/www/html/occ config:list --private
-
-# scan user file
-docker exec --user=99:100 nextcloud php /var/www/html/occ files:scan <usernmae1> <usernmae2>
-
-# scan user file and limit the search path
-docker exec --user=99:100 nextcloud php /var/www/html/occ files:scan --path="/<username>/files/Photos"
-
-# scan all user file,show directories and files verbose 
-docker exec --user=99:100 nextcloud php /var/www/html/occ files:scan --all --verbose
-
-# clear users trashbin
-docker exec --user=99:100 php /var/www/html/occ trashbin:cleanup <usernmae1> <usernmae2>
-docker exec --user=99:100 php /var/www/html/occ trashbin:cleanup --all-users
-
-# clean database tables not match files (Not tested)
-docker exec --user=99:100 nextcloud php /var/www/html/occ files:cleanup
-```
-
-### Pre-Generate Previews
-
-```sh
-# nextcloud appstore install Preview Generator
-docker exec --user=99:100 nextcloud php /var/www/html/occ preview:generate-all --verbose
-```
-
-### Upload Chunk Size
-
-For upload performance improvements in environments with high upload bandwidth, the server’s upload chunk size may be adjusted.Default is 10485760 (10 MiB).
-
-```sh
-# disable upload chunk size
-docker exec --user=99:100 nextcloud php /var/www/html/occ config:app:set files max_chunk_size --value 0
-```
-
 ### Extend Config
 
 See more: <https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html>
@@ -253,6 +194,101 @@ See more: <https://docs.nextcloud.com/server/latest/admin_manual/configuration_s
   'loglevel' => 2,
   'logdateformat' => 'Y-m-d H:i:s',
   'logtimezone' => 'Asia/Shanghai',
+```
+
+### PHP OCC Command
+
+See more: <https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/occ_command.html>
+
+Find the path where occ is located in the container.
+
+```sh
+find / -iname "*occ*"
+cd /var/www/html
+./occ --version
+
+# display config
+docker exec --user=99:100 nextcloud php /var/www/html/occ config:list
+
+# display get single value
+docker exec --user=99:100 nextcloud php /var/www/html/occ config:system:get trusted_domains
+
+# display user list
+docker exec --user=99:100 nextcloud php /var/www/html/occ user:list
+
+# display user setting
+docker exec --user=99:100 nextcloud php /var/www/html/occ user:setting <usernmae>
+
+# display config and private
+docker exec --user=99:100 nextcloud php /var/www/html/occ config:list --private
+
+# scan user file
+docker exec --user=99:100 nextcloud php /var/www/html/occ files:scan <usernmae1> <usernmae2>
+
+# scan user file and limit the search path
+docker exec --user=99:100 nextcloud php /var/www/html/occ files:scan --path="/<username>/files/Photos"
+
+# scan all user file,show directories and files verbose
+docker exec --user=99:100 nextcloud php /var/www/html/occ files:scan --all --verbose
+
+# clear users trashbin
+docker exec --user=99:100 php /var/www/html/occ trashbin:cleanup <usernmae1> <usernmae2>
+docker exec --user=99:100 php /var/www/html/occ trashbin:cleanup --all-users
+
+# clean database tables not match files (Not tested)
+docker exec --user=99:100 nextcloud php /var/www/html/occ files:cleanup
+```
+
+### Upload Chunk Size
+
+For upload performance improvements in environments with high upload bandwidth, the server’s upload chunk size may be adjusted.Default is 10485760 (10 MiB).
+
+```sh
+# disable upload chunk size
+docker exec --user=99:100 nextcloud php /var/www/html/occ config:app:set files max_chunk_size --value 0
+```
+
+### Pre-Generate Previews
+
+```sh
+# nextcloud appstore install Preview Generator
+docker exec --user=99:100 nextcloud php /var/www/html/occ preview:generate-all --verbose
+
+# root user add crontab
+*/20 * * * * php /var/www/html/occ preview:pre-generate
+
+# reload crontab
+killall busybox
+nohup /cron.sh >/var/www/html/data/crond.log &
+```
+
+### Limit the maximum size of the preview
+
+Reference:
+
+- [@nextcloud/previewgenerator](https://github.com/nextcloud/previewgenerator)
+
+- [Improving Nextcloud's Thumbnail Response Time](https://www.bentasker.co.uk/posts/documentation/linux/671-improving-nextcloud-s-thumbnail-response-time.html)
+
+```sh
+# change nextcloud preview_max
+docker exec --user=99:100 nextcloud php /var/www/html/occ config:system:set preview_max_x --value 1080
+docker exec --user=99:100 nextcloud php /var/www/html/occ config:system:set preview_max_y --value 1920
+
+# change preview generator sizes
+docker exec --user=99:100 nextcloud php /var/www/html/occ config:app:set --value="32 64 256 1024 1920"  previewgenerator squareSizes
+docker exec --user=99:100 nextcloud php /var/www/html/occ config:app:set --value="64 128 1024 1080 1920" previewgenerator widthSizes
+docker exec --user=99:100 nextcloud php /var/www/html/occ config:app:set --value="64 256 1024 1080 1920" previewgenerator heightSizes
+
+# show config
+docker exec --user=99:100 nextcloud php /var/www/html/occ config:list --private | grep preview
+docker exec --user=99:100 nextcloud php /var/www/html/occ config:list --private | grep Sizes
+
+# reset previews database
+1. stop nextcloud docker
+2. remove the folder your-nextcloud-data-directory/appdata_*/preview
+3. run docker exec --user=99:100 nextcloud php /var/www/html/occ files:scan-app-data
+4. run docker exec --user=99:100 nextcloud php /var/www/html/occ preview:generate-all --verbose
 ```
 
 ### Error Fix
