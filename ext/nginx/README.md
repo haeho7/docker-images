@@ -44,3 +44,21 @@ docker run -d \
 cd /mnt/user/appdata/nginx
 find . -type f -iname "*.conf" -print -exec chmod 644 {} \;
 ```
+
+## Basic Authentication
+
+```sh
+apk add apache2-utils
+htpasswd -c /srv/htpasswd <username>
+
+cat /srv/htpasswd
+demo:$xxx$LbahLwNb$0rD/8Jzyg4BUXAgVKxxx
+
+apk del apache2-utils
+
+# nginx location config
+   location /xxx {
+        auth_basic "Private";
+        auth_basic_user_file /srv/htpasswd;
+    }
+```
