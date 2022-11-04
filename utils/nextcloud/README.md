@@ -115,8 +115,9 @@ docker exec -i --user=99:100 nextcloud php -f /var/www/html/cron.php
 
 ### APCu and Crontab
 
-APCu is disabled by default on CLI which could cause issues with nextcloud’s cron jobs.  
-See more: <https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/caching_configuration.html#id1>
+APCu is disabled by default on CLI which could cause issues with nextcloud’s cron jobs.
+
+See more: [@nexntcloud/docs/admin_manual/caching_configuration](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/caching_configuration.html#id1)
 
 ```ini
 # cat /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini
@@ -124,9 +125,9 @@ extension=apcu
 apc.enable_cli=1
 ```
 
-### Extend Config
+## Extend Config
 
-See more: <https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html>
+See more: [@nexntcloud/docs/admin_manual/config_sample_php_parameters](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html)
 
 ```php
   // enable extra preview
@@ -187,6 +188,7 @@ See more: <https://docs.nextcloud.com/server/latest/admin_manual/configuration_s
   'templatedirectory'  => '',
   'default_language' => 'zh_CN',
   'default_locale' => 'zh_Hans_CN',
+  'default_phone_region' => 'CN',
 
   // logfile
   'log_type' => 'file',
@@ -196,9 +198,9 @@ See more: <https://docs.nextcloud.com/server/latest/admin_manual/configuration_s
   'logtimezone' => 'Asia/Shanghai',
 ```
 
-### PHP OCC Command
+## PHP OCC Command
 
-See more: <https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/occ_command.html>
+See more: [@nexntcloud/docs/admin_manual/occ_command](https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/occ_command.html)
 
 Find the path where occ is located in the container.
 
@@ -239,6 +241,21 @@ docker exec --user=99:100 php /var/www/html/occ trashbin:cleanup --all-users
 docker exec --user=99:100 nextcloud php /var/www/html/occ files:cleanup
 ```
 
+## Error Fix
+
+- WARNING: [pool www] server reached pm.max_children setting (5), consider raising it.
+
+Please refer to the following parameters: [www.conf](./nextcloud-data/php-fpm.d/www.conf)
+
+- Module php-imagick in this instance has no SVG support. For better compatibility it is recommended to install it.
+
+```sh
+docker exec -it -u root:root nextcloud sh
+apk add --no-cache imagemagick
+```
+
+## Improving
+
 ### Upload Chunk Size
 
 For upload performance improvements in environments with high upload bandwidth, the server’s upload chunk size may be adjusted.Default is 10485760 (10 MiB).
@@ -248,27 +265,64 @@ For upload performance improvements in environments with high upload bandwidth, 
 docker exec --user=99:100 nextcloud php /var/www/html/occ config:app:set files max_chunk_size --value 0
 ```
 
+### PHP-FPM
+
+If you need high performance, you can optimize the default PHP-FPM parameters.
+
+Please refer to the following parameters: [www.conf](./nextcloud-data/php-fpm.d/www.conf)
+
+```sh
+# nextcloud container add volumes
+-v /mnt/user/appdata/nextcloud/config/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf \
+```
+
+Tips: It is recommended to do it after the nextcloud container is initialized, otherwise it may cause initialization errors or other problems.
+
+## PHP-FPM Status Monitoring
+
+If you need to monitor the running status of php-fpm:
+
+- Uncomment in the `www.conf` configuration file the `pm.status_path`
+
+```conf
+pm.status_path = /status
+```
+
+- nginx configuration add `location` ,it is recommended to enable it only on internal networks.
+
+```conf
+    # php-fpm running status monitoring
+    location /status {
+        fastcgi_index   index.php;
+        fastcgi_pass    php-handler;
+        include         fastcgi_params;
+        fastcgi_param   SCRIPT_FILENAME    $document_root$fastcgi_script_name;
+        fastcgi_param   SCRIPT_NAME        $fastcgi_script_name;
+    }    
+```
+
+## APPS
+
 ### Pre-Generate Previews
+
+Reference:
+
+- [@nextcloud/previewgenerator](https://github.com/nextcloud/previewgenerator)
+- [Improving Nextcloud's Thumbnail Response Time](https://www.bentasker.co.uk/posts/documentation/linux/671-improving-nextcloud-s-thumbnail-response-time.html)
 
 ```sh
 # nextcloud appstore install Preview Generator
 docker exec --user=99:100 nextcloud php /var/www/html/occ preview:generate-all --verbose
 
 # root user add crontab
-*/20 * * * * php /var/www/html/occ preview:pre-generate
+*/30 * * * * php /var/www/html/occ preview:pre-generate
 
 # reload crontab
 killall busybox
 nohup /cron.sh >/var/www/html/data/crond.log &
 ```
 
-### Limit the maximum size of the preview
-
-Reference:
-
-- [@nextcloud/previewgenerator](https://github.com/nextcloud/previewgenerator)
-
-- [Improving Nextcloud's Thumbnail Response Time](https://www.bentasker.co.uk/posts/documentation/linux/671-improving-nextcloud-s-thumbnail-response-time.html)
+#### Limit the maximum size of the preview
 
 ```sh
 # change nextcloud preview_max
@@ -295,51 +349,49 @@ docker exec --user=99:100 nextcloud php /var/www/html/occ config:list --private 
 4. run docker exec --user=99:100 nextcloud php /var/www/html/occ preview:generate-all --verbose
 ```
 
-### Error Fix
+### Extract
 
-- WARNING: [pool www] server reached pm.max_children setting (5), consider raising it.
+Reference:
 
-Please refer to the following parameters: [www.conf](./nextcloud-data/php-fpm.d/www.conf)
-
-- Module php-imagick in this instance has no SVG support. For better compatibility it is recommended to install it.
-
-```sh
-docker exec -it -u root:root nextcloud sh
-apk add --no-cache imagemagick
-```
-
-### PHP-FPM Tuning
-
-If you need high performance, you can optimize the default PHP-FPM parameters.
-
-Please refer to the following parameters: [www.conf](./nextcloud-data/php-fpm.d/www.conf)
+- [@PaulLereverend/NextcloudExtract](https://github.com/PaulLereverend/NextcloudExtract)
+- [@nextcloud appstore/Extract](https://apps.nextcloud.com/apps/extract)
 
 ```sh
-# nextcloud container add volumes
--v /mnt/user/appdata/nextcloud/config/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf \
+# nextcloud appstore install Extract
+
+# zip
+apk add --no-cache unzip
+
+# rar
+apk add --no-cache unrar --repository=https://dl-cdn.alpinelinux.org/alpine/v3.14/main
+
+# 7z
+apk add --no-cache p7zip
 ```
 
-Tips: It is recommended to do it after the nextcloud container is initialized, otherwise it may cause initialization errors or other problems.
+### Face Recognition (Deprecation)
 
-### PHP-FPM STATUS Monitoring
+Reference:
 
-If you need to monitor the running status of php-fpm:
+- [@matiasdelellis/facerecognition/issues/160](https://github.com/matiasdelellis/facerecognition/issues/160#issuecomment-741785257)
 
-- Uncomment in the `www.conf` configuration file the `pm.status_path`
+```sh
+apk add --no-cache php8-pdlib --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
 
-```conf
-pm.status_path = /status
-```
+cp -a /usr/lib/php8/modules/pdlib.so /usr/local/lib/php/extensions/no-debug-non-zts-20200930
+cp -a /etc/php8/conf.d/pdlib.ini /usr/local/etc/php/conf.d/pdlib.ini
 
-- nginx configuration add `location` ,it is recommended to enable it only on internal networks.
+apk add --no-cache bzip2-dev
+docker-php-ext-install bz2
 
-```conf
-    # php-fpm running status monitoring
-    location /status {
-        fastcgi_index   index.php;
-        fastcgi_pass    php-handler;
-        include         fastcgi_params;
-        fastcgi_param   SCRIPT_FILENAME    $document_root$fastcgi_script_name;
-        fastcgi_param   SCRIPT_NAME        $fastcgi_script_name;
-    }    
+docker exec --user=99:100 nextcloud php /var/www/html/occ face:stats
+
+docker exec --user=99:100 nextcloud php /var/www/html/occ face:setup
+docker exec --user=99:100 nextcloud php /var/www/html/occ face:setup 1
+docker exec --user=99:100 nextcloud php /var/www/html/occ face:setup 2
+docker exec --user=99:100 nextcloud php /var/www/html/occ face:setup 3
+docker exec --user=99:100 nextcloud php /var/www/html/occ face:setup 4
+
+docker exec --user=99:100 nextcloud php /var/www/html/occ face:setup --memory 4G --model 4
+docker exec --user=99:100 nextcloud php /var/www/html/occ face:background_job -u <username1>
 ```
