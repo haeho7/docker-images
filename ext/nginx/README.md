@@ -62,3 +62,45 @@ apk del apache2-utils
         auth_basic_user_file /srv/htpasswd;
     }
 ```
+
+## proxy_set_header Host Test
+
+```conf
+server {
+    listen 8090;
+    server_name _;
+
+    location / {
+        proxy_set_header Host xxxx
+        proxy_pass http://192.168.1.1:5000;
+    }
+}
+```
+
+```sh
+proxy_set_header Host $host
+# The IP or domain name requested by the browser, excluding the port number. If the page has redirection routes, the port information will be lost, resulting in 404
+# browser: 123.123.123.123:8090
+# return:  123.123.123.123
+
+proxy_set_header Host $http_host
+# The IP or domain name requested by the browser, including the port number
+# browser: 123.123.123.123:8090
+# return:  123.123.123.123:8090
+
+no setting proxy_set_header Host
+proxy_set_header Host $proxy_host
+# Upstream server IP or domain, default port 80 is not displayed, others are displayed
+# browser: 123.123.123.123:8090
+# return:  192.168.1.1:5000
+
+proxy_set_header Host $host:$proxy_port
+# The IP or domain name requested by the browser, the port number of the upstream server
+# browser: 123.123.123.123:8090
+# return:  123.123.123.123:5000
+
+proxy_set_header Host $host:$server_port
+# The IP or domain name requested by the browser, the port number that nginx listens to
+# browser: 123.123.123.123:8090
+# return:  123.123.123.123:8090
+```
