@@ -18,9 +18,9 @@ RUN mkdir /usr/src/nextcloud/temp \
 
 # If the startup error php: not found, you need copy the login.defs file to /etc.
 # See more: https://github.com/haeho7/docker-images/blob/master/utils/nextcloud/etc/login.defs#L163-164
-COPY --chmod=644 etc/login.defs /etc/login.defs
-COPY --chmod=755 nextcloud.sh /usr/local/bin/
-COPY --chmod=644 nextcloud-data/php-fpm.d/www.conf /usr/src/nextcloud/config/php-fpm.d/
+COPY etc/login.defs /etc/login.defs
+COPY nextcloud.sh /usr/local/bin/
+COPY nextcloud-data/php-fpm.d/www.conf /usr/src/nextcloud/config/php-fpm.d/
 
 ENTRYPOINT ["nextcloud.sh"]
 CMD ["php-fpm"]

@@ -11,7 +11,7 @@ RUN apk update \
   && rm -rf /var/cache/apk/*
 
 COPY redis-data/redis.conf /opt/
-COPY --chmod=755 redis.sh /usr/local/bin/
+COPY redis.sh /usr/local/bin/
 
 ENTRYPOINT ["redis.sh"] 
 CMD ["redis-server", "/data/redis.conf"]

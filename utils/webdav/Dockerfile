@@ -32,9 +32,9 @@ RUN apk update \
   && groupadd -r webdav && useradd -r -g webdav webdav
 
 COPY --from=builder /usr/local/bin/webdav /usr/local/bin/
-COPY --chmod=644 etc/login.defs /etc/login.defs
-COPY --chmod=644 webdav-data/config.yml /opt/
-COPY --chmod=755 webdav.sh /usr/local/bin/
+COPY etc/login.defs /etc/login.defs
+COPY webdav-data/config.yml /opt/
+COPY webdav.sh /usr/local/bin/
 
 VOLUME ["/config", "/data"]
 

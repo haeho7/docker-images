@@ -11,7 +11,7 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 COPY mariadb-data/conf.d/mariadb.cnf /opt/
-COPY --chmod=755 mariadb.sh /usr/local/bin/
+COPY mariadb.sh /usr/local/bin/
 
 ENTRYPOINT ["mariadb.sh"]
 CMD ["mariadbd"]
