@@ -7,7 +7,12 @@ services:
     network_mode: host
     privileged: true
     restart: unless-stopped
+    logging:
+      options:
+        max-file: 1
+        max-size: 20m
     environment:
+      TZ: Asia/Shanghai
       USE_USERSPACE_MODE: 0
       PEER_RESOLVE_INTERVAL: 300
     volumes:

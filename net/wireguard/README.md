@@ -13,6 +13,7 @@ docker run -d \
   --restart=unless-stopped \
   --memory=512M \
   --memory-swap=1G \
+  -e TZ=Asia/Shanghai \
   -e USE_USERSPACE_MODE=0 \
   -e PEER_RESOLVE_INTERVAL=0 \
   -v /mnt/user/appdata/wireguard:/etc/wireguard \
@@ -23,13 +24,17 @@ docker run -d \
 
 If your linux kernel is lower than 5.6, you can use `USE_USERSPACE_MODE`  switch to wireguard-go.
 
-See more: <https://github.com/WireGuard/wireguard-go>
+See more:
+
+- [@wireGuard/wireguard-go](https://github.com/WireGuard/wireguard-go)
 
 ## DDNS Resolve
 
 If the peer Endpoint is DDNS,you can use `PEER_RESOLVE_INTERVAL` to resolve periodically (in seconds).
 
-Script source: <https://github.com/WireGuard/wireguard-tools/blob/master/contrib/reresolve-dns/reresolve-dns.sh>
+Script source:
+
+- [@wireGuard/wireguard-tools/reresolve-dns](https://github.com/WireGuard/wireguard-tools/blob/master/contrib/reresolve-dns/reresolve-dns.sh)
 
 ## Generate Privatekey and Publickey
 
@@ -102,7 +107,9 @@ MTU = 1432
 MTU = 1412
 ```
 
-See more: <https://lists.zx2c4.com/pipermail/wireguard/2017-December/002201.html>
+See more:
+
+- [Header / MTU sizes for Wireguard](https://lists.zx2c4.com/pipermail/wireguard/2017-December/002201.html)
 
 ### DNS (Unconfirmed)
 
