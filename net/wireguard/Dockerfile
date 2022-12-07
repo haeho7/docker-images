@@ -5,7 +5,7 @@
 #
 # Build stage
 #
-FROM golang:1.18-alpine AS builder
+FROM golang:1.19-alpine AS builder
 
 ARG VERSION=0.0.20220316
 RUN apk update \
@@ -29,14 +29,14 @@ LABEL maintainer="haeho7 <i@demo.com>"
 
 ARG WIREGUARD_VER=1.0.20210914-r0
 RUN apk update \
-  && apk add --no-cache \
+  && apk add --no-cache tzdata \
       wireguard-tools=$WIREGUARD_VER \
       wireguard-tools-doc=$WIREGUARD_VER \
   && rm -rf /var/cache/apk/*
 
 RUN install /usr/share/doc/wireguard-tools/contrib/reresolve-dns/reresolve-dns.sh /usr/local/bin/
 
-COPY --from=builder /usr/bin/wireguard-go /srv/wireguard-go/
+COPY --from=builder /usr/bin/wireguard-go /srv/bin/
 COPY wireguard.sh /usr/local/bin/
 
 ENV USE_USERSPACE_MODE=0
