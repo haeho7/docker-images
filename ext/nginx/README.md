@@ -47,6 +47,8 @@ find . -type f -iname "*.conf" -print -exec chmod 644 {} \;
 
 ## Basic Authentication
 
+- [@nginx/admin-guide/security-controls](https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/)
+
 ```sh
 apk add apache2-utils
 htpasswd -c /srv/htpasswd <username>
