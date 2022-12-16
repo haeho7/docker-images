@@ -3,7 +3,7 @@
 - [x] unRAID
 - [x] Normal
 
-## docker for nginx official
+## Docker For Nginx Official
 
 ```sh
 docker run -d \
@@ -19,7 +19,7 @@ docker run -d \
   nginx:1.23.1-alpine
 ```
 
-## docker for linuxserver
+## Docker For Linuxserver
 
 ```sh
 docker run -d \
@@ -79,28 +79,29 @@ server {
 
 ```sh
 proxy_set_header Host $host
-# The IP or domain name requested by the browser, excluding the port number. If the page has redirection routes, the port information will be lost, resulting in 404
+# The IP or domain name requested by the browser, excluding the port number.
+# If the page has redirection routes, the port information will be lost, resulting in 404.
 # browser: 123.123.123.123:8090
 # return:  123.123.123.123
 
 proxy_set_header Host $http_host
-# The IP or domain name requested by the browser, including the port number
+# The IP or domain name requested by the browser, including the port number.
 # browser: 123.123.123.123:8090
 # return:  123.123.123.123:8090
 
 no setting proxy_set_header Host
 proxy_set_header Host $proxy_host
-# Upstream server IP or domain, default port 80 is not displayed, others are displayed
+# Upstream server IP or domain, default port 80 is not displayed, others are displayed.
 # browser: 123.123.123.123:8090
 # return:  192.168.1.1:5000
 
 proxy_set_header Host $host:$proxy_port
-# The IP or domain name requested by the browser, the port number of the upstream server
+# The IP or domain name requested by the browser, the port number of the upstream server.
 # browser: 123.123.123.123:8090
 # return:  123.123.123.123:5000
 
 proxy_set_header Host $host:$server_port
-# The IP or domain name requested by the browser, the port number that nginx listens to
+# The IP or domain name requested by the browser, the port number that nginx listens to.
 # browser: 123.123.123.123:8090
 # return:  123.123.123.123:8090
 ```
