@@ -14,5 +14,5 @@ docker run -d \
   --memory-swap=512M \
   -e TZ=Asia/Shanghai \
   -v /mnt/user/appdata/ddns-go:/root \
-  jeessy/ddns-go:v4.1.1
+  jeessy/ddns-go:v4.3.4
 ```

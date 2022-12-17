@@ -16,7 +16,7 @@ docker run -d \
   -v /mnt/user/appdata/nginx/nginx.conf:/etc/nginx/nginx.conf \
   -v /mnt/user/appdata/nginx/conf.d:/etc/nginx/conf.d \
   -v /mnt/user/appdata/acme.sh:/cert \
-  nginx:1.23.1-alpine
+  nginx:1.23.3-alpine
 ```
 
 ## Docker For Linuxserver
