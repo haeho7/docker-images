@@ -192,7 +192,9 @@ See more: [@nexntcloud/docs/admin_manual/config_sample_php_parameters](https://d
 
   // logfile
   'log_type' => 'file',
-  'logfile' => '[datadirectory]/nextcloud.log',
+  'logfile' => '[tempdirectory]/nextcloud.log',
+  // database query
+  'log_query' => false,
   'loglevel' => 2,
   'logdateformat' => 'Y-m-d H:i:s',
   'logtimezone' => 'Asia/Shanghai',
