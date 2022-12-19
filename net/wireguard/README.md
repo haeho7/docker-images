@@ -134,6 +134,7 @@ As a gateway, there may be MTU related issues, you can try appending the followi
 PC & other Clinet -> Router Device (Routing) -> NodeA WireGuard tunnel (Gateway) -> NodeB WireGuard tunnel
 
 ```sh
+# NodeA Add
 PostUp = iptables -t mangle -A POSTROUTING -o %i -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
 PostDown = iptables -t mangle -D POSTROUTING -o %i -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
 ```
