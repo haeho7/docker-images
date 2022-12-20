@@ -38,13 +38,16 @@ Script source:
 
 ## Generate Privatekey and Publickey
 
-```conf
+```sh
 wg genkey | tee privatekey | wg pubkey > publickey && cat privatekey publickey
 ```
 
 ## Configs
 
-```conf
+Use `iptables` or `iptables-nft` for `PostUp` and `PostDown`, it depends on the iptables backend used by your host machine.
+Under this image (based on alpine), `iptables` is the symlink of `iptables-legacy`, so `iptables-legacy` is used by default.
+
+```sh
 #
 # /etc/wireguard/wg-server.conf
 #
@@ -86,7 +89,7 @@ PersistentKeepalive = 30
 
 Modify peer configuration online without restarting the container.
 
-```conf
+```sh
 wg set <WIREGUARD INTERFACE NAME> peer <PublicKey> allowed-ips '<old_AllowedIPs, new_AllowedIPs>'
 ```
 
@@ -174,4 +177,4 @@ PostDown = iptables -t mangle -D POSTROUTING -o %i -p tcp -m tcp --tcp-flags SYN
 
 ## Acknowledgments
 
-- [@pexcn/docker-images](https://github.com/pexcn/docker-images/tree/master/net/wireguard)
+- [@pexcn/docker-images/wireguard](https://github.com/pexcn/docker-images/tree/master/net/wireguard)
