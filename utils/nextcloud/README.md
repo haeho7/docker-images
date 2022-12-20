@@ -180,7 +180,7 @@ See more: [@nexntcloud/docs/admin_manual/config_sample_php_parameters](https://d
   // clear trashbin default auto(30 day)
   'trashbin_retention_obligation' => 'auto',
 
-  // temp directory
+  // temp directory (not working)
   'tempdirectory' => '/var/www/html/temp',
 
   // user setting
@@ -192,7 +192,7 @@ See more: [@nexntcloud/docs/admin_manual/config_sample_php_parameters](https://d
 
   // logfile
   'log_type' => 'file',
-  'logfile' => '[tempdirectory]/nextcloud.log',
+  'logfile' => '/var/www/html/temp/nextcloud.log',
   // database query
   'log_query' => false,
   'loglevel' => 2,
