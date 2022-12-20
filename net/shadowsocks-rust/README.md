@@ -1,6 +1,7 @@
 # Shadowsocks-Rust
 
 - [x] unRAID
+- [x] OpenWrt
 - [x] Normal
 
 ## Usage
