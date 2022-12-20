@@ -14,7 +14,6 @@ docker run -d \
   --memory=512M \
   --memory-swap=1G \
   -e TZ=Asia/Shanghai \
-  -e USE_USERSPACE_MODE=0 \
   -e PEER_RESOLVE_INTERVAL=0 \
   -v /mnt/user/appdata/wireguard:/etc/wireguard \
   haeho7/docker-images:wireguard
@@ -22,10 +21,12 @@ docker run -d \
 
 ## WireGuard-go
 
-If your linux kernel is lower than 5.6, you can use `USE_USERSPACE_MODE`  switch to wireguard-go.
+If the current system kernel does not support the `wireguard` module (below linux kernel 5.6), `wg-quick` will automatically fall back to userspace.
 
-See more:
+Reference:
 
+- [@WireGuard/wireguard-tools/wg-quick/linux.bash](https://github.com/WireGuard/wireguard-tools/blob/master/src/wg-quick/linux.bash#L90)
+- [@zx2c4.com/wireguard-tools/wg-quick/linux.bash](https://git.zx2c4.com/wireguard-tools/tree/src/wg-quick/linux.bash#n90)
 - [@WireGuard/wireguard-go](https://github.com/WireGuard/wireguard-go)
 
 ## DDNS Resolve
