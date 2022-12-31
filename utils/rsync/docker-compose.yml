@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  rsync:
+    image: haeho7/docker-images:rsync
+    container_name: rsync
+    network_mode: host
+    privileged: true
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Shanghai
+      ENABLE_DAEMON: 1
+      CRONTAB: '0 */12 * * * /srv/script/backup.sh > /proc/1/fd/1'
+    volumes:
+      - ./rsync-data:/srv
+      #- ./rsync-data/conf/rsyncd.conf:/etc/rsyncd.conf
+      #- ./rsync-data/conf/rsyncd.secrets:/etc/rsyncd.secrets
+      - /mnt/user:/mnt/user:ro
+      - /mnt/cache_backup/backup/nas_data_backup:/mnt/cache_backup/backup/nas_data_backup
+      - /mnt/cache_backup/backup/unraid_data_backup:/mnt/cache_backup/backup/unraid_data_backup

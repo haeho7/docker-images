@@ -41,6 +41,9 @@ jobs:
           # mariadb
           - BUILD_CONTEXT: utils/mariadb
             TARGET_PLATFORMS: linux/amd64,linux/arm64
+          # rsync
+          - BUILD_CONTEXT: utils/rsync
+            TARGET_PLATFORMS: linux/amd64,linux/arm64
     steps:
       # prepare
       - name: Checkout
