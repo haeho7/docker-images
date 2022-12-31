@@ -2,11 +2,11 @@ version: '3.9'
 
 services:
   vaultwarden:
-    image: vaultwarden/server:1.26.0-alpine
+    image: vaultwarden/server:1.27.0-alpine
     container_name: vaultwarden
     network_mode: host    
     restart: unless-stopped
-    user: 99:100
+    #user: 99:100
     env_file: ./config.env
     environment:
       TZ: Asia/Shanghai
