@@ -1,7 +1,9 @@
-user/.datas
+user/.recycle
 user/9kg
 user/backup
 user/medias
 user/torrent
 .DS_Store
 *.tmp
+*.TMP
+*.temp

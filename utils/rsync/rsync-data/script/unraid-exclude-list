@@ -1,2 +1,5 @@
+.recycle
 .DS_Store
 *.tmp
+*.TMP
+*.temp
