@@ -57,9 +57,9 @@ nas_local_backup() {
       --checksum \
       --hard-links \
       --xattrs \
+      --exclude-from='/srv/script/nas-exclude-list' \
       --log-file=/srv/logs/nas_data_backup_"$(date +%Y%m%d_%H%M%S)".log \
       --log-file-format="[%i] %L [%B] [%U:%G] [%l bytes] %f (Trans: %b bytes)" \
-      --exclude-from='/srv/script/nas-exclude-list' \
       /mnt/user \
       /mnt/cache_backup/backup/nas_data_backup \
       #| tee /srv/logs/nas_data_backup_"$(date +%Y%m%d_%H%M%S)".log
