@@ -80,6 +80,7 @@ select_backup_mode() {
 
 start_backup() {
   if [ "$(_get_status)" == 0 ]; then
+    info "rsync backup starting..."
     select_backup_mode
   else
     warn "rsync process still running, skip backup."
