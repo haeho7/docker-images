@@ -38,6 +38,7 @@ nas_local_backup() {
       --progress \
       --partial \
       --archive \
+      --sparse \
       --checksum \
       --hard-links \
       --xattrs \
@@ -54,6 +55,7 @@ nas_local_backup() {
       --progress \
       --partial \
       --archive \
+      --sparse \
       --checksum \
       --hard-links \
       --xattrs \
@@ -73,6 +75,7 @@ unraid_daemon_backup() {
       --progress \
       --partial \
       --archive \
+      --sparse \
       --checksum \
       --hard-links \
       --xattrs \
@@ -90,6 +93,7 @@ unraid_daemon_backup() {
       --progress \
       --partial \
       --archive \
+      --sparse \
       --checksum \
       --hard-links \
       --xattrs \
