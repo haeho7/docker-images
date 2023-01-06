@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  alist:
+    image: haeho7/docker-images:alist
+    container_name: alist
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Shanghai
+      PUID: 99
+      PGID: 100
+      UMASK: 022
+    volumes:
+      - ./alist-data:/opt/alist/data

@@ -44,6 +44,9 @@ jobs:
           # rsync
           - BUILD_CONTEXT: utils/rsync
             TARGET_PLATFORMS: linux/amd64,linux/arm64
+          # alist
+          - BUILD_CONTEXT: utils/alist
+            TARGET_PLATFORMS: linux/amd64,linux/arm64
     steps:
       # prepare
       - name: Checkout
