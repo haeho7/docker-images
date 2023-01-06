@@ -22,20 +22,22 @@ RUN apk update \
 #
 # Runtime stage
 #
-FROM alpine
+FROM alpine:3.16
 LABEL maintainer="haeho7 <i@demo.com>"
 
 RUN apk update \
   && apk add tzdata shadow \
   && apk add gosu --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing \
-  && rm -rf /var/cache/apk/* \
-  && groupadd -r webdav && useradd -r -g webdav webdav
+  && rm -rf /var/cache/apk/*
+
+RUN groupadd -r webdav \
+  && useradd -r -g webdav webdav
 
 COPY --from=builder /usr/local/bin/webdav /usr/local/bin/
-COPY etc/login.defs /etc/login.defs
 COPY webdav-data/config.yml /opt/
 COPY webdav.sh /usr/local/bin/
 
 VOLUME ["/config", "/data"]
+WORKDIR /config
 
 ENTRYPOINT ["webdav.sh"]

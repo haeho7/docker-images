@@ -14,7 +14,7 @@ docker run -d \
   --memory-swap=1G \
   -e PUID=99 \
   -e PGID=100 \
-  -e UMASK=000 \
+  -e UMASK=022 \
   -e TZ=Asia/Shanghai \
   -e USERNAME=example \
   -e PASSWORD='example' \

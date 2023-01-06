@@ -9,7 +9,7 @@ services:
     environment:
       PUID: 99
       PGID: 100
-      UMASK: 000
+      UMASK: 022
       TZ: Asia/Shanghai
       USERNAME: example
       PASSWORD: 'example'
