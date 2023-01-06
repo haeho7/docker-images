@@ -3,7 +3,18 @@ user/9kg
 user/backup
 user/medias
 user/torrent
+
+System Volume Information
+$Recycle.Bin
+Temp
+Thumbs.db
+.thumb
+
+lost+found
+.Trash
+
 .DS_Store
+._.DS_Store
+
 *.tmp
-*.TMP
 *.temp

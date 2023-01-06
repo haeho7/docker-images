@@ -1,5 +1,14 @@
 .recycle
+
+System Volume Information
+$Recycle.Bin
+Thumbs.db
+
+lost+found
+.Trash
+
 .DS_Store
+._.DS_Store
+
 *.tmp
-*.TMP
 *.temp
