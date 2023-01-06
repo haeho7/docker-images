@@ -9,6 +9,7 @@ services:
     environment:
       PUID: 99
       PGID: 100
+      UMASK: 022
       TZ: Asia/Shanghai
       MARIADB_ROOT_PASSWORD: 'example'
       #MARIADB_DATABASE: example

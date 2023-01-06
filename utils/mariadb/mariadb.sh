@@ -1,28 +1,58 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
-# set env
 USER=mysql
 GROUP=mysql
 GROUPS=mysql,users
 PUID=${PUID:-1000}
 PGID=${PGID:-1000}
+UMASK=${UMASK:-022}
+CONFIG_FILE="/etc/mysql/conf.d/mariadb.cnf"
 
-# set user to specified user id (non unique)
-usermod -o -u ${PUID} -g ${GROUP} -aG ${GROUPS} -s /bin/bash ${USER} &>/dev/null
+_get_time() {
+  date '+%Y-%m-%d %T'
+}
 
-# set group users to specified group id (non unique)
-groupmod -o -g ${PGID} ${GROUP} &>/dev/null
+info() {
+  local green='\e[0;32m'
+  local clear='\e[0m'
+  local time="$(_get_time)"
+  printf "${green}[${time}] [INFO]: ${clear}%s\n" "$*"
+}
 
-# copy and chown mariadb.cnf
-if [ ! -f "/etc/mysql/conf.d/mariadb.cnf" ]; then
-  echo "mariadb.cnf does not exist, copy mariadb.cnf"
-  cp -a /opt/mariadb.cnf /etc/mysql/conf.d/
-else
-  echo "mariadb.cnf file already exists, skip copy"
+warn() {
+  local yellow='\e[1;33m'
+  local clear='\e[0m'
+  local time="$(_get_time)"
+  printf "${yellow}[${time}] [WARN]: ${clear}%s\n" "$*" >&2
+}
+
+_is_exist_conf() {
+  if [ ! -f "${CONFIG_FILE}" ]; then
+    info "mariadb.cnf does not exist, copy mariadb.cnf"
+    cp /opt/mariadb.cnf ${CONFIG_FILE}
+  else
+    warn "mariadb.cnf file already exists, skip copy"
 fi
-chmod 644 /etc/mysql/conf.d/*.cnf
-chown ${PUID}:${PGID} /etc/mysql/conf.d/*.cnf
+}
 
-# call mariadb official startup script
-exec /usr/local/bin/docker-entrypoint.sh "$@"
+_setup_user_info() {
+  usermod -o -u ${PUID} -g ${GROUP} -aG ${GROUPS} -s /bin/bash ${USER}
+  groupmod -o -g ${PGID} ${GROUP}
+  umask ${UMASK}
+}
+
+_setup_owne () {
+  chown ${PUID}:${PGID} /etc/mysql/conf.d/*.cnf
+}
+
+start_mariadb() {
+  _is_exist_conf
+  _setup_user_info
+  _setup_owne
+
+  # call mariadb official startup script
+  exec /usr/local/bin/docker-entrypoint.sh "$@"
+}
+
+start_mariadb "$@"

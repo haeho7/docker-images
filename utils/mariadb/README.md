@@ -14,6 +14,7 @@ docker run -d \
   --memory-swap=4G \
   -e PUID=99 \
   -e PGID=100 \
+  -e UMASK=022 \
   -e TZ=Asia/Shanghai \
   -e MARIADB_ROOT_PASSWORD='example' \
   #-e MARIADB_DATABASE=example \
@@ -27,7 +28,7 @@ docker run -d \
 
 ## Fix Permission
 
-If the configuration file does not take effect, the configuration file repair permission is required.
+If the configuration file does not take effect, you need to repair the configuration file permissions.
 
 ```sh
 chmod 0644 /mnt/user/appdata/mariadb/conf.d/mariadb.cnf
@@ -45,18 +46,16 @@ lower_case_table_names = 0
 lower_case_table_names = 1
 ```
 
-## Variables
+## Variable
+
+Default Variables per version: [default-variables](./variables)
 
 ```sql
 show variables;
 show global variables;
 ```
 
-See more: [default-variables](./variables)
+## Optimize
 
-## Variables Tuning
-
-```txt
-https://blog.csdn.net/u014044812/article/details/78929579
-https://segmentfault.com/a/1190000021408999
-```
+- [@csdn.net](https://blog.csdn.net/u014044812/article/details/78929579)
+- [@segmentfault.com](https://segmentfault.com/a/1190000021408999)
