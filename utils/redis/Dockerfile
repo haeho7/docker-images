@@ -13,5 +13,10 @@ RUN apk update \
 COPY redis-data/redis.conf /opt/
 COPY redis.sh /usr/local/bin/
 
+VOLUME /data
+WORKDIR /data
+
+EXPOSE 6379
+
 ENTRYPOINT ["redis.sh"] 
 CMD ["redis-server", "/data/redis.conf"]

@@ -14,6 +14,7 @@ docker run -d \
   --memory-swap=1G \
   -e PUID=99 \
   -e PGID=100 \
+  -e UMASK=022 \
   -e TZ=Asia/Shanghai \
   -v /mnt/user/appdata/redis:/data \
   haeho7/docker-images:redis
@@ -25,7 +26,7 @@ Authentication is required to connect to redis. For the default password, refer 
 
 Modify the `requirepass` parameter in the configuration file, or creating the container add the `--requirepass password` extra parameter.
 
-### Redis Tuning
+### Redis Optimize
 
 If you need high performance, you can optimize the default redis parameters.
 
