@@ -15,11 +15,11 @@ _setup_user_info() {
 }
 
 _setup_owne () {
-  chown -R ${PUID}:${PGID} /opt/alist/
+  chown -R ${PUID}:${PGID} /opt/alist
 }
 
 start_alist() {
-  _set_user_info
+  _setup_user_info
   _setup_owne
   exec gosu ${PUID}:${PGID} alist server --no-prefix
   #exec gosu ${PUID}:${PGID} sh -c "umask ${UMASK} && alist server --no-prefix"
