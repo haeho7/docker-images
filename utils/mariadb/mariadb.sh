@@ -33,7 +33,7 @@ _is_exist_conf() {
     cp /opt/mariadb.cnf ${CONFIG_FILE}
   else
     warn "mariadb.cnf file already exists, skip copy"
-fi
+  fi
 }
 
 _setup_user_info() {
