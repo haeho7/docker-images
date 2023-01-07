@@ -40,4 +40,6 @@ COPY webdav.sh /usr/local/bin/
 VOLUME ["/config", "/data"]
 WORKDIR /config
 
+EXPOSE 8001
+
 ENTRYPOINT ["webdav.sh"]
