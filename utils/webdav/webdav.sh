@@ -33,7 +33,7 @@ _is_exist_conf() {
     cp /opt/config.yml ${CONFIG_FILE}
   else
     warn "config.yml file already exists, skip copy"
-fi
+  fi
 }
 
 _setup_user_info() {
