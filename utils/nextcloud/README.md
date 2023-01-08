@@ -192,8 +192,9 @@ See more: [@nexntcloud/docs/admin_manual/config_sample_php_parameters](https://d
   'default_phone_region' => 'CN',
 
   // logfile
+  // you need mkdir and chown logs directory
   'log_type' => 'file',
-  'logfile' => '/var/www/html/temp/nextcloud.log',
+  'logfile' => '/var/www/html/logs/nextcloud.log',
   // database query
   'log_query' => false,
   'loglevel' => 2,
