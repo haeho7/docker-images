@@ -2,7 +2,7 @@
 # Dockerfile for nextcloud
 #
 
-FROM nextcloud:24.0.7-fpm-alpine
+FROM nextcloud:24.0.8-fpm-alpine
 LABEL maintainer="haeho7 <i@demo.com>"
 
 # install nextcloud ext packages
