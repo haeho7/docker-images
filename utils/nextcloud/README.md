@@ -14,6 +14,7 @@ docker run -d \
   --memory-swap=4G \
   -e PUID=99 \
   -e PGID=100 \
+  -e UMASK=022 \
   -e TZ=Asia/Shanghai \
   -e MYSQL_HOST='192.168.1.20:3306' \
   -e MYSQL_DATABASE=nextcloud \
@@ -297,10 +298,11 @@ pm.status_path = /status
     location /status {
         fastcgi_index   index.php;
         fastcgi_pass    php-handler;
+        #fastcgi_pass    unix:/dev/shm/php-fpm.sock;
         include         fastcgi_params;
         fastcgi_param   SCRIPT_FILENAME    $document_root$fastcgi_script_name;
         fastcgi_param   SCRIPT_NAME        $fastcgi_script_name;
-    }    
+    }
 ```
 
 ## APPS

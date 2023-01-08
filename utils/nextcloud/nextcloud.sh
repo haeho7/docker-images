@@ -1,27 +1,57 @@
 #!/bin/sh
 set -e
 
-# set env
 USER=www-data
 GROUP=www-data
 GROUPS=www-data,users
 PUID=${PUID:-1000}
 PGID=${PGID:-1000}
+UMASK=${UMASK:-022}
 
-# set user to specified user id (non unique)
-usermod -o -u ${PUID} -g ${GROUP} -aG ${GROUPS} -s /bin/ash ${USER} &>/dev/null
+_get_time() {
+  date '+%Y-%m-%d %T'
+}
 
-# set group users to specified group id (non unique)
-groupmod -o -g ${PGID} ${GROUP} &>/dev/null
+_get_crond() {
+  pgrep -f crond | wc -l
+}
 
-# call nextcloud official crontab script
-if [ ! `pgrep -f "crond"` >/dev/null ]; then
-  echo "crond process not runing, starting crond..."
-  #nohup /cron.sh > /var/www/html/data/crond.log 2>&1 &
-  /cron.sh > /dev/stdout 2>&1 &
-else
-  echo "crond process still running"
-fi
+info() {
+  local green='\e[0;32m'
+  local clear='\e[0m'
+  local time="$(_get_time)"
+  printf "${green}[${time}] [INFO]: ${clear}%s\n" "$*"
+}
 
-# call nextcloud official startup script
-exec /entrypoint.sh "$@"
+warn() {
+  local yellow='\e[1;33m'
+  local clear='\e[0m'
+  local time="$(_get_time)"
+  printf "${yellow}[${time}] [WARN]: ${clear}%s\n" "$*" >&2
+}
+
+_setup_user_info() {
+  usermod -o -u ${PUID} -g ${GROUP} -aG ${GROUPS} -s /bin/ash ${USER}
+  groupmod -o -g ${PGID} ${GROUP}
+  umask ${UMASK}
+}
+
+start_crond() {
+  if [ "$(_get_crond)" = 0 ]; then
+    info "crond process not runing, starting crond..."
+    /cron.sh > /dev/stdout 2>&1 &
+    #nohup /cron.sh > /var/www/html/data/crond.log 2>&1 &
+  else
+    warn "crond process still running"
+  fi
+}
+
+start_nextcloud() {
+  _setup_user_info
+  start_crond
+
+  # call nextcloud official startup script
+  exec /entrypoint.sh "$@"
+}
+
+start_nextcloud "$@"

@@ -16,11 +16,12 @@ ENV TEMP_FILE_DIR="/var/www/html/temp"
 RUN mkdir /usr/src/nextcloud/temp \
   && sed -i '/post_max_size/a upload_tmp_dir=${TEMP_FILE_DIR}' /usr/local/etc/php/conf.d/nextcloud.ini
 
-# If the startup error php: not found, you need copy the login.defs file to /etc.
-# See more: https://github.com/haeho7/docker-images/blob/master/utils/nextcloud/etc/login.defs#L163-164
-COPY etc/login.defs /etc/login.defs
 COPY nextcloud.sh /usr/local/bin/
 COPY nextcloud-data/php-fpm.d/www.conf /usr/src/nextcloud/config/php-fpm.d/
+
+WORKDIR /var/www/html
+
+EXPOSE 9000
 
 ENTRYPOINT ["nextcloud.sh"]
 CMD ["php-fpm"]
