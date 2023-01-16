@@ -2,15 +2,15 @@
     "servers": [
         {
             "server": "0.0.0.0",
-            "server_port": 1962,
+            "server_port": 1776,
             "password": "${SHADOWSOCKS_PASSWORD_1}",
-            "method": "2022-blake3-aes-128-gcm"
+            "method": "2022-blake3-chacha8-poly1305"
         },
         {
             "server": "0.0.0.0",
-            "server_port": 1963,
+            "server_port": 1984,
             "password": "${SHADOWSOCKS_PASSWORD_2}",
-            "method": "2022-blake3-chacha8-poly1305"
+            "method": "2022-blake3-aes-128-gcm"
         }
     ],
 

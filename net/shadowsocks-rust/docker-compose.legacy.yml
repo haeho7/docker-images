@@ -2,9 +2,9 @@ version: '3.9'
 
 services:
   # ssserver-aes
-  ssserver:
+  ssserver-aes:
     image: pexcn/docker-images:shadowsocks-rust
-    container_name: ssserver
+    container_name: ssserver-aes
     network_mode: host
     restart: unless-stopped
     environment:
@@ -12,8 +12,8 @@ services:
       CHILLING_EFFECT: 0
     command: >
       ssservice server
-        #--user nobody
-        --server-addr 0.0.0.0:1962
+        --user nobody
+        --server-addr 0.0.0.0:1984
         --password password
         --encrypt-method aes-128-gcm
         --timeout 3600
@@ -35,8 +35,8 @@ services:
       CHILLING_EFFECT: 0
     command: >
       ssservice server
-        #--user nobody
-        --server-addr 0.0.0.0:1962
+        --user nobody
+        --server-addr 0.0.0.0:1984
         --password password
         --encrypt-method 2022-blake3-aes-128-gcm
         --timeout 3600
@@ -58,9 +58,9 @@ services:
       CHILLING_EFFECT: 0
     command: >
       ssservice local
-        #--user nobody
+        --user nobody
         --local-addr 0.0.0.0:1080
-        --server-addr 11.22.33.44:1962
+        --server-addr 11.22.33.44:1984
         --password password
         --encrypt-method aes-128-gcm
         --timeout 3600
@@ -82,10 +82,10 @@ services:
       CHILLING_EFFECT: 0
     command: >
       ssservice local
-        #--user nobody
+        --user nobody
         --protocol http
         --local-addr 127.0.0.1:1111
-        --server-addr 11.22.33.44:1962
+        --server-addr 11.22.33.44:1984
         --password password
         --encrypt-method aes-128-gcm
         --timeout 3600
@@ -106,11 +106,11 @@ services:
       CHILLING_EFFECT: 0
     command: >
       ssservice local
-        #--user nobody
+        --user nobody
         --protocol tunnel
         --local-addr 127.0.0.1:5300
         --forward-addr 8.8.8.8:53
-        --server-addr 11.22.33.44:1962
+        --server-addr 11.22.33.44:1984
         --password password
         --encrypt-method aes-128-gcm
         --timeout 3600
@@ -132,10 +132,9 @@ services:
       CHILLING_EFFECT: 0
     command: >
       ssservice local
-        #--user nobody
         --protocol redir
         --local-addr 0.0.0.0:1234
-        --server-addr 11.22.33.44:1962
+        --server-addr 11.22.33.44:1984
         --password password
         --encrypt-method aes-128-gcm
         --timeout 3600
@@ -159,10 +158,9 @@ services:
       CHILLING_EFFECT: 0
     command: >
       ssservice local
-        #--user nobody
         --protocol redir
         --local-addr 0.0.0.0:1234
-        --server-addr 11.22.33.44:1962
+        --server-addr 11.22.33.44:1984
         --password password
         --encrypt-method aes-128-gcm
         --timeout 3600
@@ -184,10 +182,9 @@ services:
       CHILLING_EFFECT: 0
     command: >
       ssservice local
-        #--user nobody
         --protocol redir
         --local-addr 0.0.0.0:1234
-        --server-addr 11.22.33.44:1962
+        --server-addr 11.22.33.44:1984
         --password password
         --encrypt-method aes-128-gcm
         --timeout 3600

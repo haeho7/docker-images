@@ -6,6 +6,8 @@
 
 ## Usage
 
+`redir` mode does not support `--user nobody` to run.
+
 ### Server
 
 ```sh
@@ -18,8 +20,8 @@ docker run -d \
   -e CHILLING_EFFECT=0 \
   pexcn/docker-images:shadowsocks-rust \
   ssservice server \
-  #--user nobody \
-  --server-addr 0.0.0.0:1962 \
+  --user nobody \
+  --server-addr 0.0.0.0:1984 \
   --password password \
   --encrypt-method aes-128-gcm \
   --timeout 3600 \
@@ -43,9 +45,9 @@ docker run -d \
   -e CHILLING_EFFECT=0 \
   pexcn/docker-images:shadowsocks-rust \
   ssservice local \
-  #--user nobody \
+  --user nobody \
   --local-addr 0.0.0.0:1080 \
-  --server-addr 11.22.33.44:1962 \
+  --server-addr 11.22.33.44:1984 \
   --password password \
   --encrypt-method aes-128-gcm \
   --timeout 3600 \
@@ -65,10 +67,10 @@ docker run -d \
   -e CHILLING_EFFECT=0 \
   pexcn/docker-images:shadowsocks-rust \
   ssservice local \
-  #--user nobody \
+  --user nobody \
   --protocol http \
   --local-addr 127.0.0.1:1111 \
-  --server-addr 11.22.33.44:1962 \
+  --server-addr 11.22.33.44:1984 \
   --password password \
   --encrypt-method aes-128-gcm \
   --timeout 3600 \
@@ -87,11 +89,11 @@ docker run -d \
   -e CHILLING_EFFECT=0 \
   pexcn/docker-images:shadowsocks-rust \
   ssservice local \
-  #--user nobody \
+  --user nobody \
   --protocol tunnel \
   --local-addr 127.0.0.1:5300 \
   --forward-addr 8.8.8.8:53 \
-  --server-addr 11.22.33.44:1962 \
+  --server-addr 11.22.33.44:1984 \
   --password password \
   --encrypt-method aes-128-gcm \
   --timeout 3600 \
@@ -111,10 +113,9 @@ docker run -d \
   -e CHILLING_EFFECT=0 \
   pexcn/docker-images:shadowsocks-rust \
   ssservice local \
-  #--user nobody \
   --protocol redir \
   --local-addr 0.0.0.0:1234 \
-  --server-addr 11.22.33.44:1962 \
+  --server-addr 11.22.33.44:1984 \
   --password password \
   --encrypt-method aes-128-gcm \
   --timeout 3600 \
@@ -136,10 +137,9 @@ docker run -d \
   -e CHILLING_EFFECT=0 \
   pexcn/docker-images:shadowsocks-rust \
   ssservice local \
-  #--user nobody \
   --protocol redir \
   --local-addr 0.0.0.0:1234 \
-  --server-addr 11.22.33.44:1962 \
+  --server-addr 11.22.33.44:1984 \
   --password password \
   --encrypt-method aes-128-gcm \
   --timeout 3600 \
@@ -159,10 +159,9 @@ docker run -d \
   -e CHILLING_EFFECT=0 \
   pexcn/docker-images:shadowsocks-rust \
   ssservice local \
-  #--user nobody \
   --protocol redir \
   --local-addr 0.0.0.0:1234 \
-  --server-addr 11.22.33.44:1962 \
+  --server-addr 11.22.33.44:1984 \
   --password password \
   --encrypt-method aes-128-gcm \
   --timeout 3600 \
@@ -184,17 +183,23 @@ Different encryption methods require different password lengths.
 
 ```sh
 # aes-128-gcm
-echo -n "freedom_not_free" | openssl base64
+any plaintext character
 
 # 2022-blake3-aes-128-gcm
 openssl rand -base64 16
 Wdp04PRBEZwrQIQthGiDRQ==
 
+# or 16-bit plaintext character generation, for example:
+echo -n "freedom_not_free" | openssl base64
+ZnJlZWRvbV9ub3RfZnJlZQ==
+
 # 2022-blake3-aes-256-gcm
+# or 32-bit plaintext character generation
 openssl rand -base64 32
 BoxEGUompLVr+DlixYJzFlIsSQAB0dC0f3U79PPbkAY=
 
 # 2022-blake3-chacha8-poly1305, 2022-blake3-chacha20-poly1305
+# or 32-bit plaintext character generation
 openssl rand -base64 32
 BoxEGUompLVr+DlixYJzFlIsSQAB0dC0f3U79PPbkAY=
 ```
