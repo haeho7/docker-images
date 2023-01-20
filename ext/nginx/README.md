@@ -12,30 +12,13 @@ docker run -d \
   --restart=unless-stopped \
   --memory=512M \
   --memory-swap=1G \
+  --log-opt max-file=1 \
+  --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
   -v /mnt/user/appdata/nginx/nginx.conf:/etc/nginx/nginx.conf \
   -v /mnt/user/appdata/nginx/conf.d:/etc/nginx/conf.d \
   -v /mnt/user/appdata/acme.sh:/cert \
-  nginx:1.23.3-alpine
-```
-
-## Docker For Linuxserver
-
-```sh
-docker run -d \
-  --name=nginx \
-  --network=host \
-  --restart=unless-stopped \
-  --memory=512M \
-  --memory-swap=1G \
-  -e PUID=99 \
-  -e PGID=100 \
-  -e UMASK=022 \
-  -e TZ=Asia/Shanghai \
-  -v /mnt/user/appdata/nginx/nginx.conf:/etc/nginx/nginx.conf \
-  -v /mnt/user/appdata/nginx/conf.d:/etc/nginx/conf.d \
-  -v /mnt/user/appdata/acme.sh:/cert \
-  linuxserver/nginx:latest
+  nginx:1.22.1-alpine
 ```
 
 ## Repair File Permissions
