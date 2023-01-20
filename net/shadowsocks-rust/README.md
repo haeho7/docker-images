@@ -38,7 +38,7 @@ docker run -d \
 ```sh
 # socks5 mode
 docker run -d \
-  --name=ss-socks5 \
+  --name=sssocks5 \
   --network=host \
   --restart=unless-stopped \
   -e TZ=Asia/Shanghai \
@@ -203,6 +203,19 @@ BoxEGUompLVr+DlixYJzFlIsSQAB0dC0f3U79PPbkAY=
 openssl rand -base64 32
 BoxEGUompLVr+DlixYJzFlIsSQAB0dC0f3U79PPbkAY=
 ```
+
+## About MTU
+
+If other UDP traffic needs to be forwarded through shadowsocks, such as `wireguard over shadowsocks tunnel mode`, you may need to adjust the `mtu` value of the upper layer application, otherwise the following error will be reported:
+
+```sh
+2023-01-18T00:54:22.385782018+08:00 DEBUG [1:140321351875360] [shadowsocks_service::local::net::udp::association] 127.0.0.1:46213 -> 192.168.99.251:1820 (proxied) sending 1440 bytes failed, error: Message too large (os error 90)
+```
+
+Reference:
+
+- [@shadowsocks/shadowsocks-rust/issues/897](https://github.com/shadowsocks/shadowsocks-rust/issues/897)
+- [@shadowsocks/shadowsocks-rust/commit/be518cedbb97462ca29651ddaf633cfed30e7000](https://github.com/shadowsocks/shadowsocks-rust/commit/be518cedbb97462ca29651ddaf633cfed30e7000)
 
 ## Acknowledgments
 

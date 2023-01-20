@@ -5,6 +5,8 @@
 
 ## Usage
 
+Install the `wireguard-tools` package, see: [@wireguard.com](https://www.wireguard.com/install)
+
 ```sh
 docker run -d \
   --name=wireguard \
@@ -13,6 +15,8 @@ docker run -d \
   --restart=unless-stopped \
   --memory=512M \
   --memory-swap=1G \
+  --log-opt max-file=1 \
+  --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
   -e PEER_RESOLVE_INTERVAL=0 \
   -v /mnt/user/appdata/wireguard:/etc/wireguard \
@@ -21,7 +25,7 @@ docker run -d \
 
 ## WireGuard-go
 
-If the current system kernel does not support the `wireguard` module (below linux kernel 5.6), `wg-quick` will automatically fall back to userspace.
+If the current system kernel does not support the `wireguard` module (the kernel is lower than 5.6), `wg-quick` will automatically fall back to userspace and use `wireguard-go`.
 
 Reference:
 
@@ -31,7 +35,7 @@ Reference:
 
 ## DDNS Resolve
 
-If the peer Endpoint is DDNS,you can use `PEER_RESOLVE_INTERVAL` to resolve periodically (in seconds).
+If the peer Endpoint is DDNS, you can use `PEER_RESOLVE_INTERVAL` to resolve periodically (in seconds).
 
 Script source:
 
@@ -88,7 +92,7 @@ PersistentKeepalive = 30
 
 ## Quick Modify Peer
 
-Modify peer configuration online without restarting the container.
+Peer configuration can be modified online without restarting wireguard.
 
 ```sh
 wg set <WIREGUARD INTERFACE NAME> peer <PublicKey> allowed-ips '<old_AllowedIPs, new_AllowedIPs>'
@@ -107,8 +111,18 @@ The best MTU equals your external MTU minus `60 bytes (IPv4)` or `80 bytes (IPv6
 # WireGuard MTU (IPv4): 1492 - 60 = 1432
 MTU = 1432
 
+# WireGuard over Phantun MTU (IPv4): 1492 - 60 - 12 = 1420
+MTU = 1420
+
 # WireGuard MTU (IPv6): 1492 - 80 = 1412
 MTU = 1412
+
+# WireGuard over Phantun MTU (IPv6): 1492 - 80 - 12 = 1400
+MTU = 1400
+
+# WireGuard over shadowsocks tunnel mode MTU (IPv4)
+# aes-128-gcm encrypt-method
+MTU = 1376
 ```
 
 See more:
