@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  rsync:
+    image: haeho7/docker-images:webdav-client
+    container_name: webdav-client
+    network_mode: host
+    restart: unless-stopped
+    cap_add:
+      - SYS_ADMIN
+    devices:
+      - /dev/fuse:/dev/fuse
+    environment:
+      TZ: Asia/Shanghai
+      PUID: 99
+      PGID: 100
+      UMASK: 022
+      DAVFS2_ASK_AUTH: 0
+      WEBDRIVE_URL: 'http://locathost:5244/dav'
+      WEBDRIVE_USERNAME: example
+      WEBDRIVE_PASSWORD: 'example'
+    volumes:
+      - ./webdav-client-data:/mnt/webdrive:rshared
