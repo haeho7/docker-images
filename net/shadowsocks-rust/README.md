@@ -8,6 +8,10 @@
 
 `redir` mode does not support `--user nobody` to run.
 
+### OpenWrt
+
+When openwrt uses the `server` mode, the `/etc/resolv.conf` content of the container is empty, and the `--dns` parameter needs to be specified.
+
 ### Server
 
 ```sh
