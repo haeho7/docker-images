@@ -1,6 +1,7 @@
 # AdGuard Home
 
 - [x] unRAID
+- [x] OpenWrt
 - [x] Normal
 
 ## Usage
