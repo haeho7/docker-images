@@ -2,10 +2,14 @@ version: '3.9'
 
 services:
   adguardhome:
-    image: adguard/adguardhome:v0.107.15
+    image: adguard/adguardhome:v0.107.23
     container_name: adguardhome
     network_mode: host
     restart: unless-stopped
+    logging:
+      options:
+        max-file: 1
+        max-size: 20m
     environment:
       TZ: Asia/Shanghai
     volumes:

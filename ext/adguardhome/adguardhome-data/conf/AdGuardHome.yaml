@@ -1,6 +1,5 @@
 bind_host: 0.0.0.0
 bind_port: 3001
-beta_bind_port: 0
 users:
 - name: example
   password: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -8,6 +7,7 @@ auth_attempts: 5
 block_auth_min: 15
 http_proxy: ""
 language: zh-cn
+theme: auto
 debug_pprof: false
 web_session_ttl: 1
 dns:
@@ -18,7 +18,7 @@ dns:
   statistics_interval: 1
   querylog_enabled: true
   querylog_file_enabled: true
-  querylog_interval: 720h
+  querylog_interval: 168h
   querylog_size_memory: 1000
   anonymize_client_ip: false
   protection_enabled: true
@@ -32,14 +32,10 @@ dns:
   ratelimit_whitelist: []
   refuse_any: false
   upstream_dns:
-    - 127.0.0.1:5353
-    - '# https://doh.pub/dns-query'
-    - '# tls://dot.pub'
-    - '# https://dns.alidns.com/dns-query'
-    - '# tls://dns.alidns.com'
+    - 127.0.0.1
   upstream_dns_file: ""
   bootstrap_dns:
-    - 127.0.0.1:5353
+    - 127.0.0.1
   all_servers: false
   fastest_addr: false
   fastest_timeout: 1s
@@ -50,17 +46,21 @@ dns:
   blocked_hosts:
     - hostname.bind
   trusted_proxies:
-    - 192.168.1.249/32
-  cache_size: 16777216
-  cache_ttl_min: 600
-  cache_ttl_max: 86400
+    - 192.168.1.10/32
+    - 127.0.0.0/8
+    - ::1/128
+  cache_size: 4194304
+  cache_ttl_min: 0
+  cache_ttl_max: 0
   cache_optimistic: true
   bogus_nxdomain: []
   aaaa_disabled: false
   enable_dnssec: false
   edns_client_subnet: false
   max_goroutines: 300
+  handle_ddr: true
   ipset: []
+  ipset_file: ""
   filtering_enabled: true
   filters_update_interval: 24
   parental_enabled: false
@@ -76,6 +76,10 @@ dns:
   private_networks: []
   use_private_ptr_resolvers: true
   local_ptr_upstreams: []
+  use_dns64: false
+  dns64_prefixes: []
+  serve_http3: false
+  use_http3_upstreams: false
 tls:
   enabled: false
   server_name: ""
@@ -86,11 +90,11 @@ tls:
   port_dnscrypt: 0
   dnscrypt_config_file: ""
   allow_unencrypted_doh: false
-  strict_sni_check: false
   certificate_chain: ""
   private_key: ""
   certificate_path: ""
   private_key_path: ""
+  strict_sni_check: false
 filters:
   - enabled: true
     url: https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
@@ -113,7 +117,12 @@ filters:
     name: Anti-AD
     id: 5
 whitelist_filters: []
-user_rules: []
+user_rules:
+  - '# beyond-compare'
+  - '||scootersoftware.com^$important'
+  - '# twitter'
+  - '@@||t.co^$important'
+  - ""
 dhcp:
   enabled: false
   interface_name: ""
@@ -139,15 +148,15 @@ clients:
     dhcp: true
     hosts: true
   persistent: []
-log_file: "" 
-log_max_backups: 1 
-log_compress: true
-log_localtime: true
+log_file: ""
+log_max_backups: 1
 log_max_size: 100
 log_max_age: 3
+log_compress: true
+log_localtime: true
 verbose: false
 os:
   group: ""
   user: ""
-  rlimit_nofile: 20480
+  rlimit_nofile: 1048576
 schema_version: 14
