@@ -20,6 +20,8 @@ docker run -d \
   --name=server-aes \
   --network=host \
   --restart=unless-stopped \
+  --log-opt max-file=1 \
+  --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
   -e CHILLING_EFFECT=0 \
   pexcn/docker-images:shadowsocks-rust \
@@ -45,6 +47,8 @@ docker run -d \
   --name=sssocks5 \
   --network=host \
   --restart=unless-stopped \
+  --log-opt max-file=1 \
+  --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
   -e CHILLING_EFFECT=0 \
   pexcn/docker-images:shadowsocks-rust \
@@ -67,6 +71,8 @@ docker run -d \
   --name=sshttp \
   --network=host \
   --restart=unless-stopped \
+  --log-opt max-file=1 \
+  --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
   -e CHILLING_EFFECT=0 \
   pexcn/docker-images:shadowsocks-rust \
@@ -89,6 +95,8 @@ docker run -d \
   --name=sstunnel \
   --network=host \
   --restart=unless-stopped \
+  --log-opt max-file=1 \
+  --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
   -e CHILLING_EFFECT=0 \
   pexcn/docker-images:shadowsocks-rust \
@@ -113,6 +121,8 @@ docker run -d \
   --name=ssredir \
   --network=host \
   --restart=unless-stopped \
+  --log-opt max-file=1 \
+  --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
   -e CHILLING_EFFECT=0 \
   pexcn/docker-images:shadowsocks-rust \
@@ -137,6 +147,8 @@ docker run -d \
   --name=ssredir-tcp \
   --network=host \
   --restart=unless-stopped \
+  --log-opt max-file=1 \
+  --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
   -e CHILLING_EFFECT=0 \
   pexcn/docker-images:shadowsocks-rust \
@@ -159,6 +171,8 @@ docker run -d \
   --name=ssredir-udp \
   --network=host \
   --restart=unless-stopped \
+  --log-opt max-file=1 \
+  --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
   -e CHILLING_EFFECT=0 \
   pexcn/docker-images:shadowsocks-rust \

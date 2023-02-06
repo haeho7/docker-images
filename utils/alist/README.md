@@ -12,6 +12,8 @@ docker run -d \
   --restart=unless-stopped \
   --memory=256M \
   --memory-swap=512M \
+  --log-opt max-file=1 \
+  --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
   -e PUID=99 \
   -e PGID=100 \

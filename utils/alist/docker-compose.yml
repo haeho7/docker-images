@@ -6,6 +6,10 @@ services:
     container_name: alist
     network_mode: host
     restart: unless-stopped
+    logging:
+      options:
+        max-file: 1
+        max-size: 20m
     environment:
       TZ: Asia/Shanghai
       PUID: 99

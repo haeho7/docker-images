@@ -6,6 +6,10 @@ services:
     container_name: embyserver
     network_mode: host
     restart: unless-stopped
+    logging:
+      options:
+        max-file: 1
+        max-size: 20m
     environment:
       UID: 99
       GID: 100

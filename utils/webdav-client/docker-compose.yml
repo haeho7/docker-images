@@ -6,6 +6,10 @@ services:
     container_name: webdav-client
     network_mode: host
     restart: unless-stopped
+    logging:
+      options:
+        max-file: 1
+        max-size: 20m
     cap_add:
       - SYS_ADMIN
     devices:

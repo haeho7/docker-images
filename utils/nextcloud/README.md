@@ -12,10 +12,12 @@ docker run -d \
   --restart=unless-stopped \
   --memory=2G \
   --memory-swap=4G \
+  --log-opt max-file=1 \
+  --log-opt max-size=20m \
+  -e TZ=Asia/Shanghai \
   -e PUID=99 \
   -e PGID=100 \
   -e UMASK=022 \
-  -e TZ=Asia/Shanghai \
   -e MYSQL_HOST='192.168.1.20:3306' \
   -e MYSQL_DATABASE=nextcloud \
   -e MYSQL_USER=nextcloud \

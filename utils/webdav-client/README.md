@@ -9,6 +9,8 @@ docker run -d \
   --restart=unless-stopped \
   --memory=512M \
   --memory-swap=1G \
+  --log-opt max-file=1 \
+  --log-opt max-size=20m \
   --cap-add=SYS_ADMIN \
   --device=/dev/fuse \
   -e TZ=Asia/Shanghai \

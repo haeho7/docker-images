@@ -8,6 +8,8 @@ docker run -d \
   --network=host \
   --privileged=true \
   --restart=unless-stopped \
+  --log-opt max-file=1 \
+  --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
   -e ENABLE_DAEMON=1 \
   -e CRONTAB='0 */12 * * * /srv/script/backup.sh > /proc/1/fd/1' \

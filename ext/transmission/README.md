@@ -13,13 +13,15 @@ docker run -d \
   --restart=unless-stopped \
   --memory=2G \
   --memory-swap=4G \
+  --log-opt max-file=1 \
+  --log-opt max-size=20m \
+  -e TZ=Asia/Shanghai \
   -e PUID=99 \
   -e PGID=100 \
   -e UMASK=022 \
-  -e TZ=Asia/Shanghai \
-  -e TRANSMISSION_WEB_HOME='/transmission-web-control/' \
   -e USER=example \
   -e PASS='example' \
+  -e TRANSMISSION_WEB_HOME='/transmission-web-control/' \
   -e WHITELIST='127.0.0.1,192.168.1.*' \
   -e HOST_WHITELIST='*.demo.com' \
   -e PEERPORT=51413 \
