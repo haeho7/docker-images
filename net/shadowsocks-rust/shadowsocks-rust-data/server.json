@@ -21,4 +21,5 @@
     "nofile": 1048576,
     "no_delay": true,
     "fast_open": true
+    //"dns": "udp://127.0.0.1:5353"
 }

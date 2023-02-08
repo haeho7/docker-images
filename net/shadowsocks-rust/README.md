@@ -10,7 +10,7 @@
 
 ### OpenWrt
 
-When openwrt uses the `server` mode, the `/etc/resolv.conf` content of the container is empty, and the `--dns` parameter needs to be specified.
+When openwrt is used, the content of the `/etc/resolv.conf` file in the container may be empty, so you need to specify `--dns` or configure the `dns:` parameter in the json file.
 
 ### Server
 
