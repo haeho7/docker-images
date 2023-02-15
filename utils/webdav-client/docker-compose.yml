@@ -20,7 +20,7 @@ services:
       PGID: 100
       UMASK: 022
       DAVFS2_ASK_AUTH: 0
-      WEBDRIVE_URL: 'http://locathost:5244/dav'
+      WEBDRIVE_URL: 'http://localhost:5244/dav'
       WEBDRIVE_USERNAME: example
       WEBDRIVE_PASSWORD: 'example'
     volumes:

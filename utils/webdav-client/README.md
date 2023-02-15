@@ -18,7 +18,7 @@ docker run -d \
   -e PGID=100 \
   -e UMASK=022 \
   -e DAVFS2_ASK_AUTH=0 \
-  -e WEBDRIVE_URL='http://locathost:5244/dav' \
+  -e WEBDRIVE_URL='http://localhost:5244/dav' \
   -e WEBDRIVE_USERNAME=example \
   -e WEBDRIVE_PASSWORD='example' \
   -v /mnt/user/appdata/webdav-cilnet:/mnt/webdrive:rshared \
