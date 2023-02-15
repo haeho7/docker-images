@@ -7,7 +7,7 @@
 #
 FROM golang:alpine AS builder
 
-ARG VERSION=v3.7.2
+ARG VERSION=v3.11.0
 RUN apk update \
   && apk add --no-cache --virtual .build-deps bash git gcc musl-dev curl \
   && git clone https://github.com/alist-org/alist.git --branch $VERSION \
