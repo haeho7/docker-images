@@ -69,14 +69,13 @@ FLUSH PRIVILEGES;
 
 variables in `nextcloud.ini` configuration files.
 
+- [@nextcloud/docker/24/fpm-alpine/Dockerfile#L99](https://github.com/nextcloud/docker/blob/c5a8a8863b1db95fb45c872a0078b177347db959/24/fpm-alpine/Dockerfile#L99)
+
 ```ini
 # cat /usr/local/etc/php/conf.d/nextcloud.ini
 memory_limit=${PHP_MEMORY_LIMIT}
 upload_max_filesize=${PHP_UPLOAD_LIMIT}
 post_max_size=${PHP_UPLOAD_LIMIT}
-
-# php temp directory (custom variables)
-upload_tmp_dir=${TEMP_FILE_DIR}
 ```
 
 ### Database and Trusted Domains List
@@ -88,6 +87,8 @@ cat /var/www/html/config/config.php
 ```
 
 ### OPcache Default
+
+- [@nextcloud/docker/24/fpm-alpine/Dockerfile#L91](https://github.com/nextcloud/docker/blob/c5a8a8863b1db95fb45c872a0078b177347db959/24/fpm-alpine/Dockerfile#L91)
 
 ```ini
 # cat /usr/local/etc/php/conf.d/opcache-recommended.ini
@@ -120,7 +121,7 @@ docker exec -i --user=99:100 nextcloud php -f /var/www/html/cron.php
 
 APCu is disabled by default on CLI which could cause issues with nextcloud’s cron jobs.
 
-See more: [@nexntcloud/docs/admin_manual/caching_configuration](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/caching_configuration.html#id1)
+- [@nexntcloud/docs/admin_manual/caching_configuration](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/caching_configuration.html#id1)
 
 ```ini
 # cat /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini
@@ -130,7 +131,7 @@ apc.enable_cli=1
 
 ## Extend Config
 
-See more: [@nexntcloud/docs/admin_manual/config_sample_php_parameters](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html)
+- [@nexntcloud/docs/admin_manual/config_sample_php_parameters](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html)
 
 ```php
   // enable extra preview
@@ -206,7 +207,7 @@ See more: [@nexntcloud/docs/admin_manual/config_sample_php_parameters](https://d
 
 ## PHP OCC Command
 
-See more: [@nexntcloud/docs/admin_manual/occ_command](https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/occ_command.html)
+- [@nexntcloud/docs/admin_manual/occ_command](https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/occ_command.html)
 
 Find the path where occ is located in the container.
 

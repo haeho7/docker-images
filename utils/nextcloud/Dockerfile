@@ -10,14 +10,22 @@ RUN apk update \
   && apk add --no-cache tzdata shadow ffmpeg imagemagick samba-client \
   && rm -rf /var/cache/apk/*
 
-ENV TEMP_FILE_DIR="/var/www/html/temp"
+ENV UPLOAD_TMP_DIR="/var/www/html/temp"
+ENV PHP_OUTPUT_BUFFERING=0
+ENV PHP_MAX_EXECUTION_TIME=900
+ENV PHP_MAX_FILE_UPLOADS=30
 
-# add php temp directory
+# php optimize
 RUN mkdir /usr/src/nextcloud/temp \
-  && sed -i '/post_max_size/a upload_tmp_dir=${TEMP_FILE_DIR}' /usr/local/etc/php/conf.d/nextcloud.ini
+  && { \
+        echo 'upload_tmp_dir=${UPLOAD_TMP_DIR}'; \
+        echo 'output_buffering=${PHP_OUTPUT_BUFFERING}'; \
+        echo 'max_execution_time=${PHP_MAX_EXECUTION_TIME}'; \
+        echo 'max_file_uploads=${PHP_MAX_FILE_UPLOADS}'; \
+      } > "${PHP_INI_DIR}/conf.d/php-optimize.ini"
 
 COPY nextcloud.sh /usr/local/bin/
-COPY nextcloud-data/php-fpm.d/www.conf /usr/src/nextcloud/config/php-fpm.d/
+COPY nextcloud-data/php-fpm.d/www.conf /usr/local/etc/php-fpm.d/
 
 WORKDIR /var/www/html
 
