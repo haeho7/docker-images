@@ -100,6 +100,15 @@ opcache.save_comments=1
 opcache.revalidate_freq=60
 ```
 
+### PHP INFO
+
+add `phpinfo ();` parameter in `Nextcloud_Home/index.php` file.
+
+```php
+<?php
+phpinfo ();
+```
+
 ### Crontab
 
 if nextcloud container is run with `--user` parameter,cron tasks may fail to execute.need custom scheduled tasks.
