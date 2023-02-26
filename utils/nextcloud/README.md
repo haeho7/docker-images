@@ -30,8 +30,8 @@ docker run -d \
   -e NEXTCLOUD_TRUSTED_DOMAINS='192.168.1.20 nextcloud.demo.com nextcloud.local.demo.com' \
   -e PHP_MEMORY_LIMIT=1024M \
   -e PHP_UPLOAD_LIMIT=0 \
-  -v /mnt/user/appdata/nextcloud:/var/www/html \
-  -v /mnt/user/datas/nextcloud:/var/www/html/data \
+  -v /mnt/user/appdata/nextcloud:/var/www/nextcloud \
+  -v /mnt/user/datas/nextcloud:/var/www/nextcloud/data \
   haeho7/docker-images:nextcloud
 ```
 
@@ -41,7 +41,7 @@ If you use nginx to proxy nextcloud, you need to mount the nextcloud working dir
 
 ```sh
 # nginx container add volumes
--v /mnt/user/appdata/nextcloud:/var/www/html \
+-v /mnt/user/appdata/nextcloud:/var/www/nextcloud \
 ```
 
 ### Redis
@@ -83,7 +83,7 @@ post_max_size=${PHP_UPLOAD_LIMIT}
 variables in `config.php` configuration files
 
 ```sh
-cat /var/www/html/config/config.php
+cat /var/www/nextcloud/config/config.php
 ```
 
 ### OPcache Default
@@ -107,14 +107,14 @@ if nextcloud container is run with `--user` parameter,cron tasks may fail to exe
 ```sh
 # nextcloud default cron configuration files.
 cat /etc/crontabs/www-data 
-*/5 * * * * php -f /var/www/html/cron.php
+*/5 * * * * php -f /var/www/nextcloud/cron.php
 ```
 
 custom scheduled tasks:
 
 ```sh
 # Unraid use User Scripts plugin
-docker exec -i --user=99:100 nextcloud php -f /var/www/html/cron.php
+docker exec -i --user=99:100 nextcloud php -f /var/www/nextcloud/cron.php
 ```
 
 ### APCu and Crontab
@@ -185,7 +185,7 @@ apc.enable_cli=1
   'trashbin_retention_obligation' => 'auto',
 
   // temp directory (not working)
-  'tempdirectory' => '/var/www/html/temp',
+  'tempdirectory' => '/var/www/nextcloud/temp',
 
   // user setting
   'skeletondirectory'  => '',
@@ -197,7 +197,7 @@ apc.enable_cli=1
   // logfile
   // you need mkdir and chown logs directory
   'log_type' => 'file',
-  'logfile' => '/var/www/html/logs/nextcloud.log',
+  'logfile' => '/var/www/nextcloud/logs/nextcloud.log',
   // database query
   'log_query' => false,
   'loglevel' => 2,
@@ -213,39 +213,39 @@ Find the path where occ is located in the container.
 
 ```sh
 find / -iname "*occ*"
-cd /var/www/html
+cd /var/www/nextcloud
 ./occ --version
 
 # display config
-docker exec --user=99:100 nextcloud php /var/www/html/occ config:list
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ config:list
 
 # display get single value
-docker exec --user=99:100 nextcloud php /var/www/html/occ config:system:get trusted_domains
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ config:system:get trusted_domains
 
 # display user list
-docker exec --user=99:100 nextcloud php /var/www/html/occ user:list
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ user:list
 
 # display user setting
-docker exec --user=99:100 nextcloud php /var/www/html/occ user:setting <usernmae>
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ user:setting <usernmae>
 
 # display config and private
-docker exec --user=99:100 nextcloud php /var/www/html/occ config:list --private
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ config:list --private
 
 # scan user file
-docker exec --user=99:100 nextcloud php /var/www/html/occ files:scan <usernmae1> <usernmae2>
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ files:scan <usernmae1> <usernmae2>
 
 # scan user file and limit the search path
-docker exec --user=99:100 nextcloud php /var/www/html/occ files:scan --path="/<username>/files/Photos"
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ files:scan --path="/<username>/files/Photos"
 
 # scan all user file,show directories and files verbose
-docker exec --user=99:100 nextcloud php /var/www/html/occ files:scan --all --verbose
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ files:scan --all --verbose
 
 # clear users trashbin
-docker exec --user=99:100 php /var/www/html/occ trashbin:cleanup <usernmae1> <usernmae2>
-docker exec --user=99:100 php /var/www/html/occ trashbin:cleanup --all-users
+docker exec --user=99:100 php /var/www/nextcloud/occ trashbin:cleanup <usernmae1> <usernmae2>
+docker exec --user=99:100 php /var/www/nextcloud/occ trashbin:cleanup --all-users
 
 # clean database tables not match files (Not tested)
-docker exec --user=99:100 nextcloud php /var/www/html/occ files:cleanup
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ files:cleanup
 ```
 
 ## Error Fix
@@ -269,7 +269,7 @@ For upload performance improvements in environments with high upload bandwidth, 
 
 ```sh
 # disable upload chunk size
-docker exec --user=99:100 nextcloud php /var/www/html/occ config:app:set files max_chunk_size --value 0
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ config:app:set files max_chunk_size --value 0
 ```
 
 ### PHP-FPM
@@ -320,41 +320,41 @@ Reference:
 
 ```sh
 # nextcloud appstore install Preview Generator
-docker exec --user=99:100 nextcloud php /var/www/html/occ preview:generate-all --verbose
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ preview:generate-all --verbose
 
 # root user add crontab
-*/30 * * * * php /var/www/html/occ preview:pre-generate
+*/30 * * * * php /var/www/nextcloud/occ preview:pre-generate
 
 # reload crontab
 killall busybox
-nohup /cron.sh >/var/www/html/data/crond.log &
+nohup /cron.sh >/var/www/nextcloud/data/crond.log &
 ```
 
 #### Limit the maximum size of the preview
 
 ```sh
 # change nextcloud preview_max
-docker exec --user=99:100 nextcloud php /var/www/html/occ config:system:set preview_max_x --value 1080
-docker exec --user=99:100 nextcloud php /var/www/html/occ config:system:set preview_max_y --value 1920
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ config:system:set preview_max_x --value 1080
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ config:system:set preview_max_y --value 1920
 
 # change nextcloud preview images quality
-docker exec --user=99:100 nextcloud php /var/www/html/occ config:system:set jpeg_quality --value 50
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ config:system:set jpeg_quality --value 50
 
 # change preview generator sizes
-docker exec --user=99:100 nextcloud php /var/www/html/occ config:app:set --value="32 64 1024"  previewgenerator squareSizes
-docker exec --user=99:100 nextcloud php /var/www/html/occ config:app:set --value="64 128 1024" previewgenerator widthSizes
-docker exec --user=99:100 nextcloud php /var/www/html/occ config:app:set --value="64 256 1024" previewgenerator heightSizes
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ config:app:set --value="32 64 1024"  previewgenerator squareSizes
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ config:app:set --value="64 128 1024" previewgenerator widthSizes
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ config:app:set --value="64 256 1024" previewgenerator heightSizes
 
 # show config
-docker exec --user=99:100 nextcloud php /var/www/html/occ config:list --private | grep preview
-docker exec --user=99:100 nextcloud php /var/www/html/occ config:list --private | grep jpeg_quality
-docker exec --user=99:100 nextcloud php /var/www/html/occ config:list --private | grep Sizes
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ config:list --private | grep preview
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ config:list --private | grep jpeg_quality
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ config:list --private | grep Sizes
 
 # reset previews database
 1. stop nextcloud docker
 2. remove the folder your-nextcloud-data-directory/appdata_*/preview
-3. run docker exec --user=99:100 nextcloud php /var/www/html/occ files:scan-app-data
-4. run docker exec --user=99:100 nextcloud php /var/www/html/occ preview:generate-all --verbose
+3. run docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ files:scan-app-data
+4. run docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ preview:generate-all --verbose
 ```
 
 ### Extract
@@ -392,14 +392,14 @@ cp -a /etc/php8/conf.d/pdlib.ini /usr/local/etc/php/conf.d/pdlib.ini
 apk add --no-cache bzip2-dev
 docker-php-ext-install bz2
 
-docker exec --user=99:100 nextcloud php /var/www/html/occ face:stats
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ face:stats
 
-docker exec --user=99:100 nextcloud php /var/www/html/occ face:setup
-docker exec --user=99:100 nextcloud php /var/www/html/occ face:setup 1
-docker exec --user=99:100 nextcloud php /var/www/html/occ face:setup 2
-docker exec --user=99:100 nextcloud php /var/www/html/occ face:setup 3
-docker exec --user=99:100 nextcloud php /var/www/html/occ face:setup 4
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ face:setup
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ face:setup 1
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ face:setup 2
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ face:setup 3
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ face:setup 4
 
-docker exec --user=99:100 nextcloud php /var/www/html/occ face:setup --memory 4G --model 4
-docker exec --user=99:100 nextcloud php /var/www/html/occ face:background_job -u <username1>
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ face:setup --memory 4G --model 4
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ face:background_job -u <username1>
 ```

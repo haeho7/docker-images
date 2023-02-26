@@ -10,7 +10,7 @@ RUN apk update \
   && apk add --no-cache tzdata shadow ffmpeg imagemagick samba-client \
   && rm -rf /var/cache/apk/*
 
-ENV UPLOAD_TMP_DIR="/var/www/html/temp"
+ENV UPLOAD_TMP_DIR="/var/www/nextcloud/temp"
 ENV PHP_OUTPUT_BUFFERING=0
 ENV PHP_MAX_EXECUTION_TIME=900
 ENV PHP_MAX_FILE_UPLOADS=30
@@ -24,10 +24,14 @@ RUN mkdir /usr/src/nextcloud/temp \
         echo 'max_file_uploads=${PHP_MAX_FILE_UPLOADS}'; \
       } > "${PHP_INI_DIR}/conf.d/php-optimize.ini"
 
+# change nextcloud webroot
+RUN sed -i 's|/var/www/html|/var/www/nextcloud|g' /entrypoint.sh \
+  && sed -i 's|/var/www/html|/var/www/nextcloud|g' /var/spool/cron/crontabs/www-data
+
 COPY nextcloud.sh /usr/local/bin/
 COPY nextcloud-data/php-fpm.d/www.conf /usr/local/etc/php-fpm.d/
 
-WORKDIR /var/www/html
+WORKDIR /var/www/nextcloud
 
 EXPOSE 9000
 

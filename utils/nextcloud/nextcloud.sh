@@ -40,7 +40,7 @@ start_crond() {
   if [ "$(_get_crond)" = 0 ]; then
     info "crond process not runing, starting crond..."
     /cron.sh > /dev/stdout 2>&1 &
-    #nohup /cron.sh > /var/www/html/data/crond.log 2>&1 &
+    #nohup /cron.sh > /var/www/nextclud/data/crond.log 2>&1 &
   else
     warn "crond process still running"
   fi

@@ -28,5 +28,5 @@ services:
       PHP_MEMORY_LIMIT: 1024M
       PHP_UPLOAD_LIMIT: 0
     volumes:
-      - ./nextcloud-data:/var/www/html
-      - /mnt/user/datas/nextcloud:/var/www/html/data
+      - ./nextcloud-data:/var/www/nextcloud
+      - /mnt/user/datas/nextcloud:/var/www/nextcloud/data
