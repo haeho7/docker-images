@@ -122,6 +122,13 @@ user_rules:
   - '||scootersoftware.com^$important'
   - '# twitter'
   - '@@||t.co^$important'
+  - '# sharp-tv'
+  - '||taobao.com^$client=''192.168.1.201'',important'
+  - '||taobao.com.lan^$client=''192.168.1.201'',important'
+  - '||ott.cibntv.net^$client=''192.168.1.201'',important'
+  - '||ott.cibntv.net.lan^$client=''192.168.1.201'',important'
+  - '||openspeech.cn^$client=''192.168.1.201'',important'
+  - '||openspeech.cn.lan^$client=''192.168.1.201'',important'
   - ""
 dhcp:
   enabled: false
