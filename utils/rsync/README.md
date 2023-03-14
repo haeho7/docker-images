@@ -67,7 +67,7 @@ sending incremental file list
 delta-transmission enabled
 ```
 
-## Dokcer Privileged
+## Docker Privileged
 
 - [@discuss.linuxcontainers.org](https://discuss.linuxcontainers.org/t/cant-run-libvirt-qemu-kvm-in-an-unprivileged-domain-anymore-unable-to-set-xattr/9466/3)
 
