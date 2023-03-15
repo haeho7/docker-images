@@ -7,7 +7,7 @@ _get_time() {
 }
 
 _get_status() {
-  ps aux | grep -v grep | grep -v daemon | grep -v "/srv/*" | grep rsync -wc
+  ps aux | grep -v grep | grep -v daemon | grep rsync | wc -l
 }
 
 info() {
