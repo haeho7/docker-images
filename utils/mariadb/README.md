@@ -36,7 +36,9 @@ If the configuration file does not take effect, you need to repair the configura
 chmod 0644 /mnt/user/appdata/mariadb/conf.d/mariadb.cnf
 ```
 
-## Lower Case
+## Case-Sensitive
+
+- [@mariadb.com/docs/server/system-variables](https://mariadb.com/docs/server/ref/mdb/system-variables/lower_case_table_names)
 
 Determines whether table names, table aliases, and database names are compared in a case-sensitive manner, and whether tablespace files are stored on disk in a case-sensitive manner.
 
