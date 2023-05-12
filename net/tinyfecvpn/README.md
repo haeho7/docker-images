@@ -46,11 +46,11 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -e USE_IPTABLES_NFT_BACKEND=0 \
   haeho7/docker-images:tinyfecvpn \
-  -s -l 0.0.0.0:1024 \
+  -s -l 0.0.0.0:1900 \
   --mode 0 \
   --key password \
   --tun-dev tinyfecvpn \
-  --sub-net 10.1.10.0 \
+  --sub-net 10.1.20.0 \
   --fec 10:6 \
   --timeout 3 \
   --log-level 3 \
@@ -71,12 +71,12 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -e USE_IPTABLES_NFT_BACKEND=0 \
   haeho7/docker-images:tinyfecvpn \
-  -c -r 11.22.33.44:1024 \
+  -c -r 11.22.33.44:1900 \
   --mode 0 \
   --key password \
   --keep-reconnect \
   --tun-dev tinyfecvpn \
-  --sub-net 10.1.10.0 \
+  --sub-net 10.1.20.0 \
   --fec 10:6 \
   --timeout 3 \
   --log-level 3 \
@@ -101,11 +101,11 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -e USE_IPTABLES_NFT_BACKEND=0 \
   haeho7/docker-images:tinyfecvpn \
-  -s -l 0.0.0.0:1025 \
+  -s -l 0.0.0.0:1901 \
   --mode 0 \
   --key password \
   --tun-dev tinyfecvpn-game \
-  --sub-net 10.1.11.0 \
+  --sub-net 10.1.21.0 \
   --fec 2:4 \
   --timeout 1 \
   --log-level 3 \
@@ -126,12 +126,12 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -e USE_IPTABLES_NFT_BACKEND=0 \
   haeho7/docker-images:tinyfecvpn \
-  -c -r 11.22.33.44:1025 \
+  -c -r 11.22.33.44:1901 \
   --mode 0 \
   --key password \
   --keep-reconnect \
   --tun-dev tinyfecvpn-game \
-  --sub-net 10.1.11.0 \
+  --sub-net 10.1.21.0 \
   --fec 2:4 \
   --timeout 1 \
   --log-level 3 \

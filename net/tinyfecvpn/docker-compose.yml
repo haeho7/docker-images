@@ -16,11 +16,11 @@ services:
       TZ: Asia/Shanghai
       USE_IPTABLES_NFT_BACKEND: 0
     command: >
-      -s -l 0.0.0.0:1024
+      -s -l 0.0.0.0:1900
       --mode 0
       --key password
       --tun-dev tinyfecvpn
-      --sub-net 10.1.10.0
+      --sub-net 10.1.20.0
       --fec 10:6
       --timeout 3
       --log-level 3
@@ -43,12 +43,12 @@ services:
       TZ: Asia/Shanghai
       USE_IPTABLES_NFT_BACKEND: 0
     command: >
-      -c -r 11.22.33.44:1024
+      -c -r 11.22.33.44:1900
       --mode 0
       --key password
       --keep-reconnect
       --tun-dev tinyfecvpn
-      --sub-net 10.1.10.0
+      --sub-net 10.1.20.0
       --fec 10:6
       --timeout 3
       --log-level 3
