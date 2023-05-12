@@ -27,7 +27,7 @@ docker run -d \
   pexcn/docker-images:shadowsocks-rust \
   ssservice server \
   --user nobody \
-  --server-addr 0.0.0.0:1984 \
+  --server-addr [::]:1984 \
   --password password \
   --encrypt-method aes-128-gcm \
   --timeout 3600 \
@@ -54,7 +54,7 @@ docker run -d \
   pexcn/docker-images:shadowsocks-rust \
   ssservice local \
   --user nobody \
-  --local-addr 0.0.0.0:1080 \
+  --local-addr [::]:1080 \
   --server-addr 11.22.33.44:1984 \
   --password password \
   --encrypt-method aes-128-gcm \
@@ -79,7 +79,7 @@ docker run -d \
   ssservice local \
   --user nobody \
   --protocol http \
-  --local-addr 127.0.0.1:1111 \
+  --local-addr [::]:1111 \
   --server-addr 11.22.33.44:1984 \
   --password password \
   --encrypt-method aes-128-gcm \
@@ -103,7 +103,7 @@ docker run -d \
   ssservice local \
   --user nobody \
   --protocol tunnel \
-  --local-addr 127.0.0.1:5300 \
+  --local-addr [::]:5300 \
   --forward-addr 8.8.8.8:53 \
   --server-addr 11.22.33.44:1984 \
   --password password \
@@ -128,7 +128,7 @@ docker run -d \
   pexcn/docker-images:shadowsocks-rust \
   ssservice local \
   --protocol redir \
-  --local-addr 0.0.0.0:1234 \
+  --local-addr [::]:1234 \
   --server-addr 11.22.33.44:1984 \
   --password password \
   --encrypt-method aes-128-gcm \
@@ -154,7 +154,7 @@ docker run -d \
   pexcn/docker-images:shadowsocks-rust \
   ssservice local \
   --protocol redir \
-  --local-addr 0.0.0.0:1234 \
+  --local-addr [::]:1234 \
   --server-addr 11.22.33.44:1984 \
   --password password \
   --encrypt-method aes-128-gcm \
@@ -178,7 +178,7 @@ docker run -d \
   pexcn/docker-images:shadowsocks-rust \
   ssservice local \
   --protocol redir \
-  --local-addr 0.0.0.0:1234 \
+  --local-addr [::]:1234 \
   --server-addr 11.22.33.44:1984 \
   --password password \
   --encrypt-method aes-128-gcm \
