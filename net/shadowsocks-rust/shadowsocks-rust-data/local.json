@@ -8,6 +8,13 @@
             "udp_redir": "tproxy"
         },
         {
+            "local_address": "::1",
+            "local_port": 1234,
+            "protocol": "redir",
+            "tcp_redir": "tproxy",
+            "udp_redir": "tproxy"
+        },
+        {
             "local_address": "127.0.0.1",
             "local_port": 5300,
             "protocol": "tunnel",
