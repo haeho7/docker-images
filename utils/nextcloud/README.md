@@ -10,8 +10,6 @@ docker run -d \
   --name=nextcloud \
   --network=host \
   --restart=unless-stopped \
-  --memory=2G \
-  --memory-swap=4G \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
