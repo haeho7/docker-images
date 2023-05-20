@@ -19,29 +19,40 @@ docker run -d \
   neilpang/acme.sh:3.0.5 daemon
 ```
 
-## 证书申请
+## Issue Certificate
 
-- `DNSPod.cn` 域变量为 `DP_Id` 和 `DP_Key`。参考: [@acme.sh/dnsapi#2-dnspodcn-option](https://github.com/acmesh-official/acme.sh/wiki/dnsapi#2-dnspodcn-option)
-- `DNSPod.com` 域变量为 `DPI_Id` 和 `DPI_Key`。参考: [@acme.sh/dnsapi#48-use-dnspodcom-domain-api-to-automatically-issue-cert](https://github.com/acmesh-official/acme.sh/wiki/dnsapi#48-use-dnspodcom-domain-api-to-automatically-issue-cert)
-- 容器外运行可能需要 `export` 相关变量
-- 通过 ACME 申请的证书无法在 zerossl 控制面板吊销，可直接注销 zerossl 账号再注册。
+### DNSPod.cn
+
+The variable names for dnspod.cn domain are `DP_Id` and `DP_Key`
+
+- [@acme.sh/dnsapi#2-dnspodcn-option](https://github.com/acmesh-official/acme.sh/wiki/dnsapi#2-dnspodcn-option)
+
+### DNSPod.com
+
+The variable names for dnspod.com domain are `DPI_Id` and `DPI_Key`
+
+- [@acme.sh/dnsapi#48-use-dnspodcom-domain-api-to-automatically-issue-cert](https://github.com/acmesh-official/acme.sh/wiki/dnsapi#48-use-dnspodcom-domain-api-to-automatically-issue-cert)
 
 ```sh
-# 切换默认提供商
+# set-default-ca
 docker exec -it acme.sh --set-default-ca --server letsencrypt / zerossl
 
-# 申请
-docker exec -it acme.sh --issue --dns dns_dp --dnssleep 30 -d demo.com -d *.demo.com -k ec-256 -m example@gmail.com
-docker exec -it acme.sh --issue --dns dns_dp --dnssleep 30 -d local.demo.com -d *.local.demo.com -k ec-256 -m example@gmail.com
+# issue
+docker exec -it acme.sh --issue --dns dns_dp --dnssleep 30 --domain demo.com --domain *.demo.com --keylength ec-256 --email example@gmail.com
+docker exec -it acme.sh --issue --dns dns_dp --dnssleep 30 --domain local.demo.com --domain *.local.demo.com --keylength ec-256 --email example@gmail.com
 
-# 续期
-docker exec -it acme.sh --renew -d demo.com -d *.demo.com --ecc --force
-docker exec -it acme.sh --renew -d local.demo.com -d *.local.demo.com --ecc --force
+# renew
+docker exec -it acme.sh --renew --domain demo.com --domain *.demo.com --ecc --force
+docker exec -it acme.sh --renew --domain local.demo.com --domain *.local.demo.com --ecc --force
 
-# 吊销
-docker exec -it acme.sh --remove -d demo.com --ecc
-docker exec -it acme.sh --remove -d local.demo.com --ecc
+# remove
+docker exec -it acme.sh --remove --domain demo.com --ecc
+docker exec -it acme.sh --remove --domain local.demo.com --ecc
 
-# 查看证书列表
+# show list
 docker exec -it acme.sh acme.sh --list
 ```
+
+## Notes
+
+The certificate obtained through the `ACME` container cannot be revoked in the `ZeroSSL` control panel, but the `ZeroSSL` account can be canceled and registered again.

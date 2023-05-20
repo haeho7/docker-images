@@ -8,8 +8,8 @@ services:
     restart: unless-stopped
     environment:
       TZ: Asia/Shanghai
-      DPI_ID: 'example'
-      DPI_Key: 'example'
+      DP_ID: 'example'
+      DP_Key: 'example'
     command: daemon
     volumes:
       - ./acme.sh-data:/acme.sh
