@@ -28,6 +28,9 @@ RUN mkdir /usr/src/nextcloud/temp \
 RUN sed -i 's|/var/www/html|/var/www/nextcloud|g' /entrypoint.sh \
   && sed -i 's|/var/www/html|/var/www/nextcloud|g' /var/spool/cron/crontabs/www-data
 
+# add logs dir
+RUN mkdir /usr/src/nextcloud/logs
+
 COPY nextcloud.sh /usr/local/bin/
 COPY nextcloud-data/php-fpm.d/www.conf /usr/local/etc/php-fpm.d/
 
