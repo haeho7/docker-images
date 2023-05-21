@@ -248,8 +248,8 @@ docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ files:scan --path
 docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ files:scan --all --verbose
 
 # clear users trashbin
-docker exec --user=99:100 php /var/www/nextcloud/occ trashbin:cleanup <usernmae1> <usernmae2>
-docker exec --user=99:100 php /var/www/nextcloud/occ trashbin:cleanup --all-users
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ trashbin:cleanup <usernmae1> <usernmae2>
+docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ trashbin:cleanup --all-users
 
 # clean database tables not match files (Not tested)
 docker exec --user=99:100 nextcloud php /var/www/nextcloud/occ files:cleanup
