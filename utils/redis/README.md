@@ -18,7 +18,7 @@ docker run -d \
   -e PUID=99 \
   -e PGID=100 \
   -e UMASK=022 \
-  -v /mnt/user/appdata/redis:/data \
+  -v /mnt/user/appdata/redis/redis-data:/data \
   haeho7/docker-images:redis
 ```
 

@@ -28,10 +28,10 @@ docker run -d \
   #-p 9091:9091 \
   #-p 51413:51413 \
   #-p 51413:51413/udp \
-  -v /mnt/user/appdata/transmission-data:/config \
-  -v /mnt/user/torrent/:/downloads \
+  -v /mnt/user/appdata/transmission/transmission-data:/config \
+  -v /mnt/user/torrent:/downloads \
   -v /mnt/user/torrent/watch:/watch \
-  linuxserver/transmission
+  linuxserver/transmission:3.00-r8-ls151
 ```
 
 ## Use macvlan network

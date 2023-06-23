@@ -23,8 +23,8 @@ docker run -d \
   #-e MARIADB_USER=example \
   #-e MARIADB_PASSWORD='example' \
   #-e MARIADB_ROOT_HOST='%' \
-  -v /mnt/user/appdata/mariadb/conf.d/:/etc/mysql/conf.d \
-  -v /mnt/user/appdata/mariadb/data:/var/lib/mysql \
+  -v /mnt/user/appdata/mariadb/mariadb-data/conf.d/:/etc/mysql/conf.d \
+  -v /mnt/user/appdata/mariadb/mariadb-data/data:/var/lib/mysql \
   haeho7/docker-images:mariadb
 ```
 
@@ -33,7 +33,7 @@ docker run -d \
 If the configuration file does not take effect, you need to repair the configuration file permissions.
 
 ```sh
-chmod 0644 /mnt/user/appdata/mariadb/conf.d/mariadb.cnf
+chmod 0644 /mnt/user/appdata/mariadb/mariadb-data/conf.d/mariadb.cnf
 ```
 
 ## Case Sensitive

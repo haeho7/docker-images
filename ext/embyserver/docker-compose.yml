@@ -10,6 +10,8 @@ services:
       options:
         max-file: 1
         max-size: 20m
+    devices:
+      - /dev/dri:/dev/dri
     environment:
       UID: 99
       GID: 100

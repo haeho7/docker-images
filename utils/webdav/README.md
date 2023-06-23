@@ -20,7 +20,7 @@ docker run -d \
   -e UMASK=022 \
   -e USERNAME=example \
   -e PASSWORD='example' \
-  -v /mnt/user/appdata/webdav:/config \
+  -v /mnt/user/appdata/webdav/webdav-data:/config \
   -v /mnt/user/datas/webdav:/data \
   haeho7/docker-images:webdav
 ```

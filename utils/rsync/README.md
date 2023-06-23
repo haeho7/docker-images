@@ -13,7 +13,7 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -e ENABLE_DAEMON=1 \
   -e CRONTAB='0 */12 * * * /srv/script/backup.sh > /proc/1/fd/1' \
-  -v /mnt/user/appdata/rsync:/srv \
+  -v /mnt/user/appdata/rsync/rsync-data:/srv \
   #-v /mnt/user/appdata/rsync/conf/rsyncd.conf:/etc/rsyncd.conf \
   #-v /mnt/user/appdata/rsync/conf/rsyncd.secrets:/etc/rsyncd.secrets \
   -v /mnt/user:/mnt/user:ro \

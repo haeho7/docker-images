@@ -18,7 +18,7 @@ docker run -d \
   -e PUID=99 \
   -e PGID=100 \
   -e UMASK=022 \
-  -v /mnt/user/appdata/mdc:/config \
+  -v /mnt/user/appdata/mdc/mdc-data:/config \
   -v /mnt/user/9kg/scan:/data \
   vergilgao/mdc:6.4.1-r0
 ```

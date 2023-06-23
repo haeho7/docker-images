@@ -21,7 +21,7 @@ docker run -d \
   -e WEBDRIVE_URL='http://localhost:5244/dav' \
   -e WEBDRIVE_USERNAME=example \
   -e WEBDRIVE_PASSWORD='example' \
-  -v /mnt/user/appdata/webdav-cilnet:/mnt/webdrive:rshared \
+  -v /mnt/user/appdata/webdav-cilnet/webdav-cilnet-data:/mnt/webdrive:rshared \
   haeho7/docker-images:webdav-client
 ```
 

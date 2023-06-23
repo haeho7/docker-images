@@ -28,7 +28,7 @@ docker run -d \
   -e NEXTCLOUD_TRUSTED_DOMAINS='192.168.1.20 nextcloud.demo.com nextcloud.local.demo.com' \
   -e PHP_MEMORY_LIMIT=1024M \
   -e PHP_UPLOAD_LIMIT=0 \
-  -v /mnt/user/appdata/nextcloud:/var/www/nextcloud \
+  -v /mnt/user/appdata/nextcloud/nextcloud-data:/var/www/nextcloud \
   -v /mnt/user/datas/nextcloud:/var/www/nextcloud/data \
   haeho7/docker-images:nextcloud
 ```
@@ -39,7 +39,7 @@ If you use nginx to proxy nextcloud, you need to mount the nextcloud working dir
 
 ```sh
 # nginx container add volumes
--v /mnt/user/appdata/nextcloud:/var/www/nextcloud \
+-v /mnt/user/appdata/nextcloud/nextcloud-data:/var/www/nextcloud \
 ```
 
 ### Redis
@@ -287,7 +287,7 @@ Please refer to the following parameters: [www.conf](./nextcloud-data/php-fpm.d/
 
 ```sh
 # nextcloud container add volumes
--v /mnt/user/appdata/nextcloud/config/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf \
+-v /mnt/user/appdata/nextcloud/nextcloud-data/config/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf \
 ```
 
 Tips: It is recommended to do it after the nextcloud container is initialized, otherwise it may cause initialization errors or other problems.

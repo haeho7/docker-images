@@ -15,16 +15,16 @@ docker run -d \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
-  -v /mnt/user/appdata/nginx/nginx.conf:/etc/nginx/nginx.conf \
-  -v /mnt/user/appdata/nginx/conf.d:/etc/nginx/conf.d \
-  -v /mnt/user/appdata/acme.sh:/cert \
+  -v /mnt/user/appdata/nginx/nginx-data/nginx.conf:/etc/nginx/nginx.conf \
+  -v /mnt/user/appdata/nginx/nginx-data/conf.d:/etc/nginx/conf.d \
+  -v /mnt/user/appdata/acme.sh/acme.sh-data:/cert \
   nginx:1.22.1-alpine
 ```
 
 ## Repair File Permissions
 
 ```sh
-cd /mnt/user/appdata/nginx
+cd /mnt/user/appdata/nginx/nginx-data
 find . -type f -iname "*.conf" -print -exec chmod 644 {} \;
 ```
 

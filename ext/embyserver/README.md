@@ -12,6 +12,7 @@ docker run -d \
   --restart=unless-stopped \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
+  --device=/dev/dri:/dev/dri \
   -e UID=99 \
   -e GID=100 \
   -e GIDLIST='100,18' \
@@ -19,17 +20,11 @@ docker run -d \
   #-p 8920:8920 \
   #-p 1900:1900/udp \
   #-p 7359:7359/udp \
-  -v /mnt/user/appdata/embyserver:/config \
   -v /etc/localtime:/etc/localtime:ro \
-  -v /mnt/user/medias/moive/:/data/movies \
+  -v /mnt/user/appdata/embyserver/embyserver-data:/config \
+  -v /mnt/user/medias/moive:/data/movies \
   -v /mnt/user/medias/series/:/data/series \
-  haeho7/docker-images:embyserver-4.6.7.0
-```
-
-## Used
-
-```sh
-haeho7/docker-images:embyserver-4.6.7.0
+  haeho7/docker-images:embyserver-4.7.10.0
 ```
 
 ## FAQs

@@ -15,7 +15,7 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -e DP_Id='example' \
   -e DP_Key='example' \
-  -v /mnt/user/appdata/acme.sh:/acme.sh \
+  -v /mnt/user/appdata/acme.sh/acme.sh-data:/acme.sh \
   neilpang/acme.sh:3.0.5 daemon
 ```
 

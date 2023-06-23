@@ -19,7 +19,7 @@ docker run -d \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
   -e PEER_RESOLVE_INTERVAL=0 \
-  -v /mnt/user/appdata/wireguard:/etc/wireguard \
+  -v /mnt/user/appdata/wireguard/wireguard-data:/etc/wireguard \
   haeho7/docker-images:wireguard
 ```
 

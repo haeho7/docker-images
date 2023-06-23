@@ -19,6 +19,6 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -e ROCKET_ENV=production \
   -e ADMIN_TOKEN='example' \
-  -v /mnt/user/appdata/vaultwarden:/data \
+  -v /mnt/user/appdata/vaultwarden/vaultwarden-data:/data \
   vaultwarden/server:1.28.1-alpine
 ```
