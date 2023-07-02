@@ -32,6 +32,9 @@ jobs:
           # tinyfecvpn
           - BUILD_CONTEXT: net/tinyfecvpn
             TARGET_PLATFORMS: linux/amd64,linux/arm64
+          # phantun
+          - BUILD_CONTEXT: net/phantun
+            TARGET_PLATFORMS: linux/amd64,linux/arm64
           # webdav
           - BUILD_CONTEXT: utils/webdav
             TARGET_PLATFORMS: linux/amd64,linux/arm64
