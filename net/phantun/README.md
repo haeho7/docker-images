@@ -6,19 +6,6 @@
 
 ## Usage
 
-### iptables Backend
-
-If the host uses the `iptables-nft` backend, the `USE_IPTABLES_NFT_BACKEND` environment variable needs to be set.
-
-```sh
-# Debian 11 (bullseye)
-iptables -V
-iptables v1.8.7 (nf_tables)
-
-ls -al /usr/sbin/iptables
-lrwxrwxrwx 1 root root 26 12月 11 17:56 /usr/sbin/iptables -> /etc/alternatives/iptables
-```
-
 ```sh
 # server
 docker run -d \
@@ -63,6 +50,19 @@ docker run -d \
   --tun phantun \
   --tun-local 10.1.10.2 \
   --tun-peer 10.1.10.1
+```
+
+### iptables Backend
+
+If the host uses the `iptables-nft` backend, the `USE_IPTABLES_NFT_BACKEND` environment variable needs to be set.
+
+```sh
+# Debian 11 (bullseye)
+iptables -V
+iptables v1.8.7 (nf_tables)
+
+ls -al /usr/sbin/iptables
+lrwxrwxrwx 1 root root 26 12月 11 17:56 /usr/sbin/iptables -> /etc/alternatives/iptables
 ```
 
 ## Local Listening
