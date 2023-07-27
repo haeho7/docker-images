@@ -16,6 +16,7 @@ docker run -d \
   --memory-swap=4G \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
+  --sysctl net.ipv6.conf.all.disable_ipv6=1 \
   -e TZ=Asia/Shanghai \
   -e PUID=99 \
   -e PGID=100 \
@@ -25,7 +26,7 @@ docker run -d \
   -e TRANSMISSION_WEB_HOME='/transmission-web-control/' \
   -e WHITELIST='127.0.0.1,192.168.1.*' \
   -e HOST_WHITELIST='*.demo.com' \
-  -e PEERPORT=51413 \
+  -e PEERPORT=51314 \
   -v /mnt/user/appdata/transmission/transmission-data:/config \
   -v /mnt/user/torrent:/downloads \
   -v /mnt/user/torrent/watch:/watch \
