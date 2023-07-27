@@ -1,0 +1,34 @@
+version: '3.9'
+
+services:
+  transmission:
+    image: haeho7/docker-images:transmission
+    container_name: transmission
+    restart: unless-stopped
+    networks:
+      default:
+        ipv4_address: 192.168.1.29
+    logging:
+      options:
+        max-file: 1
+        max-size: 20m
+    environment:
+      TZ: Asia/Shanghai
+      PUID: 99
+      PGID: 100
+      UMASK: 022
+      USER: example
+      PASS: 'example'
+      TRANSMISSION_WEB_HOME: '/transmission-web-control/'
+      WHITELIST: '127.0.0.1,192.168.1.*'
+      HOST_WHITELIST: '*.demo.com'
+      PEERPORT: 51413
+    volumes:
+      - ./transmission-data:/config
+      - /mnt/user/torrent/:/downloads
+      - /mnt/user/torrent/watch:/watch
+
+networks:
+  default:
+    name: br0
+    external: true
