@@ -13,7 +13,7 @@
     "bind-address-ipv4": "0.0.0.0",
     "bind-address-ipv6": "::",
     "blocklist-enabled": false,
-    "blocklist-url": "https://github.com/Naunter/BT_BlockLists/releases/download/master/bt_blocklists.gz",
+    "blocklist-url": "https://raw.githubusercontent.com/Naunter/BT_BlockLists/master/bt_blocklists.gz",
     "cache-size-mb": 128,
     "default-trackers": "",
     "dht-enabled": false,
