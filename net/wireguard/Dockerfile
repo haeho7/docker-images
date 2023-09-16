@@ -7,13 +7,13 @@
 #
 FROM golang:1.19-alpine AS builder
 
-ARG VERSION=0.0.20220316
+ARG VERSION=0.0.20230223
 RUN apk update \
   && apk add --no-cache --virtual .build-deps git make gcc musl-dev \
   && git clone https://github.com/WireGuard/wireguard-go.git --branch $VERSION \
   && cd wireguard-go \
   && git checkout $VERSION \
-  && sed -i 's/go build -v -o "$@"/CGO_ENABLED=0 go build -v -o "$@" -trimpath -ldflags "-s -w"/' Makefile \
+  && sed -i 's/go build -v -o "$@"/env CGO_ENABLED=0 go build -v -o "$@" -trimpath -ldflags "-s -w"/' Makefile \
   && make \
   && make install \
   && cd - \
@@ -24,10 +24,10 @@ RUN apk update \
 #
 # Runtime stage
 #
-FROM alpine:3.16
+FROM alpine:3.18
 LABEL maintainer="haeho7 <i@demo.com>"
 
-ARG WIREGUARD_VER=1.0.20210914-r0
+ARG WIREGUARD_VER=1.0.20210914-r3
 RUN apk update \
   && apk add --no-cache tzdata \
       wireguard-tools=$WIREGUARD_VER \
