@@ -206,6 +206,21 @@ PostDown = iptables -t mangle -D POSTROUTING -o %i -p tcp -m tcp --tcp-flags SYN
     PostDown = iptables -t nat -D POSTROUTING -s 10.10.10.0/24 -o shim-br0 -j SNAT --to-source 192.168.1.10
     ```
 
+### Access Control
+
+If you need access control, you can refer to the following configuration:
+
+```sh
+PostUp = iptables -N WIREGUARD-FILTER
+PostUp = iptables -I FORWARD -j WIREGUARD-FILTER
+PostUp = iptables -A WIREGUARD-FILTER -s <SRC_ADDR> -d <DST_ADDR> -p <PROTO> --dport <DST_PORT> -j ACCEPT
+PostUp = iptables -A WIREGUARD-FILTER -m iprange --src-range <SRC_IPRANGE> -d <DST_ADDR> -p <PROTO> --dport <DST_PORT> -j REJECT
+
+PostDown = iptables -D FORWARD -j WIREGUARD-FILTER
+PostDown = iptables -F WIREGUARD-FILTER
+PostDown = iptables -X WIREGUARD-FILTER
+```
+
 ## Acknowledgments
 
 - [@pexcn/docker-images/wireguard](https://github.com/pexcn/docker-images/tree/master/net/wireguard)
