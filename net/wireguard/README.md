@@ -95,7 +95,17 @@ PersistentKeepalive = 30
 Peer configuration can be modified online without restarting wireguard.
 
 ```sh
-wg set <WIREGUARD INTERFACE NAME> peer <PublicKey> allowed-ips '<old_AllowedIPs, new_AllowedIPs>'
+wg set <WIREGUARD_INTERFACE_NAME> peer <PublicKey> allowed-ips '<old_AllowedIPs, new_AllowedIPs>'
+```
+
+## Update WireGuard Running-config
+
+Update the wireguard running-configuration without restart.
+
+```sh
+#wg syncconf <WIREGUARD_INTERFACE_NAME> <(wg-quick strip <WIREGUARD_INTERFACE_NAME>)
+docker exec -it wireguard sh
+wg syncconf wg-home <(wg-quick strip wg-home)
 ```
 
 ## Best Practices
@@ -149,7 +159,7 @@ DNS = 192.168.1.1
 
 As a gateway, there may be MTU related issues, you can try appending the following iptables rules to `PostUp` and `PostDown`:
 
-PC & other Clinet -> Router Device (Routing) -> NodeA WireGuard tunnel (Gateway) -> NodeB WireGuard tunnel
+PC & other Clinet -> Router Device (Routing) -> NodeA WireGuard Tunnel (Gateway) -> NodeB WireGuard Tunnel
 
 ```sh
 # NodeA Add
@@ -159,27 +169,33 @@ PostDown = iptables -t mangle -D POSTROUTING -o %i -p tcp -m tcp --tcp-flags SYN
 
 ### Address Translation
 
-1. 如果 WireGuard 隧道作为网关角色，NodeA 的内部客户端通过 WireGuard 隧道访问 NodeB 的隧道地址或内部网络，但 NodeB 的 `AllowedIP` 中只允许 NodeA 的 WireGuard 隧道地址通过 `AllowedIPs = 10.10.10.2/32`，需要在 NodeA 上将内部源地址转换为 WireGuard 隧道接口地址。
+1. If the WireGuard tunnel acts as a gateway, NodeA's internal clients need to access NodeB's tunnel address or internal network through the WireGuard tunnel. However, NodeB's `AllowedIP` only allows NodeA's WireGuard tunnel address to pass through `AllowedIPs = 10.10.10.2/32`. In this case, it is necessary to perform source address translation on NodeA, converting the internal source address to the WireGuard tunnel interface address.
 
-    PC & Other Clinet -> Router Device (Routing) -> NodeA WireGuard tunnel (Gateway) -> NodeB WireGuard tunnel -> NodeB Internal Network (192.168.1.0/24)
+    > 如果 WireGuard 隧道作为网关角色，NodeA 的内部客户端需要通过 WireGuard 隧道访问 NodeB 的隧道地址或内部网络，但 NodeB 的 `AllowedIP` 中只允许 NodeA 的 WireGuard 隧道地址通过 `AllowedIPs = 10.10.10.2/32`，则需要在 NodeA 上将内部源地址转换为 WireGuard 隧道接口地址。
+
+    PC & Other Clinet -> Router Device (Routing) -> NodeA WireGuard Tunnel (Gateway) -> NodeB WireGuard Tunnel -> NodeB Internal Network (192.168.1.0/24)
 
     ```sh
     # NodeA Add
-    PostUp = iptables -t nat -A POSTROUTING -o <WIREGUARD INTERFACE NAME> -j SNAT --to-source 10.10.10.2
-    PostDown = iptables -t nat -D POSTROUTING -o <WIREGUARD INTERFACE NAME> -j SNAT --to-source 10.10.10.2
+    PostUp = iptables -t nat -A POSTROUTING -o <WIREGUARD_INTERFACE_NAME> -j SNAT --to-source 10.10.10.2
+    PostDown = iptables -t nat -D POSTROUTING -o <WIREGUARD_INTERFACE_NAME> -j SNAT --to-source 10.10.10.2
     ```
 
-2. 如果 NodeA 通过 WireGuard 隧道访问 NodeB 的内部网络，但 NodeB 的内部网络设备并没有添加 WireGuard 隧道地址的路由，需要在 NodeB 上将 WireGuard 隧道源地址转为 NodeB 的内部接口地址。建议配合 `iptables -s` 参数仅匹配 WireGuard 隧道网段，防止其他从 `INTERNAL INTERFACE NAME` 出去的流量被转换。
+2. If NodeA accesses NodeB's internal network through a WireGuard tunnel, but NodeB's internal network devices do not have routes for WireGuard tunnel addresses, it is necessary to perform source address translation on NodeB, converting the source address of the WireGuard tunnel to NodeB's internal interface address. It is recommended to use the `iptables -s` parameter to match only the WireGuard tunnel subnet, in order to prevent other traffic going out from `INTERNAL_INTERFACE_NAME` from being translated.
 
-    NodeA WireGuard tunnel -> NodeB WireGuard tunnel (Gateway) -> Router Device (Routing) -> NodeB internal network (192.168.1.0/24)
+    > 如果 NodeA 通过 WireGuard 隧道访问 NodeB 的内部网络，但 NodeB 的内部网络设备并没有添加 WireGuard 隧道地址的路由表，需要在 NodeB 上将 WireGuard 隧道的源地址转为 NodeB 的内部接口地址。建议配合 `iptables -s` 参数仅匹配 WireGuard 隧道网段，防止其他从 `INTERNAL_INTERFACE_NAME` 出去的流量被转换。
+
+    NodeA WireGuard Tunnel -> NodeB WireGuard Tunnel (Gateway) -> Router Device (Routing) -> NodeB internal network (192.168.1.0/24)
 
     ```sh
     # NodeB Add
-    PostUp = iptables -t nat -A POSTROUTING -s <WIREGUARD TUNNEL NETWORK> -o <INTERNAL INTERFACE NAME> -j SNAT --to-source 192.168.1.10
-    PostDown = iptables -t nat -D POSTROUTING -s <WIREGUARD TUNNEL NETWORK> -o <INTERNAL INTERFACE NAME> -j SNAT --to-source 192.168.1.10
+    PostUp = iptables -t nat -A POSTROUTING -s <WIREGUARD_TUNNEL_NETWORK> -o <INTERNAL_INTERFACE_NAME> -j SNAT --to-source 192.168.1.10
+    PostDown = iptables -t nat -D POSTROUTING -s <WIREGUARD_TUNNEL_NETWORK> -o <INTERNAL_INTERFACE_NAME> -j SNAT --to-source 192.168.1.10
     ```
 
-    若 unRAID 系统中 Docker 启用了 `主机访问自定义网络`，即系统中同时存在 `br0` 和 `shim-br0` 网络接口，在进行 `SNAT` 转换时需对两个接口都进行配置，否则访问流量会出现异常。
+3. If the Docker settings in the unRAID system have enabled "Host access to custom networks," which means that both the `br0` and `shim-br0` network interfaces exist in the system, it is necessary to configure both interfaces simultaneously when performing source address translation. Failure to do so may result in abnormal traffic access.
+
+    > 如果 unRAID 系统中 Docker 设置启用了 `主机访问自定义网络`，即系统中同时存在 `br0` 和 `shim-br0` 两个网络接口，在进行源地址转换时需要同时进行配置，否则访问流量将会出现异常。
 
     ```sh
     # NodeB Add
