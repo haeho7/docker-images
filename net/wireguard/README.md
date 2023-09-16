@@ -193,7 +193,7 @@ PostDown = iptables -t mangle -D POSTROUTING -o %i -p tcp -m tcp --tcp-flags SYN
     PostDown = iptables -t nat -D POSTROUTING -s <WIREGUARD_TUNNEL_NETWORK> -o <INTERNAL_INTERFACE_NAME> -j SNAT --to-source 192.168.1.10
     ```
 
-3. If the Docker settings in the unRAID system have enabled "Host access to custom networks," which means that both the `br0` and `shim-br0` network interfaces exist in the system, it is necessary to configure both interfaces simultaneously when performing source address translation. Failure to do so may result in abnormal traffic access.
+3. If the Docker settings in the unRAID system have enabled `Host access to custom networks`, which means that both the `br0` and `shim-br0` network interfaces exist in the system, it is necessary to configure both interfaces simultaneously when performing source address translation. Failure to do so may result in abnormal traffic access.
 
     > 如果 unRAID 系统中 Docker 设置启用了 `主机访问自定义网络`，即系统中同时存在 `br0` 和 `shim-br0` 两个网络接口，在进行源地址转换时需要同时进行配置，否则访问流量将会出现异常。
 
