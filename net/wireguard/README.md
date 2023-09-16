@@ -213,8 +213,8 @@ If you need access control, you can refer to the following configuration:
 ```sh
 PostUp = iptables -N WIREGUARD-FILTER
 PostUp = iptables -I FORWARD -j WIREGUARD-FILTER
-PostUp = iptables -A WIREGUARD-FILTER -s <SRC_ADDR> -d <DST_ADDR> -p <PROTO> --dport <DST_PORT> -j ACCEPT
-PostUp = iptables -A WIREGUARD-FILTER -m iprange --src-range <SRC_IPRANGE> -d <DST_ADDR> -p <PROTO> --dport <DST_PORT> -j REJECT
+PostUp = iptables -A WIREGUARD-FILTER -s <SRC_ADDR> -d <DST_ADDR> -p <PROTOCOL> --dport <DST_PORT> -j ACCEPT
+PostUp = iptables -A WIREGUARD-FILTER -m iprange --src-range <SRC_IPRANGE> -d <DST_ADDR> -p <PROTOCOL> --dport <DST_PORT> -j REJECT
 
 PostDown = iptables -D FORWARD -j WIREGUARD-FILTER
 PostDown = iptables -F WIREGUARD-FILTER
