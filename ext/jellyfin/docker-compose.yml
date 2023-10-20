@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   jellyfin:
-    image: nyanmisaka/jellyfin:230414-amd64
+    image: nyanmisaka/jellyfin:230901-amd64
     container_name: jellyfin
     network_mode: host
     restart: unless-stopped
@@ -23,7 +23,7 @@ services:
       #- 17359:7359/udp
     volumes:
       - ./jellyfin-data:/config
-      - /mnt/user/medias/moive:/data/movies:ro
+      - /mnt/user/medias/moives:/data/movies:ro
       - /mnt/user/medias/series:/data/series:ro
-      - /mnt/user/medias/tv:/data/movies:ro
-      - /mnt/user/medias/acg:/data/series:ro
+      - /mnt/user/medias/tv:/data/tv:ro
+      - /mnt/user/medias/acg:/data/acg:ro

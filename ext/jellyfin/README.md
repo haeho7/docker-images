@@ -21,11 +21,11 @@ docker run -d \
   #-p 11900:1900/udp \
   #-p 17359:7359/udp \
   -v /mnt/user/appdata/jellyfin/jellyfin-data:/config \
-  -v /mnt/user/medias/moive:/data/movies:ro \
+  -v /mnt/user/medias/moives:/data/movies:ro \
   -v /mnt/user/medias/series:/data/series:ro \
   -v /mnt/user/medias/tv:/data/tv:ro \
   -v /mnt/user/medias/acg:/data/acg:ro \
-  nyanmisaka/jellyfin:230414-amd64
+  nyanmisaka/jellyfin:230901-amd64
 ```
 
 ## Transcoding
@@ -60,7 +60,7 @@ Copy extrafanart to extrathumbs field: No
 
 When jellyfin adds a new media library, `Image fetchers Settings` can only select cover images and logos by default. need to install the `Fanart` plugin in the plug-in list to display the art images, banner images, banner images and other options.
 
-|       Emby      |      Jellyfin     |
+|       Emby      |      Jellyfin    |
 | :---------------| ---------------: |
 | poster.jpg      | folder.jpg       |
 | clearlogo.png   | logo.png         |
