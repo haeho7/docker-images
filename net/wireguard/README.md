@@ -169,7 +169,7 @@ PostDown = iptables -t mangle -D POSTROUTING -o %i -p tcp -m tcp --tcp-flags SYN
 
 ### Address Translation
 
-1. If the WireGuard tunnel acts as a gateway, NodeA's internal clients need to access NodeB's tunnel address or internal network through the WireGuard tunnel. However, NodeB's `AllowedIP` only allows NodeA's WireGuard tunnel address to pass through `AllowedIPs = 10.10.10.2/32`. In this case, it is necessary to perform source address translation on NodeA, converting the internal source address to the WireGuard tunnel interface address.
+1. If the WireGuard tunnel acts as a gateway, NodeA internal clients need to access NodeB tunnel address or internal network through the WireGuard tunnel. However, NodeB `AllowedIP` only allows NodeA WireGuard tunnel address to pass through `AllowedIPs = 10.10.10.2/32`. In this case, it is necessary to perform source address translation on NodeA, converting the internal source address to the WireGuard tunnel interface address.
 
     > 如果 WireGuard 隧道作为网关角色，NodeA 的内部客户端需要通过 WireGuard 隧道访问 NodeB 的隧道地址或内部网络，但 NodeB 的 `AllowedIP` 中只允许 NodeA 的 WireGuard 隧道地址通过 `AllowedIPs = 10.10.10.2/32`，则需要在 NodeA 上将内部源地址转换为 WireGuard 隧道接口地址。
 
@@ -181,7 +181,7 @@ PostDown = iptables -t mangle -D POSTROUTING -o %i -p tcp -m tcp --tcp-flags SYN
     PostDown = iptables -t nat -D POSTROUTING -o <WIREGUARD_INTERFACE_NAME> -j SNAT --to-source 10.10.10.2
     ```
 
-2. If NodeA accesses NodeB's internal network through a WireGuard tunnel, but NodeB's internal network devices do not have routes for WireGuard tunnel addresses, it is necessary to perform source address translation on NodeB, converting the source address of the WireGuard tunnel to NodeB's internal interface address. It is recommended to use the `iptables -s` parameter to match only the WireGuard tunnel subnet, in order to prevent other traffic going out from `INTERNAL_INTERFACE_NAME` from being translated.
+2. If NodeA accesses NodeB internal network through a WireGuard tunnel, but NodeB internal network devices do not have routes for WireGuard tunnel addresses, it is necessary to perform source address translation on NodeB, converting the source address of the WireGuard tunnel to NodeB internal interface address. It is recommended to use the `iptables -s` parameter to match only the WireGuard tunnel subnet, in order to prevent other traffic going out from `INTERNAL_INTERFACE_NAME` from being translated.
 
     > 如果 NodeA 通过 WireGuard 隧道访问 NodeB 的内部网络，但 NodeB 的内部网络设备并没有添加 WireGuard 隧道地址的路由表，需要在 NodeB 上将 WireGuard 隧道的源地址转为 NodeB 的内部接口地址。建议配合 `iptables -s` 参数仅匹配 WireGuard 隧道网段，防止其他从 `INTERNAL_INTERFACE_NAME` 出去的流量被转换。
 
