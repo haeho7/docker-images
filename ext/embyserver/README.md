@@ -24,7 +24,9 @@ docker run -d \
   -v /mnt/user/appdata/embyserver/embyserver-data:/config \
   -v /mnt/user/medias/moive:/data/movies \
   -v /mnt/user/medias/series/:/data/series \
-  haeho7/docker-images:embyserver-4.7.10.0
+  -v /mnt/user/medias/tv:/data/tv \
+  -v /mnt/user/medias/acg/:/data/acg \  
+  haeho7/docker-images:embyserver-4.7.14.0
 ```
 
 ## FAQs

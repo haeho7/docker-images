@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   embyserver:
-    image: haeho7/docker-images:embyserver-4.6.7.0
+    image: haeho7/docker-images:embyserver-4.7.14.0
     container_name: embyserver
     network_mode: host
     restart: unless-stopped
@@ -24,5 +24,7 @@ services:
     volumes:
       - ./embyserver-data:/config
       - /etc/localtime:/etc/localtime:ro
-      - /mnt/user/medias/moive/:/data/movies
+      - /mnt/user/medias/moives/:/data/movies
       - /mnt/user/medias/series/:/data/series
+      - /mnt/user/medias/tv/:/data/tv
+      - /mnt/user/medias/acg/:/data/acg
