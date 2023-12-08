@@ -1,5 +1,9 @@
-bind_host: 0.0.0.0
-bind_port: 3001
+http:
+  pprof:
+    port: 6060
+    enabled: false
+  address: 192.168.1.1:3001
+  session_ttl: 1h
 users:
 - name: example
   password: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -8,34 +12,23 @@ block_auth_min: 15
 http_proxy: ""
 language: zh-cn
 theme: auto
-debug_pprof: false
-web_session_ttl: 1
 dns:
   bind_hosts:
     - 192.168.1.1
     - 127.0.0.1
   port: 5354
-  statistics_interval: 1
-  querylog_enabled: true
-  querylog_file_enabled: true
-  querylog_interval: 168h
-  querylog_size_memory: 1000
   anonymize_client_ip: false
-  protection_enabled: true
-  blocking_mode: nxdomain
-  blocking_ipv4: ""
-  blocking_ipv6: ""
-  blocked_response_ttl: 300
-  parental_block_host: family-block.dns.adguard.com
-  safebrowsing_block_host: standard-block.dns.adguard.com
   ratelimit: 0
+  ratelimit_subnet_len_ipv4: 24
+  ratelimit_subnet_len_ipv6: 56
   ratelimit_whitelist: []
   refuse_any: false
   upstream_dns:
-    - 127.0.0.1
+    - 192.168.1.1
   upstream_dns_file: ""
   bootstrap_dns:
-    - 127.0.0.1
+    - 192.168.1.1
+  fallback_dns: []
   all_servers: false
   fastest_addr: false
   fastest_timeout: 1s
@@ -50,28 +43,21 @@ dns:
     - 127.0.0.0/8
     - ::1/128
   cache_size: 4194304
-  cache_ttl_min: 0
-  cache_ttl_max: 0
+  cache_ttl_min: 300
+  cache_ttl_max: 86400
   cache_optimistic: true
   bogus_nxdomain: []
   aaaa_disabled: false
   enable_dnssec: false
-  edns_client_subnet: false
+  edns_client_subnet:
+    custom_ip: ""
+    enabled: false
+    use_custom: false
   max_goroutines: 300
   handle_ddr: true
   ipset: []
   ipset_file: ""
-  filtering_enabled: true
-  filters_update_interval: 24
-  parental_enabled: false
-  safesearch_enabled: false
-  safebrowsing_enabled: false
-  safebrowsing_cache_size: 1048576
-  safesearch_cache_size: 1048576
-  parental_cache_size: 1048576
-  cache_time: 30
-  rewrites: []
-  blocked_services: []
+  bootstrap_prefer_ipv6: false
   upstream_timeout: 10s
   private_networks: []
   use_private_ptr_resolvers: true
@@ -80,6 +66,7 @@ dns:
   dns64_prefixes: []
   serve_http3: false
   use_http3_upstreams: false
+  serve_plain_dns: true
 tls:
   enabled: false
   server_name: ""
@@ -95,6 +82,16 @@ tls:
   certificate_path: ""
   private_key_path: ""
   strict_sni_check: false
+querylog:
+  ignored: []
+  interval: 168h
+  size_memory: 1000
+  enabled: true
+  file_enabled: true
+statistics:
+  ignored: []
+  interval: 24h
+  enabled: true
 filters:
   - enabled: true
     url: https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
@@ -129,7 +126,11 @@ user_rules:
   - '||ott.cibntv.net.lan^$client=''192.168.1.201'',important'
   - '||openspeech.cn^$client=''192.168.1.201'',important'
   - '||openspeech.cn.lan^$client=''192.168.1.201'',important'
-  - ""
+  - '# pi network'
+  - '@@||minepi.com^$important'
+  - '#@@||applovin.com^$important'
+  - '#@@||applvn.com^$important'
+  - '#@@||unity3d.com^$important'
 dhcp:
   enabled: false
   interface_name: ""
@@ -147,6 +148,36 @@ dhcp:
     lease_duration: 86400
     ra_slaac_only: false
     ra_allow_slaac: false
+filtering:
+  blocking_ipv4: ""
+  blocking_ipv6: ""
+  blocked_services:
+    schedule:
+      time_zone: Asia/Shanghai
+    ids: []
+  protection_disabled_until: null
+  safe_search:
+    enabled: false
+    bing: false
+    duckduckgo: false
+    google: false
+    pixabay: false
+    yandex: false
+    youtube: false
+  blocking_mode: nxdomain
+  parental_block_host: family-block.dns.adguard.com
+  safebrowsing_block_host: standard-block.dns.adguard.com
+  rewrites: []
+  safebrowsing_cache_size: 1048576
+  safesearch_cache_size: 1048576
+  parental_cache_size: 1048576
+  cache_time: 30
+  filters_update_interval: 24
+  blocked_response_ttl: 300
+  filtering_enabled: true
+  parental_enabled: false
+  safebrowsing_enabled: false
+  protection_enabled: true
 clients:
   runtime_sources:
     whois: true
@@ -155,15 +186,16 @@ clients:
     dhcp: true
     hosts: true
   persistent: []
-log_file: ""
-log_max_backups: 1
-log_max_size: 100
-log_max_age: 3
-log_compress: true
-log_localtime: true
-verbose: false
+log:
+  file: ""
+  max_backups: 1
+  max_size: 100
+  max_age: 3
+  compress: true
+  local_time: true
+  verbose: false
 os:
   group: ""
   user: ""
   rlimit_nofile: 1048576
-schema_version: 14
+schema_version: 27
