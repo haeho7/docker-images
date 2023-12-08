@@ -11,8 +11,6 @@ docker run -d \
   --network=br0 \
   --ip=192.168.1.29 \
   --restart=unless-stopped \
-  --memory=2G \
-  --memory-swap=4G \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \

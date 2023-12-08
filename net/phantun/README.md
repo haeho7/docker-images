@@ -13,8 +13,6 @@ docker run -d \
   --network=host \
   --privileged=true \
   --restart=unless-stopped \
-  --memory=512M \
-  --memory-swap=1G \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
@@ -35,8 +33,6 @@ docker run -d \
   --network=host \
   --privileged=true \
   --restart=unless-stopped \
-  --memory=512M \
-  --memory-swap=1G \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \

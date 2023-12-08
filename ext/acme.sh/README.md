@@ -10,8 +10,6 @@ docker run -d \
   --name=acme.sh \
   --network=host \
   --restart unless-stopped \
-  --memory=256M \
-  --memory-swap=512M \
   -e TZ=Asia/Shanghai \
   -e DP_Id='example' \
   -e DP_Key='example' \
