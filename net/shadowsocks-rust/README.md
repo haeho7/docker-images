@@ -200,6 +200,9 @@ Different encryption methods require different password lengths.
 - [@shadowsocks/shadowsocks-rust/issues/969](https://github.com/shadowsocks/shadowsocks-rust/issues/969)
 
 ```sh
+# ssservice genkey
+ssservice genkey -m <encrypt-method>
+
 # aes-128-gcm
 any plaintext character
 

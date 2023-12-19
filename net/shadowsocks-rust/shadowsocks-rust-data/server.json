@@ -11,6 +11,13 @@
             "server_port": 1984,
             "password": "${SHADOWSOCKS_PASSWORD_2}",
             "method": "2022-blake3-aes-128-gcm"
+        },
+        {
+            "server": "::",
+            "server_port": 2077,
+            "password": "${SHADOWSOCKS_PASSWORD_3}",
+            "method": "aes-128-gcm",
+            "acl": "/etc/shadowsocks-rust/server.acl"
         }
     ],
 
