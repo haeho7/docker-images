@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   jellyfin:
-    image: nyanmisaka/jellyfin:230901-amd64
+    image: nyanmisaka/jellyfin:240106-amd64
     container_name: jellyfin
     network_mode: host
     restart: unless-stopped
