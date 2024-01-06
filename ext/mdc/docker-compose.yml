@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   mdc:
-    image: vergilgao/mdc:6.4.1-r0
+    image: vergilgao/mdc:6.6.6-r0
     container_name: mdc
     network_mode: host
     restart: unless-stopped
