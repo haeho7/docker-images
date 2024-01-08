@@ -6,11 +6,11 @@ services:
     container_name: vaultwarden
     network_mode: host    
     restart: unless-stopped
+    user: 99:100
     logging:
       options:
         max-file: 1
         max-size: 20m
-    user: 99:100
     env_file: ./config.env
     environment:
       TZ: Asia/Shanghai

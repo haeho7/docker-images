@@ -17,10 +17,10 @@ services:
       TZ: Asia/Shanghai
       JELLYFIN_PublishedServerUrl: 192.168.1.20
     #ports:
-      #- 18096:8096
-      #- 18920:8920
-      #- 11900:1900/udp
-      #- 17359:7359/udp
+    #  - 18096:8096
+    #  - 18920:8920
+    #  - 11900:1900/udp
+    #  - 17359:7359/udp
     volumes:
       - ./jellyfin-data:/config
       - /mnt/user/medias/moives:/data/movies:ro

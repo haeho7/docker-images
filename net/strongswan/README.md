@@ -13,11 +13,11 @@ docker run -d \
   --restart unless-stopped \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  #-p 500:500/udp \
-  #-p 4500:4500/udp \
   -e PSK='PreSharedKey' \
   -e USERS='user1:password1,user2:password2' \
   -e DEBUG=0 \
+  #-p 500:500/udp \
+  #-p 4500:4500/udp \
   pexcn/docker-images:strongswan
 ```
 

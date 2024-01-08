@@ -23,7 +23,7 @@ services:
       WHITELIST: '127.0.0.1,192.168.1.*'
       HOST_WHITELIST: '*.demo.com'
       PEERPORT: 51413
-    # ports:
+    #ports:
     #  - 9091:9091
     #  - 51413:51413
     #  - 51413:51413/udp
