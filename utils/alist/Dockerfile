@@ -7,7 +7,7 @@
 #
 FROM golang:alpine AS builder
 
-ARG VERSION=v3.11.0
+ARG VERSION=v3.30.0
 RUN apk update \
   && apk add --no-cache --virtual .build-deps bash git gcc musl-dev curl \
   && git clone https://github.com/alist-org/alist.git --branch $VERSION \
@@ -22,7 +22,7 @@ RUN apk update \
 #
 # Runtime stage
 #
-FROM alpine:3.16
+FROM alpine:3.19
 LABEL maintainer="haeho7 <i@demo.com>"
 
 RUN apk update \
