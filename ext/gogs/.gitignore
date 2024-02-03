@@ -1,2 +1,3 @@
-gogs-data
+gogs-data/data
+gogs-data/log
 !gogs-data/gogs/conf/app.ini
