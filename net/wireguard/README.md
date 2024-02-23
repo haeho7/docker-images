@@ -180,6 +180,10 @@ PC & other Clinet -> Router Device (Routing) -> NodeA WireGuard Tunnel (Gateway)
 # NodeA Add
 PostUp = iptables -t mangle -A POSTROUTING -o %i -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
 PostDown = iptables -t mangle -D POSTROUTING -o %i -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
+
+# iptables-nft Usage
+#PostUp = iptables -t mangle -A POSTROUTING -o %i -p tcp -j TCPMSS --clamp-mss-to-pmtu
+#PostDown = iptables -t mangle -D POSTROUTING -o %i -p tcp -j TCPMSS --clamp-mss-to-pmtu
 ```
 
 ### Address Translation
@@ -219,6 +223,10 @@ PostDown = iptables -t mangle -D POSTROUTING -o %i -p tcp -m tcp --tcp-flags SYN
 
     PostDown = iptables -t nat -D POSTROUTING -s 10.10.10.0/24 -o br0 -j SNAT --to-source 192.168.1.10
     PostDown = iptables -t nat -D POSTROUTING -s 10.10.10.0/24 -o shim-br0 -j SNAT --to-source 192.168.1.10
+
+    # Or use MASQUERADE
+    #PostUp = ..... -s 10.10.10.0/24 -o br0 -j MASQUERADE
+    #PostDown = ..... -s 10.10.10.0/24 -o br0 -j MASQUERADE
     ```
 
 ### Access Control
