@@ -16,6 +16,7 @@ docker run -d \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
+  -e USE_IPTABLES_NFT_BACKEND=0 \
   -e PEER_RESOLVE_INTERVAL=0 \
   -v /mnt/user/appdata/wireguard/wireguard-data:/etc/wireguard \
   haeho7/docker-images:wireguard
@@ -39,6 +40,25 @@ Script source:
 
 - [@WireGuard/wireguard-tools/reresolve-dns](https://github.com/WireGuard/wireguard-tools/blob/master/contrib/reresolve-dns/reresolve-dns.sh)
 
+## Iptables Backend
+
+Use `iptables` or `iptables-nft` for `PostUp` and `PostDown`, it depends on the iptables backend used by your host machine.
+
+In alpine 3.18 and earlier, `iptables` is a symlink to `iptables-legacy`, and in alpine 3.19 `iptables-nft` is the default iptables backend.
+
+If the host uses the `iptables-nft` backend, the `USE_IPTABLES_NFT_BACKEND` environment variable needs to be set.
+
+> The iptables backend type used in the container needs to be consistent with that on the host.
+
+```sh
+# Debian 11 (bullseye)
+iptables -V
+iptables v1.8.7 (nf_tables)
+
+ls -al /usr/sbin/iptables
+lrwxrwxrwx 1 root root 26 12月 11 17:56 /usr/sbin/iptables -> /etc/alternatives/iptables
+```
+
 ## Generate Privatekey and Publickey
 
 ```sh
@@ -46,9 +66,6 @@ wg genkey | tee privatekey | wg pubkey > publickey && cat privatekey publickey
 ```
 
 ## Configs
-
-Use `iptables` or `iptables-nft` for `PostUp` and `PostDown`, it depends on the iptables backend used by your host machine.
-Under this image (based on alpine), `iptables` is the symlink of `iptables-legacy`, so `iptables-legacy` is used by default.
 
 ```sh
 #

@@ -29,7 +29,7 @@ LABEL maintainer="haeho7 <i@demo.com>"
 
 ARG WIREGUARD_VER=1.0.20210914-r3
 RUN apk update \
-  && apk add --no-cache tzdata \
+  && apk add --no-cache iptables ip6tables tzdata \
       wireguard-tools=$WIREGUARD_VER \
       wireguard-tools-doc=$WIREGUARD_VER \
   && rm -rf /var/cache/apk/*
@@ -39,6 +39,7 @@ RUN install /usr/share/doc/wireguard-tools/contrib/reresolve-dns/reresolve-dns.s
 COPY --from=builder /usr/bin/wireguard-go /usr/local/bin/
 COPY wireguard.sh /usr/local/bin/
 
+ENV USE_IPTABLES_NFT_BACKEND=0
 ENV PEER_RESOLVE_INTERVAL=0
 
 ENTRYPOINT ["wireguard.sh"]

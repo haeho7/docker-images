@@ -29,12 +29,24 @@ _graceful_stop() {
   exit 0
 }
 
+# set up an iptables or nf_tables symlink
+setup_iptables() {
+  local symlinks="iptables iptables-save iptables-restore ip6tables ip6tables-save ip6tables-restore"
+  local bindir="$(dirname "$(which iptables)")"
+  if [ "$USE_IPTABLES_NFT_BACKEND" = 1 ]; then
+    for symlink in ${symlinks}; do ln -sf xtables-nft-multi "${bindir}/${symlink}"; done
+  else
+    for symlink in ${symlinks}; do ln -sf xtables-legacy-multi "${bindir}/${symlink}"; done
+  fi
+}
+
 setup_environment() {
   # make configs be safe
   chmod 600 /etc/wireguard/*.conf
 
   # makesure ip_forward enabled
   sysctl -wq net.ipv4.ip_forward=1
+  sysctl -wq net.ipv6.conf.all.forwarding=1
 }
 
 start_wireguard() {
@@ -62,5 +74,6 @@ start_wireguard() {
   fi
 }
 
+setup_iptables
 setup_environment
 start_wireguard
