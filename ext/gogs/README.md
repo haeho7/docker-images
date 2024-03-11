@@ -15,7 +15,6 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -e PUID=99 \
   -e PGID=100 \
-  -e UMASK=022 \
   -v /mnt/user/appdata/gogs/gogs-data:/data \
   gogs/gogs:0.13
 ```

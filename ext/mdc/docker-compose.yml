@@ -14,7 +14,7 @@ services:
       TZ: Asia/Shanghai
       PUID: 99
       PGID: 100
-      UMASK: 022
+      UMASK: '022'
     volumes:
       - ./mdc-data:/config
       - /mnt/user/9kg/scan:/data

@@ -14,7 +14,7 @@ services:
       TZ: Asia/Shanghai
       PUID: 99
       PGID: 100
-      UMASK: 022
+      UMASK: '022'
       MARIADB_ROOT_PASSWORD: 'example'
       #MARIADB_DATABASE: example
       #MARIADB_USER: example
