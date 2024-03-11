@@ -18,7 +18,6 @@ services:
       TZ: Asia/Shanghai
       PUID: 99
       PGID: 100
-      UMASK: 022
       USER: example
       PASS: 'example'
       TRANSMISSION_WEB_HOME: '/transmission-web-control/'
