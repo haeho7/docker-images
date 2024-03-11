@@ -18,7 +18,6 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -e PUID=99 \
   -e PGID=100 \
-  -e UMASK=022 \
   -e USER=example \
   -e PASS='example' \
   -e TRANSMISSION_WEB_HOME='/transmission-web-control/' \
