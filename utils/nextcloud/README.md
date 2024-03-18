@@ -48,7 +48,7 @@ If you need to use a redis database, please create a [redis container](../redis/
 
 ### Mariadb
 
-If you need to use a mariadb database, please create a [mariadb container](../mariadb/README.md) first. For mariadb parameters, please refer to [mariadb.conf](../mariadb/mariadb-data/conf.d/mariadb.cnf)
+If you need to use a mariadb database, please create a [mariadb container](../mariadb/README.md) first. For mariadb parameters, please refer to [mariadb.cnf](../mariadb/mariadb-data/conf.d/mariadb.cnf)
 
 Initialize the database used by the nextcloud container in mariadb.
 
