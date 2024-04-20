@@ -17,8 +17,8 @@ docker run -d \
   #-v /mnt/user/appdata/rsync/conf/rsyncd.conf:/etc/rsyncd.conf \
   #-v /mnt/user/appdata/rsync/conf/rsyncd.secrets:/etc/rsyncd.secrets \
   -v /mnt/user:/mnt/user:ro \
-  -v /mnt/cache_backup/backup/nas_data_backup:/mnt/cache_backup/backup/nas_data_backup \
-  -v /mnt/cache_backup/backup/unraid_data_backup:/mnt/cache_backup/backup/unraid_data_backup \
+  -v /mnt/cache_backup/backup/nas-data-backup:/mnt/cache_backup/backup/nas-data-backup \
+  -v /mnt/cache_backup/backup/unraid-data-backup:/mnt/cache_backup/backup/unraid-data-backup \
   haeho7/docker-images:rsync
 ```
 
