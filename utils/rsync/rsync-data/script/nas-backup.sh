@@ -45,7 +45,7 @@ daily_backup() {
     --log-file=/srv/logs/daily_backup_"$(date +%Y%m%d_%H%M%S)".log \
     --log-file-format="[%i] %L [%B] [%U:%G] [%l bytes] %f (Trans: %b bytes)" \
     /mnt/user \
-    /mnt/cache_backup/backup/nas_data_backup \
+    /mnt/cache_backup/backup/nas-data-backup \
     #| tee /srv/logs/daily_backup_"$(date +%Y%m%d_%H%M%S)".log
 }
 
@@ -64,7 +64,7 @@ monthly_backup() {
     --log-file=/srv/logs/monthly_backup_"$(date +%Y%m%d_%H%M%S)".log \
     --log-file-format="[%i] %L [%B] [%U:%G] [%l bytes] %f (Trans: %b bytes)" \
     /mnt/user \
-    /mnt/cache_backup/backup/nas_data_backup \
+    /mnt/cache_backup/backup/nas-data-backup \
     #| tee /srv/logs/monthly_backup_"$(date +%Y%m%d_%H%M%S)".log
 }
 
