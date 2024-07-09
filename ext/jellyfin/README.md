@@ -25,7 +25,7 @@ docker run -d \
   -v /mnt/user/medias/series:/data/series:ro \
   -v /mnt/user/medias/tv:/data/tv:ro \
   -v /mnt/user/medias/acg:/data/acg:ro \
-  nyanmisaka/jellyfin:240106-amd64
+  nyanmisaka/jellyfin:240401-amd64
 ```
 
 ## Transcoding
