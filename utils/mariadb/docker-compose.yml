@@ -15,11 +15,12 @@ services:
       PUID: 99
       PGID: 100
       UMASK: '022'
-      MARIADB_ROOT_PASSWORD: 'example'
       #MARIADB_DATABASE: example
       #MARIADB_USER: example
       #MARIADB_PASSWORD: 'example'
-      #MARIADB_ROOT_HOST: '%'
+      MARIADB_ROOT_HOST: '%'
+      MARIADB_ROOT_PASSWORD='example'
     volumes:
-      - ./mariadb-data/conf.d/:/etc/mysql/conf.d
+      - ./mariadb-data/init.d:/docker-entrypoint-initdb.d
+      - ./mariadb-data/conf.d:/etc/mysql/conf.d
       - ./mariadb-data/data:/var/lib/mysql

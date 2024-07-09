@@ -16,12 +16,13 @@ docker run -d \
   -e PUID=99 \
   -e PGID=100 \
   -e UMASK=022 \
-  -e MARIADB_ROOT_PASSWORD='example' \
   #-e MARIADB_DATABASE=example \
   #-e MARIADB_USER=example \
   #-e MARIADB_PASSWORD='example' \
-  #-e MARIADB_ROOT_HOST='%' \
-  -v /mnt/user/appdata/mariadb/mariadb-data/conf.d/:/etc/mysql/conf.d \
+  -e MARIADB_ROOT_HOST='%' \
+  -e MARIADB_ROOT_PASSWORD='example' \
+  -v /mnt/user/appdata/mariadb/mariadb-data/init.d:/docker-entrypoint-initdb.d \
+  -v /mnt/user/appdata/mariadb/mariadb-data/conf.d:/etc/mysql/conf.d \
   -v /mnt/user/appdata/mariadb/mariadb-data/data:/var/lib/mysql \
   haeho7/docker-images:mariadb
 ```
