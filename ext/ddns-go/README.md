@@ -14,5 +14,5 @@ docker run -d \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
   -v /mnt/user/appdata/ddns-go/ddns-go-data:/root \
-  jeessy/ddns-go:v4.3.4
+  jeessy/ddns-go:v6.6.0
 ```
