@@ -46,7 +46,7 @@ If you use nginx to proxy nextcloud, you need to mount the nextcloud working dir
 
 If you need to use a redis database, please create a [redis container](../redis/README.md) first. For redis parameters, please refer to [redis.conf](../redis/redis-data/redis.conf)
 
-### Mariadb
+### MariaDB
 
 If you need to use a mariadb database, please create a [mariadb container](../mariadb/README.md) first. For mariadb parameters, please refer to [mariadb.cnf](../mariadb/mariadb-data/conf.d/mariadb.cnf)
 
@@ -58,7 +58,9 @@ CREATE DATABASE `nextcloud` CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_general_ci'
 
 CREATE USER `nextcloud`@`%` IDENTIFIED BY 'example';
 
-GRANT Alter, Alter Routine, Create, Create Routine, Create Temporary Tables, Create View, Delete, Drop, Event, Execute, Grant Option, Index, Insert, Lock Tables, References, Select, Show View, Trigger, Update ON `nextcloud`.* TO `nextcloud`@`%`;
+-- GRANT ALL PRIVILEGES ON `nextcloud`.* TO `nextcloud`@`%`;
+
+GRANT ALTER, ALTER ROUTINE, CREATE, CREATE ROUTINE, CREATE TEMPORARY TABLES, CREATE VIEW, DELETE, DROP, EXECUTE, INDEX, INSERT, LOCK TABLES, REFERENCES, SELECT, SHOW VIEW, TRIGGER, UPDATE ON `nextcloud`.* TO `nextcloud`@`%`;
 
 FLUSH PRIVILEGES;
 ```
