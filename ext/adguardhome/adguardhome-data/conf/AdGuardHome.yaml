@@ -24,13 +24,12 @@ dns:
   ratelimit_whitelist: []
   refuse_any: false
   upstream_dns:
-    - 192.168.1.1
+    - 127.0.0.1:5353
   upstream_dns_file: ""
   bootstrap_dns:
-    - 192.168.1.1
+    - 127.0.0.1:5353
   fallback_dns: []
-  all_servers: false
-  fastest_addr: false
+  upstream_mode: load_balance
   fastest_timeout: 1s
   allowed_clients:
     - 192.168.1.0/24
@@ -67,6 +66,7 @@ dns:
   serve_http3: false
   use_http3_upstreams: false
   serve_plain_dns: true
+  hostsfile_enabled: false
 tls:
   enabled: false
   server_name: ""
@@ -83,12 +83,14 @@ tls:
   private_key_path: ""
   strict_sni_check: false
 querylog:
+  dir_path: ""
   ignored: []
   interval: 168h
   size_memory: 1000
   enabled: true
   file_enabled: true
 statistics:
+  dir_path: ""
   ignored: []
   interval: 24h
   enabled: true
@@ -97,7 +99,7 @@ filters:
     url: https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
     name: AdGuard DNS filter
     id: 1
-  - enabled: true
+  - enabled: false
     url: https://adaway.org/hosts.txt
     name: AdAway Default Blocklist
     id: 2
@@ -109,16 +111,25 @@ filters:
     url: https://pgl.yoyo.org/adservers/serverlist.php?hostformat=adblockplus&showintro=0&mimetype=plaintext
     name: Yoyo Ad Servers
     id: 4
-  - enabled: false
+  - enabled: true
     url: https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-adguard.txt
     name: Anti-AD
     id: 5
+  - enabled: true
+    url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_50.txt
+    name: uBlock filters – Badware risks
+    id: 6
+  - enabled: true
+    url: https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt
+    name: 乘风视频过滤规则
+    id: 7
 whitelist_filters: []
 user_rules:
+  - '#'
+  - '# block'
+  - '#'
   - '# beyond-compare'
   - '||scootersoftware.com^$important'
-  - '# twitter'
-  - '@@||t.co^$important'
   - '# sharp-tv'
   - '||taobao.com^$client=''192.168.1.201'',important'
   - '||taobao.com.lan^$client=''192.168.1.201'',important'
@@ -126,11 +137,18 @@ user_rules:
   - '||ott.cibntv.net.lan^$client=''192.168.1.201'',important'
   - '||openspeech.cn^$client=''192.168.1.201'',important'
   - '||openspeech.cn.lan^$client=''192.168.1.201'',important'
+  - '#'
+  - '# unblock'
+  - '#'
   - '# pi network'
   - '@@||minepi.com^$important'
   - '#@@||applovin.com^$important'
   - '#@@||applvn.com^$important'
   - '#@@||unity3d.com^$important'
+  - '# twitter'
+  - '@@||t.co^$important'
+  - '# tvbox'
+  - '@@||fs-im-kefu.7moor-fs1.com^$client=''192.168.1.201'''
 dhcp:
   enabled: false
   interface_name: ""
@@ -160,6 +178,7 @@ filtering:
     enabled: false
     bing: false
     duckduckgo: false
+    ecosia: false
     google: false
     pixabay: false
     yandex: false
@@ -168,6 +187,8 @@ filtering:
   parental_block_host: family-block.dns.adguard.com
   safebrowsing_block_host: standard-block.dns.adguard.com
   rewrites: []
+  safe_fs_patterns:
+    - /opt/adguardhome/work/data/userfilters/*
   safebrowsing_cache_size: 1048576
   safesearch_cache_size: 1048576
   parental_cache_size: 1048576
@@ -187,6 +208,7 @@ clients:
     hosts: true
   persistent: []
 log:
+  enabled: true
   file: ""
   max_backups: 1
   max_size: 100
@@ -198,4 +220,4 @@ os:
   group: ""
   user: ""
   rlimit_nofile: 1048576
-schema_version: 27
+schema_version: 29
