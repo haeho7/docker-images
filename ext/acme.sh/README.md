@@ -23,29 +23,41 @@ docker run -d \
 
 The variable names for dnspod.cn domain are `DP_Id` and `DP_Key`
 
-- [@acme.sh/dnsapi#2-dnspodcn-option](https://github.com/acmesh-official/acme.sh/wiki/dnsapi#2-dnspodcn-option)
+- [@acme.sh/wiki/dnsapi#dns_dp](https://github.com/acmesh-official/acme.sh/wiki/dnsapi#2-dnspodcn-option)
 
-### DNSPod.com
+### CloudFlare
 
-The variable names for dnspod.com domain are `DPI_Id` and `DPI_Key`
+- [@acme.sh/wiki/dnsapi#dns_cf](https://github.com/acmesh-official/acme.sh/wiki/dnsapi#dns_cf)
 
-- [@acme.sh/dnsapi#48-use-dnspodcom-domain-api-to-automatically-issue-cert](https://github.com/acmesh-official/acme.sh/wiki/dnsapi#48-use-dnspodcom-domain-api-to-automatically-issue-cert)
+```sh
+# Single DNS zone
+CF_Zone_ID= <DNS Zone ID>
+CF_Token= <Token>
+
+# Multiple DNS zone
+CF_Account_ID= <Account ID>
+CF_Token= <Token>
+```
 
 ```sh
 # set-default-ca
 docker exec -it acme.sh --set-default-ca --server letsencrypt / zerossl
 
-# issue
-docker exec -it acme.sh --issue --dns dns_dp --dnssleep 30 --domain demo.com --domain *.demo.com --keylength ec-256 --email example@gmail.com
-docker exec -it acme.sh --issue --dns dns_dp --dnssleep 30 --domain local.demo.com --domain *.local.demo.com --keylength ec-256 --email example@gmail.com
+# issue dns_dp
+docker exec -it acme.sh --issue --dns dns_dp --dnssleep 30 --domain example.com --domain *.example.com --keylength ec-256 --email example@gmail.com
+docker exec -it acme.sh --issue --dns dns_dp --dnssleep 30 --domain local.example.com --domain *.local.example.com --keylength ec-256 --email example@gmail.com
+
+# issue cloudflare
+docker exec -it acme.sh --issue --dns dns_cf --dnssleep 30 --domain example.com --domain *.example.com --keylength ec-256 --email example@gmail.com
+docker exec -it acme.sh --issue --dns dns_cf --dnssleep 30 --domain local.example.com --domain *.local.example.com --keylength ec-256 --email example@gmail.com
 
 # renew
-docker exec -it acme.sh --renew --domain demo.com --domain *.demo.com --ecc --force
-docker exec -it acme.sh --renew --domain local.demo.com --domain *.local.demo.com --ecc --force
+docker exec -it acme.sh --renew --domain example.com --domain *.example.com --ecc --force
+docker exec -it acme.sh --renew --domain local.example.com --domain *.local.example.com --ecc --force
 
 # remove
-docker exec -it acme.sh --remove --domain demo.com --ecc
-docker exec -it acme.sh --remove --domain local.demo.com --ecc
+docker exec -it acme.sh --remove --domain example.com --ecc
+docker exec -it acme.sh --remove --domain local.example.com --ecc
 
 # show list
 docker exec -it acme.sh acme.sh --list
