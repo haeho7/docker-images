@@ -14,7 +14,7 @@ docker run -d \
   -e DP_Id='example' \
   -e DP_Key='example' \
   -v /mnt/user/appdata/acme.sh/acme.sh-data:/acme.sh \
-  neilpang/acme.sh:3.0.5 daemon
+  neilpang/acme.sh:3.1.0 daemon
 ```
 
 ## Issue Certificate

@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   acme.sh:
-    image: neilpang/acme.sh:3.0.5
+    image: neilpang/acme.sh:3.1.0
     container_name: acme.sh
     network_mode: host
     restart: unless-stopped
