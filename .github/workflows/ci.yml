@@ -40,6 +40,9 @@ jobs:
           # udp2raw
           - BUILD_CONTEXT: net/udp2raw
             TARGET_PLATFORMS: linux/amd64,linux/arm64
+          # nginx
+          - BUILD_CONTEXT: net/nginx
+            TARGET_PLATFORMS: linux/amd64,linux/arm64
           # webdav
           - BUILD_CONTEXT: utils/webdav
             TARGET_PLATFORMS: linux/amd64,linux/arm64
