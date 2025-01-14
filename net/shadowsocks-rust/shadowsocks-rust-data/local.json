@@ -18,12 +18,14 @@
 
     "servers": [
         {
+            "disabled": false,
             "server": "11.22.33.44",
             "server_port": 1776,
             "password": "${SHADOWSOCKS_PASSWORD_1}",
             "method": "2022-blake3-chacha8-poly1305"
         },
         {
+            "disabled": false,
             "server": "11.22.33.44",
             "server_port": 1984,
             "password": "${SHADOWSOCKS_PASSWORD_2}",
