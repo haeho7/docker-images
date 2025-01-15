@@ -5,6 +5,7 @@
 #
 # The design idea was derived from docker.sh by acmesh-official
 #
+# https://github.com/acmesh-official/acme.sh/wiki/deploy-to-docker-containers#2-deploy-certs-from-a-container-to-another-container
 # https://github.com/acmesh-official/acme.sh/blob/5b8d7a3/deploy/docker.sh
 #
 

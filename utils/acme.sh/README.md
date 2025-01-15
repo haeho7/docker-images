@@ -58,6 +58,10 @@ docker exec -it acme.sh --issue --dns dns_cf --dnssleep 30 --domain local.exampl
 docker exec -it acme.sh --renew --domain example.com --domain *.example.com --ecc --force
 docker exec -it acme.sh --renew --domain local.example.com --domain *.local.example.com --ecc --force
 
+# deploy
+docker exec -it acme.sh --deploy --deploy-hook docker -d example.com -d *.example.com --ecc
+docker exec -it acme.sh --deploy --deploy-hook docker -d local.example.com -d *.local.example.com --ecc
+
 # remove
 docker exec -it acme.sh --remove --domain example.com --ecc
 docker exec -it acme.sh --remove --domain local.example.com --ecc
