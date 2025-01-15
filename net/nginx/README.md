@@ -15,6 +15,7 @@ docker run -d \
   --cap-add=NET_ADMIN \
   --cap-add=SYS_ADMIN \
   --cap-add=SYS_NICE \
+  -l me.local.container.name=nginx \
   -e TZ=Asia/Shanghai \
   -v /mnt/user/appdata/nginx/nginx-data/nginx.conf:/etc/nginx/nginx.conf \
   -v /mnt/user/appdata/nginx/nginx-data/conf.d:/etc/nginx/conf.d \

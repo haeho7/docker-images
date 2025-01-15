@@ -13,7 +13,7 @@ services:
       - SYS_ADMIN
       - SYS_NICE
     labels:
-      - "me.haeho7.container.name=nginx"
+      - me.local.container.name=nginx
     environment:
       TZ: Asia/Shanghai
     volumes:
