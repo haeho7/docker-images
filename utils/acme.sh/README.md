@@ -62,9 +62,15 @@ docker exec -it acme.sh --renew --domain local.example.com --domain *.local.exam
 docker exec -it acme.sh --deploy --deploy-hook docker -d example.com -d *.example.com --ecc
 docker exec -it acme.sh --deploy --deploy-hook docker -d local.example.com -d *.local.example.com --ecc
 
+# revoke
+docker exec -it acme.sh --revoke -d example.com -d *.example.com --ecc
+docker exec -it acme.sh --revoke -d local.example.com -d *.local.example.com --ecc
+
 # remove
 docker exec -it acme.sh --remove --domain example.com --ecc
 docker exec -it acme.sh --remove --domain local.example.com --ecc
+docker exec -it acme.sh rm -r /acme.sh/example.com_ecc
+docker exec -it acme.sh rm -r /acme.sh/local.example.com_ecc
 
 # show list
 docker exec -it acme.sh acme.sh --list
@@ -72,7 +78,7 @@ docker exec -it acme.sh acme.sh --list
 
 ## Notes
 
-The certificate obtained through the `ACME` container cannot be revoked in the `ZeroSSL` control panel, but the `ZeroSSL` account can be canceled and registered again.
+The Certificates obtained through the ACME container cannot be manually revoked in the ZeroSSL control panel. need to use the `acme.sh --revoke` command.
 
 ## Acknowledgments
 
