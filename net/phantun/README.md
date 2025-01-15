@@ -18,7 +18,7 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -e USE_IPTABLES_NFT_BACKEND=0 \
   -e RUST_LOG=INFO \
-  haheo7/docker-images:phantun \
+  haeho7/docker-images:phantun \
   phantun-server \
   --local 1025 \
   --remote 127.0.0.1:1025 \
@@ -38,7 +38,7 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -e USE_IPTABLES_NFT_BACKEND=0 \
   -e RUST_LOG=INFO \
-  haheo7/docker-images:phantun \
+  haeho7/docker-images:phantun \
   phantun-client \
   --local 127.0.0.1:1025 \
   --remote 11.22.33.44:1025 \

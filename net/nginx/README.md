@@ -23,7 +23,7 @@ docker run -d \
   -v /mnt/user/appdata/nginx/nginx-data/stream.d:/etc/nginx/stream.d \
   -v /mnt/user/appdata/nginx/nginx-data/html:/etc/nginx/html \
   -v /mnt/user/appdata/acme.sh/acme.sh-data:/cert \
-  haheo7/docker-images:nginx
+  haeho7/docker-images:nginx
 ```
 
 ## Repair File Permissions

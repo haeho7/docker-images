@@ -17,7 +17,7 @@ docker run -d \
   -e DEPLOY_DOCKER_CONTAINER_RELOAD_CMD: 'nginx -s reload' \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   -v /mnt/user/appdata/acme.sh/acme.sh-data:/acme.sh \
-  haheo7/docker-images:acme.sh
+  haeho7/docker-images:acme.sh
 ```
 
 ## Issue Certificate

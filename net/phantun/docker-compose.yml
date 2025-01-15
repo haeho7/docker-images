@@ -3,7 +3,7 @@ version: '3.9'
 services:
   # server
   phantun:
-    image: haheo7/docker-images:phantun
+    image: haeho7/docker-images:phantun
     container_name: phantun-tinyfecvpn
     network_mode: host
     privileged: true
@@ -27,7 +27,7 @@ services:
 
   # client
   phantun:
-    image: haheo7/docker-images:phantun
+    image: haeho7/docker-images:phantun
     container_name: phantun
     restart: unless-stopped
     network_mode: host
