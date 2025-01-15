@@ -67,6 +67,9 @@ jobs:
           # transmission
           - BUILD_CONTEXT: utils/transmission
             TARGET_PLATFORMS: linux/amd64,linux/arm64
+          # acme.sh
+          - BUILD_CONTEXT: utils/acme.sh
+            TARGET_PLATFORMS: linux/amd64,linux/arm64
     steps:
       # prepare
       - name: Checkout

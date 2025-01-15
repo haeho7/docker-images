@@ -11,10 +11,13 @@ docker run -d \
   --network=host \
   --restart unless-stopped \
   -e TZ=Asia/Shanghai \
-  -e DP_Id='example' \
-  -e DP_Key='example' \
+  -e CF_Zone_ID='example' \
+  -e CF_Token='example' \
+  -e DEPLOY_DOCKER_CONTAINER_LABEL: 'me.local.container.name=nginx' \
+  -e DEPLOY_DOCKER_CONTAINER_RELOAD_CMD: 'nginx -s reload' \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
   -v /mnt/user/appdata/acme.sh/acme.sh-data:/acme.sh \
-  neilpang/acme.sh:3.1.0 daemon
+  haheo7/docker-images:acme.sh
 ```
 
 ## Issue Certificate
@@ -66,3 +69,7 @@ docker exec -it acme.sh acme.sh --list
 ## Notes
 
 The certificate obtained through the `ACME` container cannot be revoked in the `ZeroSSL` control panel, but the `ZeroSSL` account can be canceled and registered again.
+
+## Acknowledgments
+
+- [@pexcn/docker-images/acme.sh](https://github.com/pexcn/docker-images/tree/master/utils/acme.sh)

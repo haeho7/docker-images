@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  acme.sh:
+    image: haheo7/docker-images:acme.sh
+    container_name: acme.sh
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Shanghai
+      CF_Zone_ID: 'example'
+      CF_Token: 'example'
+      DEPLOY_DOCKER_CONTAINER_LABEL: 'me.local.container.name=nginx' \
+      DEPLOY_DOCKER_CONTAINER_RELOAD_CMD: 'nginx -s reload' \
+    command: daemon
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./acme.sh-data:/acme.sh
