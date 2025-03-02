@@ -13,8 +13,8 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -e CF_Zone_ID='example' \
   -e CF_Token='example' \
-  -e DEPLOY_DOCKER_CONTAINER_LABEL: 'me.local.container.name=nginx' \
-  -e DEPLOY_DOCKER_CONTAINER_RELOAD_CMD: 'nginx -s reload' \
+  -e DEPLOY_DOCKER_CONTAINER_LABEL='me.local.container.name=nginx' \
+  -e DEPLOY_DOCKER_CONTAINER_RELOAD_CMD='nginx -s reload' \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   -v /mnt/user/appdata/acme.sh/acme.sh-data:/acme.sh \
   haeho7/docker-images:acme.sh
