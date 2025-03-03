@@ -3,8 +3,9 @@
 ## Usage
 
 ```sh
+# daemon
 docker run -d \
-  --name=rsync \
+  --name=rsync-daemon \
   --network=host \
   --privileged=true \
   --restart=unless-stopped \
@@ -12,12 +13,41 @@ docker run -d \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
   -e ENABLE_DAEMON=1 \
-  -e CRONTAB='0 */12 * * * /srv/script/backup.sh > /proc/1/fd/1' \
+  #-v /mnt/user/appdata/rsync/conf/rsyncd.conf:/etc/rsyncd.conf \
+  #-v /mnt/user/appdata/rsync/conf/rsyncd.secrets:/etc/rsyncd.secrets \
+  -v /mnt/user:/mnt/user:ro \
+  haeho7/docker-images:rsync
+
+# nas
+docker run -d \
+  --name=rsync-nas \
+  --network=host \
+  --privileged=true \
+  --restart=unless-stopped \
+  --log-opt max-file=1 \
+  --log-opt max-size=20m \
+  -e TZ=Asia/Shanghai \
+  -e CRONTAB='0 */12 * * * /srv/script/nas-backup.sh > /proc/1/fd/1' \
   -v /mnt/user/appdata/rsync/rsync-data:/srv \
   #-v /mnt/user/appdata/rsync/conf/rsyncd.conf:/etc/rsyncd.conf \
   #-v /mnt/user/appdata/rsync/conf/rsyncd.secrets:/etc/rsyncd.secrets \
   -v /mnt/user:/mnt/user:ro \
   -v /mnt/cache_backup/backup/nas-data-backup:/mnt/cache_backup/backup/nas-data-backup \
+  haeho7/docker-images:rsync
+
+# unraid
+docker run -d \
+  --name=rsync-unraid \
+  --network=host \
+  --privileged=true \
+  --restart=unless-stopped \
+  --log-opt max-file=1 \
+  --log-opt max-size=20m \
+  -e TZ=Asia/Shanghai \
+  -e CRONTAB='0 */12 * * * /srv/script/unraid-backup.sh > /proc/1/fd/1' \
+  -v /mnt/user/appdata/rsync/rsync-data:/srv \
+  #-v /mnt/user/appdata/rsync/conf/rsyncd.conf:/etc/rsyncd.conf \
+  #-v /mnt/user/appdata/rsync/conf/rsyncd.secrets:/etc/rsyncd.secrets \
   -v /mnt/cache_backup/backup/unraid-data-backup:/mnt/cache_backup/backup/unraid-data-backup \
   haeho7/docker-images:rsync
 ```
@@ -69,9 +99,9 @@ delta-transmission enabled
 
 ## Docker Privileged
 
-- [@discuss.linuxcontainers.org](https://discuss.linuxcontainers.org/t/cant-run-libvirt-qemu-kvm-in-an-unprivileged-domain-anymore-unable-to-set-xattr/9466/3)
+- [@discuss.linuxcontainers.org](https://discuss.linuxcontainers.org/t/cant-run-libvirt-qemu-kvm-in-an-unprivileged-domain-anymore-unable-to-set-xattr/9466)
 
-If the `Privileged` parameter is not enabled for the rsync container, an error will be reported when rsync uses the `--xattrs` parameter to back up virtual images such as `Libvirt` or `QEMU-KVM`:
+If the `Privileged` parameter is not enabled for the rsync container, an exception error will occur when using the `--xattrs` parameter to back up virtual images such as `Libvirt` or `QEMU-KVM`.
 
 ```sh
 # client rsync backup parameter
@@ -99,9 +129,9 @@ total size is 13,958,737,658  speedup is 3,666,597.76 (DRY RUN)
 rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1816) [generator=3.2.3]
 ```
 
-## opt--itemize-changes
+## itemize-changes
 
-- [@samba.org/ftp/rsync/opt--itemize-changes](https://www.samba.org/ftp/rsync/rsync.html#opt--itemize-changes)
+- [@samba.org/ftp/rsync/opt--itemize-changes](https://download.samba.org/pub/rsync/rsync.1#opt--itemize-changes)
 
 ```sh
 tail -n 10 /srv/logs/nas_data_backup_20221231_213022.log
