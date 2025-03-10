@@ -18,7 +18,6 @@ services:
       TZ: Asia/Shanghai
       PUID: 99
       PGID: 100
-      UMASK: '022'
       DAVFS2_ASK_AUTH: 0
       WEBDRIVE_URL: 'http://localhost:5244/dav'
       WEBDRIVE_USERNAME: example

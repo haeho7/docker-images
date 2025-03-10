@@ -15,7 +15,6 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -e PUID=99 \
   -e PGID=100 \
-  -e UMASK=022 \
   -e USERNAME=example \
   -e PASSWORD='example' \
   -v /mnt/user/appdata/webdav/webdav-data:/config \

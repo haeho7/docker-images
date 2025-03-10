@@ -14,7 +14,6 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -e PUID=99 \
   -e PGID=100 \
-  -e UMASK=022 \
   -e DAVFS2_ASK_AUTH=0 \
   -e WEBDRIVE_URL='http://localhost:5244/dav' \
   -e WEBDRIVE_USERNAME=example \

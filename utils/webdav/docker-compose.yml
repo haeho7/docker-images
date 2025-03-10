@@ -14,7 +14,6 @@ services:
       TZ: Asia/Shanghai
       PUID: 99
       PGID: 100
-      UMASK: '022'
       USERNAME: example
       PASSWORD: 'example'
     volumes:

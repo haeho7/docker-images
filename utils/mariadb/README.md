@@ -15,7 +15,6 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -e PUID=99 \
   -e PGID=100 \
-  -e UMASK=022 \
   #-e MARIADB_DATABASE=example \
   #-e MARIADB_USER=example \
   #-e MARIADB_PASSWORD='example' \
