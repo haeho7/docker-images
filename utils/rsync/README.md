@@ -29,8 +29,6 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -e CRONTAB='0 */12 * * * /srv/script/nas-backup.sh > /proc/1/fd/1' \
   -v /mnt/user/appdata/rsync/rsync-data:/srv \
-  #-v /mnt/user/appdata/rsync/conf/rsyncd.conf:/etc/rsyncd.conf \
-  #-v /mnt/user/appdata/rsync/conf/rsyncd.secrets:/etc/rsyncd.secrets \
   -v /mnt/user:/mnt/user:ro \
   -v /mnt/cache_backup/backup/nas-data-backup:/mnt/cache_backup/backup/nas-data-backup \
   haeho7/docker-images:rsync
@@ -46,8 +44,6 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -e CRONTAB='0 */12 * * * /srv/script/unraid-backup.sh > /proc/1/fd/1' \
   -v /mnt/user/appdata/rsync/rsync-data:/srv \
-  #-v /mnt/user/appdata/rsync/conf/rsyncd.conf:/etc/rsyncd.conf \
-  #-v /mnt/user/appdata/rsync/conf/rsyncd.secrets:/etc/rsyncd.secrets \
   -v /mnt/cache_backup/backup/unraid-data-backup:/mnt/cache_backup/backup/unraid-data-backup \
   haeho7/docker-images:rsync
 ```

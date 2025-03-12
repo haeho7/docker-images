@@ -18,7 +18,7 @@ services:
       #MARIADB_USER: example
       #MARIADB_PASSWORD: 'example'
       MARIADB_ROOT_HOST: '%'
-      MARIADB_ROOT_PASSWORD='example'
+      MARIADB_ROOT_PASSWORD: 'example'
     volumes:
       - ./mariadb-data/init.d:/docker-entrypoint-initdb.d
       - ./mariadb-data/conf.d:/etc/mysql/conf.d
