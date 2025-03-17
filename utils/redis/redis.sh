@@ -36,19 +36,19 @@ _is_exist_conf() {
   fi
 }
 
-_setup_user_info() {
+_setup_user() {
   usermod -o -u ${PUID} -g ${GROUP} -aG ${GROUPS} -s /bin/ash ${USER}
   groupmod -o -g ${PGID} ${GROUP}
   umask ${UMASK}
 }
 
-_setup_owne () {
+_setup_owne() {
   chown ${PUID}:${PGID} /data/*.conf
 }
 
 start_redis() {
   _is_exist_conf
-  _setup_user_info
+  _setup_user
   _setup_owne
 
   # call redis official startup script

@@ -36,20 +36,20 @@ _is_exist_conf() {
   fi
 }
 
-_setup_user_info() {
+_setup_user() {
   usermod -o -u ${PUID} -g ${GROUP} -aG ${GROUPS} -s /bin/ash ${USER}
   groupmod -o -g ${PGID} ${GROUP}
   umask ${UMASK}
 }
 
-_setup_owne () {
+_setup_owne() {
   chown ${PUID}:${PGID} /config/*.yml
   chown ${PUID}:${PGID} /data/
 }
 
 start_webdav() {
   _is_exist_conf
-  _setup_user_info
+  _setup_user
   _setup_owne
   exec gosu ${PUID}:${PGID} webdav -c ${CONFIG_FILE} "$@"
   #exec gosu ${PUID}:${PGID} sh -c "umask ${UMASK} && webdav -c ${CONFIG_FILE}"

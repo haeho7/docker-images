@@ -30,7 +30,7 @@ warn() {
   printf "${yellow}[${time}] [WARN]: ${clear}%s\n" "$*" >&2
 }
 
-_setup_user_info() {
+_setup_user() {
   usermod -o -u ${PUID} -g ${GROUP} -aG ${GROUPS} -s /bin/ash ${USER}
   groupmod -o -g ${PGID} ${GROUP}
   umask ${UMASK}
@@ -47,10 +47,10 @@ start_crond() {
 }
 
 start_nextcloud() {
-  _setup_user_info
+  _setup_user
   start_crond
 
-  # call nextcloud official startup script
+  # call official startup script
   exec /entrypoint.sh "$@"
 }
 
