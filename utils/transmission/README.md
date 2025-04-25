@@ -9,7 +9,7 @@
 ```sh
 docker run -d \
   --name=transmission \
-  --network=br0 \
+  --network=external-network \
   --ip=192.168.1.29 \
   --restart=unless-stopped \
   --log-opt max-file=1 \
@@ -40,15 +40,16 @@ When creating a macvlan, if the bridge device, `parent` needs to specify a bridg
 
 ```sh
 # create network
-docker network create -d macvlan \
+docker network create \
+  --driver=macvlan \
   --subnet=192.168.1.0/24 \
   --gateway=192.168.1.1 \
-  -o parent=br0 \
-  br0
+  --opt parent=br0 \
+  external-network
 
 # show network
 docker network ls
-docker network inspect br0
+docker network inspect external-network
 ```
 
 ## BT or PT

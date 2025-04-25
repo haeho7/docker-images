@@ -6,7 +6,7 @@ services:
     container_name: transmission
     restart: unless-stopped
     networks:
-      default:
+       external-network:
         ipv4_address: 192.168.1.29
     logging:
       options:
@@ -30,6 +30,6 @@ services:
       - /mnt/user/torrent/watch:/watch
 
 networks:
-  default:
-    name: br0
+   external-network:
+    name: external-network
     external: true
