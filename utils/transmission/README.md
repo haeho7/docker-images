@@ -25,8 +25,8 @@ docker run -d \
   -e HOST_WHITELIST='*.demo.com' \
   -e PEERPORT=51314 \
   -v /mnt/user/appdata/transmission/transmission-data:/config \
-  -v /mnt/user/torrent:/downloads \
   -v /mnt/user/torrent/watch:/watch \
+  -v /mnt/user/torrent/downloads:/downloads \
   haeho7/docker-images:transmission
 ```
 

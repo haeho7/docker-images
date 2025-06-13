@@ -6,7 +6,7 @@ services:
     container_name: transmission
     restart: unless-stopped
     networks:
-      transmission-network:
+      external-network:
         ipv4_address: 192.168.1.29
     logging:
       options:
@@ -26,12 +26,12 @@ services:
       PEERPORT: 51314
     volumes:
       - ./transmission-data:/config
-      - /mnt/user/torrent/:/downloads
       - /mnt/user/torrent/watch:/watch
+      - /mnt/user/torrent/downloads:/downloads
 
 networks:
-  transmission-network:
-    name: transmission-network
+  external-network:
+    name: external-network
     driver: macvlan
     driver_opts:
       parent: eth0

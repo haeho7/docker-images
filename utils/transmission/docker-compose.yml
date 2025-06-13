@@ -26,8 +26,8 @@ services:
       PEERPORT: 51314
     volumes:
       - ./transmission-data:/config
-      - /mnt/user/torrent/:/downloads
       - /mnt/user/torrent/watch:/watch
+      - /mnt/user/torrent/downloads:/downloads
 
 networks:
    external-network:
