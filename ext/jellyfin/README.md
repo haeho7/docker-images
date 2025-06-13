@@ -31,14 +31,19 @@ docker run -d \
 ## Transcoding
 
 ```sh
-# Base
+# Hardware acceleration
 Hardware acceleration: Inter QuickSync (QSV)
 Enable hardware decoding for: All
 Prefer OS native DXVA or VA-API hardware decoders: No
 
 # Hardware encoding options
 Enable hardware encoding: Yes
+
+# Encoding format options
+# need to confirm whether the GPU supports HEVC or AV1 encoding
 Allow encoding in HEVC format: Yes
+Allow encoding in AV1 format: No
+
 Enable Tone mapping: Yes
 Select the Tone mapping algorithm to use: BT.2390
 Allow subtitle extraction on the fly: Yes
