@@ -27,7 +27,7 @@ LABEL maintainer="haeho7 <i@demo.com>"
 
 RUN apk update \
   && apk add tzdata shadow \
-  && apk add gosu --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing \
+  && apk add gosu --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community \
   && rm -rf /var/cache/apk/*
 
 RUN groupadd -r webdav \
