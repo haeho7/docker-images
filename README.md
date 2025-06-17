@@ -1,6 +1,6 @@
 # Docker Images
 
-[![CI](https://github.com/haeho7/docker-images/workflows/CI/badge.svg)](https://github.com/haeho7/docker-images/actions)
+[![Build](https://github.com/haeho7/docker-images/actions/workflows/ci.yml/badge.svg)](https://github.com/haeho7/docker-images/actions)
 
 Personally made docker images.
 
