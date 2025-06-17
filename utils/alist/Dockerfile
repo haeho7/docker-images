@@ -7,9 +7,9 @@
 #
 FROM golang:alpine AS builder
 
-ARG VERSION=v3.30.0
+ARG VERSION=v3.39.4
 RUN apk update \
-  && apk add --no-cache --virtual .build-deps bash git gcc musl-dev curl \
+  && apk add --no-cache --virtual .build-deps bash curl git gcc musl-dev \
   && git clone https://github.com/alist-org/alist.git --branch $VERSION \
   && cd alist \
   && bash build.sh release docker \
@@ -26,8 +26,8 @@ FROM alpine:3.19
 LABEL maintainer="haeho7 <i@demo.com>"
 
 RUN apk update \
-  && apk add --no-cache tzdata shadow \
-  && apk add --no-cache gosu --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing \
+  && apk add --no-cache tzdata shadow ffmpeg \
+  && apk add --no-cache gosu --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community \
   && rm -rf /var/cache/apk/*
 
 RUN groupadd -r alist \
@@ -39,6 +39,6 @@ COPY alist.sh /usr/local/bin/
 VOLUME /opt/alist/data
 WORKDIR /opt/alist
 
-EXPOSE 5244
+EXPOSE 5244 5245
 
 ENTRYPOINT ["alist.sh"]
