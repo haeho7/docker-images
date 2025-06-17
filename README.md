@@ -17,7 +17,7 @@ docker pull ghcr.io/haeho7/docker-images:<tag>
 ## License
 
 ```
-Copyright (C) 2021-2023, haeho7
+Copyright (C) 2021-2025, haeho7
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
