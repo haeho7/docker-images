@@ -118,7 +118,7 @@ RUN apk update \
 # Runtime stage
 #
 FROM alpine:3.20
-LABEL maintainer="haeho7 <haeho7@.gmail.com>"
+LABEL maintainer="haeho7 <i@demo.com>"
 
 RUN apk update \
   && apk add --no-cache tzdata \
