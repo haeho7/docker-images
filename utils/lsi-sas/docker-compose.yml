@@ -1,0 +1,14 @@
+services:
+  lsi-sas:
+    image: haeho7/docker-images:lsi-sas
+    container_name: lsi-sas
+    network_mode: host
+    privileged: true
+    restart: unless-stopped
+    logging:
+      options:
+        max-file: 1
+        max-size: 20m
+    environment:
+      TZ: Asia/Shanghai
+    command: ["sleep", "infinity"]
