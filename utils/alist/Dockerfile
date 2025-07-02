@@ -17,7 +17,7 @@ RUN apk update \
   && bash build.sh release docker \
   && cp bin/alist /usr/local/bin/ \
   && cd - \
-  && rm -r alist \
+  && rm -rf alist \
   && apk del .build-deps \
   && rm -rf /var/cache/apk/*
 
