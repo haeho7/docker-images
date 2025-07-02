@@ -12,6 +12,8 @@ RUN apk update \
   && apk add --no-cache --virtual .build-deps bash curl git gcc musl-dev \
   && git clone https://github.com/alist-org/alist.git --branch $VERSION \
   && cd alist \
+  && sed -i 's|repos/alist-org/alist-web/releases/latest|repos/alist-org/alist-web/releases/tags/3.39.2|g' build.sh \
+  && sed -i 's|alist-org/alist-web/releases/latest/download|alist-org/alist-web/releases/download/3.39.2|g' build.sh \
   && bash build.sh release docker \
   && cp bin/alist /usr/local/bin/ \
   && cd - \
