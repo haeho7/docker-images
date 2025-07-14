@@ -38,7 +38,7 @@ dns:
   blocked_hosts:
     - hostname.bind
   trusted_proxies:
-    - 192.168.1.10/32
+    - 192.168.1.21/32
     - 127.0.0.0/8
     - ::1/128
   cache_size: 4194304

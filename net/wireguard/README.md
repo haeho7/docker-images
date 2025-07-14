@@ -208,8 +208,8 @@ PostDown = iptables -t mangle -D POSTROUTING -o %i -p tcp -m tcp --tcp-flags SYN
 
     ```sh
     # NodeB Add
-    PostUp = iptables -t nat -A POSTROUTING -s <WIREGUARD_TUNNEL_NETWORK> -o <INTERNAL_INTERFACE_NAME> -j SNAT --to-source 192.168.1.10
-    PostDown = iptables -t nat -D POSTROUTING -s <WIREGUARD_TUNNEL_NETWORK> -o <INTERNAL_INTERFACE_NAME> -j SNAT --to-source 192.168.1.10
+    PostUp = iptables -t nat -A POSTROUTING -s <WIREGUARD_TUNNEL_NETWORK> -o <INTERNAL_INTERFACE_NAME> -j SNAT --to-source 192.168.1.21
+    PostDown = iptables -t nat -D POSTROUTING -s <WIREGUARD_TUNNEL_NETWORK> -o <INTERNAL_INTERFACE_NAME> -j SNAT --to-source 192.168.1.21
     ```
 
 3. If the Docker settings in the unRAID system have enabled `Host access to custom networks`, which means that both the `br0` and `shim-br0` network interfaces exist in the system, it is necessary to configure both interfaces simultaneously when performing source address translation. Failure to do so may result in abnormal traffic access.
@@ -218,11 +218,11 @@ PostDown = iptables -t mangle -D POSTROUTING -o %i -p tcp -m tcp --tcp-flags SYN
 
     ```sh
     # NodeB Add
-    PostUp = iptables -t nat -A POSTROUTING -s 10.10.10.0/24 -o br0 -j SNAT --to-source 192.168.1.10
-    PostUp = iptables -t nat -A POSTROUTING -s 10.10.10.0/24 -o shim-br0 -j SNAT --to-source 192.168.1.10
+    PostUp = iptables -t nat -A POSTROUTING -s 10.10.10.0/24 -o br0 -j SNAT --to-source 192.168.1.21
+    PostUp = iptables -t nat -A POSTROUTING -s 10.10.10.0/24 -o shim-br0 -j SNAT --to-source 192.168.1.21
 
-    PostDown = iptables -t nat -D POSTROUTING -s 10.10.10.0/24 -o br0 -j SNAT --to-source 192.168.1.10
-    PostDown = iptables -t nat -D POSTROUTING -s 10.10.10.0/24 -o shim-br0 -j SNAT --to-source 192.168.1.10
+    PostDown = iptables -t nat -D POSTROUTING -s 10.10.10.0/24 -o br0 -j SNAT --to-source 192.168.1.21
+    PostDown = iptables -t nat -D POSTROUTING -s 10.10.10.0/24 -o shim-br0 -j SNAT --to-source 192.168.1.21
 
     # Or use MASQUERADE
     #PostUp = ..... -s 10.10.10.0/24 -o br0 -j MASQUERADE

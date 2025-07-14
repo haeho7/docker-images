@@ -15,16 +15,16 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -e PUID=99 \
   -e PGID=100 \
-  -e MYSQL_HOST='192.168.1.20:3306' \
+  -e MYSQL_HOST='192.168.1.31:3306' \
   -e MYSQL_DATABASE=nextcloud \
   -e MYSQL_USER=nextcloud \
   -e MYSQL_PASSWORD='example' \
-  -e REDIS_HOST='192.168.1.20' \
+  -e REDIS_HOST='192.168.1.31' \
   -e REDIS_HOST_PORT=6379 \
   -e REDIS_HOST_PASSWORD='example' \
   -e NEXTCLOUD_ADMIN_USER=example \
   -e NEXTCLOUD_ADMIN_PASSWORD='example' \
-  -e NEXTCLOUD_TRUSTED_DOMAINS='192.168.1.20 nextcloud.demo.com nextcloud.local.demo.com' \
+  -e NEXTCLOUD_TRUSTED_DOMAINS='192.168.1.31 nextcloud.demo.com nextcloud.local.demo.com' \
   -e PHP_MEMORY_LIMIT=1024M \
   -e PHP_UPLOAD_LIMIT=0 \
   -v /mnt/user/appdata/nextcloud/nextcloud-data:/var/www/nextcloud \

@@ -109,7 +109,7 @@ rsync -vv \
   --checksum \
   --hard-links \
   --xattrs \
-  user1@192.168.1.10::unRAID \
+  user1@192.168.1.21::unRAID \
   /mnt/user/backup/test \
   --password-file=<(cat ./rsyncd.secrets | cut -d ':' -f 2)
 

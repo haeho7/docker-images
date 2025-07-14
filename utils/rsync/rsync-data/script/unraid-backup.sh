@@ -45,7 +45,7 @@ daily_backup() {
     --log-file=/srv/logs/daily_backup_"$(date +%Y%m%d_%H%M%S)".log \
     --log-file-format="[%i] %L [%B] [%U:%G] [%l bytes] %f (Trans: %b bytes)" \
     --password-file=<(cat /etc/rsyncd.secrets | cut -d ':' -f 2) \
-    user1@192.168.1.10::unRAID \
+    user1@192.168.1.21::unRAID \
     /mnt/cache_backup/backup/unraid-data-backup \
     #| tee /srv/logs/daily_backup_"$(date +%Y%m%d_%H%M%S)".log
 }
@@ -65,7 +65,7 @@ monthly_backup() {
     --log-file=/srv/logs/monthly_backup_"$(date +%Y%m%d_%H%M%S)".log \
     --log-file-format="[%i] %L [%B] [%U:%G] [%l bytes] %f (Trans: %b bytes)" \
     --password-file=<(cat /etc/rsyncd.secrets | cut -d ':' -f 2) \
-    user1@192.168.1.10::unRAID \
+    user1@192.168.1.21::unRAID \
     /mnt/cache_backup/backup/unraid-data-backup \
     #| tee /srv/logs/monthly_backup_"$(date +%Y%m%d_%H%M%S)".log
 }
