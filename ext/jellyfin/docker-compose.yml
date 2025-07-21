@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   jellyfin:
     image: nyanmisaka/jellyfin:250217-amd64

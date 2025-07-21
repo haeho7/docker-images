@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   mdc:
     image: vergilgao/mdc:6.6.6-r0

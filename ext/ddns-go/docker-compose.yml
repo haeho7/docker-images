@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   ddns-go:
     image: jeessy/ddns-go:v6.6.0

@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   webdav:
     image: haeho7/docker-images:webdav

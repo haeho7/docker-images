@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   rsync-daemon:
     image: haeho7/docker-images:rsync
