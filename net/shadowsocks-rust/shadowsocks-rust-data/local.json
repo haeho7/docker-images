@@ -44,6 +44,7 @@
     "nofile": 1048576,
     "no_delay": true,
     "fast_open": true,
+    "acl": "/etc/shadowsocks-rust/local.acl",
 
     "balancer": {
         "max_server_rtt": 5,
