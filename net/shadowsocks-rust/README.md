@@ -219,7 +219,7 @@ ZnJlZWRvbV9ub3RfZnJlZQ==
 openssl rand -base64 32
 BoxEGUompLVr+DlixYJzFlIsSQAB0dC0f3U79PPbkAY=
 
-# 2022-blake3-chacha8-poly1305, 2022-blake3-chacha20-poly1305
+# chacha20-ietf-poly1305, 2022-blake3-chacha8-poly1305, 2022-blake3-chacha20-poly1305
 # or 32-bit plaintext character generation
 openssl rand -base64 32
 BoxEGUompLVr+DlixYJzFlIsSQAB0dC0f3U79PPbkAY=
