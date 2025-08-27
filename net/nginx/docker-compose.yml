@@ -4,14 +4,14 @@ services:
     container_name: nginx
     network_mode: host
     restart: unless-stopped
-    logging:
-      options:
-        max-file: 5
-        max-size: 20m
     cap_add:
       - NET_ADMIN
       - SYS_ADMIN
       - SYS_NICE
+    logging:
+      options:
+        max-file: 5
+        max-size: 20m
     labels:
       me.local.container.name: nginx
     environment:
