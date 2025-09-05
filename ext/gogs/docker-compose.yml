@@ -1,6 +1,6 @@
 services:
   gogs:
-    image: gogs/gogs:0.13
+    image: gogs/gogs:0.13.3
     container_name: gogs
     network_mode: host
     restart: unless-stopped
