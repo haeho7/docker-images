@@ -1,6 +1,6 @@
 services:
   vaultwarden:
-    image: vaultwarden/server:1.32.7-alpine
+    image: vaultwarden/server:1.34.3-alpine
     container_name: vaultwarden
     network_mode: host
     restart: unless-stopped
