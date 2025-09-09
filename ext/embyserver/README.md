@@ -10,9 +10,9 @@ docker run -d \
   --name=embyserver \
   --network=host \
   --restart=unless-stopped \
+  --device=/dev/dri:/dev/dri \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  --device=/dev/dri:/dev/dri \
   -e UID=99 \
   -e GID=100 \
   -e GIDLIST='100,18' \

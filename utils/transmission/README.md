@@ -10,11 +10,11 @@
 docker run -d \
   --name=transmission \
   --network=external-network \
-  --ip=192.168.1.29 \
+  --ip=192.168.1.39 \
+  --sysctl net.ipv6.conf.all.disable_ipv6=1 \
   --restart=unless-stopped \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  --sysctl net.ipv6.conf.all.disable_ipv6=1 \
   -e TZ=Asia/Shanghai \
   -e PUID=99 \
   -e PGID=100 \

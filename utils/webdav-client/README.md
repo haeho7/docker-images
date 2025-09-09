@@ -7,10 +7,10 @@ docker run -d \
   --name=webdav-cilnet \
   --network=host \
   --restart=unless-stopped \
-  --log-opt max-file=1 \
-  --log-opt max-size=20m \
   --cap-add=SYS_ADMIN \
   --device=/dev/fuse \
+  --log-opt max-file=1 \
+  --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
   -e PUID=99 \
   -e PGID=100 \

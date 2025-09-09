@@ -5,12 +5,12 @@ services:
     network_mode: host
     restart: unless-stopped
     user: 99:100
+    devices:
+      - /dev/dri:/dev/dri
     logging:
       options:
         max-file: 1
         max-size: 20m
-    devices:
-      - /dev/dri:/dev/dri
     environment:
       TZ: Asia/Shanghai
       JELLYFIN_PublishedServerUrl: 192.168.1.31

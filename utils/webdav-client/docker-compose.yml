@@ -6,12 +6,12 @@ services:
     restart: unless-stopped
     cap_add:
       - SYS_ADMIN
+    devices:
+      - /dev/fuse:/dev/fuse
     logging:
       options:
         max-file: 1
         max-size: 20m
-    devices:
-      - /dev/fuse:/dev/fuse
     environment:
       TZ: Asia/Shanghai
       PUID: 99

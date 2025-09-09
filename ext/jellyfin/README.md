@@ -11,9 +11,9 @@ docker run -d \
   --network=host \
   --restart=unless-stopped \
   --user=99:100 \
+  --device=/dev/dri:/dev/dri \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  --device=/dev/dri:/dev/dri \
   -e TZ=Asia/Shanghai \
   -e JELLYFIN_PublishedServerUrl=192.168.1.31 \
   #-p 18096:8096 \
