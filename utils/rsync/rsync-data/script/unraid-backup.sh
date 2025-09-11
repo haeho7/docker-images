@@ -71,7 +71,7 @@ monthly_backup() {
 }
 
 select_backup_mode() {
-  if [ "$(date +%d)" == 01 ]; then
+  if [ "$(date +%d)" == 01 ] || [ "$(date +%d)" == 15 ]; then
     monthly_backup && info "unraid monthly backup complete." || error "unraid monthly backup failed."
   else
     daily_backup && info "unraid daily backup complete." || error "unraid daily backup failed."

@@ -1,20 +1,54 @@
+# Exclude list
 user/.recycle
 user/9kg
 user/backup
 user/medias
 user/torrent
 
-System Volume Information
-$Recycle.Bin
-Temp
-Thumbs.db
-.thumb
-
-lost+found
-.Trash
-
-.DS_Store
-._.DS_Store
-
+#
+# Temp
+# See: https://www.toptal.com/developers/gitignore
+#
+# General
 *.tmp
 *.temp
+
+# Windows
+*.lnk
+~$*.doc*
+~$*.xls*
+~$*.ppt*
+*.~vsd*
+*.stackdump
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+$Recycle.Bin/
+$RECYCLE.BIN/
+System Volume Information
+
+# Linux
+.thumbnails
+.Trash-*
+.nfs*
+lost+found
+
+*.~vsd*
+# macOS
+*.icloud
+.DS_Store
+._.DS_Store
+.Trashes
+.fseventsd
+.Spotlight*
+.Spotlight-V100
+.VolumeIcon.icns
+.TemporaryItems
+.AppleDB
+.AppleDesktop
+.AppleDouble
+.LSOverride
+.DocumentRevisions-V100
+.com.apple.timemachine.donotpresent
+Temporary Items
+Network Trash Folder

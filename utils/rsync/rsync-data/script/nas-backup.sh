@@ -69,7 +69,7 @@ monthly_backup() {
 }
 
 select_backup_mode() {
-  if [ "$(date +%d)" == 01 ]; then
+  if [ "$(date +%d)" == 01 ] || [ "$(date +%d)" == 15 ]; then
     monthly_backup && info "nas monthly backup complete." || error "nas monthly backup failed."
   else
     daily_backup && info "nas daily backup complete." || error "nas daily backup failed."
