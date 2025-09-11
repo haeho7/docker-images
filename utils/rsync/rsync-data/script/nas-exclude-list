@@ -20,34 +20,33 @@ user/torrent
 ~$*.ppt*
 *.~vsd*
 *.stackdump
-Thumbs.db
 ehthumbs.db
+Thumbs.db
 [Dd]esktop.ini
 $Recycle.Bin/
 $RECYCLE.BIN/
 System Volume Information
 
 # Linux
-.thumbnails
-.Trash-*
 .nfs*
+.Trash-*
+.thumbnails
 lost+found
 
-*.~vsd*
 # macOS
 *.icloud
+.fseventsd
 .DS_Store
 ._.DS_Store
-.Trashes
-.fseventsd
-.Spotlight*
-.Spotlight-V100
-.VolumeIcon.icns
-.TemporaryItems
 .AppleDB
 .AppleDesktop
 .AppleDouble
+.Spotlight*
+.Spotlight-V100
+.Trashes
+.TemporaryItems
 .LSOverride
+.VolumeIcon.icns
 .DocumentRevisions-V100
 .com.apple.timemachine.donotpresent
 Temporary Items
