@@ -2,7 +2,7 @@
 # Dockerfile for redis
 #
 
-FROM redis:7.0.5-alpine
+FROM redis:8.2.1-alpine
 LABEL maintainer="haeho7 <i@demo.com>"
 # See more: https://github.com/docker-library/redis/tree/master/7.0/alpine
 
