@@ -10,9 +10,9 @@ docker run -d \
   --name=vaultwarden \
   --network=host \
   --restart=unless-stopped \
+  --user=99:100 \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  --user=99:100 \
   --env-file=/mnt/user/appdata/vaultwarden/config.env \
   -e TZ=Asia/Shanghai \
   -e ROCKET_ENV=production \
