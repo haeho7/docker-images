@@ -42,6 +42,9 @@ cat << EOF > /etc/sysctl.d/80-tcp_optimize.conf
 net.core.rmem_max = 18750000
 net.core.wmem_max = 18750000
 EOF
+
+# apply
+sysctl -p
 ```
 
 ```sh
