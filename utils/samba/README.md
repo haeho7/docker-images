@@ -39,6 +39,7 @@ Adding these parameters can reduce disk IO usage while maintaining high throughp
 #sysctl -w net.core.wmem_max=18750000
 
 cat << EOF > /etc/sysctl.d/80-tcp_optimize.conf
+# smb
 net.core.rmem_max = 18750000
 net.core.wmem_max = 18750000
 EOF
