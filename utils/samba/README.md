@@ -7,6 +7,9 @@ docker run -d \
   --name=samba \
   --network=host \
   --restart=unless-stopped \
+  #--ulimit memlock=-1 \
+  --ulimit nproc=-1 \
+  --ulimit nofile=1048576:1048576 \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
