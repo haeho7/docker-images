@@ -1,0 +1,20 @@
+services:
+  samba:
+    image: haeho7/docker-images:samba
+    container_name: samba
+    network_mode: host
+    restart: unless-stopped
+    logging:
+      options:
+        max-file: 1
+        max-size: 20m
+    environment:
+      TZ: Asia/Shanghai
+      PUID: 99
+      PGID: 100
+    volumes:
+      - ./samba-data/smb.conf:/etc/samba/smb.conf
+      - ./samba-data/users:/etc/samba/users
+      - /mnt/user:/mnt/user
+      - /mnt/cache_torrent:/mnt/cache_torrent
+      - /mnt/cache_backup:/mnt/cache_backup
