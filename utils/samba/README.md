@@ -24,6 +24,32 @@ docker run -d \
 
 You can change the UID and PID of the container's default samba user by passing the `PUID` and `PGUD` variables, and configure the `force user` and `force group` parameters in smb.conf to ensure that permissions match those of the host machine.
 
+## Optimize
+
+By default, SMB file transfers result in high disk IO usage.
+
+Adding these parameters can reduce disk IO usage while maintaining high throughput:
+
+```sh
+# host
+#sysctl -w net.core.rmem_max=18750000
+#sysctl -w net.core.wmem_max=18750000
+
+cat << EOF > /etc/sysctl.d/80-tcp_optimize.conf
+net.core.rmem_max = 18750000
+net.core.wmem_max = 18750000
+EOF
+```
+
+```sh
+# smb.conf
+[global]
+  socket options = IPTOS_LOWDELAY TCP_NODELAY IPTOS_THROUGHPUT SO_RCVBUF=1048576 SO_SNDBUF=1048576
+  use sendfile = yes
+  getwd cache = yes
+  min receivefile size = 65535
+```
+
 ## Command
 
 ```sh
