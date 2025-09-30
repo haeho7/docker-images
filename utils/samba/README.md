@@ -35,6 +35,8 @@ Adding these parameters can reduce disk IO usage while maintaining high throughp
 
 ```sh
 # host
+cat /proc/sys/net/core/rmem_max
+cat /proc/sys/net/core/wmem_max
 #sysctl -w net.core.rmem_max=18750000
 #sysctl -w net.core.wmem_max=18750000
 
