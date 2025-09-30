@@ -28,6 +28,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          # redis
+          - BUILD_CONTEXT: db/redis
+            TARGET_PLATFORMS: linux/amd64,linux/arm64
+          # mariadb
+          - BUILD_CONTEXT: db/mariadb
+            TARGET_PLATFORMS: linux/amd64,linux/arm64
           # wireguard
           - BUILD_CONTEXT: net/wireguard
             TARGET_PLATFORMS: linux/amd64,linux/arm64
@@ -51,12 +57,6 @@ jobs:
             TARGET_PLATFORMS: linux/amd64,linux/arm64
           # nextcloud
           - BUILD_CONTEXT: utils/nextcloud
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # redis
-          - BUILD_CONTEXT: utils/redis
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # mariadb
-          - BUILD_CONTEXT: utils/mariadb
             TARGET_PLATFORMS: linux/amd64,linux/arm64
           # rsync
           - BUILD_CONTEXT: utils/rsync

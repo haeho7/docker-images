@@ -19,19 +19,19 @@ docker run -d \
   haeho7/docker-images:redis
 ```
 
-### Redis Auth
+### Auth
 
 Authentication is required to connect to redis. For the default password, refer to the configuration file: [redis.conf](./redis-data/redis.conf)
 
 Modify the `requirepass` parameter in the configuration file, or creating the container add the `--requirepass password` extra parameter.
 
-### Redis Optimize
+### Optimize
 
 If you need high performance, you can optimize the default redis parameters.
 
 Please refer to the following parameters: [redis.conf](./redis-data/redis.conf)
 
-### Redis Command
+### Command
 
 ``` sh
 # login
