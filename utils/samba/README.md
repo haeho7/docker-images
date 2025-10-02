@@ -15,8 +15,7 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -e PUID=99 \
   -e PGID=100 \
-  -v /mnt/user/appdata/samba/samba-data/smb.conf:/etc/samba/smb.conf \
-  -v /mnt/user/appdata/samba/samba-data/users:/etc/samba/users \
+  -v /mnt/user/appdata/samba/samba-data/conf:/etc/samba \
   -v /mnt/user:/mnt/user \
   -v /mnt/cache_torrent:/mnt/cache_torrent \
   -v /mnt/cache_backup:/mnt/cache_backup \

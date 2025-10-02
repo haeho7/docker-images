@@ -19,8 +19,7 @@ services:
       PUID: 99
       PGID: 100
     volumes:
-      - ./samba-data/smb.conf:/etc/samba/smb.conf
-      - ./samba-data/users:/etc/samba/users
+      - ./samba-data/conf:/etc/samba
       - /mnt/user:/mnt/user
       - /mnt/cache_torrent:/mnt/cache_torrent
       - /mnt/cache_backup:/mnt/cache_backup

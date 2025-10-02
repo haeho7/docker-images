@@ -10,8 +10,6 @@ RUN apk update \
   && apk add --no-cache tzdata shadow samba=$SAMBA_VER \
   && rm -rf /var/cache/apk/*
 
-COPY smb.conf /etc/samba/
-COPY users /etc/samba/
 COPY samba.sh /usr/local/bin/
 
 EXPOSE 445/tcp 445/udp
