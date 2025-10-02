@@ -34,6 +34,9 @@ jobs:
           # mariadb
           - BUILD_CONTEXT: db/mariadb
             TARGET_PLATFORMS: linux/amd64,linux/arm64
+          # valkey
+          - BUILD_CONTEXT: db/valkey
+            TARGET_PLATFORMS: linux/amd64,linux/arm64
           # wireguard
           - BUILD_CONTEXT: net/wireguard
             TARGET_PLATFORMS: linux/amd64,linux/arm64
