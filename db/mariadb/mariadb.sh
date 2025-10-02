@@ -7,7 +7,6 @@ GROUPS=mysql,users
 PUID=${PUID:-1000}
 PGID=${PGID:-1000}
 UMASK=${UMASK:-022}
-CONFIG_FILE="/etc/mysql/conf.d/mariadb.cnf"
 
 _get_time() {
   date '+%Y-%m-%d %T'
@@ -27,15 +26,6 @@ warn() {
   printf "${yellow}[${time}] [WARN]: ${clear}%s\n" "$*" >&2
 }
 
-_is_exist_conf() {
-  if [ ! -f "${CONFIG_FILE}" ]; then
-    info "mariadb.cnf does not exist, copy mariadb.cnf"
-    cp /opt/mariadb.cnf ${CONFIG_FILE}
-  else
-    warn "mariadb.cnf file already exists, skip copy"
-  fi
-}
-
 _setup_user() {
   usermod -o -u ${PUID} -g ${GROUP} -aG ${GROUPS} -s /bin/bash ${USER}
   groupmod -o -g ${PGID} ${GROUP}
@@ -47,7 +37,6 @@ _setup_owne() {
 }
 
 start_mariadb() {
-  _is_exist_conf
   _setup_user
   _setup_owne
 

@@ -1,8 +1,5 @@
 # MariaDB
 
-- [x] unRAID
-- [x] Normal
-
 ## Usage
 
 ```sh
