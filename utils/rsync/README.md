@@ -15,8 +15,8 @@ docker run -d \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
   -e ENABLE_DAEMON=1 \
-  #-v /mnt/user/appdata/rsync/conf/rsyncd.conf:/etc/rsyncd.conf \
-  #-v /mnt/user/appdata/rsync/conf/rsyncd.secrets:/etc/rsyncd.secrets \
+  -v /mnt/user/appdata/rsync/conf/rsyncd.conf:/etc/rsync/rsyncd.conf \
+  -v /mnt/user/appdata/rsync/conf/rsyncd.secrets:/etc/rsync/rsyncd.secrets \
   -v /mnt/user:/mnt/user:ro \
   haeho7/docker-images:rsync
 
@@ -30,8 +30,10 @@ docker run -d \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
-  -e CRONTAB='0 */12 * * * /srv/script/nas-backup.sh > /proc/1/fd/1' \
-  -v /mnt/user/appdata/rsync/rsync-data:/srv \
+  -e CRONTAB='0 */12 * * * /opt/script/nas-backup.sh > /proc/1/fd/1' \
+  #-v /mnt/user/appdata/rsync/conf/rsyncd.conf:/etc/rsync/rsyncd.conf \
+  #-v /mnt/user/appdata/rsync/conf/rsyncd.secrets:/etc/rsync/rsyncd.secrets \
+  -v /mnt/user/appdata/rsync/rsync-data/data:/opt \
   -v /mnt/user:/mnt/user:ro \
   -v /mnt/cache_backup/backup/nas-data-backup:/mnt/cache_backup/backup/nas-data-backup \
   haeho7/docker-images:rsync
@@ -46,8 +48,10 @@ docker run -d \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
-  -e CRONTAB='0 */12 * * * /srv/script/unraid-backup.sh > /proc/1/fd/1' \
-  -v /mnt/user/appdata/rsync/rsync-data:/srv \
+  -e CRONTAB='0 */12 * * * /opt/script/unraid-backup.sh > /proc/1/fd/1' \
+ #-v /mnt/user/appdata/rsync/rsync-data/conf/rsyncd.conf:/etc/rsync/rsyncd.conf \
+  -v /mnt/user/appdata/rsync/rsync-data/conf/rsyncd.secrets:/etc/rsync/rsyncd.secrets \
+  -v /mnt/user/appdata/rsync/rsync-data/data:/opt \
   -v /mnt/cache_backup/backup/unraid-data-backup:/mnt/cache_backup/backup/unraid-data-backup \
   haeho7/docker-images:rsync
 ```
@@ -63,7 +67,7 @@ But the `delta-transfer` algorithm can be enabled by adjusting the `--no-whole-f
 disable delta-transfer algorithm demo (default):
 
 ```sh
-rsync --progress --dry-run -acvvHX --exclude-from='/srv/script/nas-exclude-list' /mnt/user /mnt/cache_backup/backup/test
+rsync --progress --dry-run -acvvHX --exclude-from='/opt/script/nas-exclude-list' /mnt/user /mnt/cache_backup/backup/test
 
 sending incremental file list
 [sender] hiding directory user/medias because of pattern user/medias
@@ -82,7 +86,7 @@ delta-transmission disabled for local transfer or --whole-file
 enable delta-transfer algorithm demo:
 
 ```sh
-rsync --progress --dry-run -acvvHX --no-whole-file --exclude-from='/srv/script/nas-exclude-list' /mnt/user /mnt/cache_backup/backup/test
+rsync --progress --dry-run -acvvHX --no-whole-file --exclude-from='/opt/script/nas-exclude-list' /mnt/user /mnt/cache_backup/backup/test
 sending incremental file list
 [sender] hiding directory user/medias because of pattern user/medias
 [sender] hiding directory user/.datas because of pattern user/.datas
@@ -134,7 +138,7 @@ rsync error: some files/attrs were not transferred (see previous errors) (code 2
 - [@samba.org/ftp/rsync/opt--itemize-changes](https://download.samba.org/pub/rsync/rsync.1#opt--itemize-changes)
 
 ```sh
-tail -n 10 /srv/logs/nas_data_backup_20221231_213022.log
+tail -n 10 /opt/logs/nas_data_backup_20221231_213022.log
 
 2022/12/31 21:09:50 [119] [cS+++++++++]  [rwxrwxrwx] [99:100] [0 bytes] mnt/user/appdata/redis/redis.sock (Trans: 0 bytes)
 2022/12/31 21:09:50 [119] [>fcst......]  [rw-------] [99:100] [28974075 bytes] mnt/user/appdata/redis/appendonlydir/appendonly.aof.3.incr.aof (Trans: 28977654 bytes)

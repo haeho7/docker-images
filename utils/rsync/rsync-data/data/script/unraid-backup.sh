@@ -41,12 +41,13 @@ daily_backup() {
     --checksum \
     --hard-links \
     --xattrs \
-    --exclude-from='/srv/script/nas-exclude-list' \
-    --log-file=/srv/logs/daily_backup_"$(date +%Y%m%d_%H%M%S)".log \
+    --exclude-from='/opt/script/unraid-exclude-list' \
+    --log-file=/opt/logs/daily_backup_"$(date +%Y%m%d_%H%M%S)".log \
     --log-file-format="[%i] %L [%B] [%U:%G] [%l bytes] %f (Trans: %b bytes)" \
-    /mnt/user \
-    /mnt/cache_backup/backup/nas-data-backup \
-    #| tee /srv/logs/daily_backup_"$(date +%Y%m%d_%H%M%S)".log
+    --password-file=<(cat /etc/rsync/rsyncd.secrets | cut -d ':' -f 2) \
+    user1@192.168.1.21::unRAID \
+    /mnt/cache_backup/backup/unraid-data-backup \
+    #| tee /opt/logs/daily_backup_"$(date +%Y%m%d_%H%M%S)".log
 }
 
 monthly_backup() {
@@ -60,19 +61,20 @@ monthly_backup() {
     --hard-links \
     --xattrs \
     --delete \
-    --exclude-from='/srv/script/nas-exclude-list' \
-    --log-file=/srv/logs/monthly_backup_"$(date +%Y%m%d_%H%M%S)".log \
+    --exclude-from='/opt/script/unraid-exclude-list' \
+    --log-file=/opt/logs/monthly_backup_"$(date +%Y%m%d_%H%M%S)".log \
     --log-file-format="[%i] %L [%B] [%U:%G] [%l bytes] %f (Trans: %b bytes)" \
-    /mnt/user \
-    /mnt/cache_backup/backup/nas-data-backup \
-    #| tee /srv/logs/monthly_backup_"$(date +%Y%m%d_%H%M%S)".log
+    --password-file=<(cat /etc/rsync/rsyncd.secrets | cut -d ':' -f 2) \
+    user1@192.168.1.21::unRAID \
+    /mnt/cache_backup/backup/unraid-data-backup \
+    #| tee /opt/logs/monthly_backup_"$(date +%Y%m%d_%H%M%S)".log
 }
 
 select_backup_mode() {
   if [ "$(date +%d)" == 01 ] || [ "$(date +%d)" == 15 ]; then
-    monthly_backup && info "nas monthly backup complete." || error "nas monthly backup failed."
+    monthly_backup && info "unraid monthly backup complete." || error "unraid monthly backup failed."
   else
-    daily_backup && info "nas daily backup complete." || error "nas daily backup failed."
+    daily_backup && info "unraid daily backup complete." || error "unraid daily backup failed."
   fi
 }
 

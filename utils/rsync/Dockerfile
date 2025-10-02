@@ -20,8 +20,6 @@ RUN sed -i '/^# en_US.UTF-8 UTF-8/s/^# //' /etc/locale.gen \
   && locale-gen \
   && echo LANG=en_US.UTF-8 > /etc/default/locale
 
-COPY rsync-data/conf/rsyncd.conf /etc/
-COPY rsync-data/conf/rsyncd.secrets /etc/
 COPY rsync.sh /usr/local/bin/
 
 ENV LANG=en_US.UTF-8
