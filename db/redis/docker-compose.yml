@@ -13,4 +13,6 @@ services:
       PUID: 99
       PGID: 100
     volumes:
-      - ./redis-data:/data
+      - ./redis-data/conf:/etc/redis
+      - ./redis-data/data:/data
+    command: redis-server /etc/redis/redis.conf

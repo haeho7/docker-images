@@ -7,7 +7,6 @@ GROUPS=redis,users
 PUID=${PUID:-1000}
 PGID=${PGID:-1000}
 UMASK=${UMASK:-022}
-CONFIG_FILE="/data/redis.conf"
 
 _get_time() {
   date '+%Y-%m-%d %T'
@@ -27,15 +26,6 @@ warn() {
   printf "${yellow}[${time}] [WARN]: ${clear}%s\n" "$*" >&2
 }
 
-_is_exist_conf() {
-  if [ ! -f "${CONFIG_FILE}" ]; then
-    info "redis.conf does not exist, copy redis.conf"
-    cp /opt/redis.conf ${CONFIG_FILE}
-  else
-    warn "redis.conf file already exists, skip copy"
-  fi
-}
-
 _setup_user() {
   usermod -o -u ${PUID} -g ${GROUP} -aG ${GROUPS} -s /bin/ash ${USER}
   groupmod -o -g ${PGID} ${GROUP}
@@ -43,11 +33,10 @@ _setup_user() {
 }
 
 _setup_owne() {
-  chown ${PUID}:${PGID} /data/*.conf
+  chown ${PUID}:${PGID} /etc/redis/*.conf
 }
 
 start_redis() {
-  _is_exist_conf
   _setup_user
   _setup_owne
 
