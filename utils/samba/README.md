@@ -39,7 +39,7 @@ cat /proc/sys/net/core/wmem_max
 #sysctl -w net.core.rmem_max=18750000
 #sysctl -w net.core.wmem_max=18750000
 
-cat << EOF > /etc/sysctl.d/83-samba_optimize.conf
+cat << EOF > /etc/sysctl.d/83-samba.conf
 # samba tuning
 net.core.rmem_max = 18750000
 net.core.wmem_max = 18750000
