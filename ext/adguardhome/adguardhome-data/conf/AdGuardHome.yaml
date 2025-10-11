@@ -41,6 +41,7 @@ dns:
     - 192.168.1.21/32
     - 127.0.0.0/8
     - ::1/128
+  cache_enabled: true
   cache_size: 4194304
   cache_ttl_min: 300
   cache_ttl_max: 86400
@@ -67,6 +68,8 @@ dns:
   use_http3_upstreams: false
   serve_plain_dns: true
   hostsfile_enabled: false
+  pending_requests:
+    enabled: true
 tls:
   enabled: false
   server_name: ""
@@ -95,7 +98,7 @@ statistics:
   interval: 24h
   enabled: true
 filters:
-  - enabled: true
+  - enabled: false
     url: https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
     name: AdGuard DNS filter
     id: 1
@@ -103,17 +106,17 @@ filters:
     url: https://adaway.org/hosts.txt
     name: AdAway Default Blocklist
     id: 2
-  - enabled: true
+  - enabled: false
     url: https://easylist-downloads.adblockplus.org/easylistchina+easylist.txt
     name: EasyList+EasyListChina
     id: 3
-  - enabled: true
+  - enabled: false
     url: https://pgl.yoyo.org/adservers/serverlist.php?hostformat=adblockplus&showintro=0&mimetype=plaintext
     name: Yoyo Ad Servers
     id: 4
   - enabled: true
-    url: https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-adguard.txt
-    name: Anti-AD
+    url: https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-easylist.txt
+    name: anti-AD for AdGuardHome
     id: 5
   - enabled: true
     url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_50.txt
@@ -123,32 +126,30 @@ filters:
     url: https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt
     name: 乘风视频过滤规则
     id: 7
+  - enabled: true
+    url: https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt
+    name: AdBlock DNS Filters
+    id: 8
 whitelist_filters: []
 user_rules:
   - '#'
-  - '# block'
+  - '# Block'
   - '#'
-  - '# beyond-compare'
+  - '# Beyond-compare'
   - '||scootersoftware.com^$important'
-  - '# sharp-tv'
-  - '||taobao.com^$client=''192.168.1.201'',important'
-  - '||taobao.com.lan^$client=''192.168.1.201'',important'
-  - '||ott.cibntv.net^$client=''192.168.1.201'',important'
-  - '||ott.cibntv.net.lan^$client=''192.168.1.201'',important'
-  - '||openspeech.cn^$client=''192.168.1.201'',important'
-  - '||openspeech.cn.lan^$client=''192.168.1.201'',important'
+  - '# Sharp-TV'
+  - '||taobao.com^$client=''192.168.1.201''''$important'
+  - '||ott.cibntv.net^$client=''192.168.1.201''$important'
+  - '||openspeech.cn^$client=''192.168.1.201''$important'
+  - '# CSDN 8.8.4.4/8.8.8.8'
+  - '||passport.csdn.net^$important'
   - '#'
-  - '# unblock'
+  - '# unBlock'
   - '#'
-  - '# pi network'
+  - '# Pi Network'
   - '@@||minepi.com^$important'
-  - '#@@||applovin.com^$important'
-  - '#@@||applvn.com^$important'
-  - '#@@||unity3d.com^$important'
-  - '# twitter'
+  - '# Twitter'
   - '@@||t.co^$important'
-  - '# tvbox'
-  - '@@||fs-im-kefu.7moor-fs1.com^$client=''192.168.1.201'''
 dhcp:
   enabled: false
   interface_name: ""
@@ -220,4 +221,4 @@ os:
   group: ""
   user: ""
   rlimit_nofile: 1048576
-schema_version: 29
+schema_version: 30

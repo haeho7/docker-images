@@ -1,9 +1,5 @@
 # AdGuard Home
 
-- [x] unRAID
-- [x] OpenWrt
-- [x] Normal
-
 ## Usage
 
 ```sh
@@ -16,5 +12,5 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -v /mnt/user/appdata/adguardhome/adguardhome-data/conf:/opt/adguardhome/conf \
   -v /mnt/user/appdata/adguardhome/adguardhome-data/work:/opt/adguardhome/work \
-  adguard/adguardhome:v0.107.53
+  adguard/adguardhome:v0.107.67
 ```
