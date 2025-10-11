@@ -1,8 +1,5 @@
 # ddns-go
 
-- [x] unRAID
-- [x] Normal
-
 ## Usage
 
 ```sh
@@ -14,5 +11,5 @@ docker run -d \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
   -v /mnt/user/appdata/ddns-go/ddns-go-data:/root \
-  jeessy/ddns-go:v6.6.0
+  jeessy/ddns-go:v6.12.5
 ```
