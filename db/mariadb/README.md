@@ -33,7 +33,7 @@ chmod 0644 /mnt/user/appdata/mariadb/mariadb-data/conf.d/mariadb.cnf
 
 ## Case Sensitive
 
-- [@mariadb.com/docs/server/system-variables](https://mariadb.com/docs/server/ref/mdb/system-variables/lower_case_table_names)
+- [@mariadb.com/docs/server/system-variables](https://mariadb.com/docs/server/server-management/variables-and-modes/server-system-variables#lower_case_table_names)
 
 Determines whether table names, table aliases, and database names are compared in a case-sensitive manner, and whether tablespace files are stored on disk in a case-sensitive manner.
 
@@ -43,6 +43,9 @@ lower_case_table_names = 0
 
 # windows default
 lower_case_table_names = 1
+
+# macos default
+lower_case_table_names = 2
 ```
 
 ## Variable
@@ -53,8 +56,3 @@ Default Variables per version: [default-variables](./variables)
 show variables;
 show global variables;
 ```
-
-## Optimize
-
-- [@csdn.net](https://blog.csdn.net/u014044812/article/details/78929579)
-- [@segmentfault.com](https://segmentfault.com/a/1190000021408999)
