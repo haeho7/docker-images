@@ -94,10 +94,10 @@ explicit_defaults_for_timestamp = 0
 transaction_isolation = REPEATABLE-READ
 
 # innodb
+default_storage_engine = InnoDB
 #innodb_data_home_dir = /var/lib/mysql/
 #innodb_log_group_home_dir = /var/lib/mysql/
 innodb_data_file_path = ibdata1:12M:autoextend
-default_storage_engine = InnoDB
 innodb_flush_method = O_DIRECT
 innodb_file_per_table = 1
 innodb_log_file_size = 128M
