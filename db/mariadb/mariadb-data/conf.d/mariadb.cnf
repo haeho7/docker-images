@@ -101,7 +101,6 @@ innodb_data_file_path = ibdata1:12M:autoextend
 default_storage_engine = InnoDB
 innodb_flush_method = O_DIRECT
 innodb_file_per_table = 1
-innodb_log_files_in_group = 2
 innodb_log_file_size = 128M
 innodb_log_buffer_size = 16M
 innodb_buffer_pool_size = 512M
