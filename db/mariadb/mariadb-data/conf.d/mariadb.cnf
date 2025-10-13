@@ -11,6 +11,15 @@ quick
 max_allowed_packet = 32M
 
 [mysqld]
+# basic
+user = mysql
+port = 3306
+pid-file = /run/mysqld/mysqld.pid
+socket = /run/mysqld/mysqld.sock
+bind-address = 0.0.0.0
+tmpdir = /tmp
+datadir = /var/lib/mysql/
+
 # character
 character-set-client-handshake = false
 character-set-server = utf8mb4
@@ -19,15 +28,6 @@ collation-server = utf8mb4_general_ci
 
 # lower case
 #lower_case_table_names = 0
-
-# basic
-#user = mysql
-port = 3306
-pid-file = /run/mysqld/mysqld.pid
-socket = /run/mysqld/mysqld.sock
-bind-address = 0.0.0.0
-tmpdir = /tmp
-datadir = /var/lib/mysql/
 
 # bin log
 server_id = 1
