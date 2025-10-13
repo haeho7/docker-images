@@ -105,6 +105,7 @@ innodb_log_files_in_group = 2
 innodb_log_file_size = 128M
 innodb_log_buffer_size = 16M
 innodb_buffer_pool_size = 512M
+innodb_buffer_pool_size_max = 512M
 innodb_open_files = 65535
 innodb_write_io_threads = 4
 innodb_read_io_threads = 4
