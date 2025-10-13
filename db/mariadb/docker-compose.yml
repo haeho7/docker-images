@@ -4,6 +4,12 @@ services:
     container_name: mariadb
     network_mode: host
     restart: unless-stopped
+    ulimits:
+      memlock: -1
+      nproc: -1
+      nofile:
+        soft: 1048576
+        hard: 1048576
     logging:
       options:
         max-file: 1

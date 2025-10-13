@@ -2,7 +2,7 @@
 # Dockerfile for mariadb
 #
 
-FROM mariadb:10.6.10
+FROM mariadb:11.4.8-noble
 LABEL maintainer="haeho7 <i@demo.com>"
 # See more: https://github.com/MariaDB/mariadb-docker/tree/master
 
