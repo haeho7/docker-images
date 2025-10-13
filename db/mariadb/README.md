@@ -7,6 +7,7 @@ docker run -d \
   --name=mariadb \
   --network=host \
   --restart=unless-stopped \
+  --security-opt seccomp=unconfined \
   --ulimit memlock=-1 \
   --ulimit nproc=-1 \
   --ulimit nofile=1048576:1048576 \

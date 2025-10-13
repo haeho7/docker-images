@@ -4,6 +4,8 @@ services:
     container_name: mariadb
     network_mode: host
     restart: unless-stopped
+    security_opt:
+      - seccomp:unconfined
     ulimits:
       memlock: -1
       nproc: -1
