@@ -50,8 +50,6 @@ lower_case_table_names = 2
 
 ## Variable
 
-Default Variables per version: [default-variables](./variables)
-
 ```sql
 show variables;
 show global variables;
