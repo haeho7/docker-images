@@ -2,7 +2,6 @@
 default-character-set = utf8mb4
 port = 3306
 max_allowed_packet = 32M
-socket = /run/mysqld/mysqld.sock
 
 [mysql]
 default-character-set = utf8mb4
