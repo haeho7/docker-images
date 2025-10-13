@@ -2,7 +2,7 @@
 # Dockerfile for valkey
 #
 
-FROM valkey/valkey:8.1.3-alpine
+FROM valkey/valkey:8.1.4-alpine
 LABEL maintainer="haeho7 <i@demo.com>"
 # See more: https://github.com/valkey-io/valkey-container/blob/mainline
 
