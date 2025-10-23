@@ -18,7 +18,7 @@ services:
       --mode 0
       --key password
       --tun-dev tinyfecvpn
-      --sub-net 10.1.20.0
+      --sub-net 10.1.10.0
       --fec 10:6
       --timeout 3
       --log-level 3
@@ -46,7 +46,7 @@ services:
       --key password
       --keep-reconnect
       --tun-dev tinyfecvpn
-      --sub-net 10.1.20.0
+      --sub-net 10.1.10.0
       --fec 10:6
       --timeout 3
       --log-level 3

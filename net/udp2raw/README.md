@@ -1,9 +1,5 @@
 # udp2raw
 
-- [x] unRAID
-- [x] OpenWrt
-- [x] Normal
-
 ## Usage
 
 ```sh

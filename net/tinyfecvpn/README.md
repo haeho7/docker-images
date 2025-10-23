@@ -1,9 +1,5 @@
 # tinyfecvpn
 
-- [x] unRAID
-- [x] OpenWrt
-- [x] Normal
-
 ## Usage
 
 ### OpenWrt
@@ -48,7 +44,7 @@ docker run -d \
   --mode 0 \
   --key password \
   --tun-dev tinyfecvpn \
-  --sub-net 10.1.20.0 \
+  --sub-net 10.1.10.0 \
   --fec 10:6 \
   --timeout 3 \
   --log-level 3 \
@@ -72,7 +68,7 @@ docker run -d \
   --key password \
   --keep-reconnect \
   --tun-dev tinyfecvpn \
-  --sub-net 10.1.20.0 \
+  --sub-net 10.1.10.0 \
   --fec 10:6 \
   --timeout 3 \
   --log-level 3 \
@@ -99,7 +95,7 @@ docker run -d \
   --mode 0 \
   --key password \
   --tun-dev tinyfecvpn-game \
-  --sub-net 10.1.21.0 \
+  --sub-net 10.1.11.0 \
   --fec 2:4 \
   --timeout 1 \
   --log-level 3 \
@@ -123,7 +119,7 @@ docker run -d \
   --key password \
   --keep-reconnect \
   --tun-dev tinyfecvpn-game \
-  --sub-net 10.1.21.0 \
+  --sub-net 10.1.11.0 \
   --fec 2:4 \
   --timeout 1 \
   --log-level 3 \

@@ -24,8 +24,8 @@ docker run -d \
   --remote 127.0.0.1:1025 \
   --ipv4-only \
   --tun phantun \
-  --tun-local 10.1.10.1 \
-  --tun-peer 10.1.10.2
+  --tun-local 10.1.1.1 \
+  --tun-peer 10.1.1.2
 
 # client
 docker run -d \
@@ -44,8 +44,8 @@ docker run -d \
   --remote 11.22.33.44:1025 \
   --ipv4-only \
   --tun phantun \
-  --tun-local 10.1.10.2 \
-  --tun-peer 10.1.10.1
+  --tun-local 10.1.1.2 \
+  --tun-peer 10.1.1.1
 ```
 
 ### iptables Backend
