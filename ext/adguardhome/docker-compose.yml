@@ -2,8 +2,8 @@ services:
   adguardhome:
     image: adguard/adguardhome:v0.107.67
     container_name: adguardhome
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     logging:
       options:
         max-file: 1

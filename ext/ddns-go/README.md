@@ -1,12 +1,12 @@
-# ddns-go
+# DDNS-GO
 
 ## Usage
 
 ```sh
 docker run -d \
   --name=ddns-go \
-  --network=host \
   --restart=unless-stopped \
+  --network=host \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \

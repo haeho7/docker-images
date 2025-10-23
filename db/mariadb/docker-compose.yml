@@ -2,8 +2,8 @@ services:
   mariadb:
     image: haeho7/docker-images:mariadb
     container_name: mariadb
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     security_opt:
       - seccomp:unconfined
     ulimits:

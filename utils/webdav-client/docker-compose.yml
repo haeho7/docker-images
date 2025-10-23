@@ -1,9 +1,9 @@
 services:
-  rsync:
+  webdav-client:
     image: haeho7/docker-images:webdav-client
     container_name: webdav-client
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     cap_add:
       - SYS_ADMIN
     devices:

@@ -2,8 +2,8 @@ services:
   acme.sh:
     image: haeho7/docker-images:acme.sh
     container_name: acme.sh
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     environment:
       TZ: Asia/Shanghai
       CF_Zone_ID: 'example'

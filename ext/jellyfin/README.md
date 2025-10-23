@@ -1,15 +1,12 @@
 # Jellyfin
 
-- [x] unRAID
-- [x] Normal
-
 ## Usage
 
 ```sh
 docker run -d \
   --name=jellyfin \
-  --network=host \
   --restart=unless-stopped \
+  --network=host \
   --user=99:100 \
   --device=/dev/dri:/dev/dri \
   --log-opt max-file=1 \

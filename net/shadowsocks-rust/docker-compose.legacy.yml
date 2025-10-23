@@ -5,8 +5,8 @@ services:
   ssserver-aes:
     image: pexcn/docker-images:shadowsocks-rust
     container_name: ssserver-aes
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     logging:
       options:
         max-file: 1
@@ -32,8 +32,8 @@ services:
   ssserver-2022-aes:
     image: pexcn/docker-images:shadowsocks-rust
     container_name: ssserver-2022-aes
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     logging:
       options:
         max-file: 1
@@ -59,8 +59,8 @@ services:
   sssocks5:
     image: pexcn/docker-images:shadowsocks-rust
     container_name: sssocks5
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     logging:
       options:
         max-file: 1
@@ -87,8 +87,8 @@ services:
   sshttp:
     image: pexcn/docker-images:shadowsocks-rust
     container_name: sshttp
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     logging:
       options:
         max-file: 1
@@ -115,8 +115,8 @@ services:
   sstunnel:
     image: pexcn/docker-images:shadowsocks-rust
     container_name: sstunnel
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     logging:
       options:
         max-file: 1
@@ -145,8 +145,8 @@ services:
   ssredir:
     image: pexcn/docker-images:shadowsocks-rust
     container_name: ssredir
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     logging:
       options:
         max-file: 1
@@ -175,8 +175,8 @@ services:
   ssredir-tcp:
     image: pexcn/docker-images:shadowsocks-rust
     container_name: ssredir-tcp
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     logging:
       options:
         max-file: 1
@@ -203,8 +203,8 @@ services:
   ssredir-udp:
     image: pexcn/docker-images:shadowsocks-rust
     container_name: ssredir-udp
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     logging:
       options:
         max-file: 1

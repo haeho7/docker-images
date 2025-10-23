@@ -1,8 +1,5 @@
 # WireGuard
 
-- [x] unRAID
-- [x] Normal
-
 ## Usage
 
 Install the `wireguard-tools` package, see: [@wireguard.com](https://www.wireguard.com/install)
@@ -10,9 +7,9 @@ Install the `wireguard-tools` package, see: [@wireguard.com](https://www.wiregua
 ```sh
 docker run -d \
   --name=wireguard \
+  --restart=unless-stopped \
   --network=host \
   --privileged=true \
-  --restart=unless-stopped \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \

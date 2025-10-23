@@ -2,8 +2,8 @@ services:
   embyserver:
     image: haeho7/docker-images:embyserver-4.7.14.0
     container_name: embyserver
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     devices:
       - /dev/dri:/dev/dri
     logging:

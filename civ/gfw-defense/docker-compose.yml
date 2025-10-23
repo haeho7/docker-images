@@ -2,9 +2,9 @@ services:
   gfw-defense:
     image: pexcn/docker-images:gfw-defense
     container_name: gfw-defense
+    restart: unless-stopped
     network_mode: host
     privileged: true
-    restart: unless-stopped
     environment:
       TZ: Asia/Taipei
       BLOCKING_POLICY: DROP

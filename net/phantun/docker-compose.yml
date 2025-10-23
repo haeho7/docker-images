@@ -3,9 +3,9 @@ services:
   phantun:
     image: haeho7/docker-images:phantun
     container_name: phantun
+    restart: unless-stopped
     network_mode: host
     privileged: true
-    restart: unless-stopped
     #depends_on:
     #  - phantun-0
     logging:

@@ -2,9 +2,9 @@ services:
   rsync-daemon:
     image: haeho7/docker-images:rsync
     container_name: rsync-daemon
+    restart: unless-stopped
     network_mode: host
     privileged: true
-    restart: unless-stopped
     ulimits:
       nproc: -1
       nofile:
@@ -25,9 +25,9 @@ services:
   rsync-nas:
     image: haeho7/docker-images:rsync
     container_name: rsync-nas
+    restart: unless-stopped
     network_mode: host
     privileged: true
-    restart: unless-stopped
     ulimits:
       nofile:
         soft: 1048576
@@ -49,9 +49,9 @@ services:
   rsync-unraid:
     image: haeho7/docker-images:rsync
     container_name: rsync-unraid
+    restart: unless-stopped
     network_mode: host
     privileged: true
-    restart: unless-stopped
     ulimits:
       nofile:
         soft: 1048576

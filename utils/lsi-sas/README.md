@@ -1,16 +1,13 @@
 # LSI-SAS
 
-- [x] unRAID
-- [x] Normal
-
 ## Usage
 
 ```sh
 docker run -itd \
   --name=lsi-sas \
+  --restart=unless-stopped \
   --network=host \
   --privileged=true \
-  --restart=unless-stopped \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \

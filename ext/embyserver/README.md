@@ -1,15 +1,12 @@
 # EmbyServer
 
-- [x] unRAID
-- [x] Normal
-
 ## Usage
 
 ```sh
 docker run -d \
   --name=embyserver \
-  --network=host \
   --restart=unless-stopped \
+  --network=host \
   --device=/dev/dri:/dev/dri \
   --log-opt max-file=1 \
   --log-opt max-size=20m \

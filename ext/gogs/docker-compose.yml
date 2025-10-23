@@ -2,8 +2,8 @@ services:
   gogs:
     image: gogs/gogs:0.13.3
     container_name: gogs
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     logging:
       options:
         max-file: 1

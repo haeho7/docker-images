@@ -1,9 +1,5 @@
 # Shadowsocks-Rust
 
-- [x] unRAID
-- [x] OpenWrt
-- [x] Normal
-
 ## Usage
 
 `redir` mode does not support `--user nobody` to run.
@@ -18,8 +14,8 @@ When openwrt is used, the content of the `/etc/resolv.conf` file in the containe
 # server mode
 docker run -d \
   --name=server-aes \
-  --network=host \
   --restart=unless-stopped \
+  --network=host \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
@@ -45,8 +41,8 @@ docker run -d \
 # socks5 mode
 docker run -d \
   --name=sssocks5 \
-  --network=host \
   --restart=unless-stopped \
+  --network=host \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
@@ -69,8 +65,8 @@ docker run -d \
 # http mode
 docker run -d \
   --name=sshttp \
-  --network=host \
   --restart=unless-stopped \
+  --network=host \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
@@ -93,8 +89,8 @@ docker run -d \
 # tunnel mode
 docker run -d \
   --name=sstunnel \
-  --network=host \
   --restart=unless-stopped \
+  --network=host \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
@@ -119,9 +115,8 @@ docker run -d \
 # redir mode
 docker run -d \
   --name=ssredir \
-  --network=host \
   --restart=unless-stopped \
-  --log-opt max-file=1 \
+  --network=host \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
   -e CHILLING_EFFECT=0 \
@@ -145,8 +140,8 @@ docker run -d \
 # redir tcp mode
 docker run -d \
   --name=ssredir-tcp \
-  --network=host \
   --restart=unless-stopped \
+  --network=host \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
@@ -169,8 +164,8 @@ docker run -d \
 # redir udp mode
 docker run -d \
   --name=ssredir-udp \
-  --network=host \
   --restart=unless-stopped \
+  --network=host \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \

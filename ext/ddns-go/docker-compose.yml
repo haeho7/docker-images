@@ -2,8 +2,8 @@ services:
   ddns-go:
     image: jeessy/ddns-go:v6.12.5
     container_name: ddns-go
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     logging:
       options:
         max-file: 1

@@ -2,9 +2,9 @@ services:
   wireguard:
     image: haeho7/docker-images:wireguard
     container_name: wireguard
+    restart: unless-stopped
     network_mode: host
     privileged: true
-    restart: unless-stopped
     logging:
       options:
         max-file: 1

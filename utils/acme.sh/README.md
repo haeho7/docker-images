@@ -1,15 +1,12 @@
 # ACME.sh
 
-- [x] unRAID
-- [x] Normal
-
 ## Usage
 
 ```sh
 docker run -d \
   --name=acme.sh \
+  --restart=unless-stopped \
   --network=host \
-  --restart unless-stopped \
   -e TZ=Asia/Shanghai \
   -e CF_Zone_ID='example' \
   -e CF_Token='example' \

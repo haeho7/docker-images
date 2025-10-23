@@ -2,8 +2,8 @@ services:
   mdc:
     image: vergilgao/mdc:6.6.6-r0
     container_name: mdc
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     logging:
       options:
         max-file: 1

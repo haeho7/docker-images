@@ -1,15 +1,12 @@
 # Movie Data Capture
 
-- [x] unRAID
-- [x] Normal
-
 ## Usage
 
 ```sh
 docker run -d \
   --name=mdc \
-  --network=host \
   --restart=unless-stopped \
+  --network=host \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \

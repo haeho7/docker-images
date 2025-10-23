@@ -1,14 +1,13 @@
-# GFW-DEFENSE
-
-- [x] Normal
+# GFW-Defense
 
 ## Usage
 
 ```sh
 docker run -d \
   --name=gfw-defense \
-  --network=host \
   --restart=unless-stopped \
+  --network=host \
+  --privileged=true \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \

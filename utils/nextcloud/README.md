@@ -1,15 +1,12 @@
 # NextCloud
 
-- [x] unRAID
-- [x] Normal
-
 ## Usage
 
 ```sh
 docker run -d \
   --name=nextcloud \
-  --network=host \
   --restart=unless-stopped \
+  --network=host \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
@@ -24,7 +21,7 @@ docker run -d \
   -e REDIS_HOST_PASSWORD='example' \
   -e NEXTCLOUD_ADMIN_USER=example \
   -e NEXTCLOUD_ADMIN_PASSWORD='example' \
-  -e NEXTCLOUD_TRUSTED_DOMAINS='192.168.1.31 nextcloud.demo.com nextcloud.local.demo.com' \
+  -e NEXTCLOUD_TRUSTED_DOMAINS='192.168.1.31 nextcloud.example.com nextcloud.local.example.com' \
   -e PHP_MEMORY_LIMIT=1024M \
   -e PHP_UPLOAD_LIMIT=0 \
   -v /mnt/user/appdata/nextcloud/nextcloud-data:/var/www/nextcloud \

@@ -6,9 +6,9 @@
 # daemon
 docker run -d \
   --name=rsync-daemon \
+  --restart=unless-stopped \
   --network=host \
   --privileged=true \
-  --restart=unless-stopped \
   --ulimit nproc=-1 \
   --ulimit nofile=1048576:1048576 \
   --log-opt max-file=1 \
@@ -23,9 +23,9 @@ docker run -d \
 # nas
 docker run -d \
   --name=rsync-nas \
+  --restart=unless-stopped \
   --network=host \
   --privileged=true \
-  --restart=unless-stopped \
   --ulimit nofile=1048576:1048576 \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
@@ -41,9 +41,9 @@ docker run -d \
 # unraid
 docker run -d \
   --name=rsync-unraid \
+  --restart=unless-stopped \
   --network=host \
   --privileged=true \
-  --restart=unless-stopped \
   --ulimit nofile=1048576:1048576 \
   --log-opt max-file=1 \
   --log-opt max-size=20m \

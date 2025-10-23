@@ -2,8 +2,8 @@ services:
   valkey:
     image: haeho7/docker-images:valkey
     container_name: valkey
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     logging:
       options:
         max-file: 1

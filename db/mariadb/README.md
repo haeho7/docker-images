@@ -5,8 +5,8 @@
 ```sh
 docker run -d \
   --name=mariadb \
-  --network=host \
   --restart=unless-stopped \
+  --network=host \
   --security-opt seccomp=unconfined \
   --ulimit memlock=-1 \
   --ulimit nproc=-1 \

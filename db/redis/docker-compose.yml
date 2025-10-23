@@ -2,8 +2,8 @@ services:
   redis:
     image: haeho7/docker-images:redis
     container_name: redis
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     logging:
       options:
         max-file: 1

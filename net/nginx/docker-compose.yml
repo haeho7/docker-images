@@ -1,9 +1,9 @@
 services:
   nginx:
     image: haeho7/docker-images:nginx
+    restart: unless-stopped
     container_name: nginx
     network_mode: host
-    restart: unless-stopped
     cap_add:
       - NET_ADMIN
       - SYS_ADMIN

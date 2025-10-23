@@ -1,4 +1,4 @@
-# tinyfecvpn
+# tinyfecVPN
 
 ## Usage
 
@@ -32,9 +32,9 @@ lrwxrwxrwx 1 root root 26 12月 11 17:56 /usr/sbin/iptables -> /etc/alternatives
 # server
 docker run -d \
   --name=tinyfecvpn \
+  --restart=unless-stopped \
   --network=host \
   --privileged=true \
-  --restart=unless-stopped \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
@@ -55,9 +55,9 @@ docker run -d \
 # client
 docker run -d \
   --name=tinyfecvpn \
+  --restart=unless-stopped \
   --network=host \
   --privileged=true \
-  --restart=unless-stopped \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
@@ -83,9 +83,9 @@ docker run -d \
 # server
 docker run -d \
   --name=tinyfecvpn-game \
+  --restart=unless-stopped \
   --network=host \
   --privileged=true \
-  --restart=unless-stopped \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
@@ -106,9 +106,9 @@ docker run -d \
 # client
 docker run -d \
   --name=tinyfecvpn-game \
+  --restart=unless-stopped \
   --network=host \
   --privileged=true \
-  --restart=unless-stopped \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \

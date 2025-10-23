@@ -5,8 +5,8 @@
 ```sh
 docker run -d \
   --name=samba \
-  --network=host \
   --restart=unless-stopped \
+  --network=host \
   #--ulimit memlock=-1 \
   --ulimit nproc=-1 \
   --ulimit nofile=1048576:1048576 \

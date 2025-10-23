@@ -1,4 +1,4 @@
-# phantun
+# Phantun
 
 - [x] unRAID
 - [ ] OpenWrt
@@ -10,9 +10,9 @@
 # server
 docker run -d \
   --name=phantun \
+  --restart=unless-stopped \
   --network=host \
   --privileged=true \
-  --restart=unless-stopped \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
@@ -30,9 +30,9 @@ docker run -d \
 # client
 docker run -d \
   --name=phantun \
+  --restart=unless-stopped \
   --network=host \
   --privileged=true \
-  --restart=unless-stopped \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \

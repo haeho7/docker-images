@@ -5,8 +5,8 @@
 ```sh
 docker run -d \
   --name=webdav-cilnet \
-  --network=host \
   --restart=unless-stopped \
+  --network=host \
   --cap-add=SYS_ADMIN \
   --device=/dev/fuse \
   --log-opt max-file=1 \

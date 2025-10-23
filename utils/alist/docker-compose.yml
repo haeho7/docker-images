@@ -2,8 +2,8 @@ services:
   alist:
     image: haeho7/docker-images:alist
     container_name: alist
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     logging:
       options:
         max-file: 1

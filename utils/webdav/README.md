@@ -1,15 +1,12 @@
-# Webdav
-
-- [x] unRAID
-- [x] Normal
+# WebDAV
 
 ## Usage
 
 ```sh
 docker run -d \
   --name=webdav \
-  --network=host \
   --restart=unless-stopped \
+  --network=host \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \

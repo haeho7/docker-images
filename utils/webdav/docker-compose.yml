@@ -2,8 +2,8 @@ services:
   webdav:
     image: haeho7/docker-images:webdav
     container_name: webdav
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     logging:
       options:
         max-file: 1

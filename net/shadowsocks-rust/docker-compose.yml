@@ -2,8 +2,8 @@ services:
   ssserver:
     image: pexcn/docker-images:shadowsocks-rust
     container_name: ssserver
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     logging:
       options:
         max-file: 1
@@ -22,8 +22,8 @@ services:
   sslocal:
     image: pexcn/docker-images:shadowsocks-rust
     container_name: sslocal
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     logging:
       options:
         max-file: 1

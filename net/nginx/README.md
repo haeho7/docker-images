@@ -1,20 +1,17 @@
 # Nginx
 
-- [x] unRAID
-- [x] Normal
-
 ## Usage
 
 ```sh
 docker run -d \
   --name=nginx \
-  --network=host \
   --restart=unless-stopped \
-  --log-opt max-file=1 \
-  --log-opt max-size=20m \
+  --network=host \
   --cap-add=NET_ADMIN \
   --cap-add=SYS_ADMIN \
   --cap-add=SYS_NICE \
+  --log-opt max-file=1 \
+  --log-opt max-size=20m \
   -l me.local.container.name=nginx \
   -e TZ=Asia/Shanghai \
   -v /mnt/user/appdata/nginx/nginx-data/nginx.conf:/etc/nginx/nginx.conf \

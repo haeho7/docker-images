@@ -1,18 +1,14 @@
 # Transmission
 
-- [x] unRAID
-- [x] OpenWrt
-- [x] Normal
-
 ## Usage
 
 ```sh
 docker run -d \
   --name=transmission \
+  --restart=unless-stopped \
   --network=external-network \
   --ip=192.168.1.39 \
   --sysctl net.ipv6.conf.all.disable_ipv6=1 \
-  --restart=unless-stopped \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e TZ=Asia/Shanghai \
@@ -22,7 +18,7 @@ docker run -d \
   -e PASS='example' \
   -e TRANSMISSION_WEB_HOME='/transmission-web-control/' \
   -e WHITELIST='127.0.0.1,192.168.1.*' \
-  -e HOST_WHITELIST='*.demo.com' \
+  -e HOST_WHITELIST='*.example.com' \
   -e PEERPORT=51314 \
   -v /mnt/user/appdata/transmission/transmission-data:/config \
   -v /mnt/user/torrent/watch:/watch \
@@ -30,7 +26,7 @@ docker run -d \
   haeho7/docker-images:transmission
 ```
 
-## Use macvlan network
+## Macvlan
 
 OpenWrt need install `kmod-macvlan` package.
 

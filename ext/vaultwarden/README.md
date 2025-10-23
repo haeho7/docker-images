@@ -1,15 +1,12 @@
 # Vaultwarden
 
-- [x] unRAID
-- [x] Normal
-
 ## Usage
 
 ```sh
 docker run -d \
   --name=vaultwarden \
-  --network=host \
   --restart=unless-stopped \
+  --network=host \
   --user=99:100 \
   --log-opt max-file=1 \
   --log-opt max-size=20m \

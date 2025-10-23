@@ -2,8 +2,8 @@ services:
   samba:
     image: haeho7/docker-images:samba
     container_name: samba
-    network_mode: host
     restart: unless-stopped
+    network_mode: host
     ulimits:
       #memlock: -1
       nproc: -1

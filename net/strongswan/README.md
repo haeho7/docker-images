@@ -1,16 +1,13 @@
 # StrongSwan
 
-- [x] unRAID
-- [x] Normal
-
 ## Usage
 
 ```sh
 docker run -d \
   --name strongswan \
+  --restart=unless-stopped \
   --network=host \
   --privileged=true \
-  --restart unless-stopped \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -e PSK='PreSharedKey' \
