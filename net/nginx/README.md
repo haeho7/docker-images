@@ -13,7 +13,7 @@ docker run -d \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
   -l me.local.container.name=nginx \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -v /mnt/user/appdata/nginx/nginx-data/nginx.conf:/etc/nginx/nginx.conf \
   -v /mnt/user/appdata/nginx/nginx-data/conf.d:/etc/nginx/conf.d \
   -v /mnt/user/appdata/nginx/nginx-data/http.d:/etc/nginx/http.d \

@@ -13,7 +13,7 @@ docker run -d \
   --ulimit nofile=1048576:1048576 \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e ENABLE_DAEMON=1 \
   -v /mnt/user/appdata/rsync/conf/rsyncd.conf:/etc/rsync/rsyncd.conf \
   -v /mnt/user/appdata/rsync/conf/rsyncd.secrets:/etc/rsync/rsyncd.secrets \
@@ -29,7 +29,7 @@ docker run -d \
   --ulimit nofile=1048576:1048576 \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e CRONTAB='0 */12 * * * /opt/script/nas-backup.sh > /proc/1/fd/1' \
   #-v /mnt/user/appdata/rsync/conf/rsyncd.conf:/etc/rsync/rsyncd.conf \
   #-v /mnt/user/appdata/rsync/conf/rsyncd.secrets:/etc/rsync/rsyncd.secrets \
@@ -47,7 +47,7 @@ docker run -d \
   --ulimit nofile=1048576:1048576 \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e CRONTAB='0 */12 * * * /opt/script/unraid-backup.sh > /proc/1/fd/1' \
  #-v /mnt/user/appdata/rsync/rsync-data/conf/rsyncd.conf:/etc/rsync/rsyncd.conf \
   -v /mnt/user/appdata/rsync/rsync-data/conf/rsyncd.secrets:/etc/rsync/rsyncd.secrets \

@@ -9,7 +9,7 @@ docker run -d \
   --network=host \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e PUID=99 \
   -e PGID=100 \
   -v /mnt/user/appdata/mdc/mdc-data:/config \

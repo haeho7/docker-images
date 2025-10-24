@@ -10,7 +10,7 @@ docker run -d \
   --privileged=true \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e BLOCKING_POLICY=DROP \
   -e PASSING_POLICY=ACCEPT \
   -e DEFAULT_POLICY=RETURN \

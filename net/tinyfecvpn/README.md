@@ -37,7 +37,7 @@ docker run -d \
   --privileged=true \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e USE_IPTABLES_NFT_BACKEND=0 \
   haeho7/docker-images:tinyfecvpn \
   -s -l 0.0.0.0:1900 \
@@ -60,7 +60,7 @@ docker run -d \
   --privileged=true \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e USE_IPTABLES_NFT_BACKEND=0 \
   haeho7/docker-images:tinyfecvpn \
   -c -r 11.22.33.44:1900 \
@@ -88,7 +88,7 @@ docker run -d \
   --privileged=true \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e USE_IPTABLES_NFT_BACKEND=0 \
   haeho7/docker-images:tinyfecvpn \
   -s -l 0.0.0.0:1901 \
@@ -111,7 +111,7 @@ docker run -d \
   --privileged=true \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e USE_IPTABLES_NFT_BACKEND=0 \
   haeho7/docker-images:tinyfecvpn \
   -c -r 11.22.33.44:1901 \

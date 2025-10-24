@@ -15,7 +15,7 @@ docker run -d \
   --privileged=true \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e USE_IPTABLES_NFT_BACKEND=0 \
   -e RUST_LOG=INFO \
   haeho7/docker-images:phantun \
@@ -35,7 +35,7 @@ docker run -d \
   --privileged=true \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e USE_IPTABLES_NFT_BACKEND=0 \
   -e RUST_LOG=INFO \
   haeho7/docker-images:phantun \

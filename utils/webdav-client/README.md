@@ -11,7 +11,7 @@ docker run -d \
   --device=/dev/fuse \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e PUID=99 \
   -e PGID=100 \
   -e DAVFS2_ASK_AUTH=0 \

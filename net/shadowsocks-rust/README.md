@@ -18,7 +18,7 @@ docker run -d \
   --network=host \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e CHILLING_EFFECT=0 \
   pexcn/docker-images:shadowsocks-rust \
   ssservice server \
@@ -45,7 +45,7 @@ docker run -d \
   --network=host \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e CHILLING_EFFECT=0 \
   pexcn/docker-images:shadowsocks-rust \
   ssservice local \
@@ -69,7 +69,7 @@ docker run -d \
   --network=host \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e CHILLING_EFFECT=0 \
   pexcn/docker-images:shadowsocks-rust \
   ssservice local \
@@ -93,7 +93,7 @@ docker run -d \
   --network=host \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e CHILLING_EFFECT=0 \
   pexcn/docker-images:shadowsocks-rust \
   ssservice local \
@@ -118,7 +118,7 @@ docker run -d \
   --restart=unless-stopped \
   --network=host \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e CHILLING_EFFECT=0 \
   pexcn/docker-images:shadowsocks-rust \
   ssservice local \
@@ -144,7 +144,7 @@ docker run -d \
   --network=host \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e CHILLING_EFFECT=0 \
   pexcn/docker-images:shadowsocks-rust \
   ssservice local \
@@ -168,7 +168,7 @@ docker run -d \
   --network=host \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e CHILLING_EFFECT=0 \
   pexcn/docker-images:shadowsocks-rust \
   ssservice local \

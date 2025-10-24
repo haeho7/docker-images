@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     network_mode: host
     environment:
-      TZ: Asia/Shanghai
+      TZ: Asia/Taipei
       CF_Zone_ID: 'example'
       CF_Token: 'example'
       DEPLOY_DOCKER_CONTAINER_LABEL: 'me.local.container.name=nginx'

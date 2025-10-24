@@ -11,7 +11,7 @@ docker run -d \
   --privileged=true \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e USE_IPTABLES_NFT_BACKEND=0 \
   haeho7/docker-images:udp2raw \
   -s -l 0.0.0.0:1800 -r 127.0.0.1:1900 \
@@ -35,7 +35,7 @@ docker run -d \
   --privileged=true \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e USE_IPTABLES_NFT_BACKEND=0 \
   haeho7/docker-images:udp2raw \
   -c -l 127.0.0.1:1900 -r 11.22.33.44:1800 \

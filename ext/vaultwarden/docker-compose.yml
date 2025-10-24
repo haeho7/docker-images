@@ -11,7 +11,7 @@ services:
         max-size: 20m
     env_file: ./config.env
     environment:
-      TZ: Asia/Shanghai
+      TZ: Asia/Taipei
       ROCKET_ENV: production
       ADMIN_TOKEN: 'example'
     volumes:

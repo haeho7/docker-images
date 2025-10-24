@@ -9,7 +9,7 @@ services:
         max-file: 1
         max-size: 20m
     environment:
-      TZ: Asia/Shanghai
+      TZ: Asia/Taipei
     volumes:
       - ./adguardhome-data/conf:/opt/adguardhome/conf
       - ./adguardhome-data/work:/opt/adguardhome/work

@@ -172,7 +172,7 @@ filtering:
   blocking_ipv6: ""
   blocked_services:
     schedule:
-      time_zone: Asia/Shanghai
+      time_zone: Asia/Taipei
     ids: []
   protection_disabled_until: null
   safe_search:

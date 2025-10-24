@@ -13,7 +13,7 @@ docker run -d \
   --ulimit nofile=1048576:1048576 \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e PUID=99 \
   -e PGID=100 \
   #-e MARIADB_DATABASE=example \

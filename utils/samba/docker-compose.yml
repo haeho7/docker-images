@@ -15,7 +15,7 @@ services:
         max-file: 1
         max-size: 20m
     environment:
-      TZ: Asia/Shanghai
+      TZ: Asia/Taipei
       PUID: 99
       PGID: 100
     volumes:

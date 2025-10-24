@@ -9,7 +9,7 @@ docker run -d \
   --network=host \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e PUID=99 \
   -e PGID=100 \
   -e MYSQL_HOST='192.168.1.31:3306' \
@@ -207,7 +207,7 @@ apc.enable_cli=1
   'log_query' => false,
   'loglevel' => 2,
   'logdateformat' => 'Y-m-d H:i:s',
-  'logtimezone' => 'Asia/Shanghai',
+  'logtimezone' => 'Asia/Taipei',
 ```
 
 ## PHP OCC Command

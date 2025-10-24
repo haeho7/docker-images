@@ -9,7 +9,7 @@ services:
         max-file: 1
         max-size: 20m
     environment:
-      TZ: Asia/Shanghai
+      TZ: Asia/Taipei
       CHILLING_EFFECT: 0
       SHADOWSOCKS_PASSWORD_1: password_1
       SHADOWSOCKS_PASSWORD_2: password_2
@@ -29,7 +29,7 @@ services:
         max-file: 1
         max-size: 20m
     environment:
-      TZ: Asia/Shanghai
+      TZ: Asia/Taipei
       CHILLING_EFFECT: 0
       SHADOWSOCKS_PASSWORD_1: password_1
       SHADOWSOCKS_PASSWORD_2: password_2

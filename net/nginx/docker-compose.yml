@@ -15,7 +15,7 @@ services:
     labels:
       me.local.container.name: nginx
     environment:
-      TZ: Asia/Shanghai
+      TZ: Asia/Taipei
     volumes:
       - ./nginx-data/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx-data/conf.d:/etc/nginx/conf.d

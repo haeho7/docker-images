@@ -9,6 +9,6 @@ services:
         max-file: 1
         max-size: 20m
     environment:
-      TZ: Asia/Shanghai
+      TZ: Asia/Taipei
     volumes:
       - ./ddns-go-data:/root

@@ -9,7 +9,7 @@ services:
     #depends_on:
     #  - udp2raw-0
     environment:
-      TZ: Asia/Shanghai
+      TZ: Asia/Taipei
       USE_IPTABLES_NFT_BACKEND: 0
     command: >
       -s -l 0.0.0.0:1800 -r 127.0.0.1:1900
@@ -35,7 +35,7 @@ services:
     #depends_on:
     #  - udp2raw-0
     environment:
-      TZ: Asia/Shanghai
+      TZ: Asia/Taipei
       USE_IPTABLES_NFT_BACKEND: 0
     command: >
       -c -l 127.0.0.1:1900 -r 11.22.33.44:1800

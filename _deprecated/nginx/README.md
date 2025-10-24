@@ -12,7 +12,7 @@ docker run -d \
   --restart=unless-stopped \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -v /mnt/user/appdata/nginx/nginx-data/nginx.conf:/etc/nginx/nginx.conf \
   -v /mnt/user/appdata/nginx/nginx-data/conf.d:/etc/nginx/conf.d \
   -v /mnt/user/appdata/acme.sh/acme.sh-data:/cert \

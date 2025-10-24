@@ -7,7 +7,7 @@ docker run -d \
   --name=acme.sh \
   --restart=unless-stopped \
   --network=host \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e CF_Zone_ID='example' \
   -e CF_Token='example' \
   -e DEPLOY_DOCKER_CONTAINER_LABEL='me.local.container.name=nginx' \

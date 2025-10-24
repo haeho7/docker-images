@@ -10,7 +10,7 @@ docker run -itd \
   --privileged=true \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   haeho7/docker-images:lsi-sas
 ```
 

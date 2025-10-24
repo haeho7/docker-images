@@ -12,7 +12,7 @@ docker run -d \
   --privileged=true \
   --log-opt max-file=1 \
   --log-opt max-size=20m \
-  -e TZ=Asia/Shanghai \
+  -e TZ=Asia/Taipei \
   -e USE_IPTABLES_NFT_BACKEND=0 \
   -e PEER_RESOLVE_INTERVAL=0 \
   -v /mnt/user/appdata/wireguard/wireguard-data:/etc/wireguard \

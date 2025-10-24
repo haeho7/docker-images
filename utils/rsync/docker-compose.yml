@@ -15,7 +15,7 @@ services:
         max-file: 1
         max-size: 20m
     environment:
-      TZ: Asia/Shanghai
+      TZ: Asia/Taipei
       ENABLE_DAEMON: 1
     volumes:
       - ./rsync-data/conf/rsyncd.conf:/etc/rsync/rsyncd.conf
@@ -37,7 +37,7 @@ services:
         max-file: 1
         max-size: 20m
     environment:
-      TZ: Asia/Shanghai
+      TZ: Asia/Taipei
       CRONTAB: '0 */12 * * * /opt/script/nas-backup.sh > /proc/1/fd/1'
     volumes:
       #- ./rsync-data/conf/rsyncd.conf:/etc/rsync/rsyncd.conf
@@ -61,7 +61,7 @@ services:
         max-file: 1
         max-size: 20m
     environment:
-      TZ: Asia/Shanghai
+      TZ: Asia/Taipei
       CRONTAB: '0 */12 * * * /opt/script/unraid-backup.sh > /proc/1/fd/1'
     volumes:
       #- ./rsync-data/conf/rsyncd.conf:/etc/rsync/rsyncd.conf
