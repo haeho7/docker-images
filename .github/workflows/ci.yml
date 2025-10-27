@@ -52,6 +52,9 @@ jobs:
           # nginx
           - BUILD_CONTEXT: net/nginx
             TARGET_PLATFORMS: linux/amd64,linux/arm64
+          # netspeeder
+          - BUILD_CONTEXT: net/netspeeder
+            TARGET_PLATFORMS: linux/amd64,linux/arm64
           # webdav
           - BUILD_CONTEXT: utils/webdav
             TARGET_PLATFORMS: linux/amd64,linux/arm64
