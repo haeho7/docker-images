@@ -26,19 +26,19 @@ warn() {
   printf "${yellow}[${time}] [WARN]: ${clear}%s\n" "$*" >&2
 }
 
-_setup_user() {
+setup_user() {
   usermod -o -u ${PUID} -g ${GROUP} -aG ${GROUPS} -s /bin/bash ${USER}
   groupmod -o -g ${PGID} ${GROUP}
   umask ${UMASK}
 }
 
-_setup_owne() {
+setup_owner() {
   chown ${PUID}:${PGID} /etc/mysql/conf.d/*.cnf
 }
 
 start_mariadb() {
-  _setup_user
-  _setup_owne
+  setup_user
+  setup_owner
 
   # call mariadb official startup script
   exec /usr/local/bin/docker-entrypoint.sh "$@"
