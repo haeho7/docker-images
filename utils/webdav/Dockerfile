@@ -7,12 +7,12 @@
 #
 FROM golang:alpine AS builder
 
-ARG VERSION=v4.2.0
+ARG VERSION=v5.8.1
 RUN apk update \
   && apk add --no-cache --virtual .build-deps git gcc musl-dev \
   && git clone https://github.com/hacdias/webdav.git --branch $VERSION \
   && cd webdav \
-  && CGO_ENABLED=0 go build -trimpath -ldflags="-w -s" -v \
+  && CGO_ENABLED=0 go build -trimpath -ldflags="-w -s -X github.com/hacdias/webdav/v5/cmd.version=$VERSION" -o webdav -v \
   && cp webdav /usr/local/bin/ \
   && cd .. \
   && rm -r webdav \
@@ -22,7 +22,7 @@ RUN apk update \
 #
 # Runtime stage
 #
-FROM alpine:3.16
+FROM alpine:3.22
 LABEL maintainer="haeho7 <i@demo.com>"
 
 RUN apk update \
@@ -34,12 +34,8 @@ RUN groupadd -r webdav \
   && useradd -r -g webdav webdav
 
 COPY --from=builder /usr/local/bin/webdav /usr/local/bin/
-COPY webdav-data/config.yml /opt/
 COPY webdav.sh /usr/local/bin/
 
-VOLUME ["/config", "/data"]
-WORKDIR /config
-
-EXPOSE 8001
+VOLUME /data
 
 ENTRYPOINT ["webdav.sh"]

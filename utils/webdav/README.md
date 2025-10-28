@@ -14,7 +14,7 @@ docker run -d \
   -e PGID=100 \
   -e USERNAME=example \
   -e PASSWORD='example' \
-  -v /mnt/user/appdata/webdav/webdav-data:/config \
-  -v /mnt/user/datas/webdav:/data \
+  -v /mnt/user/appdata/webdav/webdav-data/conf:/etc/webdav \
+  -v /mnt/user/appdata/webdav/webdav-data/data:/data \
   haeho7/docker-images:webdav
 ```

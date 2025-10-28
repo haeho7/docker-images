@@ -15,5 +15,6 @@ services:
       USERNAME: example
       PASSWORD: 'example'
     volumes:
-      - ./webdav-data:/config
-      - /mnt/user/datas/webdav:/data
+      - ./webdav-data/conf:/etc/webdav
+      - ./webdav-data/data:/data
+    command: webdav -c /etc/webdav/config.yml

@@ -7,7 +7,6 @@ GROUPS=webdav,users
 PUID=${PUID:-1000}
 PGID=${PGID:-1000}
 UMASK=${UMASK:-022}
-CONFIG_FILE="/config/config.yml"
 
 _get_time() {
   date '+%Y-%m-%d %T'
@@ -27,32 +26,21 @@ warn() {
   printf "${yellow}[${time}] [WARN]: ${clear}%s\n" "$*" >&2
 }
 
-_is_exist_conf() {
-  if [ ! -f "${CONFIG_FILE}" ]; then
-    info "config.yml does not exist, copy config.yml"
-    cp /opt/config.yml ${CONFIG_FILE}
-  else
-    warn "config.yml file already exists, skip copy"
-  fi
-}
-
-_setup_user() {
+setup_user() {
   usermod -o -u ${PUID} -g ${GROUP} -aG ${GROUPS} -s /bin/ash ${USER}
   groupmod -o -g ${PGID} ${GROUP}
   umask ${UMASK}
 }
 
-_setup_owne() {
-  chown ${PUID}:${PGID} /config/*.yml
-  chown ${PUID}:${PGID} /data/
+setup_owner() {
+  chown ${PUID}:${PGID} /etc/webdav/*.yml
+  chown ${PUID}:${PGID} /data
 }
 
 start_webdav() {
-  _is_exist_conf
-  _setup_user
-  _setup_owne
-  exec gosu ${PUID}:${PGID} webdav -c ${CONFIG_FILE} "$@"
-  #exec gosu ${PUID}:${PGID} sh -c "umask ${UMASK} && webdav -c ${CONFIG_FILE}"
+  setup_user
+  setup_owner
+  exec gosu webdav "$@"
 }
 
 start_webdav "$@"
