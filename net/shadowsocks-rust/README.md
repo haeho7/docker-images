@@ -38,9 +38,9 @@ docker run -d \
 ### Client
 
 ```sh
-# socks5 mode
+# local / socks5 mode
 docker run -d \
-  --name=sssocks5 \
+  --name=sslocal \
   --restart=unless-stopped \
   --network=host \
   --log-opt max-file=1 \

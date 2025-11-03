@@ -55,10 +55,10 @@ services:
         --tcp-no-delay
         -U
 
-  # sssocks5
-  sssocks5:
+  # sslocal / sssocks5
+  sslocal:
     image: pexcn/docker-images:shadowsocks-rust
-    container_name: sssocks5
+    container_name: sslocal
     restart: unless-stopped
     network_mode: host
     logging:
