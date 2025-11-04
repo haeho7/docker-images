@@ -92,6 +92,35 @@ jobs:
       # prepare
       - name: Checkout
         uses: actions/checkout@v4
+
+      # check change
+      - name: Check context change
+        run: |
+          git fetch origin ${{ github.event.ref }} --depth=2
+
+          PREVIOUS_COMMIT=${{ github.event.before }}
+          echo "DEBUG: PREVIOUS_COMMIT initial = $PREVIOUS_COMMIT"
+
+          if [ -z "$PREVIOUS_COMMIT" ] || [ "$PREVIOUS_COMMIT" = "0000000000000000000000000000000000000000" ]; then
+            PREVIOUS_COMMIT="HEAD^"
+            echo "DEBUG: PREVIOUS_COMMIT fallback to HEAD^"
+          fi
+
+          echo "DEBUG: Using PREVIOUS_COMMIT = $PREVIOUS_COMMIT"
+
+          CHANGED_FILES=$(git diff --name-only "$PREVIOUS_COMMIT" "${{ github.sha }}" | grep -E "^${{ matrix.BUILD_CONTEXT }}(/|$)" || true)
+          echo "DEBUG: Build context = ${{ matrix.BUILD_CONTEXT }}"
+          echo "DEBUG: Changed files matching context:"
+          echo "$CHANGED_FILES"
+
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "CONTEXT_CHANGED=false" >> $GITHUB_ENV
+            echo "DEBUG: CONTEXT_CHANGED set to false"
+          else
+            echo "CONTEXT_CHANGED=true" >> $GITHUB_ENV
+            echo "DEBUG: CONTEXT_CHANGED set to true"
+          fi
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
         with:
@@ -126,7 +155,7 @@ jobs:
       # build & push
       - name: Build image and Push to Container Registries
         uses: docker/build-push-action@v5
-        if: ${{ github.event_name == 'push' || github.event.inputs.deploy == '1' }}
+        if: ${{ (github.event_name == 'push' && env.CONTEXT_CHANGED == 'true') || github.event.inputs.deploy == '1' }}
         with:
           context: ${{ matrix.BUILD_CONTEXT }}
           tags: |
