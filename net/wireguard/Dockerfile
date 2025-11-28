@@ -27,7 +27,7 @@ RUN apk update \
 FROM alpine:3.22
 LABEL maintainer="haeho7 <i@demo.com>"
 
-ARG WIREGUARD_VER=1.0.20210914-r3
+ARG WIREGUARD_VER=1.0.20250521-r0
 RUN apk update \
   && apk add --no-cache iptables ip6tables iptables-legacy tzdata \
       wireguard-tools=$WIREGUARD_VER \
