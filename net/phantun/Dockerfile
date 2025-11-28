@@ -5,7 +5,7 @@
 #
 # Build stage
 #
-FROM rust:alpine AS builder
+FROM rust:alpine3.22 AS builder
 
 ARG VERSION=v0.6.0
 RUN apk update \
@@ -25,11 +25,11 @@ RUN apk update \
 #
 # Runtime stage
 #
-FROM alpine:3.16
+FROM alpine:3.22
 LABEL maintainer="haeho7 <i@demo.com>"
 
 RUN apk update \
-  && apk add --no-cache iptables ip6tables tzdata \
+  && apk add --no-cache iptables ip6tables iptables-legacy tzdata \
   && rm -rf /var/cache/apk/*
 
 COPY --from=builder /usr/local/bin/phantun-server /usr/local/bin/

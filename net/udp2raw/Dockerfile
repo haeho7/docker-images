@@ -5,7 +5,7 @@
 #
 # Build stage
 #
-FROM alpine:3.18 AS builder
+FROM alpine:3.22 AS builder
 
 # patch for linux-headers to fix build
 # waiting for edge to enter the next stable version...
@@ -28,13 +28,11 @@ RUN apk update \
 #
 # Runtime stage
 #
-# https://www.alpinelinux.org/posts/Alpine-3.19.0-released.html
-# make the version fixed at 3.18, version 3.19 maybe requires code changes.
-FROM alpine:3.18
+FROM alpine:3.22
 LABEL maintainer="haeho7 <i@demo.com>"
 
 RUN apk update \
-  && apk add --no-cache iptables ip6tables tzdata \
+  && apk add --no-cache iptables ip6tables iptables-legacy tzdata \
   && rm -rf /var/cache/apk/*
 
 COPY --from=builder /usr/local/bin/udp2raw /usr/local/bin/

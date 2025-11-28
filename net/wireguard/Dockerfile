@@ -5,7 +5,7 @@
 #
 # Build stage
 #
-FROM golang:1.19-alpine AS builder
+FROM golang:1.25-alpine3.22 AS builder
 
 ARG VERSION=0.0.20230223
 RUN apk update \
@@ -24,12 +24,12 @@ RUN apk update \
 #
 # Runtime stage
 #
-FROM alpine:3.18
+FROM alpine:3.22
 LABEL maintainer="haeho7 <i@demo.com>"
 
 ARG WIREGUARD_VER=1.0.20210914-r3
 RUN apk update \
-  && apk add --no-cache iptables ip6tables tzdata \
+  && apk add --no-cache iptables ip6tables iptables-legacy tzdata \
       wireguard-tools=$WIREGUARD_VER \
       wireguard-tools-doc=$WIREGUARD_VER \
   && rm -rf /var/cache/apk/*
