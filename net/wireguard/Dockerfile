@@ -7,7 +7,7 @@
 #
 FROM golang:1.25-alpine3.22 AS builder
 
-ARG VERSION=0.0.20230223
+ARG VERSION=0.0.20250522
 RUN apk update \
   && apk add --no-cache --virtual .build-deps git make gcc musl-dev \
   && git clone https://github.com/WireGuard/wireguard-go.git --branch $VERSION \
