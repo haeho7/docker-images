@@ -1,0 +1,488 @@
+#port: 7890
+#socks-port: 7891
+mixed-port: 7892
+#redir-port: 7893
+#tproxy-port: 7894
+log-level: debug
+mode: rule
+ipv6: true
+allow-lan: true
+bind-address: "*"
+lan-allowed-ips:
+  - 127.0.0.0/8
+  - 192.168.1.0/24
+  - ::/0
+lan-disallowed-ips: []
+authentication: []
+skip-auth-prefixes: []
+#interface-name: pppoe-wan
+unified-delay: true
+tcp-concurrent: true
+find-process-mode: off
+disable-keep-alive: false
+keep-alive-idle: 600
+keep-alive-interval: 15
+global-client-fingerprint: chrome
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+geodata-mode: true
+geodata-loader: standard
+geosite-matcher: succinct
+geo-auto-update: true
+geo-update-interval: 24
+geox-url:
+  geoip: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  geosite: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  mmdb: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
+
+tls: {}
+
+external-controller: 0.0.0.0:9090
+external-controller-tls: ""
+secret: <password>
+# use docker image
+external-ui: /etc/mihomo/ui
+external-ui-name: metacubex
+external-ui-url: "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
+
+proxy-providers: {}
+
+proxies:
+  - name: SS-SJC
+    type: ss
+    server: 10.1.10.1
+    port: 1984
+    cipher: 2022-blake3-aes-128-gcm
+    password: <passowrd>
+    ip-version: ipv4-prefer
+    interface-name: tfvpn-sjc
+    udp: true
+    udp-over-tcp: false
+    udp-over-tcp-version: 2
+    tfo: true
+    mptcp: false
+
+  - name: SS-LAX
+    type: ss
+    server: 10.1.20.1
+    port: 1984
+    cipher: 2022-blake3-aes-128-gcm
+    password: <passowrd>
+    ip-version: ipv4-prefer
+    interface-name: tfvpn-lax
+    udp: true
+    udp-over-tcp: false
+    udp-over-tcp-version: 2
+    tfo: true
+    mptcp: false
+
+  - name: SS-TYO
+    type: ss
+    server: 10.1.30.1
+    port: 1984
+    cipher: 2022-blake3-aes-128-gcm
+    password: <passowrd>
+    ip-version: ipv4-prefer
+    interface-name: tfvpn-tyo
+    udp: true
+    udp-over-tcp: false
+    udp-over-tcp-version: 2
+    tfo: true
+    mptcp: false
+
+  - name: SS-HK
+    type: ss
+    server: 10.1.99.1
+    port: 1984
+    cipher: 2022-blake3-aes-128-gcm
+    password: <passowrd>
+    ip-version: ipv4-prefer
+    interface-name: tfvpn-hk
+    udp: true
+    udp-over-tcp: false
+    udp-over-tcp-version: 2
+    tfo: true
+    mptcp: false
+
+  # dialer proxy
+  - name: DIALER-HK-SS-TYO
+    type: ss
+    server: tyo.example.com
+    port: 1984
+    cipher: 2022-blake3-aes-128-gcm
+    password: <passowrd>
+    ip-version: ipv4-prefer
+    dialer-proxy: SS-HK
+    udp: true
+    udp-over-tcp: false
+    udp-over-tcp-version: 2
+    tfo: true
+    mptcp: false
+
+tun:
+  enable: true
+  stack: system
+  device: mihomo
+  mtu: 1500
+  gso: true
+  gso-max-size: 65536
+  udp-timeout: 300
+  #strict-route: true
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+  endpoint-independent-nat: false
+  route-exclude-address:
+    - 11.11.11.11/32
+    - 22.22.22.22/32
+    - 33.33.33.33/32
+    - 44.44.44.44/32
+
+    # reserved
+    - 0.0.0.0/8
+    - 10.0.0.0/8
+    - 100.64.0.0/10
+    - 127.0.0.0/8
+    - 169.254.0.0/16
+    - 172.16.0.0/12
+    - 192.0.0.0/24
+    - 192.0.2.0/24
+    - 192.31.196.0/24
+    - 192.52.193.0/24
+    - 192.88.99.0/24
+    - 192.168.0.0/16
+    - 192.175.48.0/24
+    - 198.18.0.0/15
+    - 198.51.100.0/24
+    - 203.0.113.0/24
+    - 224.0.0.0/4
+    - 240.0.0.0/4
+    - 255.255.255.255/32
+    - ::/128
+    - ::1/128
+    - ::ffff:0:0/96
+    - ::ffff:0:0:0/96
+    - 64:ff9b::/96
+    - 64:ff9b:1::/48
+    - 100::/64
+    - 2001::/32
+    - 2001:20::/28
+    - 2001:db8::/32
+    - 2002::/16
+    - fc00::/7
+    - fe80::/10
+    - ff00::/8
+    # wireguard
+    - 101.101.102.111/32
+  #dns-hijack:
+  #  - udp://any:53
+  #  - tcp://any:53
+
+tunnels: []
+
+dns:
+  enable: true
+  listen: 0.0.0.0:5353
+  cache-algorithm: arc
+  use-hosts: false
+  respect-rules: true
+  prefer-h3: false
+  ipv6: true
+  ipv6-timeout: 300
+  enhanced-mode: redir-host
+  fake-ip-range: ""
+  fake-ip-filter: []
+  fake-ip-filter-mode: blacklist
+  proxy-server-nameserver:
+    - 'tls://120.53.53.53:853#ecs=202.96.128.0/22'
+    - 'tls://223.5.5.5:853#ecs=202.96.128.0/22'
+  default-nameserver:
+    - 'tls://120.53.53.53:853#ecs=202.96.128.0/22'
+    - 'tls://223.5.5.5:853#ecs=202.96.128.0/22'
+  nameserver:
+    - 'https://223.5.5.5/dns-query#ecs=202.96.128.0/22'
+    - 'https://doh.pub/dns-query#ecs=202.96.128.0/22'
+    #- https://dns.alidns.com/dns-query
+  nameserver-policy:
+    'geosite:private,apple@cn,microsoft@cn,category-games@cn,geolocation-cn':
+      - 'https://223.5.5.5/dns-query#ecs=202.96.128.0/22'
+      - 'https://doh.pub/dns-query#ecs=202.96.128.0/22'
+      #- https://dns.alidns.com/dns-query
+    'geosite:dmm':
+      - 'https://dns.google/dns-query#PROXY-TYO&ecs=14.3.0.0/16'
+    'geosite:!cn':
+      - 'https://dns.google/dns-query'
+
+  direct-nameserver: []
+  direct-nameserver-follow-policy: false
+  fallback:
+    - 'https://dns.google/dns-query'
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    geosite:
+      - gfw
+    domain: []
+    ipcidr: []
+
+hosts: {}
+
+proxy-groups:
+  - name: PROXY
+    type: select
+    proxies:
+      - PROXY-AUTO
+      - PROXY-US-AUTO
+      - SS-SJC
+      - SS-LAX
+      - SS-TYO
+      - SS-HK
+      - DIALER-HK-SS-TYO
+      - DIRECT
+
+  - name: PROXY-AUTO
+    type: url-test
+    include-all-proxies: true
+    lazy: false
+    tolerance: 20
+    interval: 300
+    timeout: 5000
+    max-failed-times: 5
+    url: "https://cp.cloudflare.com/generate_204"
+
+  - name: PROXY-US-AUTO
+    type: url-test
+    proxies:
+      - SS-SJC
+      - SS-LAX
+    lazy: false
+    tolerance: 20
+    interval: 300
+    timeout: 5000
+    max-failed-times: 5
+    url: "https://cp.cloudflare.com/generate_204"
+
+  - name: PROXY-TYO
+    type: select
+    proxies:
+      - SS-TYO
+      - DIALER-HK-SS-TYO
+
+  - name: GitHub
+    type: select
+    proxies:
+      - PROXY-AUTO
+      - PROXY-US-AUTO
+      - SS-SJC
+      - SS-LAX
+      - SS-TYO
+      - SS-HK
+      - DIALER-HK-SS-TYO
+      - DIRECT
+
+  - name: YouTube
+    type: select
+    proxies:
+      - PROXY-AUTO
+      - PROXY-US-AUTO
+      - SS-SJC
+      - SS-LAX
+      - SS-TYO
+      - SS-HK
+      - DIALER-HK-SS-TYO
+      - DIRECT
+
+  - name: Google
+    type: select
+    proxies:
+      - PROXY-AUTO
+      - PROXY-US-AUTO
+      - SS-SJC
+      - SS-LAX
+      - SS-TYO
+      - SS-HK
+      - DIALER-HK-SS-TYO
+      - DIRECT
+
+  - name: Apple
+    type: select
+    proxies:
+      - PROXY-AUTO
+      - PROXY-US-AUTO
+      - SS-SJC
+      - SS-LAX
+      - SS-TYO
+      - SS-HK
+      - DIALER-HK-SS-TYO
+      - DIRECT
+
+  - name: Microsoft
+    type: select
+    proxies:
+      - PROXY-AUTO
+      - PROXY-US-AUTO
+      - SS-SJC
+      - SS-LAX
+      - SS-TYO
+      - SS-HK
+      - DIALER-HK-SS-TYO
+      - DIRECT
+
+  - name: Twitter
+    type: select
+    proxies:
+      - PROXY-AUTO
+      - PROXY-US-AUTO
+      - SS-SJC
+      - SS-LAX
+      - SS-TYO
+      - SS-HK
+      - DIALER-HK-SS-TYO
+      - DIRECT
+
+  - name: Instagram
+    type: select
+    proxies:
+      - PROXY-AUTO
+      - PROXY-US-AUTO
+      - SS-SJC
+      - SS-LAX
+      - SS-TYO
+      - SS-HK
+      - DIALER-HK-SS-TYO
+      - DIRECT
+
+  - name: Facebook
+    type: select
+    proxies:
+      - PROXY-AUTO
+      - PROXY-US-AUTO
+      - SS-SJC
+      - SS-LAX
+      - SS-TYO
+      - SS-HK
+      - DIALER-HK-SS-TYO
+      - DIRECT
+
+  - name: Telegram
+    type: select
+    proxies:
+      - PROXY-AUTO
+      - PROXY-US-AUTO
+      - SS-SJC
+      - SS-LAX
+      - SS-TYO
+      - SS-HK
+      - DIALER-HK-SS-TYO
+      - DIRECT
+
+  - name: AI
+    type: select
+    proxies:
+      - PROXY-AUTO
+      - PROXY-US-AUTO
+      - SS-SJC
+      - SS-LAX
+      - SS-TYO
+      - SS-HK
+      - DIALER-HK-SS-TYO
+      - DIRECT
+
+  - name: DMM
+    type: select
+    proxies:
+      - SS-TYO
+      - DIALER-HK-SS-TYO
+      - DIRECT
+
+  - name: 9KG
+    type: select
+    proxies:
+      - PROXY-AUTO
+      - PROXY-US-AUTO
+      - SS-SJC
+      - SS-LAX
+      - DIRECT
+
+  - name: AD
+    type: select
+    proxies:
+      - REJECT
+
+  - name: CHINA
+    type: select
+    proxies:
+      - DIRECT
+
+  - name: FINAL
+    type: select
+    proxies:
+      - PROXY-AUTO
+      - PROXY-US-AUTO
+      - SS-SJC
+      - SS-LAX
+      - SS-TYO
+      - SS-HK
+      - DIALER-HK-SS-TYO
+      - DIRECT
+
+rule-providers:
+  custom-private:
+    behavior: classical
+    format: yaml
+    type: file
+    path: ./rules/custom-private.yaml
+    interval: 86400
+
+  custom-direct:
+    behavior: classical
+    format: yaml
+    type: file
+    path: ./rules/custom-direct.yaml
+    interval: 86400
+
+  custom-proxy:
+    behavior: classical
+    format: yaml
+    type: file
+    path: ./rules/custom-proxy.yaml
+    interval: 86400
+
+rules:
+  # default action type: DIRECT、REJECT
+  #- RULE-SET,custom-private,DIRECT,no-resolve
+  - RULE-SET,custom-direct,CHINA,no-resolve
+  - RULE-SET,custom-proxy,PROXY,no-resolve
+  - GEOSITE,category-ads-all,AD
+  - GEOSITE,private,DIRECT,no-resolve
+  - GEOSITE,apple@cn,CHINA
+  - GEOSITE,microsoft@cn,CHINA
+  - GEOSITE,category-games@cn,CHINA
+  - GEOSITE,onedrive,CHINA
+  - GEOSITE,geolocation-cn,CHINA
+  - GEOSITE,github,GitHub
+  - GEOSITE,youtube,YouTube
+  - GEOSITE,google,Google
+  - GEOSITE,apple,Apple
+  - GEOSITE,microsoft,Microsoft
+  - GEOSITE,twitter,Twitter
+  - GEOSITE,instagram,Instagram
+  - GEOSITE,facebook,Facebook
+  - GEOSITE,telegram,Telegram
+  - GEOSITE,category-ai-!cn,AI
+  - GEOSITE,javdb,9KG
+  - GEOSITE,missav,9KG
+  - GEOSITE,dmm,DMM
+  - GEOSITE,gfw,PROXY
+  - GEOSITE,cn,CHINA
+  - GEOIP,private,DIRECT,no-resolve
+  - GEOIP,google,Google,no-resolve
+  - GEOIP,facebook,Facebook,no-resolve
+  - GEOIP,twitter,Twitter,no-resolve
+  - GEOIP,telegram,Telegram,no-resolve
+  - GEOIP,CN,CHINA,no-resolve
+  - MATCH,FINAL
+
+sub-rules: {}
