@@ -1,0 +1,13 @@
+services:
+  metacubexd:
+    image: haeho7/docker-images:metacubexd
+    container_name: metacubexd
+    restart: unless-stopped
+    network_mode: host
+    logging:
+      options:
+        max-file: 1
+        max-size: 20m
+    environment:
+      TZ: Asia/Taipei
+      METACUBEXD_PORT: 9091

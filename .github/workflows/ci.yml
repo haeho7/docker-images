@@ -64,6 +64,9 @@ jobs:
           # mihomo
           - BUILD_CONTEXT: net/mihomo
             TARGET_PLATFORMS: linux/amd64,linux/arm64
+          # metacubexd
+          - BUILD_CONTEXT: net/metacubexd
+            TARGET_PLATFORMS: linux/amd64,linux/arm64
           # webdav
           - BUILD_CONTEXT: utils/webdav
             TARGET_PLATFORMS: linux/amd64,linux/arm64
