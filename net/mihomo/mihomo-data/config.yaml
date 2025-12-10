@@ -447,7 +447,6 @@ rule-providers:
     interval: 86400
 
 rules:
-  # default action type: DIRECT、REJECT
   #- RULE-SET,custom-private,DIRECT,no-resolve
   - RULE-SET,custom-direct,CHINA,no-resolve
   - RULE-SET,custom-proxy,PROXY,no-resolve
