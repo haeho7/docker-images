@@ -57,13 +57,12 @@ docker run -d \
 docker run -d \
   --name=metacubexd \
   --restart=unless-stopped \
-  --network=bridge \
+  --network=host \
   --log-opt=max-file=1 \
   --log-opt=max-size=20m \
   -e TZ=Asia/Taipei \
-  -e DEFAULT_BACKEND_URL=http://192.168.1.1:9090 \
-  -p 9091:80 \
-  ghcr.io/metacubex/metacubexd
+  -e METACUBEXD_PORT=9091 \
+  haeho7/docker-images:metacubexd
 ```
 
 ## UDP2Raw and tinyfecVPN
