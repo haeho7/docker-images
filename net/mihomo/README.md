@@ -270,4 +270,4 @@ mihomo uses the `nftables` firewall by default, this variable can be used to dis
 
 ## Upstream
 
-- [@MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo)
+- [@MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo/tree/Meta)
