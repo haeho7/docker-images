@@ -3,7 +3,7 @@
 mixed-port: 7892
 #redir-port: 7893
 #tproxy-port: 7894
-log-level: debug
+log-level: warning
 mode: rule
 ipv6: true
 allow-lan: true
@@ -39,7 +39,7 @@ geox-url:
 
 tls: {}
 
-external-controller: 0.0.0.0:9090
+external-controller: 192.168.1.1:9090
 external-controller-tls: ""
 secret: <password>
 
