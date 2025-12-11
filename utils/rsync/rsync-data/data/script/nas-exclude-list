@@ -1,9 +1,9 @@
 # Exclude list
-user/.recycle
-user/9kg
-user/backup
-user/medias
-user/torrent
+user/.recycle/
+user/9kg/
+user/backup/
+user/medias/
+user/torrent/
 
 #
 # Temp
