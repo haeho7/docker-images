@@ -15,7 +15,6 @@ lan-allowed-ips:
 lan-disallowed-ips: []
 authentication: []
 skip-auth-prefixes: []
-#interface-name: pppoe-wan
 unified-delay: true
 tcp-concurrent: true
 find-process-mode: off
@@ -130,6 +129,8 @@ tun:
   auto-redirect: true
   auto-detect-interface: true
   endpoint-independent-nat: false
+  exclude-interface:
+    - pppoe-wan
   route-exclude-address:
     # vps
     - 11.11.11.11/32
