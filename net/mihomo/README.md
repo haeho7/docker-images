@@ -198,9 +198,9 @@ tun:
 
 The tun mode currently does not support the routing ICMP protocol. When using the ICMP protocol, the following situations may occur.
 
-- If the ICMP request originates from a local device running mihomo, the traffic will be captured by the tun interface regardless of whether the destination address exists or is reachable, but no routing rules will be executed.
+- If the ICMP request originates from a local device running mihomo, the traffic will be captured by the tun interface regardless of whether the destination address exists or is reachable, as long as the `disable-icmp-forwarding: true` parameter is not configured, but no routing rules will be executed.
 
-- If the ICMP request is sent by another device and passes through the Mihomo gateway, regardless of whether the destination address exists or is reachable, ICMP will directly return "unreachable" because ICMP does not support routing to the tun interface.
+- If the ICMP request is sent by another device and passes through the mihomo gateway, regardless of whether the destination address exists or is reachable, ICMP will directly return "unreachable" because ICMP does not support routing to the tun interface.
   
 Reference:
 

@@ -129,6 +129,7 @@ tun:
   auto-redirect: true
   auto-detect-interface: true
   endpoint-independent-nat: false
+  disable-icmp-forwarding: true
   exclude-interface:
     - pppoe-wan
   route-exclude-address:
