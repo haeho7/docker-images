@@ -15,7 +15,7 @@ RUN apk update \
   && git checkout $VERSION \
   && npm install --global pnpm@latest \
   && pnpm install \
-  && pnpm generate \
+  && pnpm run generate \
   && cp -a .output/public /srv \
   && npm cache clean --force \
   && cd - \
