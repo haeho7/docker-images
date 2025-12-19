@@ -64,9 +64,6 @@ jobs:
           # mihomo
           - BUILD_CONTEXT: net/mihomo
             TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # metacubexd
-          - BUILD_CONTEXT: net/metacubexd
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
           # webdav
           - BUILD_CONTEXT: utils/webdav
             TARGET_PLATFORMS: linux/amd64,linux/arm64
@@ -93,6 +90,9 @@ jobs:
             TARGET_PLATFORMS: linux/amd64,linux/arm64
           # samba
           - BUILD_CONTEXT: utils/samba
+            TARGET_PLATFORMS: linux/amd64,linux/arm64
+          # metacubexd
+          - BUILD_CONTEXT: utils/metacubexd
             TARGET_PLATFORMS: linux/amd64,linux/arm64
     steps:
       # prepare
