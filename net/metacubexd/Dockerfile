@@ -15,7 +15,8 @@ RUN apk update \
   && git checkout $VERSION \
   && npm install --global pnpm@latest \
   && pnpm install \
-  && pnpm build --outDir /srv/metacubexd \
+  && pnpm generate \
+  && cp -a .output/public /srv \
   && npm cache clean --force \
   && cd - \
   && rm -r metacubexd \
@@ -32,5 +33,5 @@ RUN apk update \
   && apk add --no-cache tzdata \
   && rm -rf /var/cache/apk/*
 
-COPY --from=builder /srv/metacubexd /srv/metacubexd
+COPY --from=builder /srv/public /srv/metacubexd
 COPY Caddyfile /etc/caddy
