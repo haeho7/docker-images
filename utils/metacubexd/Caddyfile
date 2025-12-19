@@ -11,7 +11,7 @@
 
 (logging) {
 	log {
-		output stdout 
+		output stdout
 		format console {
 			time_local
 			time_format iso8601
