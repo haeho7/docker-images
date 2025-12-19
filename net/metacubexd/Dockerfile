@@ -7,10 +7,10 @@
 #
 FROM node:25-alpine3.22 AS builder
 
-ARG VERSION=v1.219.2
+ARG VERSION=v1.234.1
 RUN apk update \
   && apk add --no-cache --virtual .build-deps git \
-  && git clone https://github.com/MetaCubeX/metacubexd.git --branch $VERSION \
+  && git clone https://github.com/MetaCubeX/metacubexd.git --single-branch --branch $VERSION --depth 1 \
   && cd metacubexd \
   && git checkout $VERSION \
   && npm install --global pnpm@latest \
