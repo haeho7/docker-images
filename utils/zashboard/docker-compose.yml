@@ -1,0 +1,13 @@
+services:
+  zashboard:
+    image: haeho7/docker-images:zashboard
+    container_name: zashboard
+    restart: unless-stopped
+    network_mode: host
+    logging:
+      options:
+        max-file: 1
+        max-size: 20m
+    environment:
+      TZ: Asia/Taipei
+      ZASHBOARD_PORT: 9091

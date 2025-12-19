@@ -94,6 +94,9 @@ jobs:
           # metacubexd
           - BUILD_CONTEXT: utils/metacubexd
             TARGET_PLATFORMS: linux/amd64,linux/arm64
+          # zashboard
+          - BUILD_CONTEXT: utils/zashboard
+            TARGET_PLATFORMS: linux/amd64,linux/arm64
     steps:
       # prepare
       - name: Checkout
