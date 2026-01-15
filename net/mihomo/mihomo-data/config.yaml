@@ -180,6 +180,26 @@ tun:
 
 tunnels: []
 
+sniffer:
+  enable: false
+  parse-pure-ip: true
+  force-dns-mapping: true
+  override-destination: true
+  sniff:
+    HTTP:
+      ports:
+        - 80
+    TLS:
+      ports:
+        - 443
+    QUIC:
+      ports:
+        - 443
+  force-domain:
+  skip-domain: []
+  skip-src-address: []
+  skip-dst-address: []
+
 dns:
   enable: true
   listen: 0.0.0.0:5353
