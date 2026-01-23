@@ -1,170 +1,166 @@
+
 name: Build
 
 on:
   push:
-    branches:
-      - master
     paths-ignore:
-      - 'LICENSE'
+      - '_deprecated/**'
       - 'ext/**'
       - '**.md'
       - '**/.gitignore'
-      #- '**/.dockerignore'
       - '**/docker-compose.yml'
+      - '*'
   workflow_dispatch:
     inputs:
-      deploy:
-        description: 'Whether to deploy DockerHub and GHCR'
-        required: true
-        default: '0'
+      global:
+        description: 'Whether to build globally'
+        required: false
+        type: boolean
+        default: false
+
 permissions:
   contents: read
   packages: write
 
+env:
+  TZ: Asia/Taipei
+
 jobs:
+  generate-matrix:
+    name: Generate matrix
+    runs-on: ubuntu-24.04
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+    outputs:
+      matrix: ${{ steps.create-matrix.outputs.matrix_json }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Detect changes
+        id: detect-changes
+        uses: tj-actions/changed-files@v47
+        with:
+          files_ignore: |
+            _deprecated/**
+            ext/**
+            **.md
+            **/.gitignore
+            **/docker-compose.yml
+            *
+          dir_names: true
+          dir_names_max_depth: 2
+          matrix: true
+
+      - name: Create matrix
+        id: create-matrix
+        run: |
+          changed_files='${{ steps.detect-changes.outputs.all_changed_files }}'
+          global_build=${{ github.event.inputs.global == 'true' }}
+
+          # override as global build
+          if jq -e 'any(startswith(".github/"))' <<< "$changed_files" >/dev/null \
+            || [ "$global_build" = true ]; then
+            changed_files=$(
+              # find build context dirs
+              find . -mindepth 2 -maxdepth 2 -type d ! -path './.*' -prune -printf '%P\n' |
+                # convert to json array
+                jq -Rs 'split("\n")[:-1]' |
+                # remove unused dirs
+                jq '[.[] | select(
+                  (
+                    startswith("_deprecated/")
+                    or startswith("ext/")
+                    or startswith("civ/gfw-defense")
+                    or startswith("net/strongswan")
+                    or startswith("net/shadowsocks-rust")
+                  )
+                  | not
+                )]'
+            )
+          fi
+
+          matrix_json=$(jq -c -n --argjson ctxs "$changed_files" '
+            {
+              include: [
+                $ctxs[] | . as $ctx | {
+                  BUILD_CONTEXT: $ctx,
+                  TARGET_PLATFORMS: (
+                    if (
+                      [
+                        "buildbot/bookworm",
+                        "buildbot/bookworm-android",
+                        "buildbot/bookworm-openwrt",
+                        "civ/gfw-defense"
+                      ] | index($ctx)
+                    ) != null
+                    then
+                      "linux/amd64"
+                    else
+                      "linux/amd64,linux/arm64"
+                    end
+                  )
+                }
+              ]
+            }
+          ')
+          echo "matrix_json=$matrix_json" >> $GITHUB_OUTPUT
+
+      - name: Show matrix
+        run: echo '${{ steps.create-matrix.outputs.matrix_json }}' | jq
+
   build-and-push:
-    #if: "!contains(github.event.head_commit.message, 'do-not-build')"
+    name: Build image
+    needs: generate-matrix
     runs-on: ubuntu-24.04
     concurrency:
       group: ${{ matrix.BUILD_CONTEXT }}
       cancel-in-progress: true
-    env:
-      TZ: Asia/Taipei
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          # redis
-          - BUILD_CONTEXT: db/redis
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # mariadb
-          - BUILD_CONTEXT: db/mariadb
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # valkey
-          - BUILD_CONTEXT: db/valkey
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # wireguard
-          - BUILD_CONTEXT: net/wireguard
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # tinyfecvpn
-          - BUILD_CONTEXT: net/tinyfecvpn
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # phantun
-          - BUILD_CONTEXT: net/phantun
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # udp2raw
-          - BUILD_CONTEXT: net/udp2raw
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # nginx
-          - BUILD_CONTEXT: net/nginx
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # netspeeder
-          - BUILD_CONTEXT: net/netspeeder
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # mihomo
-          - BUILD_CONTEXT: net/mihomo
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # webdav
-          - BUILD_CONTEXT: utils/webdav
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # webdav-client
-          - BUILD_CONTEXT: utils/webdav-client
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # nextcloud
-          - BUILD_CONTEXT: utils/nextcloud
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # rsync
-          - BUILD_CONTEXT: utils/rsync
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # alist
-          - BUILD_CONTEXT: utils/alist
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # transmission
-          #- BUILD_CONTEXT: utils/transmission
-          #  TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # acme.sh
-          - BUILD_CONTEXT: utils/acme.sh
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # lsi-sas
-          - BUILD_CONTEXT: utils/lsi-sas
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # samba
-          - BUILD_CONTEXT: utils/samba
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # metacubexd
-          - BUILD_CONTEXT: utils/metacubexd
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
-          # zashboard
-          - BUILD_CONTEXT: utils/zashboard
-            TARGET_PLATFORMS: linux/amd64,linux/arm64
+      matrix: ${{ fromJSON(needs.generate-matrix.outputs.matrix) }}
     steps:
-      # prepare
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      # check change
-      - name: Check context change
-        run: |
-          git fetch origin ${{ github.event.ref }} --depth=2
-
-          PREVIOUS_COMMIT=${{ github.event.before }}
-          echo "DEBUG: PREVIOUS_COMMIT initial = $PREVIOUS_COMMIT"
-
-          if [ -z "$PREVIOUS_COMMIT" ] || [ "$PREVIOUS_COMMIT" = "0000000000000000000000000000000000000000" ]; then
-            PREVIOUS_COMMIT="HEAD^"
-            echo "DEBUG: PREVIOUS_COMMIT fallback to HEAD^"
-          fi
-
-          echo "DEBUG: Using PREVIOUS_COMMIT = $PREVIOUS_COMMIT"
-
-          CHANGED_FILES=$(git diff --name-only "$PREVIOUS_COMMIT" "${{ github.sha }}" | grep -E "^${{ matrix.BUILD_CONTEXT }}(/|$)" || true)
-          echo "DEBUG: Build context = ${{ matrix.BUILD_CONTEXT }}"
-          echo "DEBUG: Changed files matching context:"
-          echo "$CHANGED_FILES"
-
-          if [ -z "$CHANGED_FILES" ]; then
-            echo "CONTEXT_CHANGED=false" >> $GITHUB_ENV
-            echo "DEBUG: CONTEXT_CHANGED set to false"
-          else
-            echo "CONTEXT_CHANGED=true" >> $GITHUB_ENV
-            echo "DEBUG: CONTEXT_CHANGED set to true"
-          fi
-
-      - name: Set up QEMU
+      - name: Setup QEMU
         uses: docker/setup-qemu-action@v3
         with:
           platforms: ${{ matrix.TARGET_PLATFORMS }}
-      - name: Set up Docker Buildx
+
+      - name: Setup docker buildx
         uses: docker/setup-buildx-action@v3
-      - name: Set environment variables
+
+      - name: Setup environment variables
         run: |
           echo "BUILD_TAG=$(basename ${{ matrix.BUILD_CONTEXT }})" >> $GITHUB_ENV
 
-      # login
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Login to GitHub Container Registry
+
+      - name: Login to GHCR
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # cache
-      - name: Cache Docker layers
+      - name: Cache docker layers
         uses: actions/cache@v4
         with:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-${{ env.BUILD_TAG }}-buildx-${{ github.sha }}
           restore-keys: ${{ runner.os }}-${{ env.BUILD_TAG }}-buildx-
 
-      # build & push
-      - name: Build image and Push to Container Registries
+      - name: Build and push image
         uses: docker/build-push-action@v5
-        if: ${{ (github.event_name == 'push' && env.CONTEXT_CHANGED == 'true') || github.event.inputs.deploy == '1' }}
+        if: ${{ github.event_name == 'push' }}
         with:
           context: ${{ matrix.BUILD_CONTEXT }}
           tags: |
@@ -179,8 +175,6 @@ jobs:
     if: always()
     needs: build-and-push
     runs-on: ubuntu-24.04
-    env:
-      TZ: Asia/Taipei
     steps:
       - name: Cleanup untagged images
         # use actions/delete-package-versions instead?
