@@ -7,7 +7,7 @@
 #
 FROM golang:1.25-alpine3.22 AS builder
 
-ARG VERSION=v1.19.19
+ARG VERSION=v1.19.20
 RUN apk update \
   && apk add --no-cache --virtual .build-deps git make gcc musl-dev \
   && git clone https://github.com/MetaCubeX/mihomo.git --branch $VERSION \
