@@ -24,11 +24,10 @@ server {
         # buffer
         proxy_buffering off;
         proxy_request_buffering off;
+        client_body_buffer_size 1024k;
         proxy_max_temp_file_size 0;
 
         # upload
-        # External access needs to cancel the client_body_buffer_size parameter, otherwise nginx will crash due to excessive load. The reason is currently unknown.
         client_max_body_size 0;
-        client_body_buffer_size 0;
     }
 }
