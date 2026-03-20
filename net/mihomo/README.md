@@ -231,7 +231,7 @@ service firewall reload
 
 The current TUN mode does not support proxying the ICMP protocol. therefore, ICMP traffic always uses a direct connection.
 
-When the `disable-icmp-forwarding: true` parameter is configured, the system returns an ICMP `echo reply` regardless of whether the destination address exists or is reachable; consequently, the Ping command will be unable to display the actual latency.
+When the `disable-icmp-forwarding: true` parameter is configured, the system returns an ICMP `echo reply` regardless of whether the destination address exists or is reachable. consequently, the Ping command will be unable to display the actual latency.
   
 Reference:
 
