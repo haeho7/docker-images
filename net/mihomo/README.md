@@ -194,18 +194,48 @@ tun:
   #  - tcp://any:53
 ```
 
+### OpenWrt Zone Rule
+
+When OpenWrt is configured as a gateway with Mihomo tunnel mode enabled, other hosts on the LAN experience anomalies when communicating with the external network.
+
+Symptoms:
+
+- OpenWrt itself can communicate normally with the external network using UDP and ICMP protocols;
+- Other hosts on the LAN are unable to communicate with the external network using the UDP protocol；
+- Other hosts on the LAN are unable to communicate with the external network using the ICMP protocol, returning `Destination Port Unreachable`;
+
+Reference:
+
+- [@MetaCubeX/mihomo/issues/2584](https://github.com/MetaCubeX/mihomo/issues/2584)
+
+The following policy must be added to forward traffic from the LAN zone to the Mihomo zone.
+
+```sh
+uci add firewall zone
+uci set firewall.@zone[-1].name='mihomo'
+uci set firewall.@zone[-1].input='REJECT'
+uci set firewall.@zone[-1].output='ACCEPT'
+uci set firewall.@zone[-1].forward='REJECT'
+uci add_list firewall.@zone[-1].device='mihomo'
+#uci set firewall.@zone[-1].masq='1'
+#uci set firewall.@zone[-1].mtu_fix='1'
+
+uci add firewall forwarding
+uci set firewall.@forwarding[-1].src='lan'
+uci set firewall.@forwarding[-1].dest='mihomo'
+uci commit firewall
+service firewall reload
+```
+
 ### ICMP
 
-The tun mode currently does not support the routing ICMP protocol. When using the ICMP protocol, the following situations may occur.
+The current TUN mode does not support proxying the ICMP protocol. therefore, ICMP traffic always uses a direct connection.
 
-- If the ICMP request originates from a local device running mihomo, the traffic will be captured by the tun interface regardless of whether the destination address exists or is reachable, as long as the `disable-icmp-forwarding: true` parameter is not configured, but no routing rules will be executed.
-
-- If the ICMP request is sent by another device and passes through the mihomo gateway, regardless of whether the destination address exists or is reachable, ICMP will directly return "unreachable" because ICMP does not support routing to the tun interface.
+When the `disable-icmp-forwarding: true` parameter is configured, the system returns an ICMP `echo reply` regardless of whether the destination address exists or is reachable; consequently, the Ping command will be unable to display the actual latency.
   
 Reference:
 
 - [@MetaCubeX/mihomo/issues/1698](https://github.com/MetaCubeX/mihomo/issues/1698)
-- [@nelvko/clash-for-linux-install/issues/66](https://github.com/nelvko/clash-for-linux-install/issues/66)
 
 It is recommended to use tools such as `tcping`, `ssh`, and `curl` as alternatives.
 
