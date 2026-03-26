@@ -5,7 +5,7 @@ mixed-port: 7892
 #tproxy-port: 7894
 log-level: warning
 mode: rule
-ipv6: true
+ipv6: false
 allow-lan: true
 bind-address: "*"
 lan-allowed-ips:
@@ -212,7 +212,7 @@ dns:
   use-hosts: false
   respect-rules: true
   prefer-h3: false
-  ipv6: true
+  ipv6: false
   ipv6-timeout: 300
   enhanced-mode: redir-host
   fake-ip-range: ""
