@@ -44,6 +44,12 @@ secret: <password>
 proxy-providers: {}
 
 proxies:
+  - name: LAN
+    type: direct
+    ip-version: ipv4-prefer
+    interface-name: br-lan
+    udp: true
+
   - name: SS-SJC
     type: ss
     server: 10.1.10.1
@@ -468,11 +474,11 @@ rule-providers:
     interval: 86400
 
 rules:
-  #- RULE-SET,custom-private,DIRECT,no-resolve
+  - RULE-SET,custom-private,LAN,no-resolve
   - RULE-SET,custom-direct,CHINA,no-resolve
   - RULE-SET,custom-proxy,PROXY,no-resolve
   - GEOSITE,category-ads-all,AD
-  - GEOSITE,private,DIRECT,no-resolve
+  - GEOSITE,private,LAN,no-resolve
   - GEOSITE,apple@cn,CHINA
   - GEOSITE,microsoft@cn,CHINA
   - GEOSITE,category-games@cn,CHINA
@@ -493,7 +499,7 @@ rules:
   - GEOSITE,dmm,DMM
   - GEOSITE,gfw,PROXY
   - GEOSITE,cn,CHINA
-  - GEOIP,private,DIRECT,no-resolve
+  - GEOIP,private,LAN,no-resolve
   - GEOIP,google,Google,no-resolve
   - GEOIP,facebook,Facebook,no-resolve
   - GEOIP,twitter,Twitter,no-resolve
