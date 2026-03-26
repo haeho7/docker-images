@@ -7,7 +7,7 @@
 #
 FROM node:25-alpine3.22 AS builder
 
-ARG VERSION=v2.6.1
+ARG VERSION=v2.8.1
 RUN apk update \
   && apk add --no-cache --virtual .build-deps git \
   && git clone https://github.com/Zephyruso/zashboard.git --single-branch --branch $VERSION --depth 1 \
