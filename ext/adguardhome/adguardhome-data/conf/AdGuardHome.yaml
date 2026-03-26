@@ -22,7 +22,7 @@ dns:
   ratelimit_subnet_len_ipv4: 24
   ratelimit_subnet_len_ipv6: 56
   ratelimit_whitelist: []
-  refuse_any: false
+  refuse_any: true
   upstream_dns:
     - 127.0.0.1:5353
   upstream_dns_file: ""
