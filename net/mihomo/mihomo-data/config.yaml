@@ -413,6 +413,18 @@ proxy-groups:
       - DIALER-HK-SS-TYO
       - DIRECT
 
+  - name: Crypto
+    type: select
+    proxies:
+      - PROXY-AUTO
+      - PROXY-US-AUTO
+      - SS-SJC
+      - SS-LAX
+      - SS-TYO
+      - SS-HK
+      - DIALER-HK-SS-TYO
+      - DIRECT
+
   - name: DMM
     type: select
     proxies:
@@ -494,6 +506,7 @@ rules:
   - GEOSITE,facebook,Facebook
   - GEOSITE,telegram,Telegram
   - GEOSITE,category-ai-!cn,AI
+  - GEOSITE,category-cryptocurrency,Crypto
   - GEOSITE,javdb,9KG
   - GEOSITE,missav,9KG
   - GEOSITE,dmm,DMM
