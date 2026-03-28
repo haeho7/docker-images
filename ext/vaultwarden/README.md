@@ -15,5 +15,5 @@ docker run -d \
   -e ROCKET_ENV=production \
   -e ADMIN_TOKEN='example' \
   -v /mnt/user/appdata/vaultwarden/vaultwarden-data:/data \
-  vaultwarden/server:1.34.3-alpine
+  vaultwarden/server:1.35.4-alpine
 ```
