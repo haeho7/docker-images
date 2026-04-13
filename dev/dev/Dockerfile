@@ -5,13 +5,6 @@
 FROM debian:trixie-slim
 LABEL maintainer="haeho7 <i@demo.com>"
 
-# update sources
-RUN > /etc/apt/sources.list \
-  && echo "deb http://deb.debian.org/debian trixie main" >> /etc/apt/sources.list \
-  && echo "deb http://deb.debian.org/debian trixie-updates main" >> /etc/apt/sources.list \
-  && echo "deb http://deb.debian.org/debian trixie-backports main" >> /etc/apt/sources.list \
-  && echo "deb http://security.debian.org/debian-security/ trixie-security main" >> /etc/apt/sources.list
-
 # install packages
 RUN apt-get update \
   && apt-get install --no-install-recommends -y \
