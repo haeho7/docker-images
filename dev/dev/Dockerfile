@@ -36,8 +36,10 @@ RUN sed -i '/^# en_US.UTF-8 UTF-8/s/^# //' /etc/locale.gen \
   && update-locale LANG=zh_CN.UTF-8
 
 # set dotfiles
+ARG DOTFILES_VERSION=98069c42eda87e0eac021fbb39dac2b8b34eadbe
 RUN git clone https://github.com/pexcn/dotfiles.git -b debian \
   && cd dotfiles \
+  && git checkout $DOTFILES_VERSION \
   && ./install.sh root \
   && git config --global --unset user.name \
   && git config --global --unset user.email \
