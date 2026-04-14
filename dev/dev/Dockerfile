@@ -5,6 +5,17 @@
 FROM debian:trixie-slim
 LABEL maintainer="haeho7 <i@demo.com>"
 
+# don't exclude some languages for dpkg
+# custom files must be loaded after the default docker files (load files in A-to-Z order)
+RUN echo 'path-include /usr/share/locale/zh_CN/*' > /etc/dpkg/dpkg.cfg.d/package-languages \
+  && echo 'path-include /usr/share/locale/zh_TW/*' >> /etc/dpkg/dpkg.cfg.d/package-languages \
+  && apt-get update \
+  && apt-get install --no-install-recommends --reinstall -y \
+      apt bash bsdutils coreutils diffutils dpkg findutils \
+      grep gzip sed tar util-linux util-linux-extra \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
 # install packages
 RUN apt-get update \
   && apt-get install --no-install-recommends -y \
