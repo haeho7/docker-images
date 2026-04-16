@@ -2,9 +2,6 @@
 
 . /usr/local/lib/function.sh
 
-NON_ROOT_USER="vscode"
-NON_ROOT_USER_HOME=$(eval echo "~$NON_ROOT_USER")
-
 USER_NAME=vscode
 GROUP_NAME=vscode
 EXTRA_GROUP=users
@@ -29,12 +26,12 @@ setup_git_config() {
   local email=$(git config --global --get user.email)
   if [[ -n "$GIT_USER" && "$GIT_USER" != "$user" ]]; then
     git config --global user.name "$GIT_USER"
-    su $NON_ROOT_USER -c "git config --global user.name $GIT_USER"
+    su $USER_NAME -c "git config --global user.name $GIT_USER"
     info "initialize git user to ${GIT_USER}."
   fi
   if [[ -n "$GIT_EMAIL" && "$GIT_EMAIL" != "$email" ]]; then
     git config --global user.email "$GIT_EMAIL"
-    su $NON_ROOT_USER -c "git config --global user.email $GIT_EMAIL"
+    su $USER_NAME -c "git config --global user.email $GIT_EMAIL"
     info "initialize git email to ${GIT_EMAIL}."
   fi
 }
@@ -50,11 +47,11 @@ setup_ssh_daemon() {
   fi
 
   if [ -f /root/.ssh/authorized_keys ]; then
-    if [ ! -f ${NON_ROOT_USER_HOME}/.ssh/authorized_keys ]; then
-      mkdir ${NON_ROOT_USER_HOME}/.ssh
-      cp /root/.ssh/authorized_keys ${NON_ROOT_USER_HOME}/.ssh/authorized_keys
-      chown -R ${NON_ROOT_USER}:${NON_ROOT_USER} ${NON_ROOT_USER_HOME}/.ssh
-      chmod 700 ${NON_ROOT_USER_HOME}/.ssh && chmod 600 ${NON_ROOT_USER_HOME}/.ssh/authorized_keys
+    if [ ! -f ${USER_HOME}/.ssh/authorized_keys ]; then
+      mkdir ${USER_HOME}/.ssh
+      cp /root/.ssh/authorized_keys ${USER_HOME}/.ssh/authorized_keys
+      chown -R ${USER_NAME}:${GROUP_NAME} ${USER_HOME}/.ssh
+      chmod 700 ${USER_HOME}/.ssh && chmod 600 ${USER_HOME}/.ssh/authorized_keys
       info "initialize ssh authorized_keys file."
     fi
   fi
