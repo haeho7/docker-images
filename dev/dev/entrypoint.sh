@@ -5,6 +5,25 @@
 NON_ROOT_USER="vscode"
 NON_ROOT_USER_HOME=$(eval echo "~$NON_ROOT_USER")
 
+USER_NAME=vscode
+GROUP_NAME=vscode
+EXTRA_GROUP=users
+PUID=${PUID:-1000}
+PGID=${PGID:-1000}
+UMASK=${UMASK:-022}
+USER_HOME="$(getent passwd "$USER_NAME" | cut -d: -f6)"
+
+setup_user() {
+  groupmod -o -g "$PGID" "$GROUP_NAME"
+  usermod -o -u "$PUID" -g "$GROUP_NAME" -aG "$EXTRA_GROUP" -s /bin/bash "$USER_NAME"
+  umask "$UMASK"
+}
+
+setup_owner() {
+  chown "$PUID:$PGID" "$USER_HOME"
+  find "$USER_HOME" -maxdepth 1 -type f -name '.*' -exec chown "$PUID:$PGID" {} +
+}
+
 setup_git_config() {
   local user=$(git config --global --get user.name)
   local email=$(git config --global --get user.email)
@@ -63,6 +82,8 @@ start_container() {
   wait
 }
 
+setup_user
+setup_owner
 setup_git_config
 setup_ssh_daemon
 start_container "$@"
