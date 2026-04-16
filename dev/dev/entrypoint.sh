@@ -36,6 +36,41 @@ setup_git_config() {
   fi
 }
 
+setup_ssh_auth() {
+  local conf=/etc/ssh/sshd_config.d/ssh_auth.conf
+  local lines=()
+
+  [ "$ENABLE_SSH_PASSWORD_AUTH" = 1 ] || return 0
+
+  if [[ -z "$USER_PASSWORD" || -z "$ROOT_PASSWORD" ]]; then
+    warn "empty password, skip."
+    return 0
+  fi
+
+  # not re-initialize in the restart
+  if [ -f "$conf" ]; then
+    warn "ssh auth already initialized, skip on restart"
+    return 0
+  fi
+
+  printf '%s:%s\n' "$USER_NAME" "$USER_PASSWORD" | chpasswd
+  printf 'root:%s\n' "$ROOT_PASSWORD" | chpasswd
+  info "initialize passwords for user and root"
+
+  lines+=('PasswordAuthentication yes')
+
+  if [ "$ENABLE_ROOT_PASSWORD_LOGIN" = 1 ]; then
+    lines+=('PermitRootLogin yes')
+    info "enable root password login."
+  else
+    lines+=('PermitRootLogin prohibit-password')
+    info "disable root password login."
+  fi
+
+  printf '%s\n' "${lines[@]}" > "$conf"
+  info "enable ssh password authentication."
+}
+
 setup_ssh_daemon() {
   [ "$ENABLE_SSHD" = 1 ] || return 0
 
@@ -82,5 +117,6 @@ start_container() {
 setup_user
 setup_owner
 setup_git_config
+setup_ssh_auth
 setup_ssh_daemon
 start_container "$@"
