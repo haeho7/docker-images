@@ -1,0 +1,32 @@
+services:
+  ai-agent:
+    image: haeho7/docker-images:ai-agent
+    container_name: ai-agent
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      TZ: Asia/Taipei
+      PUID: 99
+      PGID: 100
+      GIT_USER: username
+      GIT_EMAIL: 'mail@example.com'
+      USER_PASSWORD: 'example'
+      ROOT_PASSWORD: 'example'
+      SSH_PORT: 20002
+      ENABLE_SSHD: 1
+      ENABLE_SSH_PASSWORD_AUTH: 0
+      ENABLE_ROOT_PASSWORD_LOGIN: 0
+    volumes:
+      - ai-agent-home:/home/vscode
+      - ./ai-agent-data:/vscode
+      - /root/.ssh/authorized_keys:/root/.ssh/authorized_keys:ro
+      - /etc/ssh/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key:ro
+      - /etc/ssh/ssh_host_ed25519_key.pub:/etc/ssh/ssh_host_ed25519_key.pub:ro
+
+volumes:
+  ai-agent-home:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/ai-agent-home
