@@ -38,6 +38,13 @@ RUN case "$(dpkg --print-architecture)" in \
 FROM haeho7/docker-images:dev
 LABEL maintainer="haeho7 <i@demo.com>"
 
+# install bubblewrap
+RUN apt-get update \
+  && apt-get install --no-install-recommends -y \
+      ca-certificates bubblewrap \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
 # claude code
 ENV DISABLE_AUTOUPDATER=1
 ENV DISABLE_TELEMETRY=1
