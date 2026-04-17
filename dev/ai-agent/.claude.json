@@ -1,0 +1,14 @@
+{
+  "theme": "light-ansi",
+  "hasCompletedOnboarding": true,
+  "env": {
+    "ENABLE_TOOL_SEARCH": "true",
+    "ANTHROPIC_AUTH_TOKEN": "example",
+    "ANTHROPIC_BASE_URL": "https://example.com",
+    "ANTHROPIC_MODEL": "gpt-5.4",
+    "ANTHROPIC_REASONING_MODEL": "gpt-5.4",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "gpt-5.4",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "gpt-5.4",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "gpt-5.4"
+  }
+}
