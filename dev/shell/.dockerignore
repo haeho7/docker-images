@@ -1,0 +1,4 @@
+.devcontainer/
+.vscode/
+README.md
+docker-compose.yml

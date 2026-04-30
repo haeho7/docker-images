@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "mads-hartmann.bash-ide-vscode",
+        "rogalmic.bash-debug",
+        "timonwong.shellcheck",
+        "foxundermoon.shell-format",
+        "Remisa.shellman",
+        "ms-azuretools.vscode-docker"
+    ]
+}
