@@ -1,0 +1,17 @@
+{
+    "name": "Shell",
+    "image": "haeho7/docker-images:shell",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "mads-hartmann.bash-ide-vscode",
+                "rogalmic.bash-debug",
+                "timonwong.shellcheck",
+                "foxundermoon.shell-format",
+                "Remisa.shellman",
+                "ms-azuretools.vscode-docker"
+            ]
+        }
+    },
+    "remoteUser": "vscode"
+}
