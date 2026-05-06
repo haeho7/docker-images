@@ -12,7 +12,7 @@ services:
       GIT_EMAIL: 'mail@example.com'
       USER_PASSWORD: 'example'
       ROOT_PASSWORD: 'example'
-      SSH_PORT: 20002
+      SSH_PORT: 22002
       ENABLE_SSHD: 1
       ENABLE_SSH_PASSWORD_AUTH: 0
       ENABLE_ROOT_PASSWORD_LOGIN: 0
