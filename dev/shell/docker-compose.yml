@@ -2,6 +2,7 @@ services:
   shell:
     image: haeho7/docker-images:shell
     container_name: shell
+    hostname: shell
     restart: unless-stopped
     network_mode: host
     environment:
