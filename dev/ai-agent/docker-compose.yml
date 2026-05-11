@@ -2,6 +2,7 @@ services:
   ai-agent:
     image: haeho7/docker-images:ai-agent
     container_name: ai-agent
+    hostname: ai-agent
     restart: unless-stopped
     network_mode: host
     environment:
