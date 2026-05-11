@@ -1,0 +1,14 @@
+{
+  "effortLevel": "high",
+  "env": {
+    "ANTHROPIC_AUTH_TOKEN": "example",
+    "ANTHROPIC_BASE_URL": "https://example.com",
+    "ANTHROPIC_MODEL": "gpt-5.5",
+    "ANTHROPIC_REASONING_MODEL": "gpt-5.5",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "gpt-5.5",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "gpt-5.5",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "gpt-5.5",
+    "ENABLE_TOOL_SEARCH": "true",
+    "DISABLE_AUTOUPDATER": "1"
+  }
+}
