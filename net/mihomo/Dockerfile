@@ -14,8 +14,11 @@ RUN apk update \
   && cd mihomo \
   && git checkout $VERSION \
   && rm -rf docker \
-  && make docker \
-  && install bin/mihomo-docker /usr/local/bin/mihomo \
+  && sed -i \
+      '/^darwin-386:/i docker-v2:\n\tGOAMD64=v2 $(GOBUILD) -o $(BINDIR)/$(NAME)-$@\n' \
+      Makefile \
+  && make docker-v2 -j$(nproc) \
+  && install bin/mihomo-docker-v2 /usr/local/bin/mihomo \
   && cd - \
   && rm -r mihomo \
   && apk del .build-deps \
