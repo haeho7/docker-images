@@ -11,7 +11,6 @@ bind-address: "*"
 lan-allowed-ips:
   - 127.0.0.0/8
   - 192.168.1.0/24
-  - ::/0
 lan-disallowed-ips: []
 authentication: []
 skip-auth-prefixes: []
@@ -219,22 +218,24 @@ dns:
   fake-ip-filter: []
   fake-ip-filter-mode: blacklist
   proxy-server-nameserver:
-    - 'tls://120.53.53.53:853#ecs=202.96.128.0/22'
-    - 'tls://223.5.5.5:853#ecs=202.96.128.0/22'
+    - 'tls://120.53.53.53:853#ecs=202.96.128.0/22&ecs-override=true'
+    - 'tls://223.5.5.5:853#ecs=202.96.128.0/22&ecs-override=true'
   default-nameserver:
-    - 'tls://120.53.53.53:853#ecs=202.96.128.0/22'
-    - 'tls://223.5.5.5:853#ecs=202.96.128.0/22'
+    - 'tls://120.53.53.53:853#ecs=202.96.128.0/22&ecs-override=true'
+    - 'tls://223.5.5.5:853#ecs=202.96.128.0/22&ecs-override=true'
   nameserver:
-    - 'https://223.5.5.5/dns-query#ecs=202.96.128.0/22'
-    - 'https://doh.pub/dns-query#ecs=202.96.128.0/22'
+    - 'https://223.5.5.5/dns-query#ecs=202.96.128.0/22&ecs-override=true'
+    - 'https://doh.pub/dns-query#ecs=202.96.128.0/22&ecs-override=true'
     #- https://dns.alidns.com/dns-query
   nameserver-policy:
-    'geosite:private,apple@cn,microsoft@cn,category-games@cn,geolocation-cn':
-      - 'https://223.5.5.5/dns-query#ecs=202.96.128.0/22'
-      - 'https://doh.pub/dns-query#ecs=202.96.128.0/22'
+    'geosite:category-ads-all':
+      - rcode://success
+    'geosite:private,apple@cn,microsoft@cn,category-games@cn,geolocation-cn,cn':
+      - 'https://223.5.5.5/dns-query#ecs=202.96.128.0/22&ecs-override=true'
+      - 'https://doh.pub/dns-query#ecs=202.96.128.0/22&ecs-override=true'
       #- https://dns.alidns.com/dns-query
     'geosite:dmm':
-      - 'https://dns.google/dns-query#PROXY-TYO&ecs=14.3.0.0/16'
+      - 'https://dns.google/dns-query#PROXY-TYO&ecs=14.3.0.0/16&ecs-override=true'
     'geosite:!cn':
       - 'https://dns.google/dns-query'
 
@@ -273,6 +274,7 @@ proxy-groups:
     interval: 300
     timeout: 5000
     max-failed-times: 5
+    include-all-proxies: true
     url: "https://cp.cloudflare.com/generate_204"
 
   - name: PROXY-US-AUTO
