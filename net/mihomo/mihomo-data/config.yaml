@@ -268,13 +268,13 @@ proxy-groups:
 
   - name: PROXY-AUTO
     type: url-test
-    include-all-proxies: true
     lazy: false
     tolerance: 20
     interval: 300
     timeout: 5000
     max-failed-times: 5
     include-all-proxies: true
+    exclude-type: "DIRECT"
     url: "https://cp.cloudflare.com/generate_204"
 
   - name: PROXY-US-AUTO
