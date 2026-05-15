@@ -199,7 +199,7 @@ sniffer:
     QUIC:
       ports:
         - 443
-  force-domain:
+  force-domain: []
   skip-domain: []
   skip-src-address: []
   skip-dst-address: []
