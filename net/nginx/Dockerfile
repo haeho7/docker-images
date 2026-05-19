@@ -95,7 +95,7 @@ FROM alpine:3.20
 LABEL maintainer="haeho7 <i@demo.com>"
 
 RUN apk update \
-  && apk add --no-cache tzdata \
+  && apk add --no-cache ca-certificates tzdata \
   && rm -rf /var/cache/apk/*
 
 COPY --from=builder /etc/nginx/ /etc/nginx/
