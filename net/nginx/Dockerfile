@@ -20,19 +20,10 @@ RUN apk add --no-cache --virtual .build-deps \
   && git clone https://github.com/pexcn/ngx_upstream_check.git ngx_upstream_check \
   && git clone https://github.com/yaoweibin/ngx_http_substitutions_filter_module.git ngx_subs_filter \
   && git clone https://github.com/GetPageSpeed/ngx_http_google_filter_module.git ngx_google_filter \
-  && cd ngx_brotli \
-  && git checkout $NGX_BROTLI_VER \
-  && cd - \
-  && cd ngx_upstream_check \
-  && git checkout $NGX_UPSTREAM_CHECK_VER \
-  && patch -d ../nginx-${NGINX_VER} -p1 < check_1.20.1+.patch \
-  && cd - \
-  && cd ngx_subs_filter \
-  && git checkout $NGX_SUBS_FILTER_VER \
-  && cd - \
-  && cd ngx_google_filter \
-  && git checkout $NGX_GOOGLE_FILTER_VER \
-  && cd - \
+  && cd ngx_brotli && git checkout $NGX_BROTLI_VER && cd - \
+  && cd ngx_upstream_check && git checkout $NGX_UPSTREAM_CHECK_VER && patch -d ../nginx-${NGINX_VER} -p1 < check_1.20.1+.patch && cd - \
+  && cd ngx_subs_filter && git checkout $NGX_SUBS_FILTER_VER && cd - \
+  && cd ngx_google_filter && git checkout $NGX_GOOGLE_FILTER_VER && cd - \
   && cd nginx-${NGINX_VER} \
   && ./configure \
       --prefix=/etc/nginx \
