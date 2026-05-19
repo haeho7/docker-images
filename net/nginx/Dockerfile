@@ -5,7 +5,7 @@
 #
 # Build stage
 #
-FROM alpine:3.20 AS builder
+FROM alpine:3.23 AS builder
 
 ARG NGINX_VER=1.26.1
 ARG NGX_BROTLI_VER=a71f9312c2deb28875acc7bacfdd5695a111aa53
@@ -86,7 +86,7 @@ RUN apk add --no-cache --virtual .build-deps \
 #
 # Runtime stage
 #
-FROM alpine:3.20
+FROM alpine:3.23
 LABEL maintainer="haeho7 <i@demo.com>"
 
 RUN apk update \
