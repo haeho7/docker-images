@@ -19,6 +19,7 @@ docker run -d \
   -v /mnt/user/appdata/nginx/nginx-data/http.d:/etc/nginx/http.d \
   -v /mnt/user/appdata/nginx/nginx-data/stream.d:/etc/nginx/stream.d \
   -v /mnt/user/appdata/nginx/nginx-data/html:/etc/nginx/html \
+  -v /mnt/user/appdata/nginx/nginx-data/log:/usr/share/nginx/log \
   -v /mnt/user/appdata/acme.sh/acme.sh-data:/cert \
   haeho7/docker-images:nginx
 ```
