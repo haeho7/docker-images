@@ -245,7 +245,7 @@ dns:
     - 'https://dns.google/dns-query'
   fallback-filter:
     geoip: true
-    geoip-code: CN
+    geoip-code: cn
     geosite:
       - gfw
     domain: []
@@ -519,7 +519,7 @@ rules:
   - GEOIP,facebook,Facebook,no-resolve
   - GEOIP,twitter,Twitter,no-resolve
   - GEOIP,telegram,Telegram,no-resolve
-  - GEOIP,CN,CHINA,no-resolve
+  - GEOIP,cn,CHINA,no-resolve
   - MATCH,FINAL
 
 sub-rules: {}
