@@ -120,6 +120,16 @@ proxies:
     tfo: true
     mptcp: false
 
+listeners:
+  - name: SS-SERVER-USER
+    type: shadowsocks
+    port: 2077
+    listen: 0.0.0.0
+    cipher: aes-128-gcm
+    password: <passowrd>
+    rule: sub-rule-user
+    proxy: PROXY-USER
+
 tun:
   enable: true
   stack: system
@@ -294,6 +304,12 @@ proxy-groups:
     proxies:
       - SS-TYO
       - DIALER-HK-SS-TYO
+
+  - name: PROXY-USER
+    type: select
+    proxies:
+      - SS-SJC
+      - DIRECT
 
   - name: GitHub
     type: select
@@ -522,4 +538,14 @@ rules:
   - GEOIP,cn,CHINA,no-resolve
   - MATCH,FINAL
 
-sub-rules: {}
+sub-rules:
+  sub-rule-user:
+    - RULE-SET,custom-private,REJECT,no-resolve
+    - RULE-SET,custom-direct,CHINA,no-resolve
+    - RULE-SET,custom-proxy,PROXY-USER,no-resolve
+    - GEOSITE,private,REJECT,no-resolve
+    - GEOSITE,category-ads-all,AD
+    - GEOIP,private,REJECT,no-resolve
+    - GEOSITE,cn,CHINA
+    - GEOIP,CN,CHINA,no-resolve
+    - MATCH,PROXY-USER
