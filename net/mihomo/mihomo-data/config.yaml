@@ -128,7 +128,6 @@ listeners:
     cipher: aes-128-gcm
     password: <passowrd>
     rule: sub-rule-user
-    proxy: PROXY-USER
 
 tun:
   enable: true
