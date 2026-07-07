@@ -1,6 +1,6 @@
 services:
   gfw-defense:
-    image: pexcn/docker-images:gfw-defense
+    image: haeho7/docker-images:gfw-defense
     container_name: gfw-defense
     restart: unless-stopped
     network_mode: host

@@ -1,0 +1,93 @@
+#
+# Dockerfile for gfw-defense
+#
+
+#
+# Build stage
+#
+FROM alpine:3.23 AS builder
+
+ARG VERSION=57dde18f217b0eda0bf901a7b961bd80795156aa
+RUN --mount=type=ssh \
+  apk add --no-cache --repository https://dl-cdn.alpinelinux.org/alpine/edge/testing \
+      --virtual .build-deps git openssh-client gcc musl-dev shc \
+  && mkdir -p -m 0700 /root/.ssh && ssh-keyscan github.com >> /root/.ssh/known_hosts \
+  && git clone git@github.com:haeho7/gfw-defense.git \
+  && cd gfw-defense \
+  && git checkout $VERSION \
+  && CFLAGS="-O3" LDFLAGS="-static -Wl,--build-id=none -no-pie -s" shc -B -r -f gfw-defense.sh -o gfw-defense \
+  && install gfw-defense /usr/local/bin/ \
+  && cd - \
+  && rm -r gfw-defense \
+  && apk del .build-deps \
+  && rm -rf /var/cache/apk/*
+
+FROM debian:bookworm-slim AS builder-util
+
+RUN apt-get update \
+  && apt-get install --no-install-recommends -y curl ca-certificates gcc make libc6-dev \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
+ARG UTIL_VERSION=2.41.3
+RUN curl https://www.kernel.org/pub/linux/utils/util-linux/v$(echo "$UTIL_VERSION" | cut -d'.' -f1-2)/util-linux-${UTIL_VERSION}.tar.gz | tar zxv \
+  && cd util-linux-${UTIL_VERSION} \
+  && [ "$(dpkg --print-architecture)" != "arm64" ] || LDFLAGS_EXT="-lc" \
+  && ./configure \
+      --prefix=/usr/local \
+      --disable-all-programs \
+      --enable-last \
+      --disable-liblastlog2 \
+      CFLAGS="-O3 -pipe" \
+      LDFLAGS="-Wl,-static -static -static-libgcc -no-pie -Wl,--build-id=none $LDFLAGS_EXT" \
+  && make -j$(nproc) \
+  && make install-strip \
+  && cd - \
+  && rm -r util-linux-${UTIL_VERSION}
+
+#
+# Runtime stage
+#
+FROM alpine:3.23
+LABEL maintainer="haeho7 <i@demo.com>"
+
+RUN apk update \
+  && apk add --no-cache curl iptables iptables-legacy ipset openssl tzdata \
+  && rm -rf /var/cache/apk/*
+
+# No chinazi please.
+RUN rm \
+    /usr/share/zoneinfo/PRC \
+    /usr/share/zoneinfo/Asia/Chongqing \
+    /usr/share/zoneinfo/Asia/Chungking \
+    /usr/share/zoneinfo/Asia/Kashgar \
+    /usr/share/zoneinfo/Asia/Hong_Kong \
+    /usr/share/zoneinfo/Asia/Macao \
+    /usr/share/zoneinfo/Asia/Macau \
+    /usr/share/zoneinfo/Asia/Shanghai \
+    /usr/share/zoneinfo/Asia/Urumqi
+
+RUN mkdir -p /etc/gfw-defense \
+  && touch /etc/gfw-defense/blacklist.txt \
+  && touch /etc/gfw-defense/whitelist.txt
+
+COPY --from=builder /usr/local/bin/gfw-defense /usr/local/bin/
+COPY --from=builder-util /usr/local/bin/last /usr/local/bin/
+RUN ln -s last /usr/local/bin/lastb
+
+ENV BLOCKING_POLICY=DROP
+ENV PASSING_POLICY=ACCEPT
+ENV DEFAULT_POLICY=RETURN
+ENV QUICK_MODE=0
+ENV PREFER_BLACKLIST=0
+ENV ALLOW_RESERVED_ADDRESS=0
+ENV USE_IPTABLES_NFT_BACKEND=0
+ENV BLACKLIST_FILES=/etc/gfw-defense/blacklist.txt
+ENV WHITELIST_FILES=/etc/gfw-defense/whitelist.txt
+ENV AUTO_BLOCK=0
+ENV AUTO_BLOCK_INTERVAL=0
+ENV UPDATE_LIST_INTERVAL=0
+ENV UPDATE_LIST_URLS=
+#ENV LICENSE_KEY=
+
+ENTRYPOINT ["gfw-defense"]

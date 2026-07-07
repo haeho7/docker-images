@@ -20,10 +20,13 @@ docker run -d \
   -e USE_IPTABLES_NFT_BACKEND=0 \
   -e BLACKLIST_FILES='/etc/gfw-defense/blacklist.txt,/etc/gfw-defense/chnroute.txt' \
   -e WHITELIST_FILES='/etc/gfw-defense/whitelist.txt,/etc/gfw-defense/440100.txt' \
+  -e AUTO_BLOCK=0 \
+  -e AUTO_BLOCK_INTERVAL=0 \
   -e UPDATE_LIST_INTERVAL=86400 \
   -e UPDATE_LIST_URLS='https://raw.githubusercontent.com/pexcn/daily/gh-pages/chnroute/chnroute.txt,https://raw.githubusercontent.com/metowolf/iplist/master/data/cncity/440100.txt' \
+  -v /var/log/btmp:/var/log/btmp:ro \
   -v /mnt/user/appdata/gfw-defense/gfw-defense-data:/etc/gfw-defense \
-  pexcn/docker-images:gfw-defense
+  haeho7/docker-images:gfw-defense
 ```
 
 ### iptables Backend
