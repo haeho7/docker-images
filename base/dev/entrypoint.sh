@@ -94,6 +94,18 @@ setup_ssh_daemon() {
   info "$(service ssh start)"
 }
 
+run_init_hook() {
+  [ -n "$DEV_INIT" ] || return 0
+
+  if [ ! -x "$DEV_INIT" ]; then
+    error "init hook is not executable: ${DEV_INIT}"
+    return 1
+  fi
+
+  info "running init hook: ${DEV_INIT}"
+  "$DEV_INIT"
+}
+
 graceful_stop() {
   warn "caught SIGTERM or SIGINT signal, graceful stopping..."
 
@@ -119,4 +131,5 @@ setup_owner
 setup_git_config
 setup_ssh_auth
 setup_ssh_daemon
+run_init_hook || exit $?
 start_container "$@"
