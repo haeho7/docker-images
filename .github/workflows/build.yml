@@ -87,6 +87,7 @@ jobs:
               include: [
                 $ctxs[] | . as $ctx | {
                   BUILD_CONTEXT: $ctx,
+                  BUILD_TAG: ($ctx | split("/") | .[-1]),
                   TARGET_PLATFORMS: (
                     if (
                       [
@@ -139,6 +140,7 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v4
         with:
+          registry: docker.io
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
@@ -169,7 +171,7 @@ jobs:
         with:
           context: ${{ matrix.BUILD_CONTEXT }}
           tags: |
-            ${{ github.repository }}:${{ env.BUILD_TAG }}
+            docker.io/${{ github.repository }}:${{ env.BUILD_TAG }}
             ghcr.io/${{ github.repository }}:${{ env.BUILD_TAG }}
           platforms: ${{ matrix.TARGET_PLATFORMS }}
           push: true
