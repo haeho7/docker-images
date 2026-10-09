@@ -1,6 +1,6 @@
 # Docker Images
 
-[![Build](https://github.com/haeho7/docker-images/actions/workflows/ci.yml/badge.svg)](https://github.com/haeho7/docker-images/actions)
+[![Build](https://github.com/haeho7/docker-images/actions/workflows/build.yml/badge.svg)](https://github.com/haeho7/docker-images/actions)
 
 Personally made docker images.
 
@@ -17,7 +17,7 @@ docker pull ghcr.io/haeho7/docker-images:<tag>
 ## License
 
 ```
-Copyright (C) 2021-2025, haeho7
+Copyright (C) 2021-2026, haeho7
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
