@@ -187,7 +187,7 @@ jobs:
 
       - name: Build and push image
         uses: docker/build-push-action@v7
-        if: ${{ github.event_name == 'push' }}
+        #if: ${{ github.event_name == 'push' }}
         with:
           context: ${{ matrix.BUILD_CONTEXT }}
           tags: |
