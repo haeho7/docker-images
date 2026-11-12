@@ -2,10 +2,7 @@
 # Dockerfile for scratch base image
 #
 
-FROM alpine:3.24 AS builder
-LABEL maintainer="haeho7 <i@demo.com>"
-
-RUN apk add --no-cache tzdata ca-certificates
+FROM haheo7/docker-images:alpine AS builder
 
 FROM scratch
 LABEL maintainer="haeho7 <i@demo.com>"
