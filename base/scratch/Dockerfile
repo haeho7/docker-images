@@ -2,7 +2,7 @@
 # Dockerfile for scratch base image
 #
 
-FROM haheo7/docker-images:alpine AS builder
+FROM haeho7/docker-images:alpine AS builder
 
 FROM scratch
 LABEL maintainer="haeho7 <i@demo.com>"
