@@ -5,11 +5,10 @@
 #
 # Build stage
 #
-FROM node:25-alpine3.22 AS builder
+FROM node:26.13-alpine3.24 AS builder
 
-ARG VERSION=v3.5.1
-RUN apk update \
-  && apk add --no-cache --virtual .build-deps git \
+ARG VERSION=v3.30.0
+RUN apk add --no-cache --virtual .build-deps git \
   && git clone https://github.com/Zephyruso/zashboard.git --single-branch --branch $VERSION --depth 1 \
   && cd zashboard \
   && git checkout $VERSION \
@@ -19,18 +18,15 @@ RUN apk update \
   && npm cache clean --force \
   && cd - \
   && rm -r zashboard \
-  && apk del .build-deps \
-  && rm -rf /var/cache/apk/*
+  && apk del .build-deps
 
 #
 # Runtime stage
 #
-FROM caddy:2.11.1-alpine
+FROM caddy:2.11-alpine
 LABEL maintainer="haeho7 <i@demo.com>"
 
-RUN apk update \
-  && apk add --no-cache tzdata \
-  && rm -rf /var/cache/apk/*
+RUN apk add --no-cache tzdata
 
 COPY --from=builder /srv/zashboard /srv/zashboard
 COPY Caddyfile /etc/caddy
