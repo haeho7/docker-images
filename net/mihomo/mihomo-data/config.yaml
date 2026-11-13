@@ -30,9 +30,9 @@ geosite-matcher: succinct
 geo-auto-update: true
 geo-update-interval: 24
 geox-url:
-  geoip: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
-  geosite: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
-  mmdb: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
+  geoip: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  geosite: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  mmdb: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.metadb"
 
 tls: {}
 
@@ -143,6 +143,11 @@ tun:
   auto-detect-interface: true
   endpoint-independent-nat: false
   disable-icmp-forwarding: false
+  congestion-controller: bbr3
+  dns-mode: disabled
+  #dns-hijack:
+  #  - udp://any:53
+  #  - tcp://any:53
   exclude-interface:
     - pppoe-wan
   route-exclude-address:
@@ -187,9 +192,6 @@ tun:
     - ff00::/8
     # wireguard
     - 101.101.102.111/32
-  #dns-hijack:
-  #  - udp://any:53
-  #  - tcp://any:53
 
 tunnels: []
 

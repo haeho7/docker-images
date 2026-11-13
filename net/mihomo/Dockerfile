@@ -5,11 +5,10 @@
 #
 # Build stage
 #
-FROM golang:1.25-alpine3.22 AS builder
+FROM golang:1.26-alpine3.24 AS builder
 
-ARG VERSION=v1.19.24
-RUN apk update \
-  && apk add --no-cache --virtual .build-deps git make gcc musl-dev \
+ARG VERSION=v1.19.34
+RUN apk add --no-cache --virtual .build-deps git make gcc musl-dev \
   && git clone https://github.com/MetaCubeX/mihomo.git --branch $VERSION \
   && cd mihomo \
   && git checkout $VERSION \
@@ -21,18 +20,15 @@ RUN apk update \
   && install bin/mihomo-docker-v2 /usr/local/bin/mihomo \
   && cd - \
   && rm -r mihomo \
-  && apk del .build-deps \
-  && rm -rf /var/cache/apk/*
+  && apk del .build-deps
 
 #
 # Runtime stage
 #
-FROM alpine:3.22
+FROM haeho7/docker-images:alpine
 LABEL maintainer="haeho7 <i@demo.com>"
 
-RUN apk update \
-  && apk add --no-cache iptables ip6tables iptables-legacy tzdata \
-  && rm -rf /var/cache/apk/*
+RUN apk add --no-cache iptables ip6tables iptables-legacy
 
 COPY --from=builder /usr/local/bin/mihomo /usr/local/bin/
 COPY mihomo.sh /usr/local/bin/
